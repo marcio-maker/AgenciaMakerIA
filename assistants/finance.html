@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Finanças & Investimentos | MakerAI Studio</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS FINANÇAS - TEMA AZUL/PROFISSIONAL */
+        .finance-hero {
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            padding: 8rem 0 6rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .finance-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=1600&auto=format&fit=crop') center/cover;
+            opacity: 0.1;
+        }
+        
+        .ai-finance-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 1rem 0;
+            border: 2px solid white;
+            font-size: 1.1rem;
+        }
+        
+        .market-dashboard {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .dashboard-card {
+            background: var(--surface-light);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+        }
+        
+        .stock-ticker {
+            background: #1e293b;
+            color: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin: 2rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .portfolio-simulator {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.05) 100%);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin: 4rem 0;
+        }
+        
+        .portfolio-chart {
+            width: 100%;
+            height: 300px;
+            background: var(--surface);
+            border-radius: var(--radius);
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-line {
+            fill: none;
+            stroke: #3b82f6;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .risk-assessment {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .risk-level {
+            flex: 1;
+            min-width: 150px;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .risk-level.low {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid #22c55e;
+        }
+        
+        .risk-level.moderate {
+            background: rgba(234, 179, 8, 0.1);
+            border: 2px solid #eab308;
+        }
+        
+        .risk-level.high {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid #ef4444;
+        }
+        
+        .risk-level:hover {
+            transform: scale(1.05);
+        }
+        
+        .risk-level.active {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .ai-recommendations {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin: 4rem 0;
+            border-left: 5px solid #3b82f6;
+        }
+        
+        .recommendation-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--surface-light);
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .rec-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .performance-card {
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+        
+        .performance-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+        
+        .performance-value.positive {
+            color: #10b981;
+        }
+        
+        .performance-value.negative {
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; background-clip: text;">
+            AI Finanças
+        </div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">Finanças IA</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="finance-hero">
+        <div class="container">
+            <h1 style="color: white;">Inteligência Artificial para <span style="text-shadow: 0 0 30px rgba(255,255,255,0.7);">Investimentos Inteligentes</span></h1>
+            <div class="ai-finance-badge">Análise de Mercado em Tempo Real</div>
+            <p class="subtitle" style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto;">
+                Decisões de investimento baseadas em dados, previsões de mercado e gestão automatizada de portfólio
+            </p>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <main class="page-content container">
+        <!-- Dashboard -->
+        <section class="market-dashboard">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #3b82f6;">Dashboard de Mercado</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Análise em tempo real dos principais indicadores</p>
+            
+            <div class="stock-ticker">
+                <div class="ticker-content">
+                    📈 IBOV +2.3% | USD -0.5% | BTC +4.7% | PETR4 +1.8% | VALE3 +3.2% | WEGE3 -0.3% | ITUB4 +1.5% | BBDC4 +2.1% | 
+                    📊 Nasdaq +1.8% | S&P 500 +1.2% | Dow Jones +0.9% | FTSE 100 +0.5% | DAX +1.1% | Nikkei 225 -0.2% | 
+                    💰 Ouro +0.8% | Petróleo -1.2% | Ethereum +3.5% | 
+                </div>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div style="font-size: 2rem; color: #3b82f6; margin-bottom: 1rem;">📈</div>
+                    <h4>IBOVESPA</h4>
+                    <div style="font-size: 2rem; font-weight: 800; margin: 0.5rem 0; color: #10b981;">+2.34%</div>
+                    <p>124,560 pontos</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div style="font-size: 2rem; color: #3b82f6; margin-bottom: 1rem;">💵</div>
+                    <h4>Dólar</h4>
+                    <div style="font-size: 2rem; font-weight: 800; margin: 0.5rem 0; color: #ef4444;">-0.52%</div>
+                    <p>R$ 4.92</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div style="font-size: 2rem; color: #3b82f6; margin-bottom: 1rem;">₿</div>
+                    <h4>Bitcoin</h4>
+                    <div style="font-size: 2rem; font-weight: 800; margin: 0.5rem 0; color: #10b981;">+4.72%</div>
+                    <p>US$ 58,420</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div style="font-size: 2rem; color: #3b82f6; margin-bottom: 1rem;">📊</div>
+                    <h4>Sentimento</h4>
+                    <div style="font-size: 2rem; font-weight: 800; margin: 0.5rem 0; color: #10b981;">Positivo</div>
+                    <p>78% confiança</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simulador de Portfólio -->
+        <section class="portfolio-simulator">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #1e293b;">Simulador de Portfólio IA</h2>
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h3>Selecione seu Perfil de Risco</h3>
+                <div class="risk-assessment">
+                    <div class="risk-level low active" onclick="selectRisk('low')">
+                        <div style="font-size: 2rem;">🛡️</div>
+                        <h4>Conservador</h4>
+                        <small>Baixo risco</small>
+                    </div>
+                    <div class="risk-level moderate" onclick="selectRisk('moderate')">
+                        <div style="font-size: 2rem;">⚖️</div>
+                        <h4>Moderado</h4>
+                        <small>Risco médio</small>
+                    </div>
+                    <div class="risk-level high" onclick="selectRisk('high')">
+                        <div style="font-size: 2rem;">🚀</div>
+                        <h4>Agressivo</h4>
+                        <small>Alto risco</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-chart" id="portfolioChart">
+                <!-- Gráfico será gerado por JS -->
+                <svg width="100%" height="100%" id="chartSVG"></svg>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button onclick="simulatePortfolio()" class="btn primary" style="background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); padding: 1rem 2rem;">
+                    📊 Simular Investimento
+                </button>
+            </div>
+        </section>
+
+        <!-- Recomendações IA -->
+        <section class="ai-recommendations">
+            <h3 style="color: #3b82f6;">🎯 Recomendações da IA Financeira</h3>
+            <p style="margin: 1rem 0 2rem;">Análises personalizadas baseadas no perfil selecionado:</p>
+            
+            <div class="recommendation-card">
+                <div class="rec-icon">📈</div>
+                <div>
+                    <h4>Ação Recomendada</h4>
+                    <p><strong>PETR4:</strong> Análise técnica indica entrada ideal nos próximos dias. Alvo: R$ 38.50</p>
+                </div>
+            </div>
+            
+            <div class="recommendation-card">
+                <div class="rec-icon">💰</div>
+                <div>
+                    <h4>Fundo de Investimento</h4>
+                    <p><strong>Fundo XP Dividendo:</strong> Excelente para perfil conservador. Dividend Yield: 8.2% a.a.</p>
+                </div>
+            </div>
+            
+            <div class="recommendation-card">
+                <div class="rec-icon">🌍</div>
+                <div>
+                    <h4>Investimento Internacional</h4>
+                    <p><strong>ETF IVVB11:</strong> Exposição ao S&P 500 com alta liquidez. Recomendado para diversificação.</p>
+                </div>
+            </div>
+            
+            <div class="recommendation-card">
+                <div class="rec-icon">⚠️</div>
+                <div>
+                    <h4>Alerta de Risco</h4>
+                    <p>Evitar commodities neste ciclo. Análise macro indica volatilidade elevada.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métricas de Performance -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Performance da IA</h2>
+            <div class="performance-metrics">
+                <div class="performance-card">
+                    <div style="font-size: 2rem; color: #3b82f6;">📊</div>
+                    <h4>Precisão</h4>
+                    <div class="performance-value positive">87.3%</div>
+                    <p>Acerto nas recomendações</p>
+                </div>
+                
+                <div class="performance-card">
+                    <div style="font-size: 2rem; color: #3b82f6;">💰</div>
+                    <h4>Retorno</h4>
+                    <div class="performance-value positive">+24.8%</div>
+                    <p>Portfólios monitorados</p>
+                </div>
+                
+                <div class="performance-card">
+                    <div style="font-size: 2rem; color: #3b82f6;">⚡</div>
+                    <h4>Velocidade</h4>
+                    <div class="performance-value">0.3s</div>
+                    <p>Análise de mercado</p>
+                </div>
+                
+                <div class="performance-card">
+                    <div style="font-size: 2rem; color: #3b82f6;">🎯</div>
+                    <h4>Alerta Precoce</h4>
+                    <div class="performance-value">92%</div>
+                    <p>Detecção de oportunidades</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; margin: 4rem 0; padding: 3rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.05) 100%); border-radius: var(--radius-lg);">
+            <h3>Comece a investir com inteligência artificial</h3>
+            <p style="margin: 1rem 0 2rem;">Teste grátis por 30 dias - Sem compromisso</p>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+                <span style="background: white; color: #3b82f6; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 600;">Análise em Tempo Real</span>
+                <span style="background: white; color: #3b82f6; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 600;">Recomendações Personalizadas</span>
+                <span style="background: white; color: #3b82f6; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 600;">Gestão Automatizada</span>
+            </div>
+            
+            <a href="../index.html#contato" class="btn primary large" style="background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); padding: 1.5rem 3rem;">
+                Começar Teste Gratuito →
+            </a>
+            <br>
+            <a href="../index.html#assistentes" class="back-button" style="margin-top: 2rem;">
+                ← Voltar para Assistentes
+            </a>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+            
+            // Gerar gráfico inicial
+            generateChart('low');
+        });
+        
+        function selectRisk(level) {
+            // Remover active de todos
+            document.querySelectorAll('.risk-level').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Adicionar active ao selecionado
+            document.querySelector(`.risk-level.${level}`).classList.add('active');
+            
+            // Atualizar gráfico
+            generateChart(level);
+        }
+        
+        function generateChart(riskLevel) {
+            const svg = document.getElementById('chartSVG');
+            svg.innerHTML = '';
+            
+            const width = svg.clientWidth;
+            const height = svg.clientHeight;
+            const padding = 40;
+            
+            // Dados baseados no risco
+            let data = [];
+            if (riskLevel === 'low') {
+                data = [100, 102, 104, 103, 105, 107, 109, 111, 113, 115];
+            } else if (riskLevel === 'moderate') {
+                data = [100, 98, 102, 105, 103, 108, 112, 110, 115, 120];
+            } else {
+                data = [100, 95, 105, 100, 110, 105, 115, 125, 120, 135];
+            }
+            
+            // Calcular escala
+            const max = Math.max(...data);
+            const min = Math.min(...data);
+            const xScale = (width - 2*padding) / (data.length - 1);
+            const yScale = (height - 2*padding) / (max - min);
+            
+            // Criar linha
+            let path = `M ${padding} ${height - padding - (data[0] - min) * yScale}`;
+            
+            for (let i = 1; i < data.length; i++) {
+                const x = padding + i * xScale;
+                const y = height - padding - (data[i] - min) * yScale;
+                path += ` L ${x} ${y}`;
+            }
+            
+            // Adicionar linha ao SVG
+            const pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            pathEl.setAttribute("d", path);
+            pathEl.setAttribute("class", "chart-line");
+            svg.appendChild(pathEl);
+            
+            // Adicionar pontos
+            data.forEach((value, i) => {
+                const x = padding + i * xScale;
+                const y = height - padding - (value - min) * yScale;
+                
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", x);
+                circle.setAttribute("cy", y);
+                circle.setAttribute("r", "4");
+                circle.setAttribute("fill", "#3b82f6");
+                svg.appendChild(circle);
+            });
+        }
+        
+        function simulatePortfolio() {
+            const riskLevel = document.querySelector('.risk-level.active').classList.contains('low') ? 'conservador' : 
+                            document.querySelector('.risk-level.active').classList.contains('moderate') ? 'moderado' : 'agressivo';
+            
+            const returns = {
+                'conservador': '8.5% a.a.',
+                'moderado': '15.2% a.a.',
+                'agressivo': '24.8% a.a.'
+            };
+            
+            const risk = {
+                'conservador': 'Baixo',
+                'moderado': 'Médio',
+                'agressivo': 'Alto'
+            };
+            
+            alert(`📊 Simulação Completa!\n\nPerfil: ${riskLevel.toUpperCase()}\nRetorno Esperado: ${returns[riskLevel]}\nNível de Risco: ${risk[riskLevel]}\n\nA IA recomenda:\n• 40% Renda Fixa\n• 30% Ações Nacionais\n• 20% ETFs Internacionais\n• 10% Criptomoedas\n\n💡 Baseado em análise de 5.000+ variáveis de mercado.`);
+        }
+    </script>
+</body>
+</html>

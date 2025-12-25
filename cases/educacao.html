@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma EAD +400% | MakerAI Studio</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS ESPECÍFICOS PARA EDUCAÇÃO */
+        .education-hero {
+            background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
+            padding: 8rem 0 6rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .education-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&auto=format&fit=crop') center/cover;
+            opacity: 0.1;
+        }
+        
+        .retention-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 1rem 0;
+            border: 2px solid white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .gamification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .game-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
+        }
+        
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .student-journey {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 4rem 0;
+            position: relative;
+        }
+        
+        .journey-step {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+        
+        .ai-tutor-section {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(34, 211, 238, 0.05) 100%);
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin: 4rem 0;
+            text-align: center;
+        }
+        
+        .ai-avatar {
+            width: 150px;
+            height: 150px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .stats-education {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-edu {
+            text-align: center;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 2px solid transparent;
+            border-image: var(--gradient-accent) 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); -webkit-background-clip: text; background-clip: text;">
+            EAD +400%
+        </div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">Educação Digital</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="education-hero">
+        <div class="container">
+            <h1 style="color: white;">Plataforma EAD com <span style="text-shadow: 0 0 30px rgba(255,255,255,0.7);">+400%</span> de Retenção</h1>
+            <div class="retention-badge">Sistema Gamificado com IA</div>
+            <p class="subtitle" style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto;">
+                Transformamos o aprendizado digital com avatares IA, recompensas e aprendizado adaptativo
+            </p>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <main class="page-content container">
+        <!-- Estatísticas -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Impacto na Educação</h2>
+            <div class="stats-education">
+                <div class="stat-edu">
+                    <div style="font-size: 3rem; color: #06b6d4;">📈</div>
+                    <h3>+400%</h3>
+                    <p>Retenção de Alunos</p>
+                </div>
+                <div class="stat-edu">
+                    <div style="font-size: 3rem; color: #22d3ee;">🎮</div>
+                    <h3>+320%</h3>
+                    <p>Engajamento</p>
+                </div>
+                <div class="stat-edu">
+                    <div style="font-size: 3rem; color: #7c3aed;">🌍</div>
+                    <h3>3 Países</h3>
+                    <p>Expansão Internacional</p>
+                </div>
+                <div class="stat-edu">
+                    <div style="font-size: 3rem; color: #10b981;">⭐</div>
+                    <h3>98%</h3>
+                    <p>Satisfação</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gamificação -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Elementos de Gamificação</h2>
+            <div class="gamification-grid">
+                <div class="game-card">
+                    <div class="game-icon">🏆</div>
+                    <h4>Sistema de Conquistas</h4>
+                    <p>Badges, troféus e níveis para motivar progresso</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">🤖</div>
+                    <h4>Avatares IA</h4>
+                    <p>Tutores personalizados para cada aluno</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">📊</div>
+                    <h4>Rankings</h4>
+                    <p>Competição saudável entre alunos</p>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">🎁</div>
+                    <h4>Recompensas</h4>
+                    <p>Prêmios por conclusão de módulos</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Jornada do Aluno -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Jornada do Aluno</h2>
+            <div class="student-journey">
+                <div class="journey-step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>Diagnóstico Inicial</h4>
+                        <p>IA analisa nível de conhecimento e estilo de aprendizagem</p>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>Plano Personalizado</h4>
+                        <p>Rota de aprendizado adaptada às necessidades</p>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h4>Aprendizado Interativo</h4>
+                        <p>Aulas gamificadas com quizzes e desafios</p>
+                    </div>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h4>Certificação</h4>
+                        <p>Badges digitais e certificados verificáveis</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutor IA -->
+        <section class="ai-tutor-section">
+            <div class="ai-avatar">🤖</div>
+            <h2>Tutor IA Personalizado</h2>
+            <p style="max-width: 600px; margin: 1rem auto 2rem;">
+                Assistente 24/7 que responde dúvidas, explica conceitos complexos e adapta 
+                a dificuldade conforme o progresso do aluno
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <span style="background: white; color: #06b6d4; padding: 0.5rem 1.5rem; border-radius: 50px;">Explicações Personalizadas</span>
+                <span style="background: white; color: #06b6d4; padding: 0.5rem 1.5rem; border-radius: 50px;">Feedback em Tempo Real</span>
+                <span style="background: white; color: #06b6d4; padding: 0.5rem 1.5rem; border-radius: 50px;">Ajuste de Dificuldade</span>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; margin: 4rem 0;">
+            <a href="../index.html#contato" class="btn primary large" style="background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); padding: 1.5rem 3rem;">
+                Transforme Sua Plataforma EAD →
+            </a>
+            <br>
+            <a href="../index.html#cases" class="back-button" style="margin-top: 2rem;">
+                ← Voltar para Cases
+            </a>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+            
+            // Animar números das estatísticas
+            const stats = document.querySelectorAll('.stat-edu h3');
+            stats.forEach(stat => {
+                const text = stat.textContent;
+                if (text.includes('%') || text.includes('+')) {
+                    const value = parseInt(text.replace(/[^0-9]/g, ''));
+                    let current = 0;
+                    const increment = value / 30;
+                    
+                    const counter = setInterval(() => {
+                        current += increment;
+                        if (current >= value) {
+                            stat.textContent = text;
+                            clearInterval(counter);
+                        } else {
+                            const prefix = text.includes('+') ? '+' : '';
+                            const suffix = text.includes('%') ? '%' : '';
+                            stat.textContent = prefix + Math.floor(current) + suffix;
+                        }
+                    }, 50);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

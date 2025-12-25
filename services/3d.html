@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Vision 3D - MakerAI Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary: #7c3aed; --bg: #030712; --text: #f1f5f9; --text-secondary: #94a3b8; --border: #334155; --radius: 16px; --radius-lg: 24px; --shadow: 0 20px 40px rgba(0,0,0,0.3); --gradient-primary: linear-gradient(135deg, #7c3aed, #9333ea); }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); }
+    .container { max-width:1400px; margin:0 auto; padding:0 2rem; }
+    .header { position:fixed; top:0; left:0; right:0; background:rgba(15,23,42,0.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:1rem 0; z-index:1000; }
+    .header-container { display:flex; justify-content:space-between; align-items:center; }
+    .logo { font-size:1.8rem; font-weight:800; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .btn { padding:0.8rem 1.8rem; border-radius:var(--radius); text-decoration:none; font-weight:600; transition:all 0.4s; display:inline-block; }
+    .btn.secondary { background:transparent; border:1px solid var(--border); color:var(--text); }
+    .btn.primary { background:var(--gradient-primary); color:white; }
+    .section { padding:8rem 0; text-align:center; }
+    h1 { font-size:3.5rem; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .subtitle { font-size:1.3rem; color:var(--text-secondary); max-width:800px; margin:0 auto 3rem; }
+    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:2rem; margin-top:3rem; }
+    .gallery img { width:100%; border-radius:var(--radius-lg); box-shadow:var(--shadow); }
+    footer { text-align:center; padding:3rem 0; color:var(--text-secondary); border-top:1px solid var(--border); }
+    @media (max-width:768px) { h1 { font-size:2.5rem; } .gallery { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-container">
+      <a href="../index.html" class="logo">MakerAI Studio</a>
+      <a href="../index.html" class="btn secondary">← Voltar</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h1>AR Vision 3D</h1>
+      <p class="subtitle">Visualizador interativo de modelos 3D com suporte a realidade aumentada (AR).</p>
+      <div class="gallery">
+        <img src="https://i.ytimg.com/vi/1WgR-xUMHa0/maxresdefault.jpg" alt="Viewer AR Vision" loading="lazy">
+        <img src="https://devimages-cdn.apple.com/wwdc-services/images/119/4970/4970_wide_900x506_2x.jpg" alt="Modelo 3D em AR" loading="lazy">
+      </div>
+      <div class="features">
+        <h2>Tecnologias</h2>
+        <p>Three.js • WebXR • GLTF Models • React Three Fiber</p>
+        <p>Visualização AR em mobile, rotação 360°, hotspot interativo.</p>
+        <a href="../index.html#contato" class="btn primary" style="margin-top:2rem;">Criar experiência 3D</a>
+      </div>
+    </div>
+  </section>
+
+  <footer><p>© 2025 MakerAI Studio</p></footer>
+</body>
+</html>

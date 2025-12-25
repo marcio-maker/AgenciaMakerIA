@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Marketing & Conteúdo | MakerAI Studio</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS ESPECÍFICOS PARA MARKETING */
+        .marketing-hero {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            padding: 8rem 0 6rem;
+            color: #1e293b;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .marketing-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&auto=format&fit=crop') center/cover;
+            opacity: 0.15;
+        }
+        
+        .ai-copy-badge {
+            display: inline-block;
+            background: rgba(30, 41, 59, 0.9);
+            color: #fbbf24;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            margin: 1rem 0;
+            border: 2px solid #f59e0b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .content-pipeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 4rem 0;
+            position: relative;
+        }
+        
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            border: 2px solid transparent;
+            border-image: linear-gradient(90deg, #f59e0b, #fbbf24) 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pipeline-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.05), rgba(251, 191, 36, 0.05));
+            z-index: 1;
+        }
+        
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+        
+        .content-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .content-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-10px);
+            border-color: #f59e0b;
+            box-shadow: 0 20px 40px rgba(245, 158, 11, 0.2);
+        }
+        
+        .content-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .performance-metrics {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%);
+            padding: 4rem;
+            border-radius: var(--radius-lg);
+            margin: 4rem 0;
+            text-align: center;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .metric-box {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-light);
+        }
+        
+        .metric-box h4 {
+            color: #f59e0b;
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        .ai-personas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+        
+        .persona-card {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            width: 200px;
+            text-align: center;
+        }
+        
+        .persona-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .demo-chat {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin: 3rem 0;
+            border: 2px solid #f59e0b;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .chat-message {
+            background: var(--surface-light);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            position: relative;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .chat-message.ai {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%);
+            border-left: 4px solid #f59e0b;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); -webkit-background-clip: text; background-clip: text;">
+            AI Marketing
+        </div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">Marketing IA</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="marketing-hero">
+        <div class="container">
+            <h1 style="color: #1e293b;">Marketing Impulsionado por <span style="color: #f59e0b;">Inteligência Artificial</span></h1>
+            <div class="ai-copy-badge">Copywriting Automatizado ×10 mais rápido</div>
+            <p class="subtitle" style="color: #475569; max-width: 700px; margin: 0 auto;">
+                Geração de conteúdo, campanhas personalizadas e análise de performance com IA avançada
+            </p>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <main class="page-content container">
+        <!-- Pipeline de Conteúdo -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Pipeline de Conteúdo Automatizado</h2>
+            <div class="content-pipeline">
+                <div class="pipeline-step">
+                    <div class="step-icon">🎯</div>
+                    <div style="z-index: 2;">
+                        <h4>Análise de Público</h4>
+                        <p>IA identifica personas, interesses e padrões de consumo</p>
+                    </div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="step-icon">✍️</div>
+                    <div style="z-index: 2;">
+                        <h4>Geração de Copy</h4>
+                        <p>Criação automática de textos otimizados para conversão</p>
+                    </div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="step-icon">📧</div>
+                    <div style="z-index: 2;">
+                        <h4>Campanhas de Email</h4>
+                        <p>Sequências personalizadas baseadas no comportamento</p>
+                    </div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="step-icon">📊</div>
+                    <div style="z-index: 2;">
+                        <h4>Otimização Contínua</h4>
+                        <p>IA aprende e melhora as campanhas automaticamente</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tipos de Conteúdo -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Conteúdos Gerados por IA</h2>
+            <div class="content-types">
+                <div class="content-card">
+                    <div class="content-icon">📝</div>
+                    <h4>Blog Posts</h4>
+                    <p>Artigos otimizados para SEO com estrutura perfeita</p>
+                    <small style="color: #f59e0b; font-weight: 600;">2 min por artigo</small>
+                </div>
+                <div class="content-card">
+                    <div class="content-icon">📧</div>
+                    <h4>Email Marketing</h4>
+                    <p>Sequências de vendas e nurture personalizadas</p>
+                    <small style="color: #f59e0b; font-weight: 600;">95% de abertura</small>
+                </div>
+                <div class="content-card">
+                    <div class="content-icon">📱</div>
+                    <h4>Redes Sociais</h4>
+                    <p>Posts, stories e campanhas com análise de engajamento</p>
+                    <small style="color: #f59e0b; font-weight: 600;">+300% interação</small>
+                </div>
+                <div class="content-card">
+                    <div class="content-icon">🎥</div>
+                    <h4>Vídeo Scripts</h4>
+                    <p>Roteiros para YouTube, Reels e TikTok</p>
+                    <small style="color: #f59e0b; font-weight: 600;">Produção 10x mais rápida</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demonstração Chat -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Assistente de Copy IA</h2>
+            <div class="demo-chat">
+                <div class="chat-message">
+                    <strong>Usuário:</strong> Preciso de um email para vender um curso de programação para iniciantes
+                </div>
+                <div class="chat-message ai">
+                    <strong>AI Copywriter:</strong> "Domine a programação em 90 dias! 🚀 Aprenda Python, JavaScript e construa seus primeiros projetos reais. Turma com vagas limitadas - 50% de desconto para os primeiros 20 inscritos!"
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button onclick="generateCopy()" class="btn primary" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);">
+                        Gerar Novo Copy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métricas de Performance -->
+        <section class="performance-metrics">
+            <h2 style="color: #1e293b;">Performance Comprovada</h2>
+            <p style="color: #475569; max-width: 600px; margin: 1rem auto 2rem;">
+                Resultados reais de campanhas otimizadas por IA
+            </p>
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <div style="font-size: 2rem;">📈</div>
+                    <h4>+250%</h4>
+                    <p>Taxa de Conversão</p>
+                </div>
+                <div class="metric-box">
+                    <div style="font-size: 2rem;">💰</div>
+                    <h4>8x ROI</h4>
+                    <p>Retorno sobre Investimento</p>
+                </div>
+                <div class="metric-box">
+                    <div style="font-size: 2rem;">⚡</div>
+                    <h4>90%</h4>
+                    <p>Redução no Tempo de Produção</p>
+                </div>
+                <div class="metric-box">
+                    <div style="font-size: 2rem;">🎯</div>
+                    <h4>+180%</h4>
+                    <p>Engajamento em Redes Sociais</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personas -->
+        <section style="margin: 4rem 0; text-align: center;">
+            <h2 style="margin-bottom: 3rem;">Personas de Marketing IA</h2>
+            <div class="ai-personas">
+                <div class="persona-card">
+                    <div class="persona-avatar">📧</div>
+                    <h4>Email Expert</h4>
+                    <p>Especialista em sequências de vendas</p>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-avatar">📱</div>
+                    <h4>Social Media Pro</h4>
+                    <p>Posts virais e engajamento</p>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-avatar">🔍</div>
+                    <h4>SEO Strategist</h4>
+                    <p>Otimização para mecanismos de busca</p>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-avatar">🎯</div>
+                    <h4>Ad Specialist</h4>
+                    <p>Campanhas pagas performáticas</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; margin: 4rem 0;">
+            <a href="../index.html#contato" class="btn primary large" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); padding: 1.5rem 3rem; color: #1e293b;">
+                Automatize Seu Marketing →
+            </a>
+            <br>
+            <a href="../index.html#assistentes" class="back-button" style="margin-top: 2rem;">
+                ← Voltar para Assistentes
+            </a>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+        });
+        
+        function generateCopy() {
+            const copies = [
+                "🚀 Transforme sua carreira em 12 semanas! Curso intensivo com mentoria individual e projetos reais para portfolio. Vagas limitadas!",
+                "💡 Aprenda com os melhores! Curso 100% prático com certificação reconhecida. Garantia de satisfação ou seu dinheiro de volta!",
+                "👨‍💻 De iniciante a desenvolvedor júnior em 3 meses. Metodologia comprovada, comunidade ativa e suporte 24/7.",
+                "🎯 Domine as tecnologias mais requisitadas do mercado. Turma exclusiva com apenas 15 alunos para atenção personalizada!"
+            ];
+            
+            const chat = document.querySelector('.demo-chat .ai');
+            const randomCopy = copies[Math.floor(Math.random() * copies.length)];
+            
+            chat.innerHTML = `<strong>AI Copywriter:</strong> "${randomCopy}"`;
+            chat.style.animation = 'none';
+            setTimeout(() => chat.style.animation = 'fadeIn 0.5s ease', 10);
+        }
+    </script>
+</body>
+</html>

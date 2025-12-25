@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template PWA de Vendas | MakerAI Studio</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS PWA - TEMA ROXO/MODERNO */
+        .pwa-hero {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            padding: 8rem 0 6rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pwa-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&auto=format&fit=crop') center/cover;
+            opacity: 0.1;
+        }
+        
+        .pwa-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 1rem 0;
+            border: 2px solid white;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+            to { box-shadow: 0 0 20px rgba(255,255,255,0.8); }
+        }
+        
+        .pwa-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-box {
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-box:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #8b5cf6;
+        }
+        
+        .demo-phone {
+            width: 300px;
+            height: 600px;
+            background: var(--surface);
+            border-radius: 40px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            border: 10px solid #1e293b;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .screen-content {
+            padding: 2rem;
+            color: white;
+        }
+        
+        .pwa-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 4rem 0;
+        }
+        
+        .stat-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#8b5cf6 var(--value), var(--surface-light) 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .stat-circle::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: var(--surface);
+            border-radius: 50%;
+        }
+        
+        .stat-circle span {
+            position: relative;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #8b5cf6;
+            z-index: 1;
+        }
+        
+        .tech-stack-pwa {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .tech-chip {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .pricing-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            border: 2px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card.popular {
+            border-color: #8b5cf6;
+            transform: scale(1.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.popular::before {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -40px;
+            background: #8b5cf6;
+            color: white;
+            padding: 0.5rem 3rem;
+            transform: rotate(45deg);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: #8b5cf6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%); -webkit-background-clip: text; background-clip: text;">
+            PWA Template
+        </div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">PWA Template</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="pwa-hero">
+        <div class="container">
+            <h1 style="color: white;">Template PWA de Vendas <span style="text-shadow: 0 0 30px rgba(255,255,255,0.7);">Premium</span></h1>
+            <div class="pwa-badge">Instale como App • Offline • Push Notifications</div>
+            <p class="subtitle" style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto;">
+                PWA pronto para e-commerce, catálogos ou qualquer aplicação web moderna
+            </p>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <main class="page-content container">
+        <!-- Demonstração -->
+        <section style="margin: 4rem 0; text-align: center;">
+            <h2 style="margin-bottom: 3rem;">Demo Interativa</h2>
+            <div class="demo-phone">
+                <div class="phone-screen">
+                    <div class="screen-content">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">🛍️</div>
+                            <h3 style="color: white;">PWA Store</h3>
+                            <p style="color: #94a3b8;">Bem-vindo à loja!</p>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: #8b5cf6; border-radius: var(--radius);"></div>
+                                <div>
+                                    <h4 style="color: white; margin: 0;">Produto Premium</h4>
+                                    <p style="color: #94a3b8; margin: 0; font-size: 0.875rem;">R$ 249,90</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: #10b981; border-radius: var(--radius);"></div>
+                                <div>
+                                    <h4 style="color: white; margin: 0;">Produto Básico</h4>
+                                    <p style="color: #94a3b8; margin: 0; font-size: 0.875rem;">R$ 89,90</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="position: absolute; bottom: 2rem; left: 2rem; right: 2rem;">
+                            <div style="background: #8b5cf6; color: white; padding: 1rem; border-radius: var(--radius); text-align: center; font-weight: 600;">
+                                🛒 Carrinho (2 itens)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <button onclick="installPWA()" class="btn primary" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);">
+                    📲 Instalar App Demo
+                </button>
+            </div>
+        </section>
+
+        <!-- Características -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Características do Template</h2>
+            <div class="pwa-features">
+                <div class="feature-box">
+                    <div class="feature-icon">📱</div>
+                    <h4>Instalação como App</h4>
+                    <p>Adicione à tela inicial como um aplicativo nativo</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Offline First</h4>
+                    <p>Funciona mesmo sem conexão com internet</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">🔔</div>
+                    <h4>Push Notifications</h4>
+                    <p>Notificações para engajar usuários</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">📊</div>
+                    <h4>Analytics Integrado</h4>
+                    <p>Monitoramento completo de métricas</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">💳</div>
+                    <h4>Checkout Otimizado</h4>
+                    <p>Pagamentos com 1 clique e múltiplos gateways</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">🎨</div>
+                    <h4>Design System</h4>
+                    <p>Componentes reutilizáveis e temas</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estatísticas -->
+        <section style="margin: 4rem 0; text-align: center;">
+            <h2 style="margin-bottom: 3rem;">Performance Garantida</h2>
+            <div class="pwa-stats">
+                <div style="text-align: center;">
+                    <div class="stat-circle" style="--value: 95%">
+                        <span>95</span>
+                    </div>
+                    <h4 style="margin-top: 1rem;">Lighthouse</h4>
+                    <p>Score Performance</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="stat-circle" style="--value: 90%">
+                        <span>0.9s</span>
+                    </div>
+                    <h4 style="margin-top: 1rem;">Carregamento</h4>
+                    <p>Tempo médio</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="stat-circle" style="--value: 85%">
+                        <span>+85%</span>
+                    </div>
+                    <h4 style="margin-top: 1rem;">Conversão</h4>
+                    <p>Aumento típico</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="stat-circle" style="--value: 80%">
+                        <span>-80%</span>
+                    </div>
+                    <h4 style="margin-top: 1rem;">Rebote</h4>
+                    <p>Redução na taxa</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stack Tecnológica -->
+        <section style="margin: 4rem 0; text-align: center;">
+            <h2 style="margin-bottom: 2rem;">Stack Tecnológica</h2>
+            <div class="tech-stack-pwa">
+                <span class="tech-chip">Next.js 14</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">Tailwind CSS</span>
+                <span class="tech-chip">Stripe</span>
+                <span class="tech-chip">Supabase</span>
+                <span class="tech-chip">Service Workers</span>
+                <span class="tech-chip">Vercel</span>
+                <span class="tech-chip">Workbox</span>
+            </div>
+        </section>
+
+        <!-- Tabela de Preços -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Planos & Preços</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3 style="color: #8b5cf6;">Básico</h3>
+                    <div style="font-size: 3rem; font-weight: 800; margin: 1.5rem 0; color: var(--text);">R$ 2.490</div>
+                    <p style="color: var(--text-secondary);">Template PWA completo</p>
+                    
+                    <ul style="text-align: left; margin: 2rem 0; padding: 0; list-style: none;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Template PWA completo</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Design responsivo</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ 5 páginas básicas</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Suporte 30 dias</li>
+                        <li style="padding: 0.5rem 0;">× Personalizações</li>
+                    </ul>
+                    
+                    <button onclick="selectPlan('basic')" class="btn secondary" style="width: 100%;">Escolher Plano</button>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <h3 style="color: #8b5cf6;">Premium</h3>
+                    <div style="font-size: 3rem; font-weight: 800; margin: 1.5rem 0; color: var(--text);">R$ 4.990</div>
+                    <p style="color: var(--text-secondary);">Mais vendido - Customizável</p>
+                    
+                    <ul style="text-align: left; margin: 2rem 0; padding: 0; list-style: none;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Tudo do Básico</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ 10 páginas customizáveis</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Integração com APIs</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Checkout completo</li>
+                        <li style="padding: 0.5rem 0;">✓ Suporte 90 dias</li>
+                    </ul>
+                    
+                    <button onclick="selectPlan('premium')" class="btn primary" style="width: 100%; background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);">
+                        Escolher Plano
+                    </button>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3 style="color: #8b5cf6;">Enterprise</h3>
+                    <div style="font-size: 3rem; font-weight: 800; margin: 1.5rem 0; color: var(--text);">Sob Consulta</div>
+                    <p style="color: var(--text-secondary);">Solução completa</p>
+                    
+                    <ul style="text-align: left; margin: 2rem 0; padding: 0; list-style: none;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Tudo do Premium</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Design exclusivo</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Integrações personalizadas</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);">✓ Treinamento da equipe</li>
+                        <li style="padding: 0.5rem 0;">✓ Suporte 1 ano</li>
+                    </ul>
+                    
+                    <button onclick="selectPlan('enterprise')" class="btn secondary" style="width: 100%;">Falar com Vendas</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; margin: 4rem 0; padding: 4rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%); border-radius: var(--radius-lg);">
+            <h2 style="margin-bottom: 1rem;">Pronto para lançar seu PWA?</h2>
+            <p style="margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Temos mais de 50 templates PWA prontos ou podemos criar um exclusivo para você
+            </p>
+            
+            <a href="../index.html#contato" class="btn primary large" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%); padding: 1.5rem 3rem;">
+                Quero meu PWA Agora →
+            </a>
+            <br>
+            <a href="../index.html#produtos" class="back-button" style="margin-top: 2rem;">
+                ← Voltar para Produtos
+            </a>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+        });
+        
+        function installPWA() {
+            if ('serviceWorker' in navigator && 'PushManager' in window) {
+                alert('📱 App PWA pronto para instalação!\n\nNo Chrome/Edge: Clique em "Instalar" na barra de endereços\nNo Safari: Compartilhar → Adicionar à Tela Inicial\n\nEste template inclui todas as funcionalidades de um PWA nativo.');
+            } else {
+                alert('⚠️ Seu navegador não suporta instalação de PWA.\n\nRecomendamos Chrome, Edge ou Safari atualizados.');
+            }
+        }
+        
+        function selectPlan(plan) {
+            const plans = {
+                'basic': 'Básico - R$ 2.490',
+                'premium': 'Premium - R$ 4.990',
+                'enterprise': 'Enterprise - Sob Consulta'
+            };
+            
+            if (plan === 'enterprise') {
+                alert('👔 Ótima escolha!\n\nNosso time entrará em contato em até 2 horas úteis para discutir suas necessidades específicas e criar uma proposta personalizada.');
+            } else {
+                alert(`🎉 Plano ${plans[plan]} selecionado!\n\nVocê será redirecionado para o checkout seguro. O template PWA completo será enviado em até 24 horas após a confirmação do pagamento.`);
+            }
+        }
+    </script>
+</body>
+</html>

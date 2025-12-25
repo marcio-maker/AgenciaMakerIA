@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Médica +300% | MakerAI Studio</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS SAÚDE - TEMA VERDE/SAÚDE */
+        .health-hero {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            padding: 8rem 0 6rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .health-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&auto=format&fit=crop') center/cover;
+            opacity: 0.1;
+        }
+        
+        .health-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 1rem 0;
+            border: 2px solid white;
+            font-size: 1.1rem;
+        }
+        
+        .health-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .health-stat {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            border: 2px solid #10b981;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .health-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #10b981;
+            line-height: 1;
+            margin: 1rem 0;
+        }
+        
+        .scheduling-flow {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .flow-timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .flow-timeline::before {
+            content: '';
+            position: absolute;
+            left: 1.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #10b981;
+        }
+        
+        .timeline-step {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-step:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: -3.3rem;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: #10b981;
+            border-radius: 50%;
+            border: 4px solid var(--surface);
+        }
+        
+        .ai-prediction {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin: 4rem 0;
+            border-left: 5px solid #10b981;
+        }
+        
+        .prediction-meter {
+            width: 100%;
+            height: 20px;
+            background: var(--surface-light);
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .prediction-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            border-radius: 10px;
+            transition: width 2s ease;
+            width: 0%;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #10b981;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); -webkit-background-clip: text; background-clip: text;">
+            Saúde -85%
+        </div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">Saúde Digital</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="health-hero">
+        <div class="container">
+            <h1 style="color: white;">Clínica Médica com <span style="text-shadow: 0 0 30px rgba(255,255,255,0.7);">-85%</span> de Faltas</h1>
+            <div class="health-badge">Agendamento Inteligente +300% Eficiência</div>
+            <p class="subtitle" style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto;">
+                Sistema de agendamento com IA que prevê faltas e otimiza a agenda em tempo real
+            </p>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <main class="page-content container">
+        <!-- Estatísticas -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Impacto na Gestão de Saúde</h2>
+            <div class="health-stats">
+                <div class="health-stat">
+                    <div class="feature-icon">📉</div>
+                    <div class="stat-number">-85%</div>
+                    <h4>Redução de Faltas</h4>
+                    <p>Com previsão de ausências</p>
+                </div>
+                <div class="health-stat">
+                    <div class="feature-icon">⚡</div>
+                    <div class="stat-number">+300%</div>
+                    <h4>Eficiência</h4>
+                    <p>Agenda otimizada</p>
+                </div>
+                <div class="health-stat">
+                    <div class="feature-icon">😊</div>
+                    <div class="stat-number">95%</div>
+                    <h4>Satisfação</h4>
+                    <p>Pacientes satisfeitos</p>
+                </div>
+                <div class="health-stat">
+                    <div class="feature-icon">💰</div>
+                    <div class="stat-number">12x</div>
+                    <h4>ROI</h4>
+                    <p>Em 6 meses</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fluxo de Agendamento -->
+        <section class="scheduling-flow">
+            <h2 style="text-align: center; margin-bottom: 3rem; color: #10b981;">Fluxo de Agendamento Inteligente</h2>
+            <div class="flow-timeline">
+                <div class="timeline-step">
+                    <h4>1. Agendamento Online</h4>
+                    <p>Paciente agenda via app ou site, escolhendo especialidade e horário preferencial</p>
+                </div>
+                <div class="timeline-step">
+                    <h4>2. Análise Preditiva IA</h4>
+                    <p>Sistema analisa histórico e prevê probabilidade de ausência com 92% de precisão</p>
+                </div>
+                <div class="timeline-step">
+                    <h4>3. Confirmação Automática</h4>
+                    <p>Lembretes inteligentes via WhatsApp, SMS e email 24h antes</p>
+                </div>
+                <div class="timeline-step">
+                    <h4>4. Reagendamento Automático</h4>
+                    <p>Em caso de cancelamento, sistema realoca outros pacientes automaticamente</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Predição IA -->
+        <section class="ai-prediction">
+            <h3>Predição de Faltas por IA</h3>
+            <p>Nosso sistema analisa múltiplos fatores para prever ausências:</p>
+            
+            <div style="margin: 2rem 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Histórico do Paciente</span>
+                    <span>92%</span>
+                </div>
+                <div class="prediction-meter">
+                    <div class="prediction-fill" style="width: 92%"></div>
+                </div>
+            </div>
+            
+            <div style="margin: 2rem 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Fator Tempo/Trânsito</span>
+                    <span>85%</span>
+                </div>
+                <div class="prediction-meter">
+                    <div class="prediction-fill" style="width: 85%"></div>
+                </div>
+            </div>
+            
+            <div style="margin: 2rem 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>Análise Meteorológica</span>
+                    <span>78%</span>
+                </div>
+                <div class="prediction-meter">
+                    <div class="prediction-fill" style="width: 78%"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Recursos do Sistema</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h4>IA Preditiva</h4>
+                    <p>Prevê faltas com base em múltiplos fatores analisados em tempo real</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>App Paciente</h4>
+                    <p>Agendamento, lembrete, prontuário digital e telemedicina</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍⚕️</div>
+                    <h4>Dashboard Médico</h4>
+                    <p>Visão completa da agenda, pacientes e histórico</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h4>Gestão Financeira</h4>
+                    <p>Controle de receitas, despesas e faturamento</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; margin: 4rem 0; padding: 3rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%); border-radius: var(--radius-lg);">
+            <h3>Pronto para transformar sua clínica?</h3>
+            <p style="margin: 1rem 0 2rem;">Reduza faltas, aumente eficiência e melhore a experiência dos pacientes</p>
+            <a href="../index.html#contato" class="btn primary large" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); padding: 1.5rem 3rem;">
+                Agendar Demonstração →
+            </a>
+            <br>
+            <a href="../index.html#cases" class="back-button" style="margin-top: 2rem;">
+                ← Voltar para Cases
+            </a>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+            
+            // Animar barras de predição
+            setTimeout(() => {
+                const bars = document.querySelectorAll('.prediction-fill');
+                bars.forEach(bar => {
+                    bar.style.width = bar.style.width;
+                });
+            }, 500);
+            
+            // Contar estatísticas
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const text = stat.textContent;
+                const value = parseInt(text.replace(/[^0-9]/g, ''));
+                const isNegative = text.includes('-');
+                let current = 0;
+                const increment = value / 30;
+                
+                const counter = setInterval(() => {
+                    current += increment;
+                    if (current >= value) {
+                        stat.textContent = text;
+                        clearInterval(counter);
+                    } else {
+                        const prefix = isNegative ? '-' : '+';
+                        const suffix = text.includes('%') ? '%' : 'x';
+                        stat.textContent = prefix + Math.floor(current) + suffix;
+                    }
+                }, 50);
+            });
+        });
+    </script>
+</body>
+</html>

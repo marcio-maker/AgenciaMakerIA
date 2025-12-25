@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Systems: Por que usar | MakerAI Studio Blog</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS DESIGN SYSTEM - TEMA DESIGN/UI */
+        .design-hero {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            padding: 8rem 0 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .design-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+        
+        .design-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .design-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .design-card:hover {
+            transform: translateY(-5px);
+            border-color: #8b5cf6;
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+        
+        .component-showcase {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 2px solid var(--border);
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .component-preview {
+            background: var(--surface-light);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .color-swatch {
+            height: 100px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .color-swatch:hover {
+            transform: scale(1.05);
+        }
+        
+        .color-swatch::after {
+            content: attr(data-hex);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.5rem;
+            font-size: 0.75rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .color-swatch:hover::after {
+            transform: translateY(0);
+        }
+        
+        .typography-scale {
+            margin: 3rem 0;
+        }
+        
+        .type-example {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .spacing-system {
+            display: flex;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .spacing-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .spacing-visual {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .spacing-label {
+            font-weight: 600;
+            color: #8b5cf6;
+        }
+        
+        .benefits-timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .benefits-timeline::before {
+            content: '';
+            position: absolute;
+            left: 1.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #8b5cf6, #a855f7);
+        }
+        
+        .benefit-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+        }
+        
+        .benefit-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .benefit-item::before {
+            content: '';
+            position: absolute;
+            left: -3.3rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #8b5cf6;
+            border-radius: 50%;
+            border: 4px solid var(--surface);
+        }
+        
+        .tools-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+        
+        .tool-card {
+            width: 150px;
+            height: 150px;
+            background: var(--surface);
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: #8b5cf6;
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #8b5cf6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%); -webkit-background-clip: text; background-clip: text;">
+            Design Systems
+        </div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">Blog • UI/UX</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="design-hero">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                    <span style="background: rgba(255,255,255,0.2); color: white; padding: 0.5rem 1rem; border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600;">
+                        UI/UX DESIGN
+                    </span>
+                    <span style="color: rgba(255,255,255,0.8);">10 Dez 2025 • 8 min de leitura</span>
+                </div>
+                
+                <h1 style="color: white;">Design Systems: Por que são essenciais para projetos escaláveis</h1>
+                <p style="color: rgba(255,255,255,0.9); font-size: 1.25rem; line-height: 1.6; margin: 2rem 0;">
+                    Como sistemas de design consistentes podem aumentar produtividade em 300% e reduzir custos de desenvolvimento.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <main class="page-content container" style="max-width: 800px; margin: 0 auto;">
+        <!-- Introdução -->
+        <section style="margin: 4rem 0;">
+            <h2>🎨 O que é um Design System?</h2>
+            <p>Um Design System é uma coleção de componentes reutilizáveis, guiados por padrões claros, que podem ser montados para construir qualquer número de aplicações.</p>
+            
+            <div class="design-grid">
+                <div class="design-card">
+                    <div style="font-size: 2rem; color: #8b5cf6; margin-bottom: 1rem;">📚</div>
+                    <h4>Biblioteca de Componentes</h4>
+                    <p>Botões, inputs, cards e outros elementos UI padronizados e documentados</p>
+                </div>
+                
+                <div class="design-card">
+                    <div style="font-size: 2rem; color: #8b5cf6; margin-bottom: 1rem;">🎯</div>
+                    <h4>Guia de Estilos</h4>
+                    <p>Cores, tipografia, espaçamento e outros fundamentos visuais</p>
+                </div>
+                
+                <div class="design-card">
+                    <div style="font-size: 2rem; color: #8b5cf6; margin-bottom: 1rem;">⚙️</div>
+                    <h4>Padrões e Boas Práticas</h4>
+                    <p>Como e quando usar cada componente e padrão de interação</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefícios -->
+        <section style="margin: 4rem 0;">
+            <h2>🚀 Benefícios Mensuráveis</h2>
+            
+            <div class="benefits-timeline">
+                <div class="benefit-item">
+                    <h4>Consistência Visual</h4>
+                    <p>Todos os produtos mantêm a mesma identidade visual, criando uma experiência unificada para o usuário. Reduz confusão e aumenta confiança na marca.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <h4>Produtividade 3x Maior</h4>
+                    <p>Desenvolvedores gastam 70% menos tempo criando interfaces do zero. Foco em lógica de negócio ao invés de estilização repetitiva.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <h4>Redução de Bugs</h4>
+                    <p>Componentes testados reduzem erros de UI em até 40%. Padronização previne comportamentos inesperados em diferentes partes da aplicação.</p>
+                </div>
+                
+                <div class="benefit-item">
+                    <h4>Escalabilidade</h4>
+                    <p>Novas funcionalidades são implementadas 4x mais rápido. Times podem crescer sem perder consistência.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Cores -->
+        <section style="margin: 4rem 0;">
+            <h2>🌈 Sistema de Cores</h2>
+            <p>Paleta consistente com tokens semânticos:</p>
+            
+            <div class="color-palette">
+                <div class="color-swatch" style="background: #7c3aed;" data-hex="#7c3aed"></div>
+                <div class="color-swatch" style="background: #8b5cf6;" data-hex="#8b5cf6"></div>
+                <div class="color-swatch" style="background: #a855f7;" data-hex="#a855f7"></div>
+                <div class="color-swatch" style="background: #06b6d4;" data-hex="#06b6d4"></div>
+                <div class="color-swatch" style="background: #22d3ee;" data-hex="#22d3ee"></div>
+                <div class="color-swatch" style="background: #10b981;" data-hex="#10b981"></div>
+                <div class="color-swatch" style="background: #34d399;" data-hex="#34d399"></div>
+                <div class="color-swatch" style="background: #f59e0b;" data-hex="#f59e0b"></div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <h4>Tokens Semânticos</h4>
+                <div class="design-grid">
+                    <div class="design-card">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 20px; height: 20px; background: #7c3aed; border-radius: 4px;"></div>
+                            <div>
+                                <strong>Primary</strong>
+                                <p style="margin: 0; font-size: 0.875rem;">var(--primary)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="design-card">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 20px; height: 20px; background: #10b981; border-radius: 4px;"></div>
+                            <div>
+                                <strong>Success</strong>
+                                <p style="margin: 0; font-size: 0.875rem;">var(--success)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="design-card">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 20px; height: 20px; background: #ef4444; border-radius: 4px;"></div>
+                            <div>
+                                <strong>Error</strong>
+                                <p style="margin: 0; font-size: 0.875rem;">var(--error)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="design-card">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 20px; height: 20px; background: #f59e0b; border-radius: 4px;"></div>
+                            <div>
+                                <strong>Warning</strong>
+                                <p style="margin: 0; font-size: 0.875rem;">var(--warning)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tipografia -->
+        <section class="typography-scale">
+            <h2>🔤 Sistema Tipográfico</h2>
+            <p>Escala de tipos com hierarquia clara:</p>
+            
+            <div class="type-example">
+                <div style="font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 0.5rem;">
+                    Heading 1 • 3.5rem
+                </div>
+                <code style="color: var(--text-secondary);">font-size: 3.5rem; font-weight: 800;</code>
+            </div>
+            
+            <div class="type-example">
+                <div style="font-size: 2.75rem; font-weight: 800; line-height: 1.1; margin-bottom: 0.5rem;">
+                    Heading 2 • 2.75rem
+                </div>
+                <code style="color: var(--text-secondary);">font-size: 2.75rem; font-weight: 800;</code>
+            </div>
+            
+            <div class="type-example">
+                <div style="font-size: 2.25rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.5rem;">
+                    Heading 3 • 2.25rem
+                </div>
+                <code style="color: var(--text-secondary);">font-size: 2.25rem; font-weight: 700;</code>
+            </div>
+            
+            <div class="type-example">
+                <div style="font-size: 1.125rem; line-height: 1.7; margin-bottom: 0.5rem;">
+                    Body Text • 1.125rem
+                </div>
+                <code style="color: var(--text-secondary);">font-size: 1.125rem; line-height: 1.7;</code>
+            </div>
+            
+            <div class="type-example">
+                <div style="font-size: 0.875rem; line-height: 1.5; margin-bottom: 0.5rem;">
+                    Small Text • 0.875rem
+                </div>
+                <code style="color: var(--text-secondary);">font-size: 0.875rem; line-height: 1.5;</code>
+            </div>
+        </section>
+
+        <!-- Espaçamento -->
+        <section style="margin: 4rem 0;">
+            <h2>📏 Sistema de Espaçamento (8pt Grid)</h2>
+            
+            <div class="spacing-system">
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="padding: 0.5rem;"></div>
+                    <div class="spacing-label">0.5rem • 8px</div>
+                    <small>--space-xs</small>
+                </div>
+                
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="padding: 1rem;"></div>
+                    <div class="spacing-label">1rem • 16px</div>
+                    <small>--space-sm</small>
+                </div>
+                
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="padding: 1.5rem;"></div>
+                    <div class="spacing-label">1.5rem • 24px</div>
+                    <small>--space-md</small>
+                </div>
+                
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="padding: 2rem;"></div>
+                    <div class="spacing-label">2rem • 32px</div>
+                    <small>--space-lg</small>
+                </div>
+                
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="padding: 3rem;"></div>
+                    <div class="spacing-label">3rem • 48px</div>
+                    <small>--space-xl</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Showcase de Componentes -->
+        <section class="component-showcase">
+            <h3 style="color: #8b5cf6; text-align: center; margin-bottom: 2rem;">Componentes Reutilizáveis</h3>
+            
+            <div class="component-grid">
+                <div class="component-preview">
+                    <button class="btn primary" style="width: 100%;">Primary Button</button>
+                </div>
+                
+                <div class="component-preview">
+                    <button class="btn secondary" style="width: 100%;">Secondary Button</button>
+                </div>
+                
+                <div class="component-preview">
+                    <input type="text" placeholder="Input Field" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--radius);">
+                </div>
+                
+                <div class="component-preview">
+                    <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                        Card Component
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ferramentas -->
+        <section style="margin: 4rem 0;">
+            <h2>🛠️ Ferramentas Recomendadas</h2>
+            <p>Stack moderna para design systems:</p>
+            
+            <div class="tools-showcase">
+                <div class="tool-card">
+                    <div class="tool-icon">🎨</div>
+                    <h4 style="margin: 0;">Figma</h4>
+                    <small style="color: var(--text-secondary);">Design</small>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">⚛️</div>
+                    <h4 style="margin: 0;">Storybook</h4>
+                    <small style="color: var(--text-secondary);">Documentação</small>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🎯</div>
+                    <h4 style="margin: 0;">Tailwind</h4>
+                    <small style="color: var(--text-secondary);">CSS Utility</small>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🔧</div>
+                    <h4 style="margin: 0;">Chromatic</h4>
+                    <small style="color: var(--text-secondary);">Testing</small>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">📚</div>
+                    <h4 style="margin: 0;">Zeroheight</h4>
+                    <small style="color: var(--text-secondary);">Docs</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; margin: 4rem 0; padding: 3rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%); border-radius: var(--radius-lg);">
+            <h3>Precisa de um Design System para seu projeto?</h3>
+            <p style="margin: 1rem 0 2rem;">Desenvolvemos sistemas de design customizados para startups e empresas estabelecidas</p>
+            
+            <a href="../index.html#contato" class="btn primary" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);">
+                Criar Design System Personalizado →
+            </a>
+            <br>
+            <a href="../index.html#blog" class="back-button" style="margin-top: 2rem;">
+                ← Voltar para Blog
+            </a>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

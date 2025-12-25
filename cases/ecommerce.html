@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case E-commerce 5x ROI | MakerAI Studio</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS ESPECÍFICOS PARA E-COMMERCE */
+        .ecommerce-hero {
+            background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+            padding: 8rem 0 6rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ecommerce-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&auto=format&fit=crop') center/cover;
+            opacity: 0.1;
+        }
+        
+        .roi-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 1rem 0;
+            border: 2px solid white;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .metric-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+        
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+        }
+        
+        .conversion-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .flow-step {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .flow-step:last-child::after {
+            display: none;
+        }
+        
+        .tech-stack-ecommerce {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .tech-pill {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern">E-commerce +240%</div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">Case de Sucesso</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="ecommerce-hero">
+        <div class="container">
+            <h1 style="color: white;">E-commerce com <span style="text-shadow: 0 0 20px rgba(255,255,255,0.5);">+240%</span> em Conversão</h1>
+            <div class="roi-badge">ROI 5x em 4 meses</div>
+            <p class="subtitle" style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto;">
+                Implementamos PWA com chatbot de vendas IA que transformou a experiência de compra
+            </p>
+        </div>
+    </section>
+
+    <!-- Conteúdo Principal -->
+    <main class="page-content container">
+        <!-- Métricas de Resultado -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Resultados Alcançados</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">+240%</div>
+                    <h4>Conversão</h4>
+                    <p>Aumento na taxa de conversão</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">-60%</div>
+                    <h4>Abandono</h4>
+                    <p>Redução no abandono de carrinho</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">+180%</div>
+                    <h4>Ticket Médio</h4>
+                    <p>Aumento no valor por compra</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">5x</div>
+                    <h4>ROI</h4>
+                    <p>Retorno sobre investimento</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fluxo de Conversão -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Fluxo de Conversão Otimizado</h2>
+            <div class="conversion-flow">
+                <div class="flow-step">
+                    <div style="font-size: 2rem;">👁️</div>
+                    <h4>Visita</h4>
+                    <p>Usuário acessa o site</p>
+                </div>
+                <div class="flow-step">
+                    <div style="font-size: 2rem;">💬</div>
+                    <h4>Chatbot IA</h4>
+                    <p>Atendimento personalizado</p>
+                </div>
+                <div class="flow-step">
+                    <div style="font-size: 2rem;">🛒</div>
+                    <h4>Carrinho</h4>
+                    <p>Produtos recomendados</p>
+                </div>
+                <div class="flow-step">
+                    <div style="font-size: 2rem;">💰</div>
+                    <h4>Conversão</h4>
+                    <p>Compra finalizada</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tecnologias -->
+        <section style="margin: 4rem 0; text-align: center;">
+            <h2 style="margin-bottom: 2rem;">Stack Tecnológica</h2>
+            <div class="tech-stack-ecommerce">
+                <span class="tech-pill">Next.js PWA</span>
+                <span class="tech-pill">OpenAI GPT-4</span>
+                <span class="tech-pill">Stripe Payments</span>
+                <span class="tech-pill">Redis Cache</span>
+                <span class="tech-pill">Vercel Edge</span>
+                <span class="tech-pill">Supabase DB</span>
+            </div>
+        </section>
+
+        <!-- Depoimento -->
+        <section style="margin: 4rem 0; text-align: center; padding: 3rem; background: var(--surface-light); border-radius: var(--radius-lg);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">💬</div>
+            <h3>"A MakerAI transformou nosso e-commerce em uma máquina de vendas 24/7."</h3>
+            <p><strong>CEO, Fashion Store</strong></p>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; margin: 4rem 0;">
+            <a href="../index.html#contato" class="btn primary large" style="padding: 1.5rem 3rem; font-size: 1.2rem;">
+                Quero Resultados Similares →
+            </a>
+            <br>
+            <a href="../index.html#cases" class="back-button" style="margin-top: 2rem;">
+                ← Voltar para Cases
+            </a>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        // Animar métricas
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+            
+            // Animação de contagem das métricas
+            const metrics = document.querySelectorAll('.metric-value');
+            metrics.forEach(metric => {
+                const finalValue = metric.textContent;
+                metric.textContent = '0';
+                let count = 0;
+                const target = parseInt(finalValue);
+                const increment = target / 50;
+                
+                const timer = setInterval(() => {
+                    count += increment;
+                    metric.textContent = count >= target ? finalValue : Math.floor(count) + (finalValue.includes('%') ? '%' : 'x');
+                    if (count >= target) clearInterval(timer);
+                }, 40);
+            });
+        });
+    </script>
+</body>
+</html>

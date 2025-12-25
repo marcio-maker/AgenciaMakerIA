@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Nutrição & Saúde | MakerAI Studio</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS NUTRIÇÃO - TEMA VERDE/SAUDÁVEL */
+        .nutrition-hero {
+            background: linear-gradient(135deg, #84cc16 0%, #a3e635 100%);
+            padding: 8rem 0 6rem;
+            color: #1e293b;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nutrition-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=1600&auto=format&fit=crop') center/cover;
+            opacity: 0.15;
+        }
+        
+        .ai-nutrition-badge {
+            display: inline-block;
+            background: rgba(30, 41, 59, 0.9);
+            color: #84cc16;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            margin: 1rem 0;
+            border: 2px solid #84cc16;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .meal-planner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .meal-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+        
+        .meal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(132, 204, 22, 0.2);
+        }
+        
+        .meal-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #84cc16 0%, #a3e635 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        .meal-content {
+            padding: 2rem;
+        }
+        
+        .nutrition-facts {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--surface-light);
+            border-radius: var(--radius);
+        }
+        
+        .nutrition-item {
+            text-align: center;
+        }
+        
+        .nutrition-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #84cc16;
+        }
+        
+        .diet-customizer {
+            background: linear-gradient(135deg, rgba(132, 204, 22, 0.1) 0%, rgba(163, 230, 53, 0.05) 100%);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin: 4rem 0;
+        }
+        
+        .customizer-sliders {
+            margin: 2rem 0;
+        }
+        
+        .slider-group {
+            margin: 1.5rem 0;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: var(--surface-light);
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #84cc16;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        
+        .health-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .metric-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#84cc16 var(--value), var(--surface-light) 0);
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .metric-circle::before {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: var(--surface);
+            border-radius: 50%;
+        }
+        
+        .metric-circle span {
+            position: relative;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #84cc16;
+            z-index: 1;
+        }
+        
+        .ai-insights {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin: 4rem 0;
+            border-left: 5px solid #84cc16;
+        }
+        
+        .insight-card {
+            background: var(--surface-light);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            border-left: 3px solid #84cc16;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #84cc16 0%, #a3e635 100%); -webkit-background-clip: text; background-clip: text;">
+            AI Nutrição
+        </div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">Nutrição IA</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="nutrition-hero">
+        <div class="container">
+            <h1 style="color: #1e293b;">Nutrição Personalizada por <span style="color: #84cc16;">Inteligência Artificial</span></h1>
+            <div class="ai-nutrition-badge">Plano Alimentar 100% Personalizado</div>
+            <p class="subtitle" style="color: #475569; max-width: 700px; margin: 0 auto;">
+                Planos de refeições adaptados ao seu corpo, objetivos e preferências alimentares
+            </p>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <main class="page-content container">
+        <!-- Planos de Refeição -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Planos de Refeição Gerados por IA</h2>
+            <div class="meal-planner">
+                <div class="meal-card">
+                    <div class="meal-image">🍳</div>
+                    <div class="meal-content">
+                        <h3>Café da Manhã</h3>
+                        <p>Omelete de claras com espinafre e queijo cottage + 1 fatia de pão integral</p>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">320</div>
+                                <small>Calorias</small>
+                            </div>
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">28g</div>
+                                <small>Proteína</small>
+                            </div>
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">25g</div>
+                                <small>Carbs</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal-card">
+                    <div class="meal-image">🥗</div>
+                    <div class="meal-content">
+                        <h3>Almoço</h3>
+                        <p>Filé de frango grelhado com quinoa e legumes no vapor + salada verde</p>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">450</div>
+                                <small>Calorias</small>
+                            </div>
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">35g</div>
+                                <small>Proteína</small>
+                            </div>
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">40g</div>
+                                <small>Carbs</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal-card">
+                    <div class="meal-image">🐟</div>
+                    <div class="meal-content">
+                        <h3>Jantar</h3>
+                        <p>Salmão ao forno com batata-doce e brócolis + abacate</p>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">380</div>
+                                <small>Calorias</small>
+                            </div>
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">30g</div>
+                                <small>Proteína</small>
+                            </div>
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">35g</div>
+                                <small>Carbs</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customizador de Dieta -->
+        <section class="diet-customizer">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #1e293b;">Personalize Sua Dieta</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Ajuste as configurações e a IA criará um plano perfeito para você</p>
+            
+            <div class="customizer-sliders">
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Objetivo: <strong id="goalValue">Emagrecimento</strong></span>
+                        <span id="goalPercent">70%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="70" class="slider" id="goalSlider" 
+                           oninput="updateGoal(this.value)">
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Nível de Atividade: <strong id="activityValue">Moderado</strong></span>
+                        <span id="activityPercent">50%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="activitySlider"
+                           oninput="updateActivity(this.value)">
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span>Restrições: <strong id="restrictionValue">Lactose</strong></span>
+                        <span id="restrictionPercent">30%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="30" class="slider" id="restrictionSlider"
+                           oninput="updateRestriction(this.value)">
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button onclick="generatePlan()" class="btn primary" style="background: linear-gradient(135deg, #84cc16 0%, #a3e635 100%); color: #1e293b; padding: 1rem 2rem;">
+                    🍽️ Gerar Novo Plano
+                </button>
+            </div>
+        </section>
+
+        <!-- Métricas de Saúde -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Acompanhamento de Progresso</h2>
+            <div class="health-metrics">
+                <div style="text-align: center;">
+                    <div class="metric-circle" style="--value: 75%">
+                        <span>75%</span>
+                    </div>
+                    <h4 style="margin-top: 1rem;">Adesão</h4>
+                    <p>Taxa de seguimento do plano</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="metric-circle" style="--value: 60%">
+                        <span>-5kg</span>
+                    </div>
+                    <h4 style="margin-top: 1rem;">Perda de Peso</h4>
+                    <p>Em 30 dias</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="metric-circle" style="--value: 90%">
+                        <span>90%</span>
+                    </div>
+                    <h4 style="margin-top: 1rem;">Energia</h4>
+                    <p>Aumento nos níveis</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="metric-circle" style="--value: 85%">
+                        <span>85%</span>
+                    </div>
+                    <h4 style="margin-top: 1rem;">Satisfação</h4>
+                    <p>Com as refeições</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights IA -->
+        <section class="ai-insights">
+            <h3 style="color: #84cc16;">💡 Insights da IA Nutricional</h3>
+            <p style="margin: 1rem 0 2rem;">Análises inteligentes baseadas em seus dados:</p>
+            
+            <div class="insight-card">
+                <strong>🚰 Hidratação: </strong> Você está consumindo 30% menos água do que o recomendado para seu nível de atividade.
+            </div>
+            
+            <div class="insight-card">
+                <strong>🥦 Fibra: </strong> Sua ingestão de fibras está 25% abaixo do ideal. Sugerimos aumentar vegetais folhosos.
+            </div>
+            
+            <div class="insight-card">
+                <strong>⏰ Horário: </strong> Seu jantar está muito próximo da hora de dormir. Considere antecipar em 1 hora.
+            </div>
+            
+            <div class="insight-card">
+                <strong>🍎 Lanches: </strong> Você tende a consumir lanches ricos em açúcar às 16h. Sugerimos substituir por frutas.
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; margin: 4rem 0;">
+            <div style="max-width: 600px; margin: 0 auto 3rem;">
+                <h3>Experimente grátis por 7 dias</h3>
+                <p>Receba um plano nutricional personalizado criado por IA para seus objetivos específicos</p>
+            </div>
+            
+            <a href="../index.html#contato" class="btn primary large" style="background: linear-gradient(135deg, #84cc16 0%, #a3e635 100%); padding: 1.5rem 3rem; color: #1e293b;">
+                Começar Teste Gratuito →
+            </a>
+            <br>
+            <a href="../index.html#assistentes" class="back-button" style="margin-top: 2rem;">
+                ← Voltar para Assistentes
+            </a>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+        });
+        
+        function updateGoal(value) {
+            const goalText = document.getElementById('goalValue');
+            const goalPercent = document.getElementById('goalPercent');
+            goalPercent.textContent = value + '%';
+            
+            if (value < 33) goalText.textContent = 'Manutenção';
+            else if (value < 66) goalText.textContent = 'Hipertrofia';
+            else goalText.textContent = 'Emagrecimento';
+        }
+        
+        function updateActivity(value) {
+            const activityText = document.getElementById('activityValue');
+            const activityPercent = document.getElementById('activityPercent');
+            activityPercent.textContent = value + '%';
+            
+            if (value < 25) activityText.textContent = 'Sedentário';
+            else if (value < 50) activityText.textContent = 'Leve';
+            else if (value < 75) activityText.textContent = 'Moderado';
+            else activityText.textContent = 'Intenso';
+        }
+        
+        function updateRestriction(value) {
+            const restrictionText = document.getElementById('restrictionValue');
+            const restrictionPercent = document.getElementById('restrictionPercent');
+            restrictionPercent.textContent = value + '%';
+            
+            if (value < 25) restrictionText.textContent = 'Nenhuma';
+            else if (value < 50) restrictionText.textContent = 'Lactose';
+            else if (value < 75) restrictionText.textContent = 'Glúten';
+            else restrictionText.textContent = 'Vegano';
+        }
+        
+        function generatePlan() {
+            alert('🎉 Novo plano nutricional gerado com sucesso!\n\nA IA analisou suas preferências e criou um plano personalizado. Verifique seu email para ver o plano completo.');
+            
+            // Simular animação de loading
+            const button = document.querySelector('.diet-customizer button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '🍎 Analisando dados...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.innerHTML = '✅ Plano Gerado!';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }, 2000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

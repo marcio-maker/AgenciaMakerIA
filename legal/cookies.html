@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookies – MakerAI Studio</title>
+    <style>
+        :root { --bg: #0d0d0f; --text: #ffffff; --accent: #00ff88; --surface: #17171a; }
+        body { background: var(--bg); color: var(--text); font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { background: var(--surface); padding: 30px; border-radius: 20px; width: 90%; max-width: 450px; text-align: center; border: 1px solid #333; }
+        .btn { background: var(--accent); color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .status { margin-top: 10px; font-size: 0.8rem; color: #888; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Preferências de Cookies</h2>
+        <p>Usamos cookies para otimizar sua experiência com nossas IAs.</p>
+        <button class="btn" onclick="savePreference()">Aceitar Todos</button>
+        <div id="status" class="status">Status: Aguardando escolha</div>
+    </div>
+
+    <script>
+        function savePreference() {
+            document.getElementById('status').innerText = "Status: Preferências Salvas!";
+            document.getElementById('status').style.color = "#00ff88";
+            setTimeout(() => { window.location.href = '../index.html'; }, 1500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard 3D Analytics | MakerAI Studio</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS 3D - TEMA CÍANO/FUTURISTA */
+        .dashboard3d-hero {
+            background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
+            padding: 8rem 0 6rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard3d-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&auto=format&fit=crop') center/cover;
+            opacity: 0.1;
+        }
+        
+        .globe-container {
+            width: 300px;
+            height: 300px;
+            margin: 2rem auto;
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .globe {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateGlobe 20s linear infinite;
+        }
+        
+        @keyframes rotateGlobe {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        .globe-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.3), transparent 70%);
+            border: 2px solid rgba(34, 211, 238, 0.5);
+        }
+        
+        .globe-layer:nth-child(2) {
+            transform: rotateY(60deg);
+        }
+        
+        .globe-layer:nth-child(3) {
+            transform: rotateY(120deg);
+        }
+        
+        .data-point {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #22d3ee;
+            border-radius: 50%;
+            transform-style: preserve-3d;
+            animation: pulsePoint 2s infinite;
+        }
+        
+        @keyframes pulsePoint {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+        
+        .dashboard-grid-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .dashboard-card-3d {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+        
+        .dashboard-card-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), transparent);
+            z-index: 1;
+        }
+        
+        .dashboard-card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            border-color: #06b6d4;
+        }
+        
+        .card-3d-title {
+            color: #06b6d4;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .chart-3d {
+            height: 200px;
+            position: relative;
+            margin: 1.5rem 0;
+        }
+        
+        .bar-3d {
+            position: absolute;
+            bottom: 0;
+            background: linear-gradient(to top, #06b6d4, #22d3ee);
+            border-radius: 4px 4px 0 0;
+            transform-style: preserve-3d;
+            transform: rotateX(45deg);
+            transition: height 0.3s ease;
+        }
+        
+        .bar-3d::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-5px) rotateX(-45deg);
+        }
+        
+        .interactive-demo {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 2px solid #06b6d4;
+            text-align: center;
+        }
+        
+        .control-panel {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 1rem 2rem;
+            background: var(--surface-light);
+            border: 2px solid #06b6d4;
+            border-radius: var(--radius);
+            color: #06b6d4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .control-btn:hover {
+            background: #06b6d4;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .real-time-data {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .data-stream {
+            background: rgba(6, 182, 212, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            min-width: 200px;
+            text-align: center;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+        
+        .stream-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #06b6d4;
+            margin: 0.5rem 0;
+        }
+        
+        .features-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-3d {
+            text-align: center;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-3d:hover {
+            transform: translateZ(20px);
+            border-color: #06b6d4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); -webkit-background-clip: text; background-clip: text;">
+            3D Analytics
+        </div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">Dashboard 3D</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="dashboard3d-hero">
+        <div class="container">
+            <h1 style="color: white;">Dashboard <span style="text-shadow: 0 0 30px rgba(255,255,255,0.7);">3D Analytics</span></h1>
+            <p class="subtitle" style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto;">
+                Visualizações interativas em 3D para análise de dados em tempo real
+            </p>
+            
+            <div class="globe-container">
+                <div class="globe">
+                    <div class="globe-layer"></div>
+                    <div class="globe-layer"></div>
+                    <div class="globe-layer"></div>
+                    
+                    <!-- Pontos de dados -->
+                    <div class="data-point" style="top: 30%; left: 40%;"></div>
+                    <div class="data-point" style="top: 60%; left: 20%;"></div>
+                    <div class="data-point" style="top: 20%; left: 70%;"></div>
+                    <div class="data-point" style="top: 70%; left: 60%;"></div>
+                    <div class="data-point" style="top: 40%; left: 80%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <main class="page-content container">
+        <!-- Dashboard -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Visualização 3D de Dados</h2>
+            <div class="dashboard-grid-3d">
+                <div class="dashboard-card-3d">
+                    <h3 class="card-3d-title">📈 Vendas por Região</h3>
+                    <div class="chart-3d">
+                        <div class="bar-3d" style="left: 10%; width: 15%; height: 80%;"></div>
+                        <div class="bar-3d" style="left: 30%; width: 15%; height: 60%;"></div>
+                        <div class="bar-3d" style="left: 50%; width: 15%; height: 90%;"></div>
+                        <div class="bar-3d" style="left: 70%; width: 15%; height: 40%;"></div>
+                        <div class="bar-3d" style="left: 90%; width: 15%; height: 70%;"></div>
+                    </div>
+                    <p>Distribuição espacial das vendas em tempo real</p>
+                </div>
+                
+                <div class="dashboard-card-3d">
+                    <h3 class="card-3d-title">👥 Engajamento do Usuário</h3>
+                    <div class="chart-3d">
+                        <div class="bar-3d" style="left: 10%; width: 15%; height: 65%;"></div>
+                        <div class="bar-3d" style="left: 30%; width: 15%; height: 85%;"></div>
+                        <div class="bar-3d" style="left: 50%; width: 15%; height: 45%;"></div>
+                        <div class="bar-3d" style="left: 70%; width: 15%; height: 95%;"></div>
+                        <div class="bar-3d" style="left: 90%; width: 15%; height: 75%;"></div>
+                    </div>
+                    <p>Análise 3D de padrões de interação</p>
+                </div>
+                
+                <div class="dashboard-card-3d">
+                    <h3 class="card-3d-title">⚡ Performance do Sistema</h3>
+                    <div class="chart-3d">
+                        <div class="bar-3d" style="left: 10%; width: 15%; height: 90%;"></div>
+                        <div class="bar-3d" style="left: 30%; width: 15%; height: 70%;"></div>
+                        <div class="bar-3d" style="left: 50%; width: 15%; height: 85%;"></div>
+                        <div class="bar-3d" style="left: 70%; width: 15%; height: 60%;"></div>
+                        <div class="bar-3d" style="left: 90%; width: 15%; height: 95%;"></div>
+                    </div>
+                    <p>Monitoramento 3D de recursos do servidor</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Interativa -->
+        <section class="interactive-demo">
+            <h2 style="color: #06b6d4; margin-bottom: 1rem;">Controle a Visualização 3D</h2>
+            <p style="margin-bottom: 2rem;">Interaja com os dados em tempo real</p>
+            
+            <div class="control-panel">
+                <button class="control-btn" onclick="rotateView('left')">↶ Rotacionar Esquerda</button>
+                <button class="control-btn" onclick="zoomIn()">🔍 Ampliar</button>
+                <button class="control-btn" onclick="changeView('top')">⬆ Vista Superior</button>
+                <button class="control-btn" onclick="zoomOut()">🔭 Reduzir</button>
+                <button class="control-btn" onclick="rotateView('right')">↷ Rotacionar Direita</button>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 2rem; background: rgba(0,0,0,0.3); border-radius: var(--radius);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <span>Rotatção X: <strong id="rotationX">0°</strong></span>
+                    <span>Rotatção Y: <strong id="rotationY">0°</strong></span>
+                    <span>Zoom: <strong id="zoomLevel">100%</strong></span>
+                </div>
+                <input type="range" min="0" max="360" value="0" class="slider" oninput="updateRotationX(this.value)" style="width: 100%;">
+            </div>
+        </section>
+
+        <!-- Dados em Tempo Real -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Fluxo de Dados em Tempo Real</h2>
+            <div class="real-time-data">
+                <div class="data-stream">
+                    <div style="font-size: 2rem;">📊</div>
+                    <h4>Processando</h4>
+                    <div class="stream-value" id="dataCount">1,247</div>
+                    <p>pontos de dados/segundo</p>
+                </div>
+                
+                <div class="data-stream">
+                    <div style="font-size: 2rem;">⚡</div>
+                    <h4>Latência</h4>
+                    <div class="stream-value" id="latency">12ms</div>
+                    <p>tempo de resposta</p>
+                </div>
+                
+                <div class="data-stream">
+                    <div style="font-size: 2rem;">💾</div>
+                    <h4>Memória</h4>
+                    <div class="stream-value" id="memory">64%</div>
+                    <p>utilização ativa</p>
+                </div>
+                
+                <div class="data-stream">
+                    <div style="font-size: 2rem;">👁️</div>
+                    <h4>Visualizações</h4>
+                    <div class="stream-value" id="views">3D</div>
+                    <p>renderização ativa</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Características -->
+        <section style="margin: 4rem 0;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Recursos do Dashboard 3D</h2>
+            <div class="features-3d">
+                <div class="feature-3d">
+                    <div style="font-size: 3rem; color: #06b6d4; margin-bottom: 1rem;">🎮</div>
+                    <h4>Interação 3D</h4>
+                    <p>Rotacione, amplie e explore dados em três dimensões</p>
+                </div>
+                
+                <div class="feature-3d">
+                    <div style="font-size: 3rem; color: #06b6d4; margin-bottom: 1rem;">⚡</div>
+                    <h4>Real-time</h4>
+                    <p>Atualização automática de dados a cada 500ms</p>
+                </div>
+                
+                <div class="feature-3d">
+                    <div style="font-size: 3rem; color: #06b6d4; margin-bottom: 1rem;">📱</div>
+                    <h4>WebGL Otimizado</h4>
+                    <p>Renderização acelerada por GPU para performance</p>
+                </div>
+                
+                <div class="feature-3d">
+                    <div style="font-size: 3rem; color: #06b6d4; margin-bottom: 1rem;">🔗</div>
+                    <h4>Multi-fonte</h4>
+                    <p>Integração com APIs, bancos de dados e streams</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="text-align: center; margin: 4rem 0; padding: 4rem; background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(34, 211, 238, 0.05) 100%); border-radius: var(--radius-lg);">
+            <h2 style="margin-bottom: 1rem;">Transforme Seus Dados em Insights 3D</h2>
+            <p style="margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Visualize dados complexos de forma intuitiva com nosso dashboard 3D interativo
+            </p>
+            
+            <a href="../index.html#contato" class="btn primary large" style="background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%); padding: 1.5rem 3rem;">
+                Solicitar Demonstração 3D →
+            </a>
+            <br>
+            <a href="../index.html#produtos" class="back-button" style="margin-top: 2rem;">
+                ← Voltar para Produtos
+            </a>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+            
+            // Simular dados em tempo real
+            setInterval(() => {
+                const dataCount = document.getElementById('dataCount');
+                const count = parseInt(dataCount.textContent.replace(',', ''));
+                const newCount = count + Math.floor(Math.random() * 10);
+                dataCount.textContent = newCount.toLocaleString();
+                
+                const latency = document.getElementById('latency');
+                const newLatency = 10 + Math.floor(Math.random() * 10);
+                latency.textContent = newLatency + 'ms';
+                
+                const memory = document.getElementById('memory');
+                const newMemory = 60 + Math.floor(Math.random() * 10);
+                memory.textContent = newMemory + '%';
+            }, 1000);
+        });
+        
+        let rotationX = 0;
+        let rotationY = 0;
+        let zoom = 100;
+        
+        function rotateView(direction) {
+            if (direction === 'left') rotationY -= 45;
+            else rotationY += 45;
+            
+            document.getElementById('rotationY').textContent = rotationY + '°';
+            document.querySelector('.globe').style.animation = 'none';
+            document.querySelector('.globe').style.transform = `rotateY(${rotationY}deg)`;
+        }
+        
+        function updateRotationX(value) {
+            rotationX = parseInt(value);
+            document.getElementById('rotationX').textContent = rotationX + '°';
+            document.querySelector('.globe').style.transform = `rotateY(${rotationY}deg) rotateX(${rotationX}deg)`;
+        }
+        
+        function zoomIn() {
+            zoom = Math.min(200, zoom + 20);
+            document.getElementById('zoomLevel').textContent = zoom + '%';
+            document.querySelector('.globe').style.transform = `rotateY(${rotationY}deg) rotateX(${rotationX}deg) scale(${zoom/100})`;
+        }
+        
+        function zoomOut() {
+            zoom = Math.max(50, zoom - 20);
+            document.getElementById('zoomLevel').textContent = zoom + '%';
+            document.querySelector('.globe').style.transform = `rotateY(${rotationY}deg) rotateX(${rotationX}deg) scale(${zoom/100})`;
+        }
+        
+        function changeView(view) {
+            const views = {
+                'top': { x: 0, y: 0 },
+                'front': { x: 0, y: 0 },
+                'side': { x: 0, y: 90 }
+            };
+            
+            rotationX = views[view].x || 0;
+            rotationY = views[view].y || 0;
+            
+            document.getElementById('rotationX').textContent = rotationX + '°';
+            document.getElementById('rotationY').textContent = rotationY + '°';
+            document.querySelector('.globe').style.transform = `rotateY(${rotationY}deg) rotateX(${rotationX}deg)`;
+        }
+    </script>
+</body>
+</html>

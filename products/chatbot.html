@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot IA Empresarial | MakerAI Studio</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ESTILOS CHATBOT - TEMA VERDE/AMIGÁVEL */
+        .chatbot-hero {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            padding: 8rem 0 6rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chatbot-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=1600&auto=format&fit=crop') center/cover;
+            opacity: 0.1;
+        }
+        
+        .chatbot-avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            border-radius: 50%;
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            animation: bounce 3s infinite;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .chatbot-demo {
+            max-width: 800px;
+            margin: 4rem auto;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            padding: 2rem;
+            background: var(--surface-light);
+        }
+        
+        .message {
+            margin: 1rem 0;
+            display: flex;
+            gap: 1rem;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .message-content {
+            flex: 1;
+        }
+        
+        .message.bot .message-content {
+            background: var(--surface);
+            padding: 1rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            max-width: 80%;
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .message.user .message-avatar {
+            background: var(--primary);
+        }
+        
+        .message.user .message-content {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: right;
+            max-width: 80%;
+            margin-left: auto;
+        }
+        
+        .chat-input-area {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+        
+        .chat-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface-light);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .quick-reply {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+        }
+        
+        .quick-reply:hover {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+        
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .capability-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .capability-card:hover {
+            transform: translateY(-5px);
+            border-color: #10b981;
+        }
+        
+        .capability-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #10b981;
+        }
+        
+        .integration-logos {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+        
+        .integration-logo {
+            width: 100px;
+            height: 100px;
+            background: var(--surface);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .integration-logo:hover {
+            transform: scale(1.1);
+            border-color: #10b981;
+        }
+        
+        .stats-chatbot {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .stat-chat {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
+            border-radius: var(--radius);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #10b981;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div id="loadingScreen">
+        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); -webkit-background-clip: text; background-clip: text;">
+            AI Chatbot
+        </div>
+        <div class="loading-orbit"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <a href="../index.html" class="logo">MakerAI Studio</a>
+                <span class="badge">Chatbot IA</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="chatbot-hero">
+        <div class="container">
+            <h1 style="color: white;">Chatbot Empresarial com <span style="text-shadow: 0 0 30px rgba(255,255,255,0.7);">Inteligência Artificial</span></h1>
+            <p class="subtitle" style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto;">
+                Assistente conversacional 24/7 com memória contextual e integração completa
+            </p>
+            
+            <div class="chatbot-avatar">🤖</div>
+        </div>
+    </section>
+
+    <!-- Demo Chat -->
+    <section style="margin: 4rem 0;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Experimente o Chatbot</h2>
+            <div class="chatbot-demo">
+                <div class="chat-header">
+                    <div style="width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #10b981;">🤖</div>
+                    <div>
+                        <h3 style="margin: 0; color: white;">Assistente MakerAI</h3>
+                        <p style="margin: 0; opacity: 0.8; font-size: 0.875rem;">Online • Responde em segundos</p>
+                    </div>
+                </div>
+                
+                <div class="chat-container" id="chatContainer">
+                    <div class="message bot">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content">
+                            <p>Olá! Sou o assistente IA da MakerAI. Como posso ajudar você hoje?</p>
+                            <p style="font-size: 0.875rem; opacity: 0.7; margin-top: 0.5rem;">💡 <strong>Posso:</strong> Explicar serviços, fazer orçamentos, agendar demonstrações e muito mais!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area">
+                    <div class="quick-replies">
+                        <div class="quick-reply" onclick="sendMessage('Quais serviços vocês oferecem?')">Serviços</div>
+                        <div class="quick-reply" onclick="sendMessage('Como funciona o orçamento?')">Orçamento</div>
+                        <div class="quick-reply" onclick="sendMessage('Preciso de um chatbot para meu e-commerce')">Chatbot E-commerce</div>
+                        <div class="quick-reply" onclick="sendMessage('Agendar demonstração')">Agendar Demo</div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Digite sua mensagem..." onkeypress="handleKeyPress(event)">
+                        <button onclick="sendUserMessage()" class="btn primary" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%);">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capacidades -->
+    <section style="margin: 4rem 0;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Capacidades do Chatbot IA</h2>
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">🧠</div>
+                    <h4>Memória Contextual</h4>
+                    <p>Lembra da conversa anterior e mantém contexto</p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">🌐</div>
+                    <h4>Multi-idioma</h4>
+                    <p>Suporte a PT, EN, ES com tradução automática</p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">🔌</div>
+                    <h4>Integrações</h4>
+                    <p>Conecta com CRM, ERP, WhatsApp e mais</p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">📊</div>
+                    <h4>Análise de Sentimento</h4>
+                    <p>Identifica humor do cliente e ajusta respostas</p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">🎯</div>
+                    <h4>Vendas Inteligentes</h4>
+                    <p>Recomenda produtos baseado no perfil</p>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">⚡</div>
+                    <h4>Resposta Instantânea</h4>
+                    <p>Responde em menos de 2 segundos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrações -->
+    <section style="margin: 4rem 0; text-align: center;">
+        <div class="container">
+            <h2 style="margin-bottom: 2rem;">Integrações Nativas</h2>
+            <p style="margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Conecte-se com as ferramentas que sua empresa já usa
+            </p>
+            
+            <div class="integration-logos">
+                <div class="integration-logo">💬</div>
+                <div class="integration-logo">📧</div>
+                <div class="integration-logo">📱</div>
+                <div class="integration-logo">🛒</div>
+                <div class="integration-logo">📊</div>
+                <div class="integration-logo">🔗</div>
+            </div>
+            
+            <p style="margin-top: 2rem; color: var(--text-secondary);">
+                WhatsApp • Email • SMS • Shopify • Salesforce • HubSpot • Zapier • API REST • Webhook
+            </p>
+        </div>
+    </section>
+
+    <!-- Estatísticas -->
+    <section style="margin: 4rem 0;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Impacto Mensurável</h2>
+            <div class="stats-chatbot">
+                <div class="stat-chat">
+                    <div style="font-size: 2rem;">⏱️</div>
+                    <div class="stat-value">-85%</div>
+                    <h4>Tempo de Resposta</h4>
+                    <p>Redução no tempo de atendimento</p>
+                </div>
+                
+                <div class="stat-chat">
+                    <div style="font-size: 2rem;">💰</div>
+                    <div class="stat-value">+240%</div>
+                    <h4>Conversão</h4>
+                    <p>Aumento em leads qualificados</p>
+                </div>
+                
+                <div class="stat-chat">
+                    <div style="font-size: 2rem;">😊</div>
+                    <div class="stat-value">94%</div>
+                    <h4>Satisfação</h4>
+                    <p>Clientes satisfeitos com atendimento</p>
+                </div>
+                
+                <div class="stat-chat">
+                    <div style="font-size: 2rem;">🎯</div>
+                    <div class="stat-value">24/7</div>
+                    <h4>Disponibilidade</h4>
+                    <p>Atendimento ininterrupto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="text-align: center; margin: 4rem 0; padding: 4rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%); border-radius: var(--radius-lg);">
+        <h2 style="margin-bottom: 1rem;">Automatize Seu Atendimento com IA</h2>
+        <p style="margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Reduza custos, aumente conversões e ofereça suporte 24/7 com nosso chatbot empresarial
+        </p>
+        
+        <a href="../index.html#contato" class="btn primary large" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); padding: 1.5rem 3rem;">
+            Solicitar Demonstração do Chatbot →
+        </a>
+        <br>
+        <a href="../index.html#produtos" class="back-button" style="margin-top: 2rem;">
+            ← Voltar para Produtos
+        </a>
+    </section>
+
+    <script src="../script.js"></script>
+    <script>
+        const responses = {
+            'Quais serviços vocês oferecem?': 'Oferecemos desenvolvimento de PWAs, chatbots IA, automações RPA, modelagem 3D, dashboards e consultoria em IA. Qual área te interessa mais?',
+            'Como funciona o orçamento?': 'Fazemos uma análise gratuita do seu projeto, definimos escopo e entregamos proposta em até 48h. Valores variam de R$8.000 a R$40.000+ dependendo da complexidade.',
+            'Preciso de um chatbot para meu e-commerce': 'Perfeito! Desenvolvemos chatbots para e-commerce que aumentam conversão em até 240%. Integramos com seu catálogo, processam pagamentos e atendem 24/7.',
+            'Agendar demonstração': 'Excelente! Podemos agendar uma demo personalizada. Você prefere amanhã às 10h ou depois de amanhã às 14h?',
+            'default': 'Entendi! Posso conectar você com nosso time especializado para uma conversa mais detalhada. Posso te ajudar com mais alguma coisa?'
+        };
+        
+        let conversation = [];
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+        });
+        
+        function sendMessage(text) {
+            document.getElementById('chatInput').value = text;
+            sendUserMessage();
+        }
+        
+        function sendUserMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Adicionar mensagem do usuário
+            addMessage(message, 'user');
+            conversation.push({ role: 'user', content: message });
+            
+            // Limpar input
+            input.value = '';
+            
+            // Simular "digitando..."
+            showTypingIndicator();
+            
+            // Resposta após delay
+            setTimeout(() => {
+                removeTypingIndicator();
+                const response = responses[message] || responses['default'];
+                addMessage(response, 'bot');
+                conversation.push({ role: 'assistant', content: response });
+            }, 1000 + Math.random() * 1000);
+        }
+        
+        function addMessage(text, sender) {
+            const container = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${sender === 'bot' ? '🤖' : '👤'}</div>
+                <div class="message-content">
+                    <p>${text}</p>
+                </div>
+            `;
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function showTypingIndicator() {
+            const container = document.getElementById('chatContainer');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = 'typingIndicator';
+            
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div style="display: flex; gap: 5px;">
+                        <div style="width: 8px; height: 8px; background: var(--text-secondary); border-radius: 50%; animation: typing 1s infinite;"></div>
+                        <div style="width: 8px; height: 8px; background: var(--text-secondary); border-radius: 50%; animation: typing 1s infinite 0.2s;"></div>
+                        <div style="width: 8px; height: 8px; background: var(--text-secondary); border-radius: 50%; animation: typing 1s infinite 0.4s;"></div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(typingDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function removeTypingIndicator() {
+            const typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendUserMessage();
+            }
+        }
+    </script>
+</body>
+</html>

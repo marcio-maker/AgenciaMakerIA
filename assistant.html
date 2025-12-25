@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistente MakerAI</title>
+
+  <!-- Usa o mesmo style.css do site principal para manter o tema consistente -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      background: var(--surface);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .assistant-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: none;
+    }
+
+    .assistant-header {
+      padding: 1rem 1.5rem;
+      background: var(--gradient-primary);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .assistant-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .assistant-avatar {
+      font-size: 2.8rem;
+    }
+
+    .assistant-status {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    .close-overlay {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-overlay:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .assistant-messages {
+      flex: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--surface-light);
+    }
+
+    .message {
+      max-width: 85%;
+      align-self: flex-start;
+    }
+
+    .message.user {
+      align-self: flex-end;
+    }
+
+    .message-content {
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius);
+      line-height: 1.6;
+      word-wrap: break-word;
+    }
+
+    .message.bot .message-content {
+      background: var(--surface);
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.user .message-content {
+      background: var(--gradient-primary);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .suggestions {
+      padding: 0.75rem 1.5rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+      flex-shrink: 0;
+    }
+
+    .suggestions::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .suggestions::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .suggestions::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .suggestion-chip {
+      display: inline-block;
+      background: var(--surface-light);
+      color: var(--text);
+      padding: 0.65rem 1rem;
+      margin-right: 0.75rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      user-select: none;
+    }
+
+    .suggestion-chip:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    }
+
+    .assistant-input {
+      padding: 1rem 1.5rem;
+      background: var(--surface);
+      display: flex;
+      gap: 0.75rem;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .assistant-input input {
+      flex: 1;
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-light);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .assistant-input input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+    }
+
+    .assistant-input button {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .assistant-input button:hover {
+      transform: scale(1.1);
+    }
+
+    .typing-dots {
+      display: inline-block;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* CTA WhatsApp */
+    .whatsapp-cta {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(37, 211, 102, 0.1);
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      border-radius: var(--radius);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .whatsapp-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #25d366;
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 0.5rem;
+    }
+
+    .whatsapp-cta a:hover {
+      background: #128c7e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    .whatsapp-icon {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="assistant-container">
+    <!-- Header -->
+    <div class="assistant-header">
+      <div class="assistant-info">
+        <div class="assistant-avatar">🤖</div>
+        <div>
+          <h4>Assistente MakerAI</h4>
+          <span class="assistant-status">Online • Pronto para ajudar</span>
+        </div>
+      </div>
+      <button class="close-overlay" onclick="window.location.href = 'index.html'" aria-label="Fechar assistente">✕</button>
+    </div>
+
+    <!-- Mensagens -->
+    <div class="assistant-messages" id="messages">
+      <div class="message bot">
+        <div class="message-content" id="welcomeMessage">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Sugestões -->
+    <div class="suggestions" id="suggestions">
+      <!-- Preenchidas via JS -->
+    </div>
+
+    <!-- Input -->
+    <div class="assistant-input">
+      <input type="text" id="userInput" placeholder="Digite sua mensagem..." aria-label="Digite sua mensagem">
+      <button id="sendBtn" aria-label="Enviar mensagem">➤</button>
+    </div>
+  </div>
+
+  <script>
+    // ==================== CONFIGURAÇÕES ====================
+    const whatsappNumber = "5511914808693"; // Altere apenas se necessário
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=Olá!%20Vi%20o%20site%20da%20MakerAI%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto`;
+
+    // Elementos DOM
+    const messagesContainer = document.getElementById('messages');
+    const input = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const welcomeMessageEl = document.getElementById('welcomeMessage');
+    const suggestionsContainer = document.getElementById('suggestions');
+
+    let whatsappShown = false;
+
+    // ==================== SEGURANÇA ====================
+    function escapeHTML(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // ==================== IDIOMA ====================
+    let currentLang = 'pt';
+    try {
+      if (window.MakerAITranslations && typeof window.MakerAITranslations.getCurrentLang === 'function') {
+        currentLang = window.MakerAITranslations.getCurrentLang();
+      }
+    } catch (e) {
+      console.warn('Tradução não disponível – usando português padrão');
+    }
+
+    // ==================== UTILITÁRIOS ====================
+    function scrollToBottom() {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function addMessage(text, type = 'bot') {
+      const msg = document.createElement('div');
+      msg.className = `message ${type}`;
+      const safeText = type === 'user' ? escapeHTML(text) : text;
+      msg.innerHTML = `<div class="message-content">${safeText}</div>`;
+      messagesContainer.appendChild(msg);
+      scrollToBottom();
+
+      // Mostra CTA do WhatsApp apenas uma vez, após a primeira resposta do bot
+      if (type === 'bot' && !whatsappShown) {
+        setTimeout(() => {
+          const cta = document.createElement('div');
+          cta.className = 'message bot';
+          cta.innerHTML = `
+            <div class="message-content whatsapp-cta">
+              <p>Quer falar diretamente com um humano?</p>
+              <a href="${whatsappLink}" target="_blank" rel="noopener">
+                <span class="whatsapp-icon">📱</span> Abrir WhatsApp
+              </a>
+            </div>`;
+          messagesContainer.appendChild(cta);
+          scrollToBottom();
+          whatsappShown = true;
+        }, 1200);
+      }
+    }
+
+    // ==================== SUGESTÕES ====================
+    function createSuggestions() {
+      suggestionsContainer.innerHTML = '';
+      const suggestions = [
+        { text: "Quais serviços vocês oferecem?", query: "serviços" },
+        { text: "Resumo da MakerAI Studio", query: "resumo" },
+        { text: "Tecnologias que vocês usam", query: "tecnologias" },
+        { text: "Quanto custa um projeto?", query: "preços" },
+        { text: "Cases e portfólio", query: "portfolio" },
+        { text: "Como entro em contato?", query: "contato" }
+      ];
+
+      suggestions.forEach(s => {
+        const chip = document.createElement('span');
+        chip.className = 'suggestion-chip';
+        chip.textContent = s.text;
+        chip.onclick = () => sendMessage(s.query);
+        suggestionsContainer.appendChild(chip);
+      });
+    }
+
+    // ==================== MENSAGEM DE BOAS-VINDAS ====================
+    function updateWelcomeMessage() {
+      const welcome = `
+        Olá! Sou o assistente da <strong>MakerAI Studio</strong>.<br><br>
+        Posso te ajudar com:<br>
+        • Resumo completo da empresa<br>
+        • Serviços e soluções<br>
+        • Tecnologias utilizadas<br>
+        • Faixa de preços<br>
+        • Portfólio e cases reais<br>
+        • Contato direto<br><br>
+        É só perguntar ou clicar em uma sugestão abaixo! 😊
+      `;
+      welcomeMessageEl.innerHTML = welcome;
+    }
+
+    // ==================== RESPOSTAS INTELIGENTES (GLOSSÁRIO DO PROJETO) ====================
+    function getBotResponse(message) {
+      const msg = message.toLowerCase().trim();
+
+      if (/oi|olá|hello|hi|hey|hola|bom dia|boa tarde|boa noite/.test(msg)) {
+        return "Olá! 😊 Tudo bem? Estou aqui para te contar tudo sobre a MakerAI Studio. No que você está interessado hoje?";
+      }
+
+      if (/serviço|oferece|oferecemos|o que vocês fazem/.test(msg)) {
+        return `
+          <strong>Nossos serviços premium:</strong><br><br>
+          • Assistentes de IA personalizados (como este!)<br>
+          • PWAs de alta performance e offline<br>
+          • Automação com RPA e integrações (Make, Zapier, n8n)<br>
+          • Modelagem e animação 3D (Blender, Three.js, Spline)<br>
+          • Dashboards inteligentes com IA<br>
+          • Chatbots avançados e experiências interativas<br><br>
+          Tudo com foco em performance, acessibilidade e escalabilidade.
+        `;
+      }
+
+      if (/resumo|visão geral|o que é a makerai|quem são vocês/.test(msg)) {
+        return `
+          <strong>Resumo da MakerAI Studio</strong><br><br>
+          Somos uma agência digital especializada em soluções premium com Inteligência Artificial e tecnologias modernas.<br><br>
+          <strong>Missão:</strong> Transformar ideias em produtos digitais rápidos, bonitos, inteligentes e acessíveis.<br><br>
+          <strong>Setores atendidos:</strong> Educação, Saúde, Indústria, E-commerce, Startups e Empresas.<br><br>
+          <strong>Diferencial:</strong> Prototipagem rápida + entrega com qualidade de estúdio + suporte contínuo.<br><br>
+          Foco total em resultados reais para o cliente.
+        `;
+      }
+
+      if (/tecnologia|stack|tech|ferramentas|usam/.test(msg)) {
+        return `
+          <strong>Tecnologias que dominamos:</strong><br><br>
+          <strong>IA & Machine Learning:</strong> OpenAI, Grok, LangChain, fine-tuning, RAG<br>
+          <strong>Frontend:</strong> React, Next.js, Vue, Svelte, Tailwind<br>
+          <strong>Mobile/Web:</strong> PWA, Flutter, React Native<br>
+          <strong>Backend:</strong> Node.js, Python, Firebase, Supabase<br>
+          <strong>3D & Design:</strong> Blender, Three.js, Spline, Figma<br>
+          <strong>Automação:</strong> Make, Zapier, n8n, UiPath (RPA)<br>
+          <strong>Banco de dados:</strong> PostgreSQL, Pinecone, Redis<br><br>
+          Sempre usamos o que há de melhor e mais atual.
+        `;
+      }
+
+      if (/preço|custo|valor|quanto custa|orçamento|investimento/.test(msg)) {
+        return `
+          <strong>Faixa de preços aproximada (orçamento gratuito e sem compromisso):</strong><br><br>
+          • Assistente IA simples: R$ 8.000 – R$ 15.000<br>
+          • Chatbot avançado: R$ 12.000 – R$ 25.000<br>
+          • PWA completo: R$ 20.000 – R$ 45.000<br>
+          • Automação complexa (RPA): R$ 15.000 – R$ 35.000<br>
+          • Dashboard com IA: R$ 25.000 – R$ 60.000<br>
+          • Projeto completo (site + IA + automação): R$ 50.000+<br><br>
+          Valores variam conforme escopo. Me conte sobre seu projeto que te passo uma estimativa precisa!
+        `;
+      }
+
+      if (/portfolio|case|projeto|trabalho|exemplo/.test(msg)) {
+        return `
+          Temos cases reais em:<br><br>
+          • Educação (plataformas EAD com IA)<br>
+          • Saúde (telemedicina e dashboards clínicos)<br>
+          • Indústria (monitoramento IoT)<br>
+          • E-commerce (PWAs com conversão alta)<br><br>
+          Veja a seção <strong>Cases</strong> no menu principal do site para ver projetos completos com resultados.
+        `;
+      }
+
+      if (/contato|falar|whatsapp|atendimento|equipe/.test(msg)) {
+        return `
+          O melhor jeito é direto no WhatsApp! 📱<br><br>
+          Clique no botão verde abaixo ou vá na seção Contato do site.<br><br>
+          Respondemos em minutos durante o horário comercial.
+        `;
+      }
+
+      // Resposta padrão
+      return `
+        Boa pergunta! 🤔<br><br>
+        Me conte mais sobre seu projeto ou necessidade que eu te ajudo da melhor forma.<br><br>
+        Você pode digitar: <strong>resumo</strong>, <strong>serviços</strong>, <strong>tecnologias</strong>, <strong>preços</strong> ou qualquer outra dúvida!
+      `;
+    }
+
+    // ==================== ENVIO DE MENSAGEM ====================
+    function sendMessage(text = null) {
+      const message = text || input.value.trim();
+      if (!message) return;
+
+      addMessage(message, 'user');
+      if (!text) input.value = '';
+
+      // Indicador de digitação
+      const typing = document.createElement('div');
+      typing.className = 'message bot';
+      typing.innerHTML = '<div class="message-content">Digitando<span class="typing-dots">...</span></div>';
+      messagesContainer.appendChild(typing);
+      scrollToBottom();
+
+      // Resposta simulada
+      setTimeout(() => {
+        typing.remove();
+        addMessage(getBotResponse(message), 'bot');
+      }, 800 + Math.random() * 1000);
+    }
+
+    // ==================== INICIALIZAÇÃO ====================
+    try {
+      sendBtn.addEventListener('click', () => sendMessage());
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      updateWelcomeMessage();
+      createSuggestions();
+      input.focus();
+      scrollToBottom();
+    } catch (error) {
+      console.error('Erro ao inicializar assistente:', error);
+    }
+  </script>
+</body>
+
+</html>

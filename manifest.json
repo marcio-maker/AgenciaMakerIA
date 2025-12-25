@@ -1,0 +1,21 @@
+{
+  "name": "MakerAI Studio",
+  "short_name": "MakerAI",
+  "description": "Agência de IA e Experiências Digitais",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d0d0f",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2593/2593635.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2593/2593635.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
