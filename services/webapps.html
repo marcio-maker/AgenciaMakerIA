@@ -1,77 +1,2237 @@
-<!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<!doctype html>
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexusFlow PWA - MakerAI Studio</title>
-  <meta name="description" content="NexusFlow - Plataforma PWA de gerenciamento de fluxo de trabalho com performance offline e sincronização em tempo real.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#3a6ea5" />
+  <meta name="description" content="Curso completo para fortalecer laços familiares e melhorar a comunicação entre pais e filhos" />
+  <meta name="application-name" content="Universidade de Pais" />
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlVuaXZlcnNpZGFkZSBkZSBQYWlzIC0gQ29uZXjDp8OjbyBQYWlzIGUgRmlsaG9zIiwKICAic2hvcnRfbmFtZSI6ICJVbml2ZXJzaWRhZGUgUGFpcyIsCiAgImRlc2NyaXB0aW9uIjogIkN1cnNvIGNvbXBsZXRvIHBhcmEgZm9ydGFsZWNlciBsYcOnb3MgZmFtaWxpYXJlcyBlIG1lbGhvcmFyIGEgY29tdW5pY2HDp8OjbyBlbnRyZSBwYWlzIGUgZmlsaG9zIiwKICAidGhlbWVfY29sb3IiOiAiIzNhNmVhNSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y1ZjdmYSIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAic2NvcGUiOiAiLyIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiY2F0ZWdvcmllcyI6IFsiZWR1Y2F0aW9uIiwgInBhcmVudGluZyIsICJmYW1pbHkiXSwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly92aWEucGxhY2Vob2xkZXIuY29tLzcyLzNhNmVhNS9mZmZmZmY/I3RleHQ9IiwiCiAgICAgICJzaXplcyI6ICI3Mng3MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly92aWEucGxhY2Vob2xkZXIuY29tLzk2LzNhNmVhNS9mZmZmZmY/I3RleHQ9IiwiCiAgICAgICJzaXplcyI6ICI5Nng5NiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly92aWEucGxhY2Vob2xkZXIuY29tLzEyOC8zYTZlYTUvZmZmZmZmPyN0ZXh0PSIsCiAgICAgICJzaXplcyI6ICIxMjg6MTI4IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL3ZpYS5wbGFjZWhvbGRlci5jb20vMTQ0LzNhNmVhNS9mZmZmZmY/I3RleHQ9IiwiCiAgICAgICJzaXplcyI6ICIxNDQ6MTQ0IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL3ZpYS5wbGFjZWhvbGRlci5jb20vMTUyLzNhNmVhNS9mZmZmZmY/I3RleHQ9IiwiCiAgICAgICJzaXplcyI6ICIxNTI6MTUyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL3ZpYS5wbGFjZWhvbGRlci5jb20vMTkyLzNhNmVhNS9mZmZmZmY/I3RleHQ9IiwiCiAgICAgICJzaXplcyI6ICIxOTI6MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL3ZpYS5wbGFjZWhvbGRlci5jb20vMzg0LzNhNmVhNS9mZmZmZmY/I3RleHQ9IiwiCiAgICAgICJzaXplcyI6ICIzODQ6Mzg0IiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL3ZpYS5wbGFjZWhvbGRlci5jb20vNTEyLzNhNmVhNS9mZmZmZmY/I3RleHQ9IiwiCiAgICAgICJzaXplcyI6ICI1MTI6NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0KICBdCn0=" />
+  
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="https://via.placeholder.com/180/3a6ea5/FFFFFF?text=UP" />
+  <link rel="apple-touch-icon" sizes="152x152" href="https://via.placeholder.com/152/3a6ea5/FFFFFF?text=UP" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://via.placeholder.com/180/3a6ea5/FFFFFF?text=UP" />
+  <link rel="apple-touch-icon" sizes="167x167" href="https://via.placeholder.com/167/3a6ea5/FFFFFF?text=UP" />
+  
+  <title>Universidade de Pais — Curso Demo</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
+    /* ===== STYLES COMPLETOS ===== */
     :root {
-      --primary: #7c3aed; --primary-light: #8b5cf6; --primary-dark: #5b21b6;
-      --bg: #030712; --surface: #0f172a; --text: #f1f5f9; --text-secondary: #94a3b8;
-      --border: #334155; --radius: 16px; --radius-lg: 24px; --shadow: 0 20px 40px rgba(0,0,0,0.3);
-      --gradient-primary: linear-gradient(135deg, #7c3aed, #9333ea);
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --primary: #3a6ea5;
+      --secondary: #e67e22;
+      --success: #16a085;
+      --accent: #8e44ad;
+      --muted: #7f8c8d;
+      --text: #2c3e50;
+      --danger: #c0392b;
+      --warning: #f1c40f;
+      --dark-bg: #1e272e;
+      --dark-card: #2f3640;
+      --dark-text: #dcdde1;
+      --dark-muted: #718093;
+      --radius: 12px;
+      --shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; min-height:100vh; }
-    .container { max-width:1400px; margin:0 auto; padding:0 2rem; }
-    .header { position:fixed; top:0; left:0; right:0; background:rgba(15,23,42,0.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); z-index:1000; padding:1rem 0; }
-    .header-container { display:flex; justify-content:space-between; align-items:center; }
-    .logo { font-size:1.8rem; font-weight:800; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .btn { display:inline-block; padding:0.8rem 1.8rem; border-radius:var(--radius); text-decoration:none; font-weight:600; transition:all 0.4s; }
-    .btn.secondary { background:transparent; border:1px solid var(--border); color:var(--text); }
-    .btn.secondary:hover { border-color:var(--primary); color:var(--primary); }
-    .btn.primary { background:var(--gradient-primary); color:white; }
-    .btn.primary:hover { transform:translateY(-3px); box-shadow:0 10px 20px rgba(124,58,237,0.3); }
-    .section { padding:8rem 0; }
-    h1 { font-size:3.5rem; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1rem; }
-    .subtitle { font-size:1.3rem; color:var(--text-secondary); max-width:800px; margin:0 auto 3rem; }
-    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:2rem; margin-top:3rem; }
-    .gallery img { width:100%; border-radius:var(--radius-lg); box-shadow:var(--shadow); }
-    .features { margin:4rem 0; text-align:center; }
-    .features p { margin:1rem 0; font-size:1.1rem; }
-    footer { text-align:center; padding:3rem 0; color:var(--text-secondary); border-top:1px solid var(--border); }
-    @media (max-width:768px) { h1 { font-size:2.5rem; } .gallery { grid-template-columns:1fr; } .container { padding:0 1rem; } }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* PWA Banner */
+    .pwa-install-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 15px 20px;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+      animation: slideUp 0.5s ease-out;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .pwa-install-banner.hidden {
+      display: none;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .pwa-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+
+    .pwa-banner-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .pwa-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9em;
+    }
+
+    .pwa-btn.install {
+      background: white;
+      color: var(--primary);
+    }
+
+    .pwa-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* App Container */
+    .app {
+      width: 100vw;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: var(--card);
+      position: relative;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      max-width: 420px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      width: 100%;
+      color: var(--text);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .brand .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .nav-actions {
+      position: relative;
+    }
+
+    .icon {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text);
+      padding: 8px;
+      border-radius: 50%;
+      transition: all 0.2s;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      min-width: 280px;
+      z-index: 1001;
+      padding: 8px 0;
+      animation: slideIn 0.3s ease-out;
+      border: 1px solid var(--bg);
+    }
+
+    .menu-dropdown.active {
+      display: block;
+    }
+
+    .menu-dropdown .tab {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 500;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-size: 0.95em;
+    }
+
+    .menu-dropdown .tab:hover {
+      background-color: var(--bg);
+    }
+
+    /* Main Content */
+    .main-content {
+      padding-top: 70px;
+      padding-bottom: 70px;
+      overflow-y: auto;
+      min-height: calc(100vh - 140px);
+    }
+
+    .screen {
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+      display: none;
+      animation: fadeInUp 0.4s ease-out;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Buttons */
+    .btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.95em;
+    }
+
+    .btn:hover:not(:disabled) {
+      background-color: #3a7bd5;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+    }
+
+    .btn.ghost {
+      background-color: transparent;
+      color: var(--text);
+      border: 1px solid var(--muted);
+    }
+
+    .btn.ghost:hover:not(:disabled) {
+      background-color: var(--bg);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Forms */
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      box-sizing: border-box;
+      margin: 8px 0;
+      border: 1px solid var(--bg);
+      border-radius: 6px;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: all 0.2s;
+      font-family: inherit;
+      font-size: 0.95em;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Modules */
+    .module {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      transition: all 0.3s;
+    }
+
+    .module:hover:not(.locked) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .module-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+
+    /* Profile */
+    .profile-photo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    #profile-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+      border: 3px solid var(--primary);
+    }
+
+    /* Toggles */
+    .toggle-group {
+      margin: 0;
+      padding: 12px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--bg);
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--muted);
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+      background-color: var(--primary);
+    }
+
+    input:checked + .toggle-slider:before {
+      transform: translateX(26px);
+    }
+
+    /* Benefits */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    @media (min-width: 500px) {
+      .benefits-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+
+    .benefit-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      border-radius: var(--radius);
+      border-left: 5px solid var(--primary);
+      background-color: var(--bg);
+      transition: all 0.3s;
+      height: 100%;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .benefit-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .benefit-content h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.2em;
+    }
+
+    .benefit-content p {
+      margin: 0 0 12px 0;
+      color: var(--muted);
+      font-size: 0.9em;
+    }
+
+    .benefit-features {
+      margin: 0 0 12px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .benefit-features li {
+      padding: 4px 0;
+      font-size: 0.85em;
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .benefit-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .benefit-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-top: auto;
+      font-size: 0.8em;
+      color: var(--muted);
+    }
+
+    /* Filters */
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .filter-tab {
+      padding: 8px 16px;
+      border: 2px solid var(--muted);
+      background: var(--bg);
+      color: var(--text);
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: 500;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-tab.active,
+    .filter-tab:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Sentiments */
+    .sentiments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .sentiment-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      border-radius: var(--radius);
+      background: var(--bg);
+      cursor: pointer;
+      transition: all 0.3s;
+      border-left: 4px solid var(--success);
+      min-height: 70px;
+    }
+
+    .sentiment-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .emotion-icon {
+      font-size: 1.8em;
+      flex-shrink: 0;
+    }
+
+    .emotion-text {
+      flex-grow: 1;
+    }
+
+    .emotion-text strong {
+      display: block;
+      font-size: 0.95em;
+      margin-bottom: 4px;
+    }
+
+    .emotion-desc {
+      font-size: 0.75em;
+      color: var(--muted);
+      display: block;
+    }
+
+    /* Filters Container */
+    .filters-container {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border: 2px solid var(--muted);
+      background: var(--bg);
+      color: var(--text);
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: 500;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Stats */
+    .stat-item {
+      padding: 0 15px;
+      text-align: center;
+      flex: 1;
+      min-width: 80px;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    @media (min-width: 500px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+
+    .testimonial-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--primary);
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .testimonial-author {
+      font-weight: bold;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Footer */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      padding: 10px 0;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-around;
+      z-index: 1000;
+      border-top: 1px solid var(--bg);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all 0.2s;
+      padding: 5px 10px;
+      border-radius: 8px;
+      flex: 1;
+      min-width: 60px;
+    }
+
+    .nav-item:hover {
+      color: var(--primary);
+      background: var(--bg);
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+      font-weight: 700;
+      background: rgba(74, 144, 226, 0.1);
+    }
+
+    .nav-item .nav-icon {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    /* Toast */
+    #toast-container {
+      position: fixed;
+      bottom: 80px;
+      left: 0;
+      right: 0;
+      z-index: 2000;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast {
+      min-width: 250px;
+      max-width: 350px;
+      background-color: var(--text);
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 14px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transition: all 0.5s;
+      transform: translateY(100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.success { background-color: var(--success); }
+    .toast.error { background-color: var(--danger); }
+    .toast.warning { background-color: var(--warning); color: var(--text); }
+    .toast.info { background-color: var(--primary); }
+
+    /* Dark Mode */
+    .dark-mode {
+      --bg: var(--dark-bg);
+      --card: var(--dark-card);
+      --text: var(--dark-text);
+      --muted: var(--dark-muted);
+      background-color: var(--dark-bg);
+      color: var(--text);
+    }
+
+    .dark-mode .app {
+      background-color: var(--dark-bg);
+    }
+
+    .dark-mode header,
+    .dark-mode footer,
+    .dark-mode .card {
+      background: var(--dark-card);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .screen {
+        padding: 15px;
+      }
+      
+      .sentiments-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+      
+      .filter-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .filter-tab {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Utility Classes */
+    .muted {
+      color: var(--muted);
+      font-size: 0.9em;
+    }
+
+    .text-center { text-align: center; }
+    .flex { display: flex; }
+    .flex-column { display: flex; flex-direction: column; }
+    .flex-center { display: flex; align-items: center; justify-content: center; }
+    .flex-between { display: flex; align-items: center; justify-content: space-between; }
+    .gap-10 { gap: 10px; }
+    .gap-20 { gap: 20px; }
+    .mt-20 { margin-top: 20px; }
+    .mb-20 { margin-bottom: 20px; }
+    .w-100 { width: 100%; }
+
+    /* Animations */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px) scaleY(0.9); }
+      to { opacity: 1; transform: translateY(0) scaleY(1); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="container header-container">
-      <a href="../index.html" class="logo">MakerAI Studio</a>
-      <a href="../index.html" class="btn secondary">← Voltar ao Portfólio</a>
-    </div>
-  </header>
-
-  <section class="section">
-    <div class="container" style="text-align:center;">
-      <h1>NexusFlow PWA</h1>
-      <p class="subtitle">Plataforma de gerenciamento de fluxo de trabalho progressiva – offline first, sincronização em tempo real e interface intuitiva.</p>
-      <div class="gallery">
-        <img src="https://miro.medium.com/v2/resize:fit:2000/1*XC0xECuKKGLSRTr9f9MFIQ.png" alt="Dashboard NexusFlow PWA" loading="lazy">
-        <img src="https://thumbs.dreamstime.com/b/dashboard-dark-theme-web-site-admin-panel-graphs-charts-diagrams-statistics-infographic-elements-dashboards-vector-325093602.jpg" alt="Interface mobile NexusFlow" loading="lazy">
+  <!-- PWA Installation Banner -->
+  <div id="pwa-install-banner" class="pwa-install-banner hidden">
+    <div class="pwa-banner-content">
+      <div class="pwa-icon">
+        <i class="fas fa-download"></i>
       </div>
-      <div class="features">
-        <h2>Tecnologias Utilizadas</h2>
-        <p>Next.js • Workbox • IndexedDB • Tailwind CSS • Supabase Auth</p>
-        <p>Funcionalidades: Offline sync, push notifications, instalação como app nativo, performance 98+ no Lighthouse.</p>
-        <a href="../index.html#contato" class="btn primary" style="margin-top:2rem; font-size:1.2rem;">Quero um projeto similar</a>
+      <div class="pwa-text">
+        <h4>Instalar App</h4>
+        <p>Tenha acesso offline e ícone na tela inicial</p>
       </div>
     </div>
-  </section>
+    <div class="pwa-banner-actions">
+      <button class="pwa-btn" onclick="closeInstallBanner()">Fechar</button>
+      <button class="pwa-btn install" onclick="installPWA()">Instalar</button>
+    </div>
+  </div>
 
-  <footer>
-    <p>© 2026 MakerAI Studio – Projeto Demonstrativo</p>
-  </footer>
+  <!-- App Container -->
+  <div class="app" role="application" aria-label="App Conexão Pais e Filhos">
+    <!-- Header -->
+    <header>
+      <div class="brand" onclick="nav('home')">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.2xBALJYhhVno3u98s_XItAHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="Logo Universidade de Pais" class="logo" />
+        <div>
+          <h1>Universidade de Pais</h1>
+          <div class="muted">Conexão Pais e Filhos.</div>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon" id="menu-button" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu-dropdown" id="menu-dropdown">
+          <div class="tab" onclick="nav('about')">
+            <i class="fas fa-info-circle"></i> Sobre a Universidade
+          </div>
+          <div class="tab" onclick="nav('faq')">
+            <i class="fas fa-question-circle"></i> FAQs/Fale Conosco
+          </div>
+          <div class="tab" onclick="nav('benefits')">
+            <i class="fas fa-star"></i> Benefícios
+          </div>
+          <div class="tab" onclick="nav('sentiments')">
+            <i class="fas fa-brain"></i> Lista de Emoções
+          </div>
+          <div class="tab" onclick="nav('notes')">
+            <i class="fas fa-sticky-note"></i> Anotações
+          </div>
+          <div class="tab" onclick="nav('favorites')">
+            <i class="fas fa-heart"></i> Favoritos
+          </div>
+          <div class="tab" onclick="nav('share')">
+            <i class="fas fa-share-alt"></i> Compartilhar
+          </div>
+          <div class="tab" onclick="nav('profile')">
+            <i class="fas fa-user-cog"></i> Configurações do Perfil
+          </div>
+          <div class="tab" onclick="exportUserData()">
+            <i class="fas fa-download"></i> Exportar Dados
+          </div>
+          <div class="tab" onclick="clearAllData()" style="color: var(--danger);">
+            <i class="fas fa-trash"></i> Limpar Todos os Dados
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+      <!-- Signup -->
+      <section id="screen-signup" class="screen card" style="display:none;text-align:center;">
+        <h2 style="margin-top:0">Bem-vindo(a)!</h2>
+        <p class="muted">Crie sua conta para acompanhar seu progresso no curso.</p>
+        
+        <div style="margin-bottom:15px;">
+          <button class="btn ghost" onclick="handleExistingUser()">
+            <i class="fas fa-user-check"></i> Já tenho conta
+          </button>
+        </div>
+        
+        <div class="signup-form" style="margin-top:12px;">
+          <input type="text" id="signup-name" placeholder="Seu nome completo" required>
+          <input type="email" id="signup-email" placeholder="seu@email.com" required>
+          <button class="btn" onclick="saveInitialAccount()">
+            <i class="fas fa-rocket"></i> Começar o Curso
+          </button>
+        </div>
+      </section>
+
+      <!-- Home -->
+      <section id="screen-home" class="screen card" style="display:none">
+        <div class="course-head" style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div class="muted">Módulos</div>
+            <h2 style="margin:4px 0 0">Fortalecendo Laços Familiares</h2>
+          </div>
+          <div class="meta" style="font-size:0.9em;font-weight:600">32 Aulas</div>
+        </div>
+        <p class="muted">Um curso único para fortalecer laços familiares, ministrado pelo Dr. Wimer Bottura Jr.</p>
+        
+        <div class="modules" id="modules" style="margin-top:12px;">
+          <!-- Modules serão renderizados via JS -->
+        </div>
+      </section>
+
+      <!-- Profile (COMPLETO) -->
+      <section id="screen-profile" class="screen card" style="display:none; text-align:center;">
+        <h2 style="margin-top:0">
+          <i class="fas fa-user-cog"></i> Configurações do Perfil
+        </h2>
+
+        <div class="profile-photo-section">
+          <img id="profile-photo" src="https://via.placeholder.com/120/3a6ea5/FFFFFF?text=FP" alt="Foto do Perfil">
+          <div style="display:flex;gap:8px;margin-top:10px; flex-wrap: wrap; justify-content: center;">
+            <button class="btn ghost" onclick="document.getElementById('photo-input').click()">
+              <i class="fas fa-camera"></i> Escolher Foto
+            </button>
+            <button class="btn ghost" onclick="removeProfilePhoto()">
+              <i class="fas fa-trash"></i> Remover
+            </button>
+          </div>
+          <input type="file" id="photo-input" accept="image/*" style="display:none;" onchange="updateProfilePhoto(event)">
+        </div>
+
+        <div class="form-group">
+          <label for="profile-name">
+            <i class="fas fa-user"></i> Nome
+          </label>
+          <input type="text" id="profile-name" placeholder="Digite seu nome completo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="profile-email">
+            <i class="fas fa-envelope"></i> Email
+          </label>
+          <input type="email" id="profile-email" placeholder="Digite seu email de acesso" required>
+        </div>
+
+        <h3 style="margin-top:20px;">
+          <i class="fas fa-sliders-h"></i> Preferências
+        </h3>
+
+        <div class="form-group toggle-group">
+          <label for="dark-mode-toggle">
+            <i class="fas fa-moon"></i> Modo Escuro
+          </label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="dark-mode-toggle" onchange="toggleDarkMode(this)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group toggle-group">
+          <label for="notifications-toggle">
+            <i class="fas fa-bell"></i> Notificações
+          </label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="notifications-toggle" onchange="handleNotificationToggle(this)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group toggle-group">
+          <label for="reminders-toggle">
+            <i class="fas fa-clock"></i> Lembretes Diários
+          </label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="reminders-toggle" onchange="handleReminderToggle(this)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="profile-stats card" style="margin-top:20px;">
+          <h3 style="margin-top:0;">
+            <i class="fas fa-chart-line"></i> Suas Estatísticas
+          </h3>
+          <div style="display:flex;justify-content:space-around;flex-wrap:wrap;">
+            <div class="stat-item">
+              <div id="stats-completed-profile" style="font-size:1.5em;font-weight:bold;color:var(--success)">0</div>
+              <div style="font-size:0.8em;color:var(--muted)">Aulas Concluídas</div>
+            </div>
+            <div class="stat-item">
+              <div id="stats-percentage-profile" style="font-size:1.5em;font-weight:bold;color:var(--primary)">0%</div>
+              <div style="font-size:0.8em;color:var(--muted)">Progresso</div>
+            </div>
+            <div class="stat-item">
+              <div id="stats-favorites-profile" style="font-size:1.5em;font-weight:bold;color:var(--danger)">0</div>
+              <div style="font-size:0.8em;color:var(--muted)">Favoritos</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn" onclick="saveAccountSettings()">
+            <i class="fas fa-save"></i> Salvar Configurações
+          </button>
+          <button class="btn ghost" onclick="exportUserData()">
+            <i class="fas fa-download"></i> Exportar Dados
+          </button>
+        </div>
+      </section>
+
+      <!-- Benefits (COMPLETO) -->
+      <section id="screen-benefits" class="screen card" style="display:none">
+        <div class="benefits-header" style="text-align:center;margin-bottom:30px;">
+          <h2 style="margin-top:0;color:var(--primary);">
+            <i class="fas fa-star"></i> Benefícios do Curso
+          </h2>
+          <p class="muted" style="max-width:600px;margin:0 auto;">Descubra os principais ganhos ao completar o programa</p>
+
+          <!-- Estatísticas -->
+          <div class="benefits-stats" style="display:flex;justify-content:center;gap:30px;margin-top:20px;flex-wrap:wrap;">
+            <div class="stat-item" style="text-align:center;">
+              <div style="font-size:2em;font-weight:bold;color:var(--secondary);">89%</div>
+              <div style="font-size:0.8em;color:var(--muted);">Melhora na comunicação</div>
+            </div>
+            <div class="stat-item" style="text-align:center;">
+              <div style="font-size:2em;font-weight:bold;color:var(--secondary);">76%</div>
+              <div style="font-size:0.8em;color:var(--muted);">Redução de conflitos</div>
+            </div>
+            <div class="stat-item" style="text-align:center;">
+              <div style="font-size:2em;font-weight:bold;color:var(--secondary);">94%</div>
+              <div style="font-size:0.8em;color:var(--muted);">Satisfação dos pais</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="benefits-filters">
+          <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterBenefits('all')">
+              <i class="fas fa-star"></i> Todos
+            </button>
+            <button class="filter-tab" onclick="filterBenefits('comunicacao')">
+              <i class="fas fa-comments"></i> Comunicação
+            </button>
+            <button class="filter-tab" onclick="filterBenefits('relacionamento')">
+              <i class="fas fa-heart"></i> Relacionamento
+            </button>
+            <button class="filter-tab" onclick="filterBenefits('desenvolvimento')">
+              <i class="fas fa-brain"></i> Desenvolvimento
+            </button>
+          </div>
+        </div>
+
+        <!-- Grid de Benefícios -->
+        <div class="benefits-grid" id="benefits-grid">
+          <!-- COMUNICAÇÃO -->
+          <div class="benefit-card comunicacao" data-category="comunicacao">
+            <div class="benefit-icon">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div class="benefit-content">
+              <h3>Comunicação Clara e Efetiva</h3>
+              <p>Aprenda a expressar suas necessidades e a ouvir seus filhos de forma que ambos se sintam compreendidos.</p>
+              <ul class="benefit-features">
+                <li>Escuta ativa e empática</li>
+                <li>Expressão assertiva de sentimentos</li>
+                <li>Diálogo sem julgamentos</li>
+              </ul>
+              <div class="benefit-meta">
+                <span class="benefit-duration"><i class="fas fa-clock"></i> Aulas 2-5</span>
+                <span class="benefit-level"><i class="fas fa-lightbulb"></i> Fundamental</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RELACIONAMENTO -->
+          <div class="benefit-card relacionamento" data-category="relacionamento">
+            <div class="benefit-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="benefit-content">
+              <h3>Vínculos Fortalecidos</h3>
+              <p>Construa relacionamentos mais profundos e significativos com seus filhos através da conexão emocional genuína.</p>
+              <ul class="benefit-features">
+                <li>Confiança e segurança emocional</li>
+                <li>Respeito mútuo e empatia</li>
+                <li>Memórias familiares positivas</li>
+              </ul>
+              <div class="benefit-meta">
+                <span class="benefit-duration"><i class="fas fa-clock"></i> Aulas 6-9</span>
+                <span class="benefit-level"><i class="fas fa-lightbulb"></i> Intermediário</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DESENVOLVIMENTO -->
+          <div class="benefit-card desenvolvimento" data-category="desenvolvimento">
+            <div class="benefit-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <div class="benefit-content">
+              <h3>Desenvolvimento Emocional</h3>
+              <p>Ajude seus filhos a desenvolverem inteligência emocional, resiliência e habilidades sociais essenciais para a vida.</p>
+              <ul class="benefit-features">
+                <li>Autoconhecimento e autoestima</li>
+                <li>Gestão de emoções complexas</li>
+                <li>Resolução pacífica de conflitos</li>
+              </ul>
+              <div class="benefit-meta">
+                <span class="benefit-duration"><i class="fas fa-clock"></i> Aulas 10-13</span>
+                <span class="benefit-level"><i class="fas fa-lightbulb"></i> Avançado</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- HARMONIA FAMILIAR -->
+          <div class="benefit-card comunicacao" data-category="comunicacao">
+            <div class="benefit-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="benefit-content">
+              <h3>Harmonia Familiar</h3>
+              <p>Crie um ambiente familiar pacífico onde todos se sintam ouvidos, valorizados e apoiados.</p>
+              <ul class="benefit-features">
+                <li>Redução de conflitos domésticos</li>
+                <li>Ambiente seguro para expressão</li>
+                <li>Cooperação e trabalho em equipe</li>
+              </ul>
+              <div class="benefit-meta">
+                <span class="benefit-duration"><i class="fas fa-clock"></i> Aulas 14-17</span>
+                <span class="benefit-level"><i class="fas fa-lightbulb"></i> Fundamental</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AUTOCONFIANÇA -->
+          <div class="benefit-card relacionamento" data-category="relacionamento">
+            <div class="benefit-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div class="benefit-content">
+              <h3>Autoconfiança Parental</h3>
+              <p>Ganhe segurança em suas decisões parentais e confiança em sua capacidade de educar e guiar seus filhos.</p>
+              <ul class="benefit-features">
+                <li>Tomada de decisão assertiva</li>
+                <li>Estabelecimento de limites saudáveis</li>
+                <li>Autonomia e liderança familiar</li>
+              </ul>
+              <div class="benefit-meta">
+                <span class="benefit-duration"><i class="fas fa-clock"></i> Aulas 18-21</span>
+                <span class="benefit-level"><i class="fas fa-lightbulb"></i> Intermediário</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- LEGADO FAMILIAR -->
+          <div class="benefit-card desenvolvimento" data-category="desenvolvimento">
+            <div class="benefit-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <div class="benefit-content">
+              <h3>Legado Familiar Positivo</h3>
+              <p>Construa um legado de valores, princípios e memórias que serão levados por gerações.</p>
+              <ul class="benefit-features">
+                <li>Transmissão de valores familiares</li>
+                <li>Tradições e rituais significativos</li>
+                <li>Base sólida para o futuro</li>
+              </ul>
+              <div class="benefit-meta">
+                <span class="benefit-duration"><i class="fas fa-clock"></i> Aulas 22-25</span>
+                <span class="benefit-level"><i class="fas fa-lightbulb"></i> Avançado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Depoimentos -->
+        <div class="testimonials-section" style="margin-top:40px;padding:30px;background:var(--bg);border-radius:var(--radius);">
+          <h3 style="text-align:center;margin-bottom:25px;">
+            <i class="fas fa-quote-left"></i> O que os pais estão dizendo:
+          </h3>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="testimonial-text">
+                "O curso transformou nossa comunicação familiar. Finalmente entendemos o que nossos filhos realmente precisam!"
+              </div>
+              <div class="testimonial-author">
+                <i class="fas fa-user"></i> Ana Silva, mãe de 2 filhos
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-text">
+                "As técnicas de resolução de conflitos reduziram nossas brigas em 80%. Valeu cada minuto do curso!"
+              </div>
+              <div class="testimonial-author">
+                <i class="fas fa-user"></i> Carlos Oliveira, pai adolescente
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-text">
+                "Aprendi a validar as emoções dos meus filhos e isso mudou completamente nosso relacionamento. Gratidão!"
+              </div>
+              <div class="testimonial-author">
+                <i class="fas fa-user"></i> Mariana Costa, mãe de 3
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sentiments (COMPLETO) -->
+      <section id="screen-sentiments" class="screen card" style="display:none">
+        <h2 style="margin-top:0">
+          <i class="fas fa-brain"></i> Lista de Emoções
+        </h2>
+        <p class="muted">Ferramenta essencial para ajudar você e seu filho a nomear e validar o que estão sentindo.</p>
+
+        <!-- Filtros -->
+        <div class="filters-container">
+          <button class="filter-btn active" onclick="filterEmotions('all')">
+            <i class="fas fa-layer-group"></i> Todas
+          </button>
+          <button class="filter-btn" onclick="filterEmotions('positive')">
+            <i class="fas fa-smile"></i> Positivas
+          </button>
+          <button class="filter-btn" onclick="filterEmotions('neutral')">
+            <i class="fas fa-meh"></i> Neutras
+          </button>
+          <button class="filter-btn" onclick="filterEmotions('negative')">
+            <i class="fas fa-frown"></i> Desafiadoras
+          </button>
+        </div>
+
+        <!-- Grid de Emoções -->
+        <div class="sentiments-grid" id="sentiments-grid">
+          <!-- Emoções Positivas -->
+          <div class="sentiment-card success" data-category="positive">
+            <div class="emotion-icon">😊</div>
+            <div class="emotion-text">
+              <strong>Alegria</strong>
+              <span class="emotion-desc">Contentamento, felicidade</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card success" data-category="positive">
+            <div class="emotion-icon">😌</div>
+            <div class="emotion-text">
+              <strong>Paz</strong>
+              <span class="emotion-desc">Tranquilidade, serenidade</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card success" data-category="positive">
+            <div class="emotion-icon">😄</div>
+            <div class="emotion-text">
+              <strong>Entusiasmo</strong>
+              <span class="emotion-desc">Animação, excitação</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card success" data-category="positive">
+            <div class="emotion-icon">🤗</div>
+            <div class="emotion-text">
+              <strong>Carinho</strong>
+              <span class="emotion-desc">Afeto, aconchego</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card success" data-category="positive">
+            <div class="emotion-icon">😇</div>
+            <div class="emotion-text">
+              <strong>Gratidão</strong>
+              <span class="emotion-desc">Agradecimento, reconhecimento</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card success" data-category="positive">
+            <div class="emotion-icon">🥰</div>
+            <div class="emotion-text">
+              <strong>Amor</strong>
+              <span class="emotion-desc">Afeição, conexão profunda</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card success" data-category="positive">
+            <div class="emotion-icon">😎</div>
+            <div class="emotion-text">
+              <strong>Confiança</strong>
+              <span class="emotion-desc">Segurança, autoestima</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card success" data-category="positive">
+            <div class="emotion-icon">🎉</div>
+            <div class="emotion-text">
+              <strong>Celebração</strong>
+              <span class="emotion-desc">Festa, conquista</span>
+            </div>
+          </div>
+
+          <!-- Emoções Neutras -->
+          <div class="sentiment-card neutral" data-category="neutral">
+            <div class="emotion-icon">😐</div>
+            <div class="emotion-text">
+              <strong>Neutro</strong>
+              <span class="emotion-desc">Equilíbrio, indiferença</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card neutral" data-category="neutral">
+            <div class="emotion-icon">🤔</div>
+            <div class="emotion-text">
+              <strong>Pensativo</strong>
+              <span class="emotion-desc">Reflexão, contemplação</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card neutral" data-category="neutral">
+            <div class="emotion-icon">😶</div>
+            <div class="emotion-text">
+              <strong>Surpreso</strong>
+              <span class="emotion-desc">Espanto, incredulidade</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card neutral" data-category="neutral">
+            <div class="emotion-icon">🧐</div>
+            <div class="emotion-text">
+              <strong>Curioso</strong>
+              <span class="emotion-desc">Interesse, investigação</span>
+            </div>
+          </div>
+
+          <!-- Emoções Desafiadoras -->
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😟</div>
+            <div class="emotion-text">
+              <strong>Preocupação</strong>
+              <span class="emotion-desc">Inquietação, ansiedade</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😕</div>
+            <div class="emotion-text">
+              <strong>Confusão</strong>
+              <span class="emotion-desc">Dúvida, incerteza</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😞</div>
+            <div class="emotion-text">
+              <strong>Tristeza</strong>
+              <span class="emotion-desc">Desânimo, melancolia</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😔</div>
+            <div class="emotion-text">
+              <strong>Desapontamento</strong>
+              <span class="emotion-desc">Frustração, letdown</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😣</div>
+            <div class="emotion-text">
+              <strong>Frustração</strong>
+              <span class="emotion-desc">Irritação, impaciência</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😠</div>
+            <div class="emotion-text">
+              <strong>Raiva</strong>
+              <span class="emotion-desc">Ira, indignação</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😢</div>
+            <div class="emotion-text">
+              <strong>Chateado</strong>
+              <span class="emotion-desc">Mágoa, pesar</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😨</div>
+            <div class="emotion-text">
+              <strong>Medo</strong>
+              <span class="emotion-desc">Temor, apreensão</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😰</div>
+            <div class="emotion-text">
+              <strong>Ansiedade</strong>
+              <span class="emotion-desc">Nervosismo, tensão</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😩</div>
+            <div class="emotion-text">
+              <strong>Exaustão</strong>
+              <span class="emotion-desc">Cansaço, esgotamento</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😤</div>
+            <div class="emotion-text">
+              <strong>Impaciência</strong>
+              <span class="emotion-desc">Irritação, intolerância</span>
+            </div>
+          </div>
+
+          <div class="sentiment-card danger" data-category="negative">
+            <div class="emotion-icon">😭</div>
+            <div class="emotion-text">
+              <strong>Angústia</strong>
+              <span class="emotion-desc">Sofrimento, desespero</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="emotion-stats" style="margin-top:20px;padding:15px;background:var(--bg);border-radius:var(--radius);">
+          <div style="display:flex;justify-content:space-around;flex-wrap:wrap;">
+            <div class="stat-item">
+              <div style="font-size:1.5em;font-weight:bold;color:var(--success)">8</div>
+              <div style="font-size:0.8em;color:var(--muted)">Positivas</div>
+            </div>
+            <div class="stat-item">
+              <div style="font-size:1.5em;font-weight:bold;color:var(--warning)">4</div>
+              <div style="font-size:0.8em;color:var(--muted)">Neutras</div>
+            </div>
+            <div class="stat-item">
+              <div style="font-size:1.5em;font-weight:bold;color:var(--danger)">12</div>
+              <div style="font-size:0.8em;color:var(--muted)">Desafiadoras</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outras telas (mantidas básicas) -->
+      <section id="screen-aulas" class="screen card" style="display:none">
+        <h2>Aulas</h2>
+        <p class="muted">Conteúdo das aulas será carregado aqui...</p>
+      </section>
+
+      <section id="screen-aula" class="screen" style="display:none">
+        <h2>Aula</h2>
+        <p class="muted">Player de vídeo e conteúdo da aula...</p>
+      </section>
+
+      <section id="screen-complete" class="screen card" style="display:none;text-align:center">
+        <h2>Parabéns!</h2>
+        <p class="muted">Aula concluída com sucesso!</p>
+      </section>
+
+      <section id="screen-about" class="screen card" style="display:none">
+        <h2>Sobre a Universidade</h2>
+        <p class="muted">Informações sobre a Universidade de Pais...</p>
+      </section>
+
+      <section id="screen-faq" class="screen card" style="display:none">
+        <h2>FAQs</h2>
+        <p class="muted">Perguntas frequentes e contato...</p>
+      </section>
+
+      <section id="screen-notes" class="screen card" style="display:none">
+        <h2>Anotações</h2>
+        <p class="muted">Sistema de anotações pessoais...</p>
+      </section>
+
+      <section id="screen-favorites" class="screen card" style="display:none">
+        <h2>Favoritos</h2>
+        <p class="muted">Aulas marcadas como favoritas...</p>
+      </section>
+
+      <section id="screen-share" class="screen card" style="display:none">
+        <h2>Compartilhar</h2>
+        <p class="muted">Compartilhe o curso com amigos...</p>
+      </section>
+
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="nav-item active" id="nav-home" onclick="nav('home')">
+        <div class="nav-icon"><i class="fas fa-home"></i></div><span>Início</span>
+      </div>
+      <div class="nav-item" id="nav-benefits" onclick="nav('benefits')">
+        <div class="nav-icon"><i class="fas fa-star"></i></div><span>Benefícios</span>
+      </div>
+      <div class="nav-item" id="nav-sentiments" onclick="nav('sentiments')">
+        <div class="nav-icon"><i class="fas fa-brain"></i></div><span>Emoções</span>
+      </div>
+      <div class="nav-item" id="nav-profile" onclick="nav('profile')">
+        <div class="nav-icon"><i class="fas fa-user"></i></div><span>Perfil</span>
+      </div>
+    </footer>
+  </div>
 
   <script>
-    // Tema toggle simples (opcional)
-    document.addEventListener('DOMContentLoaded', () => {
-      const html = document.documentElement;
-      if (localStorage.getItem('theme') === 'light') {
-        html.setAttribute('data-theme', 'light');
+    // ===== CONFIGURAÇÃO =====
+    const APP_CONFIG = {
+      NAME: 'Universidade de Pais',
+      VERSION: '3.0.0',
+      STORAGE_PREFIX: 'up_'
+    };
+
+    // ===== GESTORES =====
+    let appState;
+    let pwaManager;
+
+    // ===== APP STATE =====
+    class AppStateManager {
+      constructor() {
+        this.state = {
+          currentScreen: 'signup',
+          moduleIndex: 0,
+          aulaIndex: 0,
+          currentQuizStep: 0,
+          quizScores: {},
+          completedAulas: {},
+          bookmarkedAulas: [],
+          searchQuery: '',
+          account: {
+            name: '',
+            email: '',
+            notifications: true,
+            reminders: false,
+            darkMode: false,
+            createdAt: new Date().toISOString()
+          },
+          stats: {
+            totalTimeSpent: 0,
+            streak: 0,
+            lastLogin: new Date().toISOString(),
+            appLaunches: 0
+          }
+        };
+        
+        this.loadState();
+        this.setupAutoSave();
+        this.trackAppLaunch();
       }
+
+      loadState() {
+        try {
+          const savedState = localStorage.getItem(`${APP_CONFIG.STORAGE_PREFIX}appState`);
+          if (savedState) {
+            const parsed = JSON.parse(savedState);
+            this.state = { ...this.state, ...parsed };
+            
+            if (this.state.account.name && this.state.account.email) {
+              this.state.currentScreen = 'home';
+            }
+          }
+        } catch (error) {
+          console.error('Erro ao carregar estado:', error);
+        }
+      }
+
+      saveState() {
+        try {
+          this.state.stats.lastActivity = new Date().toISOString();
+          localStorage.setItem(`${APP_CONFIG.STORAGE_PREFIX}appState`, 
+            JSON.stringify(this.state));
+        } catch (error) {
+          console.error('Erro ao salvar estado:', error);
+        }
+      }
+
+      setupAutoSave() {
+        setInterval(() => this.saveState(), 30000);
+        window.addEventListener('beforeunload', () => this.saveState());
+      }
+
+      trackAppLaunch() {
+        this.state.stats.appLaunches = (this.state.stats.appLaunches || 0) + 1;
+        this.state.stats.lastLogin = new Date().toISOString();
+        this.saveState();
+      }
+
+      getProgress() {
+        const totalAulas = 32;
+        const completed = Object.keys(this.state.completedAulas || {}).length;
+        const percentage = Math.round((completed / totalAulas) * 100);
+        
+        return {
+          completedCount: completed,
+          totalCount: totalAulas,
+          percentage: percentage
+        };
+      }
+    }
+
+    // ===== PWA MANAGER =====
+    class PWAInstallManager {
+      constructor() {
+        this.deferredPrompt = null;
+        this.isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                           window.navigator.standalone;
+        this.init();
+      }
+
+      init() {
+        if (this.isStandalone) return;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          this.deferredPrompt = e;
+          this.showInstallBanner();
+        });
+
+        window.addEventListener('appinstalled', () => {
+          console.log('App instalado!');
+          this.hideInstallBanner();
+          toast('🎉 App instalado na tela inicial!', 'success');
+        });
+
+        this.checkInstallCriteria();
+      }
+
+      showInstallBanner() {
+        const banner = document.getElementById('pwa-install-banner');
+        const hasUsedApp = localStorage.getItem(`${APP_CONFIG.STORAGE_PREFIX}appUsageTime`);
+        
+        if (banner && this.deferredPrompt && !this.isStandalone && hasUsedApp) {
+          banner.classList.remove('hidden');
+        }
+      }
+
+      hideInstallBanner() {
+        const banner = document.getElementById('pwa-install-banner');
+        if (banner) banner.classList.add('hidden');
+      }
+
+      async installPWA() {
+        if (!this.deferredPrompt) {
+          toast('Recurso de instalação não disponível', 'warning');
+          return;
+        }
+
+        try {
+          this.deferredPrompt.prompt();
+          const { outcome } = await this.deferredPrompt.userChoice;
+          
+          if (outcome === 'accepted') {
+            this.deferredPrompt = null;
+          }
+          
+          this.hideInstallBanner();
+        } catch (error) {
+          console.error('Erro na instalação:', error);
+          toast('Erro ao instalar o app', 'error');
+        }
+      }
+
+      checkInstallCriteria() {
+        const appLaunches = parseInt(localStorage.getItem(`${APP_CONFIG.STORAGE_PREFIX}appLaunches`) || '0');
+        if (appLaunches > 2 && !this.isStandalone) {
+          setTimeout(() => this.showInstallBanner(), 5000);
+        }
+      }
+    }
+
+    // ===== FUNÇÕES UTILITÁRIAS =====
+    function toast(message, type = 'info', duration = 4000) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <i class="fas fa-${getToastIcon(type)}"></i>
+        <span>${message}</span>
+      `;
+      
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 10);
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+        toast.classList.add('hide');
+        setTimeout(() => toast.remove(), 500);
+      }, duration);
+    }
+
+    function getToastIcon(type) {
+      const icons = {
+        success: 'check-circle',
+        error: 'exclamation-circle',
+        warning: 'exclamation-triangle',
+        info: 'info-circle'
+      };
+      return icons[type] || 'info-circle';
+    }
+
+    function toggleMenu(force = null) {
+      const menu = document.getElementById('menu-dropdown');
+      const isActive = menu.classList.contains('active');
+      const shouldShow = force === true || (force === null && !isActive);
+      
+      if (shouldShow) {
+        menu.classList.add('active');
+      } else {
+        menu.classList.remove('active');
+      }
+    }
+
+    function nav(screen, modIdx = null, aulaIdx = null) {
+      toggleMenu(false);
+      
+      // Esconder todas as telas
+      document.querySelectorAll('.screen').forEach(s => {
+        s.style.display = 'none';
+        s.classList.remove('active');
+      });
+      
+      // Mostrar tela alvo
+      const target = document.getElementById(`screen-${screen}`);
+      if (target) {
+        target.style.display = 'block';
+        target.classList.add('active');
+        
+        // Salvar estado
+        if (appState) {
+          appState.state.currentScreen = screen;
+          if (modIdx !== null) appState.state.moduleIndex = modIdx;
+          if (aulaIdx !== null) appState.state.aulaIndex = aulaIdx;
+          appState.saveState();
+        }
+      }
+      
+      // Atualizar navegação
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      const navItem = document.getElementById(`nav-${screen}`);
+      if (navItem) {
+        navItem.classList.add('active');
+      }
+      
+      // Renderizar conteúdo específico
+      renderScreen(screen, modIdx, aulaIdx);
+    }
+
+    function renderScreen(screen, modIdx, aulaIdx) {
+      switch(screen) {
+        case 'home':
+          renderHome();
+          break;
+        case 'profile':
+          renderProfile();
+          break;
+        case 'benefits':
+          setupBenefits();
+          break;
+        case 'sentiments':
+          setupSentiments();
+          break;
+      }
+    }
+
+    function renderHome() {
+      const modulesContainer = document.getElementById('modules');
+      if (!modulesContainer) return;
+
+      const modules = [
+        {
+          id: 0,
+          title: "Módulo 1: Tranquilizando os Pais",
+          description: "Acalmando preocupações comuns dos pais e fortalecendo a base familiar.",
+          image: "https://i.pinimg.com/736x/0b/57/da/0b57dab511ce87d28abac1d7924e866d.jpg"
+        },
+        {
+          id: 1,
+          title: "Módulo 2: Conectando com o Adolescente",
+          description: "Técnicas avançadas de escuta, empatia e validação de sentimentos.",
+          image: "https://i.pinimg.com/736x/da/0c/83/da0c83747f596db117ee11efebaf20c6.jpg"
+        },
+        {
+          id: 2,
+          title: "Módulo 3: Ferramentas de Impacto",
+          description: "Estratégias práticas para mudança de comportamento imediata.",
+          image: "https://i.pinimg.com/736x/24/03/40/2403407a1d51c3524ea8e67c26ebac91.jpg"
+        },
+        {
+          id: 3,
+          title: "Módulo 4: Crescendo Juntos",
+          description: "Visão de longo prazo e construção de legado familiar.",
+          image: "https://i.pinimg.com/736x/54/2e/97/542e97ebc7efbe4718c41dea9d3c415a.jpg"
+        }
+      ];
+
+      modulesContainer.innerHTML = modules.map(mod => `
+        <div class="module" onclick="nav('aulas', ${mod.id})">
+          <img class="module-img" src="${mod.image}" alt="${mod.title}">
+          <div class="module-info">
+            <h3>${mod.title}</h3>
+            <p>${mod.description}</p>
+            <div class="module-progress">
+              <progress value="0" max="8"></progress>
+              <span class="progress-text">0/8 aulas</span>
+            </div>
+          </div>
+          <div class="module-status">▶️</div>
+        </div>
+      `).join('');
+    }
+
+    function renderProfile() {
+      if (!appState) return;
+
+      const { account } = appState.state;
+      const progress = appState.getProgress();
+
+      // Preencher campos
+      document.getElementById('profile-name').value = account.name || '';
+      document.getElementById('profile-email').value = account.email || '';
+      document.getElementById('dark-mode-toggle').checked = account.darkMode || false;
+      document.getElementById('notifications-toggle').checked = account.notifications || true;
+      document.getElementById('reminders-toggle').checked = account.reminders || false;
+
+      // Atualizar estatísticas
+      document.getElementById('stats-completed-profile').textContent = progress.completedCount;
+      document.getElementById('stats-percentage-profile').textContent = progress.percentage + '%';
+      document.getElementById('stats-favorites-profile').textContent = 
+        appState.state.bookmarkedAulas?.length || 0;
+
+      // Aplicar modo escuro
+      if (account.darkMode) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+    }
+
+    function setupBenefits() {
+      // Configurar filtros de benefícios
+      const filterTabs = document.querySelectorAll('.filter-tab');
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          filterTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Configurar cards de benefícios
+      const benefitCards = document.querySelectorAll('.benefit-card');
+      benefitCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const title = this.querySelector('h3').textContent;
+          toast(`Benefício: ${title}`, 'info');
+        });
+      });
+    }
+
+    function setupSentiments() {
+      // Configurar filtros de emoções
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Configurar cards de emoções
+      const emotionCards = document.querySelectorAll('.sentiment-card');
+      emotionCards.forEach(card => {
+        card.addEventListener('click', function() {
+          const emotion = this.querySelector('strong').textContent;
+          const description = this.querySelector('.emotion-desc').textContent;
+          toast(`${emotion}: ${description}`, 'info');
+        });
+      });
+    }
+
+    // ===== FUNÇÕES DO PERFIL =====
+    function saveAccountSettings() {
+      if (!appState) return;
+
+      const name = document.getElementById('profile-name')?.value.trim();
+      const email = document.getElementById('profile-email')?.value.trim();
+
+      if (!name || !email) {
+        toast('Preencha todos os campos', 'error');
+        return;
+      }
+
+      if (!email.includes('@')) {
+        toast('Email inválido', 'error');
+        return;
+      }
+
+      appState.state.account.name = name;
+      appState.state.account.email = email;
+      appState.saveState();
+
+      toast('✅ Configurações salvas com sucesso!', 'success');
+    }
+
+    function toggleDarkMode(checkbox) {
+      if (!appState) return;
+
+      appState.state.account.darkMode = checkbox.checked;
+      appState.saveState();
+
+      if (checkbox.checked) {
+        document.body.classList.add('dark-mode');
+        toast('🌙 Modo Escuro Ativado', 'info');
+      } else {
+        document.body.classList.remove('dark-mode');
+        toast('☀️ Modo Claro Ativado', 'info');
+      }
+    }
+
+    function handleNotificationToggle(checkbox) {
+      if (!appState) return;
+
+      appState.state.account.notifications = checkbox.checked;
+      appState.saveState();
+
+      toast(checkbox.checked ? '🔔 Notificações Ativadas' : '🔕 Notificações Desativadas', 'info');
+    }
+
+    function handleReminderToggle(checkbox) {
+      if (!appState) return;
+
+      appState.state.account.reminders = checkbox.checked;
+      appState.saveState();
+
+      toast(checkbox.checked ? '⏰ Lembretes Ativados' : '⏰ Lembretes Desativados', 'info');
+    }
+
+    function updateProfilePhoto(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        toast('Por favor, selecione uma imagem válida', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const photoElement = document.getElementById('profile-photo');
+        photoElement.src = e.target.result;
+        localStorage.setItem(`${APP_CONFIG.STORAGE_PREFIX}profilePhoto`, e.target.result);
+        toast('📸 Foto atualizada com sucesso!', 'success');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeProfilePhoto() {
+      const defaultPhoto = 'https://via.placeholder.com/120/3a6ea5/FFFFFF?text=FP';
+      const photoElement = document.getElementById('profile-photo');
+      photoElement.src = defaultPhoto;
+      localStorage.removeItem(`${APP_CONFIG.STORAGE_PREFIX}profilePhoto`);
+      toast('🗑️ Foto removida', 'info');
+    }
+
+    // ===== FUNÇÕES DE FILTRO =====
+    function filterBenefits(category) {
+      const cards = document.querySelectorAll('.benefit-card');
+      
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterEmotions(category) {
+      const cards = document.querySelectorAll('.sentiment-card');
+      
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // ===== FUNÇÕES DE CONTA =====
+    function saveInitialAccount() {
+      const name = document.getElementById('signup-name')?.value.trim();
+      const email = document.getElementById('signup-email')?.value.trim();
+      
+      if (!name || !email) {
+        toast('Preencha todos os campos', 'error');
+        return;
+      }
+      
+      if (!email.includes('@')) {
+        toast('Email inválido', 'error');
+        return;
+      }
+      
+      if (appState) {
+        appState.state.account.name = name;
+        appState.state.account.email = email;
+        appState.state.currentScreen = 'home';
+        appState.saveState();
+        
+        toast(`🎉 Bem-vindo(a), ${name}!`, 'success');
+        nav('home');
+      }
+    }
+
+    function handleExistingUser() {
+      if (appState && appState.state.account.name) {
+        nav('home');
+        toast(`👋 Bem-vindo de volta, ${appState.state.account.name}!`, 'success');
+      } else {
+        toast('Nenhuma conta encontrada', 'warning');
+      }
+    }
+
+    function exportUserData() {
+      try {
+        if (!appState) return;
+        
+        const data = {
+          app: APP_CONFIG,
+          exportDate: new Date().toISOString(),
+          state: appState.state,
+          profilePhoto: localStorage.getItem(`${APP_CONFIG.STORAGE_PREFIX}profilePhoto`)
+        };
+        
+        const blob = new Blob([JSON.stringify(data, null, 2)], 
+          { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `universidade-pais-backup-${new Date().toISOString().slice(0,10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        toast('💾 Dados exportados com sucesso!', 'success');
+      } catch (error) {
+        console.error('Erro ao exportar:', error);
+        toast('Erro ao exportar dados', 'error');
+      }
+    }
+
+    function clearAllData() {
+      if (confirm('🚨 TEM CERTEZA? Isso apagará TODOS os seus dados permanentemente!')) {
+        // Limpar localStorage
+        Object.keys(localStorage).forEach(key => {
+          if (key.startsWith(APP_CONFIG.STORAGE_PREFIX)) {
+            localStorage.removeItem(key);
+          }
+        });
+        
+        toast('🗑️ Todos os dados foram apagados', 'warning');
+        setTimeout(() => location.reload(), 2000);
+      }
+    }
+
+    // ===== FUNÇÕES PWA =====
+    function installPWA() {
+      if (pwaManager) {
+        pwaManager.installPWA();
+      }
+    }
+
+    function closeInstallBanner() {
+      const banner = document.getElementById('pwa-install-banner');
+      if (banner) {
+        banner.classList.add('hidden');
+        localStorage.setItem(`${APP_CONFIG.STORAGE_PREFIX}bannerClosed`, 
+          new Date().toISOString());
+      }
+    }
+
+    // ===== SERVICE WORKER =====
+    function registerServiceWorker() {
+      if ('serviceWorker' in navigator) {
+        const swCode = `
+          const CACHE_NAME = 'universidade-pais-v3';
+          
+          self.addEventListener('install', event => {
+            event.waitUntil(
+              caches.open(CACHE_NAME)
+                .then(cache => cache.addAll(['/']))
+                .then(() => self.skipWaiting())
+            );
+          });
+          
+          self.addEventListener('activate', event => {
+            event.waitUntil(
+              caches.keys().then(cacheNames => {
+                return Promise.all(
+                  cacheNames.map(cache => {
+                    if (cache !== CACHE_NAME) {
+                      return caches.delete(cache);
+                    }
+                  })
+                );
+              }).then(() => self.clients.claim())
+            );
+          });
+          
+          self.addEventListener('fetch', event => {
+            event.respondWith(
+              caches.match(event.request)
+                .then(response => response || fetch(event.request))
+            );
+          });
+        `;
+        
+        const swBlob = new Blob([swCode], { type: 'application/javascript' });
+        const swURL = URL.createObjectURL(swBlob);
+        
+        navigator.serviceWorker.register(swURL)
+          .then(registration => {
+            console.log('Service Worker registrado:', registration);
+          })
+          .catch(error => {
+            console.error('Erro no Service Worker:', error);
+          });
+      }
+    }
+
+    // ===== INICIALIZAÇÃO =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar gestores
+      appState = new AppStateManager();
+      pwaManager = new PWAInstallManager();
+      
+      // Registrar Service Worker
+      registerServiceWorker();
+      
+      // Configurar event listeners
+      document.addEventListener('click', (e) => {
+        const menu = document.getElementById('menu-dropdown');
+        const menuBtn = document.getElementById('menu-button');
+        
+        if (menu && menuBtn && 
+            !menu.contains(e.target) && 
+            !menuBtn.contains(e.target)) {
+          toggleMenu(false);
+        }
+      });
+      
+      // Atalhos de teclado
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggleMenu(false);
+      });
+      
+      // Carregar foto de perfil salva
+      const savedPhoto = localStorage.getItem(`${APP_CONFIG.STORAGE_PREFIX}profilePhoto`);
+      if (savedPhoto) {
+        const photoElement = document.getElementById('profile-photo');
+        if (photoElement) photoElement.src = savedPhoto;
+      }
+      
+      // Navegar para tela inicial
+      setTimeout(() => {
+        nav(appState.state.currentScreen);
+      }, 100);
+      
+      console.log(`🎓 ${APP_CONFIG.NAME} v${APP_CONFIG.VERSION} inicializado!`);
     });
+
+    // ===== EXPORTAR FUNÇÕES =====
+    window.nav = nav;
+    window.toggleMenu = toggleMenu;
+    window.toast = toast;
+    window.saveInitialAccount = saveInitialAccount;
+    window.saveAccountSettings = saveAccountSettings;
+    window.handleExistingUser = handleExistingUser;
+    window.toggleDarkMode = toggleDarkMode;
+    window.handleNotificationToggle = handleNotificationToggle;
+    window.handleReminderToggle = handleReminderToggle;
+    window.updateProfilePhoto = updateProfilePhoto;
+    window.removeProfilePhoto = removeProfilePhoto;
+    window.exportUserData = exportUserData;
+    window.clearAllData = clearAllData;
+    window.installPWA = installPWA;
+    window.closeInstallBanner = closeInstallBanner;
+    window.filterBenefits = filterBenefits;
+    window.filterEmotions = filterEmotions;
   </script>
 </body>
 </html>
