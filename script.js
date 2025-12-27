@@ -40,23 +40,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Função de sanitização para prevenir XSS
   function sanitizeHTML(str, allowBasicHTML = false) {
-  if (!str) return '';
-  
-  const div = document.createElement('div');
-  
-  if (allowBasicHTML) {
-    // Permite tags seguras para traduções
-    const temp = str
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/&lt;(\/?(span|strong|em|br|i|b|mark|a)(?:\s[^>]*)?)&gt;/gi, '<$1>');
-    div.innerHTML = temp;
-  } else {
-    div.textContent = str;
+    if (!str) return '';
+
+    const div = document.createElement('div');
+
+    if (allowBasicHTML) {
+      // Permite tags seguras para traduções
+      const temp = str
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/&lt;(\/?(span|strong|em|br|i|b|mark|a)(?:\s[^>]*)?)&gt;/gi, '<$1>');
+      div.innerHTML = temp;
+    } else {
+      div.textContent = str;
+    }
+
+    return div.innerHTML;
   }
-  
-  return div.innerHTML;
-}
 
   // ============ FUNÇÕES DE NOTIFICAÇÃO E OVERLAY ============
   function showNotification(message, type = 'info') {
@@ -638,19 +638,19 @@ document.addEventListener('DOMContentLoaded', function () {
       log('Service cards ou overlay não encontrados');
       return;
     }
-
+    
     const serviceDetails = {
       'web-apps': {
         title: 'Web Apps e PWAs',
-        description: 'Desenvolvemos Progressive Web Apps (PWAs) de alta performance que funcionam offline, têm push notifications e podem ser instalados como aplicativos nativos.',
+        description: 'Desenvolvemos Progressive Web Apps (PWAs) de alta performance que funcionam offline, podem ser instaladas como aplicativos nativos e oferecem experiências ricas e interativas, como a demo completa da Universidade de Pais.',
         features: [
           'Responsividade total para todos os dispositivos',
-          'Funcionamento offline com cache inteligente',
-          'Integração com câmera, GPS e outros sensores',
-          'Push notifications para engajamento',
-          'Performance otimizada (Lighthouse score 90+)'
+          'Funcionamento offline completo com cache inteligente',
+          'Persistência local de dados (progresso, perfil, favoritos e configurações)',
+          'Instalação como app nativo com banner e manifest PWA',
+          'Performance otimizada e design moderno com animações fluidas'
         ],
-        technologies: ['React', 'Next.js', 'Service Workers', 'Webpack']
+        technologies: ['HTML5', 'CSS3', 'Vanilla JavaScript', 'Service Workers', 'LocalStorage', 'Web Manifest']
       },
       'ia': {
         title: 'Avatares & Consultores IA',
@@ -1232,40 +1232,40 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ============ INICIALIZAÇÃO COMPLETA OTIMIZADA ============
-function initAll() {
-  const criticalComponents = [
-    { fn: initLoadingScreen, name: 'Loading Screen' },
-    { fn: initThemeToggle, name: 'Alternador de Tema' },
-    { fn: initAssistant, name: 'Assistente IA' },
-    { fn: optimizeImages, name: 'Otimização de Imagens' },
-    { fn: initMobileMenu, name: 'Menu Mobile' },
-    { fn: initSmoothScroll, name: 'Scroll Suave' },
-    { fn: initMobileOptimizations, name: 'Otimizações Mobile' },
-    { fn: initDemoLinks, name: 'Links Demo' }
-  ];
+  function initAll() {
+    const criticalComponents = [
+      { fn: initLoadingScreen, name: 'Loading Screen' },
+      { fn: initThemeToggle, name: 'Alternador de Tema' },
+      { fn: initAssistant, name: 'Assistente IA' },
+      { fn: optimizeImages, name: 'Otimização de Imagens' },
+      { fn: initMobileMenu, name: 'Menu Mobile' },
+      { fn: initSmoothScroll, name: 'Scroll Suave' },
+      { fn: initMobileOptimizations, name: 'Otimizações Mobile' },
+      { fn: initDemoLinks, name: 'Links Demo' }
+    ];
 
-  const nonCriticalComponents = [
-    { fn: initCarousel, name: 'Carrossel' },
-    { fn: initFAQ, name: 'FAQ' },
-    { fn: initServiceCards, name: 'Cards de Serviço' },
-    { fn: initCasesModal, name: 'Modal de Cases' },
-    { fn: initContactForm, name: 'Formulário de Contato' },
-    { fn: initScrollAnimations, name: 'Animações de Scroll' },
-    { fn: initAdvancedLogging, name: 'Logs Avançados' },
-    { fn: initPWAInstall, name: 'Banner PWA' }, // <--- DEVE ESTAR AQUI
-    { fn: initPerformance, name: 'Performance' }
-  ];
+    const nonCriticalComponents = [
+      { fn: initCarousel, name: 'Carrossel' },
+      { fn: initFAQ, name: 'FAQ' },
+      { fn: initServiceCards, name: 'Cards de Serviço' },
+      { fn: initCasesModal, name: 'Modal de Cases' },
+      { fn: initContactForm, name: 'Formulário de Contato' },
+      { fn: initScrollAnimations, name: 'Animações de Scroll' },
+      { fn: initAdvancedLogging, name: 'Logs Avançados' },
+      { fn: initPWAInstall, name: 'Banner PWA' }, // <--- DEVE ESTAR AQUI
+      { fn: initPerformance, name: 'Performance' }
+    ];
 
-  // Executa críticos
-  criticalComponents.forEach(c => initComponent(c.fn, c.name));
+    // Executa críticos
+    criticalComponents.forEach(c => initComponent(c.fn, c.name));
 
-  // Executa secundários com delay
-  setTimeout(() => {
-    nonCriticalComponents.forEach(c => initComponent(c.fn, c.name));
-  }, 150);
+    // Executa secundários com delay
+    setTimeout(() => {
+      nonCriticalComponents.forEach(c => initComponent(c.fn, c.name));
+    }, 150);
 
-  log('Sistema v5.2 inicializado completamente');
-}
+    log('Sistema v5.2 inicializado completamente');
+  }
 
   // ============ EXECUÇÃO SEGURA ============
   try {
@@ -1315,7 +1315,7 @@ function initPWAInstall() {
 
     if (titleEl) titleEl.textContent = t.title || 'MakerAI no teu telemóvel';
     if (descEl) {
-      descEl.innerHTML = t.banner || 
+      descEl.innerHTML = t.banner ||
         `Instale o MakerAI Studio e receba <strong>grátis</strong> o Guia de Prompts IA!<br>
          <em>Já instalado por +127 profissionais</em>`;
     }
@@ -1340,22 +1340,22 @@ function initPWAInstall() {
   btnInstall.addEventListener('click', openLeadModal);
 
   function openLeadModal() {
-  // Remove modal antigo se existir
-  const existing = document.getElementById('pwaLeadModal');
-  if (existing) existing.remove();
+    // Remove modal antigo se existir
+    const existing = document.getElementById('pwaLeadModal');
+    if (existing) existing.remove();
 
-  const lang = getLang();
-  const t = translations[lang]?.pwa || {};
-  const common = translations[lang]?.common || {};
+    const lang = getLang();
+    const t = translations[lang]?.pwa || {};
+    const common = translations[lang]?.common || {};
 
-  const modal = document.createElement('div');
-  modal.id = 'pwaLeadModal';
-  modal.className = 'assistant-overlay active';
-  modal.setAttribute('role', 'dialog');
-  modal.setAttribute('aria-modal', 'true');
-  modal.setAttribute('aria-labelledby', 'pwa-lead-title');
+    const modal = document.createElement('div');
+    modal.id = 'pwaLeadModal';
+    modal.className = 'assistant-overlay active';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'pwa-lead-title');
 
-  modal.innerHTML = `
+    modal.innerHTML = `
     <div class="assistant-container-wrapper" style="
       max-width: 460px;
       padding: 2rem;
@@ -1368,8 +1368,8 @@ function initPWAInstall() {
     ">
       <h3 id="pwa-lead-title" style="margin-bottom: 1rem; font-size: 1.8rem;">🎁 Bônus Exclusivo</h3>
       <p style="margin-bottom: 2rem; line-height: 1.7; opacity: 0.9; font-size: 1.05rem;">
-        ${t.modal_text || 
-          `Instale agora e receba <strong>instantaneamente</strong>:<br><br>
+        ${t.modal_text ||
+      `Instale agora e receba <strong>instantaneamente</strong>:<br><br>
            ✅ Guia Completo de 150+ Prompts IA<br>
            ✅ Dicas Semanais exclusivas no WhatsApp<br><br>
            <em>Já usado por +127 profissionais</em>`}
@@ -1390,46 +1390,46 @@ function initPWAInstall() {
     </div>
   `;
 
-  document.body.appendChild(modal);
+    document.body.appendChild(modal);
 
-  // Fechar modal
-  const closeModal = () => modal.remove();
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal || e.target.id === 'pwaLeadCancel') closeModal();
-  });
-  modal.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
+    // Fechar modal
+    const closeModal = () => modal.remove();
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target.id === 'pwaLeadCancel') closeModal();
+    });
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
 
-  // Botão principal: abre WhatsApp + tenta instalar PWA
-  document.getElementById('pwaDirectInstallBtn').addEventListener('click', () => {
-    closeModal();
+    // Botão principal: abre WhatsApp + tenta instalar PWA
+    document.getElementById('pwaDirectInstallBtn').addEventListener('click', () => {
+      closeModal();
 
-    // Mensagem pré-pronta para o WhatsApp
-    const message = encodeURIComponent(
-      `🚀 *Quero o Guia de 150+ Prompts IA + Dicas Semanais!*\n\n` +
-      `Vi no site MakerAI Studio e instalei o app.\n` +
-      `Me envia o bônus exclusivo? 😊`
-    );
+      // Mensagem pré-pronta para o WhatsApp
+      const message = encodeURIComponent(
+        `🚀 *Quero o Guia de 150+ Prompts IA + Dicas Semanais!*\n\n` +
+        `Vi no site MakerAI Studio e instalei o app.\n` +
+        `Me envia o bônus exclusivo? 😊`
+      );
 
-    // Abre WhatsApp
-    window.open(`https://wa.me/5511914809693?text=${message}`, '_blank');
+      // Abre WhatsApp
+      window.open(`https://wa.me/5511914809693?text=${message}`, '_blank');
 
-    showNotification('Redirecionando para o WhatsApp...', 'success');
+      showNotification('Redirecionando para o WhatsApp...', 'success');
 
-    // Tenta instalar o PWA (se o prompt estiver disponível)
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          showNotification('App instalado com sucesso! 🎉', 'success');
-          banner.style.display = 'none'; // Esconde o banner após instalação
-        }
-        deferredPrompt = null;
-      });
-    }
-  });
-}
+      // Tenta instalar o PWA (se o prompt estiver disponível)
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showNotification('App instalado com sucesso! 🎉', 'success');
+            banner.style.display = 'none'; // Esconde o banner após instalação
+          }
+          deferredPrompt = null;
+        });
+      }
+    });
+  }
 
   // Fechar banner
   btnClose.addEventListener('click', () => {
