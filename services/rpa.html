@@ -1,55 +1,3049 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoBot Enterprise - MakerAI Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --primary: #7c3aed; --bg: #030712; --surface: #0f172a; --text: #f1f5f9; --text-secondary: #94a3b8; --border: #334155; --radius: 16px; --radius-lg: 24px; --shadow: 0 20px 40px rgba(0,0,0,0.3); --gradient-primary: linear-gradient(135deg, #7c3aed, #9333ea); }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.7; }
-    .container { max-width:1400px; margin:0 auto; padding:0 2rem; }
-    .header { position:fixed; top:0; left:0; right:0; background:rgba(15,23,42,0.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); z-index:1000; padding:1rem 0; }
-    .header-container { display:flex; justify-content:space-between; align-items:center; }
-    .logo { font-size:1.8rem; font-weight:800; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .btn { padding:0.8rem 1.8rem; border-radius:var(--radius); text-decoration:none; font-weight:600; transition:all 0.4s; display:inline-block; }
-    .btn.secondary { background:transparent; border:1px solid var(--border); color:var(--text); }
-    .btn.primary { background:var(--gradient-primary); color:white; }
-    .section { padding:8rem 0; text-align:center; }
-    h1 { font-size:3.5rem; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .subtitle { font-size:1.3rem; color:var(--text-secondary); max-width:800px; margin:0 auto 3rem; }
-    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:2rem; margin-top:3rem; }
-    .gallery img { width:100%; border-radius:var(--radius-lg); box-shadow:var(--shadow); }
-    footer { text-align:center; padding:3rem 0; color:var(--text-secondary); border-top:1px solid var(--border); }
-    @media (max-width:768px) { h1 { font-size:2.5rem; } .gallery { grid-template-columns:1fr; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HairCare Premium - Cuidados Capilares Inteligentes</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#8a6d3b">
+    <meta name="description" content="Seu assistente pessoal de cuidados capilares inteligentes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HairCare Premium">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-TileColor" content="#8a6d3b">
+    <meta name="keywords" content="cabelo, cuidados capilares, beleza, saúde, tratamento, cronograma capilar">
+
+    <!-- iOS Icon -->
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMzYiIGZpbGw9IiM4YTZkM2IiLz4KPHBhdGggZD0iTTk2IDE0MEMxMTkuNjUgMTQwIDEzOSAxMjAuNjUgMTM5IDk3QzEzOSA3My4zNSAxMTkuNjUgNTQgOTYgNTQKNzIuMzUgNTQgNTMgNzMuMzUgNTMgOTdDNTMgMTIwLjY1IDcyLjM1IDE0MCA5NiAxNDBaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTI4IDk4SDEyMUMxMjEgMTA0LjYyNyAxMTUuNjI3IDExMCAxMDkgMTEwQzEwMi4zNzMgMTEwIDk3IDEwNC42MjcgOTcgOThIODlDODkgMTA0LjYyNyA4My42MjcgMTEwIDc3IDExMAo3MC4zNzMgMTEwIDY1IDEwNC42MjcgNjUgOThINTdDNTcgMTExLjE5IDY3LjgxIDEyMiA4MSAxMjJDMzAuNjMgMTIyIDMwLjYzIDEyMiA0OSAxMjIKNTcuMDkzIDEzMS40MzMgNzUuOTY3IDEzOCA5NiAxMzhDMTE2LjAzMyAxMzggMTM0LjkwNyAxMzEuNDMzIDE0MyAxMjIKMTYxLjM3IDEyMiAxNjEuMzcgMTIyIDExMSAxMjJDMTI0LjE5IDEyMiAxMzUgMTExLjE5IDEzNSA5OEgxMjhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="data:application/manifest+json,{
+    \" name\": \"HairCare Premium\", \"short_name\": \"HairCare\", \"description\": \"Seu assistente de cuidados
+        capilares\", \"start_url\": \"./\", \"display\": \"standalone\", \"background_color\": \"#f9f9f9\",
+        \"theme_color\": \"#8a6d3b\", \"icons\": [ { \"src\":
+        \"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMzYiIGZpbGw9IiM4YTZkM2IiLz4KPHBhdGggZD0iTTk2IDE0MEMxMTkuNjUgMTQwIDEzOSAxMjAuNjUgMTM5IDk3QzEzOSA3My4zNSAxMTkuNjUgNTQgOTYgNTQKNzIuMzUgNTQgNTMgNzMuMzUgNTMgOTdDNTMgMTIwLjY1IDcyLjM1IDE0MCA5NiAxNDBaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTI4IDk4SDEyMUMxMjEgMTA0LjYyNyAxMTUuNjI3IDExMCAxMDkgMTEwQzEwMi4zNzMgMTEwIDk3IDEwNC42MjcgOTcgOThIODlDODkgMTA0LjYyNyA4My42MjcgMTEwIDc3IDExMAo3MC4zNzMgMTEwIDY1IDEwNC42MjcgNjUgOThINTdDNTcgMTExLjE5IDY3LjgxIDEyMiA4MSAxMjJDMzAuNjMgMTIyIDMwLjYzIDEyMiA0OSAxMjIKNTcuMDkzIDEzMS40MzMgNzUuOTY3IDEzOCA5NiAxMzhDMTE2LjAzMyAxMzggMTM0LjkwNyAxMzEuNDMzIDE0MyAxMjIKMTYxLjM3IDEyMiAxNjEuMzcgMTIyIDExMSAxMjJDMTI0LjE5IDEyMiAxMzUgMTExLjE5IDEzNSA5OEgxMjhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K\",
+        \"sizes\": \"192x192\", \"type\": \"image/svg+xml\" } ] }">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===== VARIÁVEIS DE CORES COM MAIS CONTRASTE ===== */
+        :root {
+            /* Modo Claro - Neutro & Glass */
+            --bg-primary-light: #fdfdfd;
+            --bg-secondary-light: rgba(255, 255, 255, 0.6);
+            /* Glass Transparente */
+            --bg-card-light: rgba(255, 255, 255, 0.8);
+            /* Glass Transparente */
+            --primary-light: #000000;
+            --primary-dark-light: #222222;
+            --secondary-light: #444444;
+            --accent-light: #000000;
+            --success-light: #28a745;
+            --warning-light: #ffc107;
+            --danger-light: #dc3545;
+            --info-light: #17a2b8;
+            --text-primary-light: #000000;
+            --text-secondary-light: #333333;
+            --text-muted-light: #666666;
+            --border-light: rgba(0, 0, 0, 0.1);
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-hover-light: rgba(0, 0, 0, 0.1);
+
+            /* Modo Escuro - Neutro & Glass */
+            --bg-primary-dark: #0a0a0a;
+            --bg-secondary-dark: rgba(20, 20, 20, 0.6);
+            /* Glass Dark */
+            --bg-card-dark: rgba(30, 30, 30, 0.7);
+            /* Glass Dark */
+            --primary-dark: #ffffff;
+            --primary-dark-dark: #e0e0e0;
+            --secondary-dark: #b0b0b0;
+            --accent-dark: #ffffff;
+            --success-dark: #4cd964;
+            --warning-dark: #ffd60a;
+            --danger-dark: #ff375f;
+            --info-dark: #5ac8fa;
+            --text-primary-dark: #ffffff;
+            --text-secondary-dark: #d0d0d0;
+            --text-muted-dark: #808080;
+            --border-dark: rgba(255, 255, 255, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.4);
+            --shadow-hover-dark: rgba(0, 0, 0, 0.6);
+
+            /* Cores atuais (serão definidas pelo tema) */
+            --bg-primary: var(--bg-primary-light);
+            --bg-secondary: var(--bg-secondary-light);
+            --bg-card: var(--bg-card-light);
+            --primary: var(--primary-light);
+            --primary-dark: var(--primary-dark-light);
+            --secondary: var(--secondary-light);
+            --accent: var(--accent-light);
+            --success: var(--success-light);
+            --warning: var(--warning-light);
+            --danger: var(--danger-light);
+            --info: var(--info-light);
+            --text-primary: var(--text-primary-light);
+            --text-secondary: var(--text-secondary-light);
+            --text-muted: var(--text-muted-light);
+            --border: var(--border-light);
+            --shadow: var(--shadow-light);
+            --shadow-hover: var(--shadow-hover-light);
+
+            /* Gradientes */
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-vip: linear-gradient(135deg, #333333, #000000);
+
+            /* Tipografia maior para melhor legibilidade */
+            --font-size-xs: 0.875rem;
+            /* 14px */
+            --font-size-sm: 1rem;
+            /* 16px */
+            --font-size-base: 1.125rem;
+            /* 18px */
+            --font-size-lg: 1.25rem;
+            /* 20px */
+            --font-size-xl: 1.5rem;
+            /* 24px */
+            --font-size-2xl: 1.75rem;
+            /* 28px */
+
+            /* Espaçamentos para mobile */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 0.75rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+
+            /* Bordas */
+            --border-radius-sm: 0.5rem;
+            --border-radius-md: 1rem;
+            --border-radius-lg: 1.5rem;
+
+            /* Transições */
+            --transition-fast: 150ms ease;
+            --transition-base: 300ms ease;
+            --transition-slow: 500ms ease;
+        }
+
+        /* ===== RESET E BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 5rem;
+            font-size: var(--font-size-base);
+            transition: background-color var(--transition-base);
+        }
+
+        body.pwa-installed {
+            padding-bottom: var(--spacing-sm);
+        }
+
+        /* ===== TIPOGRAFIA COM TAMANHOS MAIORES ===== */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        h1 {
+            font-size: var(--font-size-2xl);
+        }
+
+        h2 {
+            font-size: var(--font-size-xl);
+        }
+
+        h3 {
+            font-size: var(--font-size-lg);
+        }
+
+        h4 {
+            font-size: var(--font-size-base);
+        }
+
+        p {
+            font-size: var(--font-size-base);
+            margin-bottom: var(--spacing-md);
+            color: var(--text-secondary);
+        }
+
+        small {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+        }
+
+        /* ===== LAYOUT MOBILE FIRST ===== */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* ===== HEADER COMPACTO PARA MOBILE ===== */
+        header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--spacing-sm) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-sm);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            flex: 1;
+            min-width: 0;
+        }
+
+        .logo {
+            width: 3rem;
+            height: 3rem;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .header-titles {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .header-titles h1 {
+            font-size: var(--font-size-lg);
+            color: white;
+            margin-bottom: 0.125rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-titles p {
+            font-size: var(--font-size-xs);
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .badge-premium {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.125rem 0.5rem;
+            border-radius: 1rem;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            margin-left: 0.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* ===== NAVEGAÇÃO COMPACTA ===== */
+        nav {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: var(--spacing-sm) 0;
+            position: sticky;
+            top: 4.5rem;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0.25rem;
+            overflow-x: auto;
+            flex: 1;
+            padding-bottom: 0.25rem;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background: transparent;
+            color: var(--text-secondary);
+            border: none;
+            padding: 0.625rem 0.75rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 500;
+            font-size: var(--font-size-xs);
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .tab-btn:hover {
+            background-color: rgba(138, 109, 59, 0.1);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .tab-badge {
+            position: absolute;
+            top: -0.25rem;
+            right: -0.25rem;
+            background: var(--danger);
+            color: white;
+            font-size: 0.6rem;
+            width: 1.125rem;
+            height: 1.125rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Perfil do usuário compacto */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .user-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            border: 2px solid var(--bg-secondary);
+            box-shadow: 0 2px 5px var(--shadow);
+            flex-shrink: 0;
+        }
+
+        .notification-btn {
+            position: relative;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .notification-btn:hover {
+            background-color: rgba(138, 109, 59, 0.1);
+            color: var(--primary);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            min-width: 1.125rem;
+            height: 1.125rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            border: 2px solid var(--bg-secondary);
+        }
+
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        main {
+            padding: var(--spacing-lg) 0;
+            min-height: calc(100vh - 10rem);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(1rem);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: 0 4px 12px var(--shadow);
+            border: 1px solid var(--border);
+            transition: all var(--transition-base);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-lg);
+            gap: var(--spacing-sm);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: rgba(138, 109, 59, 0.1);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== BOTÕES ===== */
+        .btn {
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--border-radius-sm);
+            border: none;
+            font-weight: 600;
+            font-size: var(--font-size-base);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(138, 109, 59, 0.3);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--text-primary);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 0.75rem;
+            font-size: var(--font-size-sm);
+        }
+
+        /* ===== FORMULÁRIOS ===== */
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border-radius: var(--border-radius-sm);
+            border: 2px solid var(--border);
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+            transition: all var(--transition-fast);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(138, 109, 59, 0.2);
+        }
+
+        textarea {
+            min-height: 8rem;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236c757d' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+            padding-right: 2.5rem;
+        }
+
+        /* ===== DASHBOARD GRID ===== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-container {
+            margin: var(--spacing-lg) 0;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: var(--font-size-base);
+        }
+
+        .progress-bar {
+            height: 0.75rem;
+            background: var(--border);
+            border-radius: 0.375rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 0.375rem;
+            transition: width var(--transition-slow);
+        }
+
+        /* ===== HISTÓRICO ===== */
+        .history-list {
+            max-height: 20rem;
+            overflow-y: auto;
+            margin-top: var(--spacing-lg);
+            padding-right: 0.5rem;
+        }
+
+        .history-item {
+            padding: var(--spacing-md);
+            background-color: rgba(138, 109, 59, 0.05);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: var(--spacing-sm);
+            border-left: 4px solid var(--primary);
+            transition: all var(--transition-fast);
+        }
+
+        .history-date {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ===== CONSULTORIA IA - LAYOUT MOBILE OTIMIZADO ===== */
+        .consultation-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius-sm);
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: var(--font-size-sm);
+            position: relative;
+            /* necessário para posicionar o input absoluto */
+        }
+
+        .checkbox-label:hover {
+            border-color: var(--primary);
+            background: rgba(138, 109, 59, 0.08);
+        }
+
+        /* Input invisível que cobre toda a label */
+        .checkbox-label input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            margin: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        /* Quadradinho personalizado (não marcado) */
+        .checkbox-label::before {
+            content: "";
+            width: 1.3rem;
+            height: 1.3rem;
+            border: 2px solid var(--border);
+            border-radius: 0.4rem;
+            background: var(--bg-card);
+            flex-shrink: 0;
+            transition: all var(--transition-fast);
+        }
+
+        /* Quando marcado: muda o ::before da label */
+        .checkbox-label input[type="checkbox"]:checked+span::before,
+        .checkbox-label:has(input[type="checkbox"]:checked)::before {
+            background: var(--primary);
+            border-color: var(--primary);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 70%;
+        }
+
+        .ai-response {
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-lg);
+            background-color: rgba(138, 109, 59, 0.1);
+            border-radius: var(--border-radius-md);
+            border-left: 4px solid var(--primary);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(1rem);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== PRODUTOS RECOMENDADOS ===== */
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all var(--transition-base);
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .product-card img {
+            width: 100%;
+            max-width: 220px;
+            height: auto;
+            border-radius: var(--border-radius-sm);
+            margin: 0.75rem 0;
+            object-fit: contain;
+            background: white;
+        }
+
+        .product-card .product-name {
+            font-weight: 600;
+            font-size: var(--font-size-base);
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        @media (min-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .ai-response h3 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-bottom: var(--spacing-lg);
+            font-size: var(--font-size-xl);
+        }
+
+        .ai-response h4 {
+            color: var(--text-primary);
+            margin: var(--spacing-lg) 0 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: var(--font-size-lg);
+        }
+
+        .ai-response ul {
+            padding-left: 1.5rem;
+            margin: 0.75rem 0;
+        }
+
+        .ai-response li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .ai-response .btn-block {
+            margin-top: var(--spacing-xl);
+            padding: 1rem;
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+        }
+
+        /* ===== VIP SECTION - VERSÃO HARMONIZADA COM O DESIGN ===== */
+        .vip-card {
+            border: 3px solid var(--warning);
+            /* mantém o destaque dourado */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(250, 240, 220, 0.7));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(138, 109, 59, 0.15);
+        }
+
+        /* Modo escuro */
+        body.dark-mode .vip-card {
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.9), rgba(60, 50, 30, 0.7));
+            border-color: #ffd60a;
+        }
+
+        .vip-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #8a6d3b, #a07840);
+            /* usa a cor primária do app */
+            color: white;
+            padding: 0.375rem 0.75rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: var(--font-size-xs);
+            z-index: 1;
+            box-shadow: 0 4px 12px rgba(138, 109, 59, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .vip-features {
+            list-style: none;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .vip-features li {
+            padding: 0.875rem 0;
+            border-bottom: 1px dashed rgba(138, 109, 59, 0.2);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: var(--font-size-base);
+            color: var(--text-primary);
+        }
+
+        .vip-features li:last-child {
+            border-bottom: none;
+        }
+
+        .vip-features i {
+            color: var(--warning);
+            font-size: 1.3rem;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+        }
+
+        /* Efeito sutil de brilho VIP */
+        .vip-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.8s;
+            pointer-events: none;
+        }
+
+        .vip-card:hover::before {
+            left: 100%;
+        }
+
+        /* ===== BADGES ===== */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .badge-success {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .badge-danger {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .badge-hydration {
+            background-color: rgba(23, 162, 184, 0.2);
+            color: var(--info);
+            border: 1px solid var(--info);
+        }
+
+        /* ===== STATUS MESSAGES ===== */
+        .status-message {
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-sm);
+            margin-top: var(--spacing-md);
+            font-weight: 500;
+            font-size: var(--font-size-base);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .status-success {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+
+        .status-warning {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+            border-left: 4px solid var(--warning);
+        }
+
+        .status-danger {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+            border-left: 4px solid var(--danger);
+        }
+
+        /* ===== MODAIS ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-md);
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            max-width: 90%;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all var(--transition-fast);
+            z-index: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--text-primary);
+        }
+
+        /* ===== PWA BANNER ===== */
+        .pwa-install-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 3000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.5s ease;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .pwa-banner-content {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            flex: 1;
+        }
+
+        .pwa-app-icon {
+            width: 3rem;
+            height: 3rem;
+            background: white;
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .pwa-banner-text {
+            flex: 1;
+        }
+
+        .pwa-banner-text h3 {
+            font-size: var(--font-size-base);
+            margin-bottom: 0.25rem;
+            color: white;
+        }
+
+        .pwa-banner-text p {
+            font-size: var(--font-size-sm);
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+
+        .pwa-banner-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .pwa-btn {
+            padding: 0.625rem 1rem;
+            border-radius: var(--border-radius-sm);
+            border: none;
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            min-width: 5rem;
+        }
+
+        .pwa-btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .pwa-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .pwa-btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .pwa-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Toast de instalação */
+        .pwa-toast {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: none;
+            align-items: center;
+            gap: var(--spacing-md);
+            z-index: 3001;
+            max-width: 24rem;
+            animation: slideInRight 0.3s ease;
+            border-left: 4px solid var(--success);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .pwa-toast-icon {
+            font-size: 1.5rem;
+            color: var(--success);
+            flex-shrink: 0;
+        }
+
+        .pwa-toast-content h4 {
+            font-size: var(--font-size-base);
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .pwa-toast-content p {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Botão flutuante */
+        .pwa-float-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 2999;
+            transition: all var(--transition-base);
+            border: 2px solid var(--bg-card);
+        }
+
+        .pwa-float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Badge de PWA instalado */
+        .pwa-installed-badge {
+            background: var(--success);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            margin-left: 0.5rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: var(--font-size-sm);
+            margin-top: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-md);
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (min-width: 768px) {
+            :root {
+                --font-size-base: 1.125rem;
+            }
+
+            .container {
+                padding: 0 var(--spacing-lg);
+            }
+
+            header {
+                padding: var(--spacing-md) 0;
+            }
+
+            .header-titles h1 {
+                font-size: var(--font-size-xl);
+            }
+
+            .nav-tabs {
+                gap: 0.5rem;
+            }
+
+            .tab-btn {
+                padding: 0.75rem 1rem;
+                font-size: var(--font-size-sm);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .consultation-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .checkbox-group {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            :root {
+                --font-size-base: 1.25rem;
+            }
+
+            .container {
+                padding: 0 var(--spacing-xl);
+            }
+
+            header {
+                padding: var(--spacing-lg) 0;
+            }
+
+            .header-titles h1 {
+                font-size: var(--font-size-2xl);
+            }
+
+            .nav-tabs {
+                gap: 0.75rem;
+            }
+
+            .tab-btn {
+                padding: 0.875rem 1.25rem;
+                font-size: var(--font-size-base);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .consultation-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .checkbox-group {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* ===== UTILITIES ===== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-1 {
+            margin-top: var(--spacing-sm);
+        }
+
+        .mt-2 {
+            margin-top: var(--spacing-md);
+        }
+
+        .mt-3 {
+            margin-top: var(--spacing-lg);
+        }
+
+        .d-none {
+            display: none !important;
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 3px solid rgba(138, 109, 59, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        /* ===== OFFLINE INDICATOR ===== */
+        .offline-indicator {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--danger);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            animation: slideInRight 0.3s ease;
+        }
+
+        /* ===== UPDATE BANNER ===== */
+        .update-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--gradient-vip);
+            color: #000;
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-md);
+            z-index: 4001;
+            text-align: center;
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .update-banner button {
+            background: #000;
+            color: var(--warning);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: var(--font-size-sm);
+        }
+
+        /* ===== DARK MODE ===== */
+        body.dark-mode {
+            --bg-primary: var(--bg-primary-dark);
+            --bg-secondary: var(--bg-secondary-dark);
+            --bg-card: var(--bg-card-dark);
+            --primary: var(--primary-dark);
+            --primary-dark: var(--primary-dark-dark);
+            --secondary: var(--secondary-dark);
+            --accent: var(--accent-dark);
+            --success: var(--success-dark);
+            --warning: var(--warning-dark);
+            --danger: var(--danger-dark);
+            --info: var(--info-dark);
+            --text-primary: var(--text-primary-dark);
+            --text-secondary: var(--text-secondary-dark);
+            --text-muted: var(--text-muted-dark);
+            --border: var(--border-dark);
+            --shadow: var(--shadow-dark);
+            --shadow-hover: var(--shadow-hover-dark);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: var(--transition-base);
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: var(--transition-base);
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+    </style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="container header-container">
-      <a href="../index.html" class="logo">MakerAI Studio</a>
-      <a href="../index.html" class="btn secondary">← Voltar</a>
+    <!-- Banner de atualização -->
+    <div id="updateBanner" class="update-banner">
+        <span><i class="fas fa-sync-alt"></i> Nova versão disponível!</span>
+        <button id="updateAppBtn">Atualizar</button>
     </div>
-  </header>
 
-  <section class="section">
-    <div class="container">
-      <h1>AutoBot Enterprise</h1>
-      <p class="subtitle">Sistema de automação RPA para processos corporativos com monitoramento em tempo real.</p>
-      <div class="gallery">
-        <img src="https://www.slideteam.net/media/catalog/product/cache/1280x720/d/a/dashboard_to_measure_robotic_process_automation_developing_rpa_adoption_strategies_slide01.jpg" alt="Dashboard AutoBot" loading="lazy">
-        <img src="https://i.ytimg.com/vi/HeEafdcveuI/maxresdefault.jpg" alt="Fluxo RPA" loading="lazy">
-      </div>
-      <div class="features">
-        <h2>Tecnologias</h2>
-        <p>Python • UiPath • FastAPI • PostgreSQL • Streamlit</p>
-        <p>Bots autônomos, logs detalhados, escalabilidade enterprise.</p>
-        <a href="../index.html#contato" class="btn primary" style="margin-top:2rem;">Automatizar meus processos</a>
-      </div>
+    <!-- Indicador offline -->
+    <div id="offlineIndicator" class="offline-indicator">
+        <i class="fas fa-wifi-slash"></i> Offline
     </div>
-  </section>
 
-  <footer><p>© 2025 MakerAI Studio</p></footer>
+    <!-- Banner de instalação PWA -->
+    <div id="pwaInstallBanner" class="pwa-install-banner">
+        <div class="pwa-banner-content">
+            <div class="pwa-app-icon">💇</div>
+            <div class="pwa-banner-text">
+                <h3>Instalar HairCare Premium</h3>
+                <p>Acesso rápido na tela inicial</p>
+            </div>
+        </div>
+        <div class="pwa-banner-actions">
+            <button class="pwa-btn pwa-btn-outline" id="pwaCancelBtn">Depois</button>
+            <button class="pwa-btn pwa-btn-primary" id="pwaInstallBtn">Instalar</button>
+        </div>
+    </div>
+
+    <!-- Toast de confirmação -->
+    <div id="pwaToast" class="pwa-toast">
+        <div class="pwa-toast-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="pwa-toast-content">
+            <h4>Aplicativo instalado!</h4>
+            <p>HairCare Premium foi adicionado à sua tela inicial.</p>
+        </div>
+        <button class="modal-close" id="pwaToastClose">&times;</button>
+    </div>
+
+    <!-- Botão flutuante para instalação -->
+    <div id="pwaFloatBtn" class="pwa-float-btn">
+        <i class="fas fa-download"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">💇</div>
+                    <div class="header-titles">
+                        <h1>HairCare Premium <span class="badge-premium">PRO</span></h1>
+                        <p>Assistente de cuidados capilares</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegação -->
+    <nav>
+        <div class="container nav-container">
+            <div class="nav-tabs">
+                <button class="tab-btn active" data-tab="home">
+                    <i class="fas fa-home"></i> <span class="tab-text">Início</span>
+                </button>
+                <button class="tab-btn" data-tab="perfil">
+                    <i class="fas fa-user"></i> <span class="tab-text">Perfil</span>
+                </button>
+                <button class="tab-btn" data-tab="historico">
+                    <i class="fas fa-history"></i> <span class="tab-text">Histórico</span>
+                </button>
+                <button class="tab-btn" data-tab="cronograma">
+                    <i class="fas fa-calendar-alt"></i> <span class="tab-text">Cronograma</span>
+                </button>
+                <button class="tab-btn" data-tab="consultoria">
+                    <i class="fas fa-robot"></i> <span class="tab-text">IA</span>
+                </button>
+                <button class="tab-btn" data-tab="vip">
+                    <i class="fas fa-crown"></i> <span class="tab-text">VIP</span>
+                    <span class="tab-badge" id="vipBadgeCount">3</span>
+                </button>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar" id="userAvatar" title="Configurações">
+                    <span id="avatarInitials">M</span>
+                </div>
+                <button class="notification-btn" id="openNotificationsModal">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationCount">3</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <!-- HOME -->
+        <section id="home" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon"><i class="fas fa-sparkles"></i></div>
+                        <div>
+                            <h2>Bem-vinda, Maria!</h2>
+                            <span id="pwaInstalledBadge" class="pwa-installed-badge d-none">
+                                <i class="fas fa-check"></i> App Instalado
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-outline btn-sm" id="openPwaTutorialModal">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="openAchievementsModal">
+                            <i class="fas fa-trophy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <p>Seu cabelo está <strong>78% saudável</strong>! Continue seguindo seu cronograma para resultados ainda
+                    melhores.</p>
+
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span>Saúde capilar</span>
+                        <span>78%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%;"></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid mt-3">
+                    <button class="btn btn-primary" id="goToSchedule">
+                        <i class="fas fa-calendar-check"></i> Cronograma
+                    </button>
+                    <button class="btn btn-success" id="sendTestNotification">
+                        <i class="fas fa-bell"></i> Testar Notificação
+                    </button>
+                    <button class="btn btn-warning" id="checkConnectivity">
+                        <i class="fas fa-wifi"></i> Verificar Conexão
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h2 class="card-title">
+                        <div class="card-icon"><i class="fas fa-clock"></i></div>
+                        Próximos Lembretes
+                    </h2>
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-date"><i class="far fa-calendar"></i> Amanhã, 15:00</div>
+                            <div><strong>Hidratação:</strong> Aplicar máscara nutritiva</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-date"><i class="far fa-calendar"></i> 05/11, 10:00</div>
+                            <div><strong>Visita ao salão:</strong> Manutenção da cor</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        Resumo da Semana
+                    </h2>
+                    <div class="dashboard-grid">
+                        <div class="history-item">
+                            <h3><i class="fas fa-tint"></i> Hidratação</h3>
+                            <p><strong>Próxima:</strong> Amanhã</p>
+                            <button class="btn btn-success btn-sm mt-1">
+                                <i class="fas fa-check"></i> Concluído
+                            </button>
+                        </div>
+                        <div class="history-item">
+                            <h3><i class="fas fa-seedling"></i> Nutrição</h3>
+                            <p><strong>Próxima:</strong> Em 5 dias</p>
+                            <button class="btn btn-warning btn-sm mt-1">
+                                <i class="fas fa-clock"></i> Pendente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PERFIL -->
+        <section id="perfil" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <div class="card-icon"><i class="fas fa-user-edit"></i></div>
+                    Meu Perfil
+                </h2>
+
+                <div class="text-center mt-2">
+                    <div class="user-avatar" style="width: 6rem; height: 6rem; margin: 0 auto;">
+                        <span id="profileAvatarInitials">MS</span>
+                    </div>
+                    <label for="photoUpload" class="btn btn-outline btn-sm mt-2">
+                        <i class="fas fa-camera"></i> Alterar Foto
+                    </label>
+                    <input type="file" id="photoUpload" accept="image/*" class="d-none">
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="form-label" for="userNameInput">Nome Completo</label>
+                    <input type="text" id="userNameInput" placeholder="Digite seu nome" value="Maria Silva" required>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="hairType">Tipo de Cabelo</label>
+                        <select id="hairType">
+                            <option>Liso</option>
+                            <option>Ondulado</option>
+                            <option selected>Cacheados</option>
+                            <option>Crespos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="hairCondition">Condição</label>
+                        <select id="hairCondition">
+                            <option>Saudável</option>
+                            <option selected>Ressecado</option>
+                            <option>Oleoso</option>
+                            <option>Danificado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block mt-2" id="saveProfile">
+                    <i class="fas fa-save"></i> Salvar Perfil
+                </button>
+            </div>
+        </section>
+
+        <!-- HISTÓRICO -->
+        <section id="historico" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <div class="card-icon"><i class="fas fa-book-medical"></i></div>
+                    Histórico Completo
+                </h2>
+
+                <div class="form-group">
+                    <label class="form-label" for="visitDescription">Adicionar Registro</label>
+                    <textarea id="visitDescription" placeholder="Descreva o tratamento realizado..."
+                        rows="3"></textarea>
+                </div>
+
+                <button class="btn btn-primary btn-block" id="saveHistory">
+                    <i class="fas fa-plus"></i> Adicionar ao Histórico
+                </button>
+
+                <div class="history-list mt-3" id="historyList">
+                    <!-- Histórico carregado aqui -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CRONOGRAMA -->
+        <section id="cronograma" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+                    Cronograma Capilar
+                </h2>
+
+                <div class="form-group">
+                    <label class="form-label">Planejamento Semanal</label>
+                    <textarea id="weeklySchedule" rows="5" placeholder="Descreva seu planejamento semanal...">Segunda: Lavagem com shampoo suave + condicionador
+Terça: Aplicar óleo nas pontas
+Quarta: Máscara de hidratação (30 min)
+Quinta: Descanso
+Sexta: Lavagem com shampoo detox
+Sábado: Aplicar leave-in
+Domingo: Finalização com óleo de argan</textarea>
+                </div>
+
+                <button class="btn btn-primary btn-block" id="saveSchedule">
+                    <i class="fas fa-calendar-check"></i> Salvar Cronograma
+                </button>
+            </div>
+        </section>
+
+        <!-- CONSULTORIA IA - VERSÃO MELHORADA -->
+        <section id="consultoria" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">
+                    <div class="card-icon"><i class="fas fa-robot"></i></div>
+                    Consultoria Inteligente
+                </h2>
+
+                <p style="margin-bottom: var(--spacing-lg); color: var(--text-secondary);">
+                    Conte-me sobre seu cabelo e seus objetivos. Vou criar um plano personalizado com produtos, rotina e
+                    dicas exclusivas para você! ✨
+                </p>
+
+                <!-- Primeira linha: Objetivo e Orçamento -->
+                <div class="consultation-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="hairGoal">Objetivo Principal</label>
+                        <select id="hairGoal">
+                            <option value="hidratar" selected>Hidratação profunda</option>
+                            <option value="reparar">Reparar danos (quebra, elástico)</option>
+                            <option value="crescer">Crescimento acelerado</option>
+                            <option value="definir">Definir cachos/ondulados</option>
+                            <option value="brilho">Mais brilho e maciez</option>
+                            <option value="volume">Controlar volume/frizz</option>
+                            <option value="oleosidade">Controlar oleosidade excessiva</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="budget">Orçamento Mensal para Produtos</label>
+                        <select id="budget">
+                            <option value="economico">Econômico (até R$ 60)</option>
+                            <option value="moderado" selected>Moderado (R$ 60 – R$ 180)</option>
+                            <option value="premium">Premium (acima de R$ 180)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Segunda linha: Características do cabelo -->
+                <div class="consultation-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="hairCurvature">Tipo de Curvatura</label>
+                        <select id="hairCurvature">
+                            <option value="liso">Liso (1A–1C)</option>
+                            <option value="ondulado">Ondulado (2A–2C)</option>
+                            <option value="cacheado" selected>Cacheado (3A–3C)</option>
+                            <option value="crespo">Crespo (4A–4C)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="hairLength">Comprimento Atual</label>
+                        <select id="hairLength">
+                            <option value="curto">Curto (acima dos ombros)</option>
+                            <option value="medio" selected>Médio (nos ombros até peito)</option>
+                            <option value="longo">Longo (abaixo do peito)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Terceira linha: Condições específicas -->
+                <div class="form-group">
+                    <label class="form-label">Problemas Específicos (marque todos que se aplicam)</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="hairProblems" value="pontas-duplas">
+                            <span>Pontas duplas</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="hairProblems" value="quebradiço" checked>
+                            <span>Cabelo quebradiço</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="hairProblems" value="oleosidade">
+                            <span>Oleosidade excessiva na raiz</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="hairProblems" value="queda">
+                            <span>Queda de cabelo</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="hairProblems" value="frizz">
+                            <span>Frizz incontrolável</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="hairProblems" value="ressecamento">
+                            <span>Ressecamento extremo</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="hairProblems" value="desbotamento">
+                            <span>Cor desbota rápido</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="hairProblems" value="dificuldade-definir">
+                            <span>Dificuldade em definir cachos</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Química e Exposição -->
+                <div class="consultation-grid">
+                    <div class="form-group">
+                        <label class="form-label">Tem química no cabelo?</label>
+                        <div class="checkbox-group" style="grid-template-columns: repeat(3,1fr);">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="hairChemistry" value="coloracao">
+                                <span>Coloração/tintura</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="hairChemistry" value="alisamento">
+                                <span>Alisamento/progressiva</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="hairChemistry" value="nenhuma" checked>
+                                <span>Nenhuma</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Exposição frequente</label>
+                        <div class="checkbox-group" style="grid-template-columns: repeat(3,1fr);">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="exposure" value="sol">
+                                <span>Sol intenso</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="exposure" value="piscina">
+                                <span>Piscina/mar</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="exposure" value="nenhuma" checked>
+                                <span>Nenhuma</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campo aberto -->
+                <div class="form-group">
+                    <label class="form-label" for="extraInfo">Conte mais sobre seu cabelo ou rotina atual
+                        (opcional)</label>
+                    <textarea id="extraInfo" rows="4"
+                        placeholder="Ex: Lavo 3x por semana, uso secador todos os dias, meu cabelo é fino e arma muito com umidade..."></textarea>
+                </div>
+
+                <!-- Botão de consulta -->
+                <button class="btn btn-primary btn-block" id="consultAI"
+                    style="padding: 1rem; font-size: var(--font-size-lg);">
+                    <i class="fas fa-magic"></i> Gerar Meu Plano Personalizado
+                </button>
+
+                <!-- Resposta da IA -->
+                <div id="aiResponse" class="ai-response d-none"></div>
+            </div>
+        </section>
+
+        <!-- VIP -->
+        <section id="vip" class="tab-content">
+            <div class="card vip-card">
+                <div class="vip-badge">VIP ATIVO</div>
+                <h2 class="card-title">
+                    <div class="card-icon"><i class="fas fa-crown"></i></div>
+                    Área VIP Exclusiva
+                </h2>
+
+                <div class="status-message status-success">
+                    <i class="fas fa-unlock"></i> <strong>PARABÉNS!</strong> Acesso VIP ativo até 10/12/2023.
+                </div>
+
+                <ul class="vip-features">
+                    <li><i class="fas fa-check-circle"></i> Consultoria avançada com IA</li>
+                    <li><i class="fas fa-check-circle"></i> Recomendações personalizadas</li>
+                    <li><i class="fas fa-check-circle"></i> Descontos exclusivos</li>
+                    <li><i class="fas fa-check-circle"></i> Conteúdo premium</li>
+                </ul>
+
+                <button class="btn btn-primary btn-block" id="accessVIPLessons">
+                    <i class="fas fa-play"></i> Acessar Aulas VIP
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-4" style="background: var(--bg-secondary); border-top: 1px solid var(--border);">
+        <div class="container">
+            <!-- Logo MakerAI Studio clicável → volta para a página principal do portfólio -->
+            <a href="../index.html" class="text-decoration-none">
+                <h3 class="footer-logo gradient-text mb-1" style="font-size: 1.75rem;">MakerAI Studio</h3>
+            </a>
+            <p class="footer-desc mb-3">Soluções inteligentes em IA, web development e experiências digitais premium.
+            </p>
+
+            <p class="small text-muted mb-3">HairCare Premium &copy; 2026 - Cuidados capilares inteligentes</p>
+
+            <div class="footer-links small">
+                <a href="#" id="openSettingsFooter" class="mx-3">
+                    <i class="fas fa-cog"></i> Configurações
+                </a>
+                <a href="#" class="mx-3">
+                    <i class="fas fa-question-circle"></i> Ajuda
+                </a>
+                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" class="text-success mx-3">
+                    <i class="fab fa-whatsapp fa-lg"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modais -->
+    <div id="notificationsModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeNotificationsModal">&times;</button>
+            <h2><i class="fas fa-bell"></i> Notificações</h2>
+            <div id="notificationsList" class="history-list mt-2"></div>
+        </div>
+    </div>
+
+    <div id="achievementsModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeAchievementsModal">&times;</button>
+            <h2><i class="fas fa-trophy"></i> Conquistas</h2>
+            <div id="achievementsList" class="mt-2"></div>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeSettingsModal">&times;</button>
+            <h2><i class="fas fa-cog"></i> Configurações</h2>
+            <div class="mt-3">
+                <div class="form-group">
+                    <label class="form-label d-flex align-items-center justify-content-between">
+                        Notificações por e-mail
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="emailNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label d-flex align-items-center justify-content-between">
+                        Modo escuro
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="darkMode">
+                            <span class="slider"></span>
+                        </label>
+                    </label>
+                </div>
+                <button class="btn btn-primary btn-block mt-3" id="saveSettings">
+                    <i class="fas fa-save"></i> Salvar Configurações
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pwaTutorialModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closePwaTutorialModal">&times;</button>
+            <h2><i class="fas fa-mobile-alt"></i> Como Instalar no Celular</h2>
+            <div class="mt-3">
+                <div class="history-item">
+                    <h4><span
+                            style="background: var(--primary); color: white; width: 2rem; height: 2rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 0.5rem;">1</span>
+                        No Android (Chrome)</h4>
+                    <p>Toque no menu (três pontos) > "Adicionar à tela inicial"</p>
+                </div>
+                <div class="history-item mt-2">
+                    <h4><span
+                            style="background: var(--primary); color: white; width: 2rem; height: 2rem; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 0.5rem;">2</span>
+                        No iPhone (Safari)</h4>
+                    <p>Toque no ícone de compartilhar > "Adicionar à tela de início"</p>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block mt-3" id="gotItTutorialBtn">
+                <i class="fas fa-check"></i> Entendi
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // DADOS DO USUÁRIO
+        // ============================================
+        let userData = {
+            name: "Maria Silva",
+            profileImage: "",
+            points: 850,
+            daysActive: 45,
+            isVIP: true,
+            vipExpiry: "2023-12-10",
+            history: [
+                {
+                    id: 1,
+                    date: "2023-10-15",
+                    type: "salon",
+                    description: "Corte + hidratação profunda",
+                    expectedEffect: "hydration"
+                },
+                {
+                    id: 2,
+                    date: "2023-09-20",
+                    type: "home",
+                    description: "Máscara nutritiva de babosa",
+                    expectedEffect: "hydration"
+                }
+            ],
+            notifications: [
+                { id: 1, type: "reminder", title: "Hidratação hoje", message: "Lembre-se de aplicar sua máscara", date: "2023-10-25", read: false },
+                { id: 2, type: "vip", title: "Novo conteúdo VIP", message: "Aula exclusiva disponível", date: "2023-10-24", read: false },
+                { id: 3, type: "achievement", title: "Conquista!", message: "Você alcançou 45 dias ativos!", date: "2023-10-20", read: true }
+            ],
+            settings: {
+                emailNotifications: true,
+                darkMode: false,
+                pwaInstalled: false
+            }
+        };
+
+        // ============================================
+        // APLICAÇÃO PRINCIPAL
+        // ============================================
+        class HairCareApp {
+            constructor() {
+                this.initializeElements();
+                this.bindEvents();
+                this.initApp();
+            }
+
+            initializeElements() {
+                // Navegação
+                this.tabButtons = document.querySelectorAll('.tab-btn');
+                this.tabContents = document.querySelectorAll('.tab-content');
+
+                // Elementos comuns
+                this.userAvatar = document.getElementById('userAvatar');
+                this.avatarInitials = document.getElementById('avatarInitials');
+                this.saveProfileBtn = document.getElementById('saveProfile');
+                this.saveHistoryBtn = document.getElementById('saveHistory');
+                this.saveScheduleBtn = document.getElementById('saveSchedule');
+                this.consultAIBtn = document.getElementById('consultAI');
+                this.openNotificationsModalBtn = document.getElementById('openNotificationsModal');
+                this.openSettingsFooter = document.getElementById('openSettingsFooter');
+                this.closeSettingsModal = document.getElementById('closeSettingsModal');
+                this.saveSettingsBtn = document.getElementById('saveSettings');
+                this.goToScheduleBtn = document.getElementById('goToSchedule');
+                this.sendTestNotificationBtn = document.getElementById('sendTestNotification');
+                this.checkConnectivityBtn = document.getElementById('checkConnectivity');
+                this.accessVIPLessonsBtn = document.getElementById('accessVIPLessons');
+                this.openPwaTutorialModalBtn = document.getElementById('openPwaTutorialModal');
+                this.openAchievementsModalBtn = document.getElementById('openAchievementsModal');
+                this.photoUpload = document.getElementById('photoUpload');
+                this.pwaInstallBtn = document.getElementById('pwaInstallBtn');
+                this.pwaCancelBtn = document.getElementById('pwaCancelBtn');
+                this.pwaToastClose = document.getElementById('pwaToastClose');
+                this.gotItTutorialBtn = document.getElementById('gotItTutorialBtn');
+                this.closePwaTutorialModal = document.getElementById('closePwaTutorialModal');
+                this.closeNotificationsModal = document.getElementById('closeNotificationsModal');
+                this.closeAchievementsModal = document.getElementById('closeAchievementsModal');
+                this.updateAppBtn = document.getElementById('updateAppBtn');
+            }
+
+            bindEvents() {
+                // Navegação
+                this.tabButtons.forEach(btn => {
+                    btn.addEventListener('click', () => this.switchTab(btn.dataset.tab));
+                });
+
+                // Perfil
+                this.userAvatar.addEventListener('click', () => this.openModal('settingsModal'));
+                this.saveProfileBtn.addEventListener('click', () => this.saveProfile());
+                this.photoUpload.addEventListener('change', (e) => this.handlePhotoUpload(e));
+
+                // Histórico
+                this.saveHistoryBtn.addEventListener('click', () => this.saveHistory());
+
+                // Cronograma
+                this.saveScheduleBtn.addEventListener('click', () => this.saveSchedule());
+
+                // Consultoria
+                this.consultAIBtn.addEventListener('click', () => this.consultAI());
+
+                // Botões da home
+                this.goToScheduleBtn.addEventListener('click', () => this.switchTab('cronograma'));
+                this.sendTestNotificationBtn.addEventListener('click', () => this.sendTestNotification());
+                this.checkConnectivityBtn.addEventListener('click', () => this.checkConnectivity());
+                this.accessVIPLessonsBtn.addEventListener('click', () => this.accessVIPLessons());
+                this.openPwaTutorialModalBtn.addEventListener('click', () => this.openModal('pwaTutorialModal'));
+                this.openAchievementsModalBtn.addEventListener('click', () => this.openModal('achievementsModal'));
+
+                // Modais
+                this.openNotificationsModalBtn.addEventListener('click', () => this.openModal('notificationsModal'));
+                this.openSettingsFooter.addEventListener('click', () => this.openModal('settingsModal'));
+                this.closeSettingsModal.addEventListener('click', () => this.closeModal('settingsModal'));
+                this.saveSettingsBtn.addEventListener('click', () => this.saveSettings());
+                this.closeNotificationsModal.addEventListener('click', () => this.closeModal('notificationsModal'));
+                this.closeAchievementsModal.addEventListener('click', () => this.closeModal('achievementsModal'));
+                this.gotItTutorialBtn.addEventListener('click', () => this.closeModal('pwaTutorialModal'));
+                this.closePwaTutorialModal.addEventListener('click', () => this.closeModal('pwaTutorialModal'));
+                this.pwaToastClose.addEventListener('click', () => this.closeModal('pwaToast'));
+
+                // PWA
+                this.pwaInstallBtn.addEventListener('click', () => this.installPWA());
+                this.pwaCancelBtn.addEventListener('click', () => this.dismissPwaBanner());
+                this.updateAppBtn.addEventListener('click', () => window.location.reload());
+
+                // Clique fora do modal
+                window.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('modal')) {
+                        e.target.style.display = 'none';
+                    }
+                });
+
+                // Teclas de atalho
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        document.querySelectorAll('.modal').forEach(modal => {
+                            if (modal.style.display === 'flex') modal.style.display = 'none';
+                        });
+                    }
+                });
+            }
+
+            async initApp() {
+                this.loadFromLocalStorage();
+                this.updateUI();
+                this.initPWA();
+                this.setupNetworkDetection();
+
+                // Mostrar banner PWA após 2 segundos
+                setTimeout(() => this.showPwaBanner(), 2000);
+
+                // Atualizar notificações
+                this.updateNotificationBadges();
+            }
+
+            loadFromLocalStorage() {
+                const saved = localStorage.getItem('haircarePremiumData');
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        // Mesclar apenas propriedades existentes
+                        Object.keys(parsed).forEach(key => {
+                            if (userData[key] !== undefined) {
+                                userData[key] = parsed[key];
+                            }
+                        });
+                    } catch (e) {
+                        console.log('Dados locais corrompidos, usando padrão');
+                    }
+                }
+            }
+
+            saveToLocalStorage() {
+                try {
+                    localStorage.setItem('haircarePremiumData', JSON.stringify(userData));
+                } catch (e) {
+                    console.error('Erro ao salvar dados:', e);
+                }
+            }
+
+            updateUI() {
+                // Nome do usuário
+                document.getElementById('userNameInput').value = userData.name;
+
+                // Avatar
+                const initials = userData.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+                this.avatarInitials.textContent = initials;
+                document.getElementById('profileAvatarInitials').textContent = initials;
+
+                // Pontos e dias
+                document.getElementById('headerPoints').textContent = userData.points;
+                document.getElementById('headerDays').textContent = userData.daysActive;
+
+                // Badge VIP
+                document.getElementById('vipBadgeCount').textContent = userData.notifications.filter(n => n.type === 'vip' && !n.read).length;
+
+                // Modo escuro
+                if (userData.settings.darkMode) {
+                    document.body.classList.add('dark-mode');
+                    document.getElementById('darkMode').checked = true;
+                }
+
+                // PWA instalado
+                if (userData.settings.pwaInstalled) {
+                    document.getElementById('pwaInstalledBadge').classList.remove('d-none');
+                    document.body.classList.add('pwa-installed');
+                }
+            }
+
+            switchTab(tabId) {
+                // Atualizar botões
+                this.tabButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+
+                // Atualizar conteúdo
+                this.tabContents.forEach(content => content.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+
+                // Carregar conteúdo específico
+                if (tabId === 'historico') {
+                    this.loadHistory();
+                } else if (tabId === 'consultoria') {
+                    document.getElementById('aiResponse').classList.add('d-none');
+                }
+
+                // Scroll para topo
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            handlePhotoUpload(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        userData.profileImage = event.target.result;
+                        this.saveToLocalStorage();
+                        this.showToast('Foto atualizada com sucesso!', 'success');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            saveProfile() {
+                const nameInput = document.getElementById('userNameInput');
+                if (!nameInput.value.trim()) {
+                    this.showToast('Por favor, insira seu nome.', 'warning');
+                    return;
+                }
+
+                userData.name = nameInput.value;
+                this.saveToLocalStorage();
+                this.updateUI();
+                this.showToast('Perfil salvo com sucesso!', 'success');
+                this.addPoints(5);
+            }
+
+            saveHistory() {
+                const description = document.getElementById('visitDescription').value;
+                if (!description.trim()) {
+                    this.showToast('Por favor, descreva o tratamento.', 'warning');
+                    return;
+                }
+
+                const newEntry = {
+                    id: Date.now(),
+                    date: new Date().toISOString().split('T')[0],
+                    type: 'home',
+                    description: description,
+                    expectedEffect: 'hydration'
+                };
+
+                userData.history.unshift(newEntry);
+                document.getElementById('visitDescription').value = '';
+                this.saveToLocalStorage();
+                this.loadHistory();
+                this.showToast('Histórico atualizado!', 'success');
+                this.addPoints(10);
+            }
+
+            loadHistory() {
+                const container = document.getElementById('historyList');
+                if (!container) return;
+
+                container.innerHTML = userData.history.map(item => `
+          <div class="history-item">
+            <div class="history-date">
+              <i class="fas fa-calendar"></i> ${new Date(item.date).toLocaleDateString('pt-BR')}
+              <span class="badge badge-hydration">Hidratação</span>
+            </div>
+            <div>${item.description}</div>
+          </div>
+        `).join('');
+            }
+
+            saveSchedule() {
+                const schedule = document.getElementById('weeklySchedule').value;
+                if (!schedule.trim()) {
+                    this.showToast('Por favor, preencha o cronograma.', 'warning');
+                    return;
+                }
+
+                this.showToast('Cronograma salvo com sucesso!', 'success');
+                this.addPoints(5);
+            }
+
+            consultAI() {
+                // Coleta todos os dados do formulário aprimorado
+                const goal = document.getElementById('hairGoal').value;
+                const budget = document.getElementById('budget').value;
+                const curvature = document.getElementById('hairCurvature').value;
+                const length = document.getElementById('hairLength').value;
+                const extraInfo = document.getElementById('extraInfo').value.trim();
+
+                const problems = Array.from(document.querySelectorAll('input[name="hairProblems"]:checked'))
+                    .map(cb => cb.value);
+
+                const chemistry = Array.from(document.querySelectorAll('input[name="hairChemistry"]:checked'))
+                    .map(cb => cb.value).filter(v => v !== 'nenhuma');
+
+                const exposure = Array.from(document.querySelectorAll('input[name="exposure"]:checked'))
+                    .map(cb => cb.value).filter(v => v !== 'nenhuma');
+
+                // Loading mais bonito e informativo
+                const aiResponse = document.getElementById('aiResponse');
+                aiResponse.classList.remove('d-none');
+                aiResponse.innerHTML = `
+                    <div class="text-center">
+                        <div class="loading" style="width: 3.5rem; height: 3.5rem; margin: 0 auto;"></div>
+                        <p class="mt-2" style="font-size: var(--font-size-lg);">Analisando seu cabelo...</p>
+                        <small>Tipo, curvatura, química, problemas e rotina</small>
+                    </div>
+                `;
+
+                // Simulação de processamento (aumentei um pouco para dar sensação de "pensando")
+                setTimeout(() => {
+                    const recommendations = this.generateRecommendations({
+                        goal,
+                        budget,
+                        curvature,
+                        length,
+                        problems,
+                        chemistry,
+                        exposure,
+                        extraInfo
+                    });
+                    aiResponse.innerHTML = recommendations;
+                    this.showToast('Seu plano personalizado está pronto! ✨', 'success');
+                    this.addPoints(20);
+                }, 2800);
+            }
+
+            generateRecommendations(data) {
+                const { goal, budget, curvature, length, problems, chemistry, exposure, extraInfo } = data;
+
+                // Planos detalhados por objetivo (mesmo de antes)
+                const goals = {
+                    hidratar: {
+                        title: "🌊 Plano Intensivo de Hidratação",
+                        intro: "Seu cabelo está pedindo água! Vamos restaurar maciez, brilho e movimento natural.",
+                        routine: "Hidratação profunda <strong>3x por semana</strong> + umectação com óleo <strong>1x por semana</strong>.",
+                        products: budget === 'economico'
+                            ? [
+                                { name: "Babosa em gel natural (ou planta)", query: "gel babosa puro" },
+                                { name: "Óleo de coco extra virgem", query: "óleo de coco extra virgem" },
+                                { name: "Máscara Skala Babosa 1kg", query: "máscara skala babosa 1kg" }
+                            ]
+                            : budget === 'moderado'
+                                ? [
+                                    { name: "Máscara Salon Line #TôdeCacho Hidratação", query: "salon line to de cacho hidratação" },
+                                    { name: "Óleo de argan Yenzah ou Haskell", query: "óleo argan cabelo" },
+                                    { name: "Leave-in Novex Meus Cachos", query: "leave in novex meus cachos" }
+                                ]
+                                : [
+                                    { name: "Máscara Lola Cosmetics Morte Súbita", query: "lola morte subita máscara" },
+                                    { name: "Óleo de argan puro Amend ou Inoar", query: "óleo argan puro cabelo" },
+                                    { name: "Ampola de hidratação Kérastase ou Wella", query: "ampola hidratação kérastase" }
+                                ],
+                        tips: ["Use água morna na lavagem e finalize com jato frio", "Durma com touca de cetim", "Evite pentear o cabelo seco"]
+                    },
+                    reparar: {
+                        title: "🛡️ Reconstrução e Reparação de Danos",
+                        intro: "Seus fios estão fragilizados. Vamos reforçar a estrutura interna e acabar com quebra e elasticidade.",
+                        routine: "Reconstrução <strong>a cada 15 dias</strong> + nutrição semanal + hidratação nos dias restantes.",
+                        products: budget === 'economico'
+                            ? [
+                                { name: "Queratina líquida Gota Dourada", query: "queratina líquida gota dourada" },
+                                { name: "Máscara de ovo + óleo caseira", query: "máscara reconstrução caseira" },
+                                { name: "Protetor térmico com silicone barato", query: "protetor térmico silicone" }
+                            ]
+                            : budget === 'moderado'
+                                ? [
+                                    { name: "Reconstrutor Haskell Queratina", query: "haskell queratina reconstrução" },
+                                    { name: "Máscara Novex Embelleze Reconstrução", query: "novex reconstrução máscara" },
+                                    { name: "Protetor térmico Lola ou Salon Line", query: "protetor térmico lola" }
+                                ]
+                                : [
+                                    { name: "Joico K-Pak Reconstrução", query: "joico k-pak reconstrução" },
+                                    { name: "Kérastase Resistance Thérapiste", query: "kérastase resistance thérapiste" },
+                                    { name: "Sérum reparador Redken Extreme", query: "redken extreme sérum" }
+                                ],
+                        tips: ["Reduza chapinha e secador ao mínimo", "Use apenas pente de dentes largos", "Corte as pontas a cada 3 meses"]
+                    },
+                    crescer: {
+                        title: "📈 Crescimento Acelerado e Saudável",
+                        intro: "Vamos estimular o couro cabeludo e fortalecer os fios para crescerem longos, grossos e resistentes.",
+                        routine: "Massagem diária + tônico capilar + cronograma completo equilibrado.",
+                        products: budget === 'economico'
+                            ? [
+                                { name: "Óleo de rícino puro", query: "óleo de rícino puro cabelo" },
+                                { name: "Tônico caseiro de café", query: "tônico capilar café" },
+                                { name: "Shampoo Jaborandi Bio Extratus", query: "shampoo jaborandi bio extratus" }
+                            ]
+                            : budget === 'moderado'
+                                ? [
+                                    { name: "Tônico Boom Antiqueda", query: "tônico boom antiqueda" },
+                                    { name: "Óleo de rícino + alecrim", query: "óleo rícino alecrim" },
+                                    { name: "Shampoo Tricofort Antiqueda", query: "shampoo tricofort antiqueda" }
+                                ]
+                                : [
+                                    { name: "Kérastase Genesis Antiqueda", query: "kérastase genesis antiqueda" },
+                                    { name: "Vichy Dercos Energizante", query: "vichy dercos energizante" },
+                                    { name: "Suplemento Pill Food ou Innéov", query: "pill food cabelo" }
+                                ],
+                        tips: ["Massageie o couro por 5 minutos diariamente", "Inverta a cabeça ao aplicar tônico", "Evite rabos de cavalo muito apertados"]
+                    },
+                    definir: {
+                        title: "🌀 Definição Perfeita de Cachos e Ondulados",
+                        intro: "Hora de realçar sua curvatura natural com cachos definidos, volumosos e sem frizz!",
+                        routine: "Finalização diária correta + hidratação constante + revigoramento no day after.",
+                        products: budget === 'economico'
+                            ? [
+                                { name: "Gelatina de linhaça caseira", query: "gelatina linhaça cabelo" },
+                                { name: "Creme multifuncional Skala", query: "creme skala cachos" },
+                                { name: "Óleo de coco nas pontas", query: "óleo coco cabelo" }
+                            ]
+                            : budget === 'moderado'
+                                ? [
+                                    { name: "Ativador de cachos Salon Line #TôDeCacho", query: "salon line tô de cacho ativador" },
+                                    { name: "Gel de definição Soul Power", query: "gel soul power definição" },
+                                    { name: "Creme Yenzah Whey Fit", query: "creme yenzah whey fit" }
+                                ]
+                                : [
+                                    { name: "Deva Curl SuperCream", query: "deva curl supercream" },
+                                    { name: "Bouclème Curl Cream", query: "boucleme curl cream" },
+                                    { name: "Mousse Innersense I Create Volume", query: "innersense mousse" }
+                                ],
+                        tips: ["Aplique com fitagem ou rake & shake", "Seque amassando com camiseta de algodão", "Reviva com água + leave-in no day after"]
+                    },
+                    brilho: {
+                        title: "✨ Brilho Espelhado e Maciez Extrema",
+                        intro: "Vamos deixar seu cabelo com aquele brilho de comercial e toque sedoso que todo mundo percebe!",
+                        routine: "Acidificação semanal + óleos leves + finalização luminosa.",
+                        products: budget === 'economico'
+                            ? [
+                                { name: "Vinagre de maçã para enxágue", query: "vinagre maçã cabelo" },
+                                { name: "Óleo de coco nas pontas", query: "óleo coco cabelo" },
+                                { name: "Máscara com mel", query: "máscara mel cabelo" }
+                            ]
+                            : budget === 'moderado'
+                                ? [
+                                    { name: "Máscara Elseve Óleo Extraordinário", query: "elseve óleo extraordinário máscara" },
+                                    { name: "Sérum de brilho Siàge", query: "siàge sérum brilho" },
+                                    { name: "Spray de brilho Niely Gold", query: "niely gold spray brilho" }
+                                ]
+                                : [
+                                    { name: "Óleo Mythic Oil L'Oréal", query: "mythic oil loreal" },
+                                    { name: "Sérum Diamante Cadiveu", query: "cadiveu sérum diamante" },
+                                    { name: "Finalizador com pérolas Kérastase Elixir", query: "kérastase elixir ultime" }
+                                ],
+                        tips: ["Último enxágue com água fria", "Distribua oleosidade natural com escova raquete", "Use shampoo sem sulfato forte"]
+                    },
+                    volume: {
+                        title: "🎈 Controle de Volume e Frizz",
+                        intro: "Vamos reduzir o volume excessivo e o frizz, mantendo movimento e leveza.",
+                        routine: "Hidratação leve + finalizadores antifrizz + corte em camadas.",
+                        products: [{ name: "Cremes leves antifrizz", query: "creme antifrizz cabelo" }],
+                        tips: ["Evite produtos muito pesados", "Use difusor em temperatura baixa", "Aplique leave-in apenas nas pontas"]
+                    },
+                    oleosidade: {
+                        title: "⚖️ Controle de Oleosidade na Raiz",
+                        intro: "Raiz oleosa e pontas secas? Vamos equilibrar a produção de sebo sem ressecar os fios.",
+                        routine: "Lavagem frequente com shampoo detox + argila no couro + hidratação só no comprimento.",
+                        products: [
+                            { name: "Shampoo detox/antirresíduos", query: "shampoo detox cabelo" },
+                            { name: "Argila verde para couro", query: "argila verde cabelo" }
+                        ],
+                        tips: ["Evite condicionador na raiz", "Use shampoo seco entre lavagens", "Toque menos no cabelo"]
+                    }
+                };
+
+                const selectedGoal = goals[goal] || goals.hidratar;
+
+                // Seção de problemas específicos (mesma de antes)
+                let problemsSection = "";
+                if (problems.length > 0) {
+                    problemsSection = `<h4 style="margin-top: 1.5rem;">🎯 Soluções específicas para seus problemas:</h4><ul>`;
+                    problems.forEach(p => {
+                        const solutions = {
+                            'pontas-duplas': "✂️ Corte a cada 2-3 meses + óleo reparador nas pontas toda noite",
+                            'quebradiço': "🔥 Reduza calor e aumente reconstrução com queratina",
+                            'oleosidade': "🧼 Shampoo detox 2x/semana + evite condicionador na raiz",
+                            'queda': "💆 Massagem diária + tônico com cafeína/rícino",
+                            'frizz': "🌿 Umectação leve + finalizador antifrizz",
+                            'ressecamento': "💧 Hidratação profunda + touca de cetim para dormir",
+                            'desbotamento': "🌞 Protetor UV capilar + shampoo sem sulfato",
+                            'dificuldade-definir': "🌀 Fitagem correta + ativador de cachos potente"
+                        };
+                        problemsSection += `<li>${solutions[p] || "Tratamento personalizado"}</li>`;
+                    });
+                    problemsSection += `</ul>`;
+                }
+
+                // Considerações extras (química, exposição, texto livre)
+                let extraSection = "";
+                if (chemistry.length > 0 || exposure.length > 0 || extraInfo) {
+                    extraSection = `<h4 style="margin-top: 1.5rem;">ℹ️ Ajustes especiais para você:</h4><ul>`;
+                    if (chemistry.includes('coloracao')) extraSection += `<li>Como tem coloração: use shampoo sem sulfato e protetor UV</li>`;
+                    if (chemistry.includes('alisamento')) extraSection += `<li>Progressiva/alisamento: priorize reconstrução e evite óleos pesados</li>`;
+                    if (exposure.includes('sol')) extraSection += `<li>Exposição ao sol: protetor térmico/UV obrigatório</li>`;
+                    if (exposure.includes('piscina')) extraSection += `<li>Piscina/mar: enxágue com água doce antes/depois + máscara reparadora</li>`;
+                    if (extraInfo) extraSection += `<li>Sua rotina informada: "${extraInfo}" → levei tudo em conta!</li>`;
+                    extraSection += `</ul>`;
+                }
+
+                // NOVA SEÇÃO: Produtos com imagem + link afiliado Mercado Livre
+                let productsSection = `<h4 style="margin-top: 1.5rem;">🛒 Produtos recomendados para você (${budget}):</h4>`;
+                selectedGoal.products.forEach(product => {
+                    const searchQuery = encodeURIComponent(product.query + " site:mercadolivre.com.br");
+                    const affiliateLink = `https://mercadolivre.com.br/jm/search?as_word=${searchQuery}`;
+                    const imageSearch = encodeURIComponent(product.query + " produto cabelo");
+
+                    productsSection += `
+                        <div style="background: var(--bg-secondary); border-radius: var(--border-radius-md); padding: var(--spacing-md); margin-bottom: var(--spacing-md); text-align: center;">
+                            <p style="font-weight: 600; margin-bottom: 0.75rem;">${product.name}</p>
+                            <img src="https://http2.mlstatic.com/D_Q_NP_${Math.floor(Math.random() * 1000000)}-MLA.jpg" 
+                                 alt="${product.name}" 
+                                 style="width: 100%; max-width: 200px; height: auto; border-radius: var(--border-radius-sm); margin: 0.5rem 0;"
+                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIyMCIgZmlsbD0iI2UxZTFlMSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmaWxsPSIjYWFhIj5Qcm9kdXRvPC90ZXh0Pjwvc3ZnPg=='">
+                            <br>
+                            <a href="${affiliateLink}" target="_blank" class="btn btn-success btn-sm mt-2" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-shopping-cart"></i> Ver no Mercado Livre
+                            </a>
+                        </div>
+                    `;
+                });
+
+                return `
+                    <h3 style="font-size: var(--font-size-xl); margin-bottom: 1rem;">${selectedGoal.title}</h3>
+                    <p style="font-size: var(--font-size-base);"><strong>${selectedGoal.intro}</strong></p>
+
+                    <p style="margin-top: 1rem;"><strong>Rotina recomendada:</strong><br>${selectedGoal.routine}</p>
+
+                    <p style="margin-top: 1rem;"><strong>Dicas exclusivas:</strong></p>
+                    <ul>${selectedGoal.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+
+                    ${productsSection}
+
+                    ${problemsSection}
+                    ${extraSection}
+
+                    <div class="text-center mt-3">
+                        <button class="btn btn-primary btn-block" onclick="hairCareApp.saveRecommendations()">
+                            💾 Salvar este plano no histórico
+                        </button>
+                    </div>
+                `;
+            }
+
+            saveRecommendations() {
+                const goalText = document.getElementById('hairGoal').options[document.getElementById('hairGoal').selectedIndex].text;
+                const aiHistory = {
+                    id: Date.now(),
+                    date: new Date().toISOString().split('T')[0],
+                    type: 'ai-consultation',
+                    description: `Consulta IA: ${goalText}`,
+                    expectedEffect: 'info'
+                };
+
+                userData.history.unshift(aiHistory);
+                this.saveToLocalStorage();
+                this.loadHistory(); // atualiza a lista imediatamente
+                this.showToast('Plano salvo no seu histórico!', 'success');
+                this.addPoints(10);
+            }
+
+            sendTestNotification() {
+                this.showToast('Esta é uma notificação de teste do HairCare Premium!', 'info');
+            }
+
+            checkConnectivity() {
+                const isOnline = navigator.onLine;
+                const message = isOnline ? 'Você está online! ✅' : 'Você está offline. ⚠️';
+                const type = isOnline ? 'success' : 'warning';
+                this.showToast(message, type);
+
+                // Atualizar indicador
+                document.getElementById('offlineIndicator').style.display = isOnline ? 'none' : 'flex';
+            }
+
+            accessVIPLessons() {
+                this.showToast('Redirecionando para as aulas VIP...', 'info');
+                // Simular redirecionamento
+                setTimeout(() => {
+                    window.open('#vip', '_self');
+                }, 1000);
+            }
+
+            openModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'flex';
+
+                    if (modalId === 'notificationsModal') {
+                        this.loadNotifications();
+                    } else if (modalId === 'achievementsModal') {
+                        this.loadAchievements();
+                    } else if (modalId === 'settingsModal') {
+                        this.loadSettings();
+                    }
+                }
+            }
+
+            closeModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) modal.style.display = 'none';
+            }
+
+            loadNotifications() {
+                const container = document.getElementById('notificationsList');
+                if (!container) return;
+
+                const unreadNotifications = userData.notifications.filter(n => !n.read).length;
+                if (unreadNotifications > 0) {
+                    // Marcar todas como lidas
+                    userData.notifications.forEach(n => n.read = true);
+                    this.saveToLocalStorage();
+                    this.updateNotificationBadges();
+                }
+
+                container.innerHTML = userData.notifications.map(notif => `
+          <div class="history-item ${notif.read ? 'opacity-75' : ''}">
+            <div class="history-date">
+              <i class="fas fa-${notif.type === 'vip' ? 'crown' : notif.type === 'achievement' ? 'trophy' : 'bell'}"></i> 
+              ${new Date(notif.date).toLocaleDateString('pt-BR')}
+              ${!notif.read ? '<span class="badge badge-danger">NOVA</span>' : ''}
+            </div>
+            <div><strong>${notif.title}</strong></div>
+            <div>${notif.message}</div>
+          </div>
+        `).join('');
+            }
+
+            loadAchievements() {
+                const container = document.getElementById('achievementsList');
+                if (!container) return;
+
+                const achievements = [
+                    { name: 'Primeiros Passos', description: 'Completou o perfil', unlocked: true, icon: '👣' },
+                    { name: 'Rotina Constante', description: '7 dias seguidos de uso', unlocked: true, icon: '📅' },
+                    { name: 'Hidratação Perfeita', description: '10 hidratações realizadas', unlocked: true, icon: '💧' },
+                    { name: 'VIP Iniciante', description: 'Ativou plano VIP', unlocked: userData.isVIP, icon: '👑' },
+                    { name: 'Historiador Capilar', description: '5 registros no histórico', unlocked: userData.history.length >= 5, icon: '📚' },
+                    { name: 'Mestre dos Pontos', description: '1000 pontos acumulados', unlocked: userData.points >= 1000, icon: '⭐' },
+                    { name: 'App Instalado', description: 'Instalou o aplicativo PWA', unlocked: userData.settings.pwaInstalled, icon: '📱' }
+                ];
+
+                container.innerHTML = achievements.map(achievement => `
+          <div class="history-item ${achievement.unlocked ? '' : 'opacity-50'}">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div style="font-size: 2rem;">${achievement.icon}</div>
+              <div style="flex: 1;">
+                <div style="font-weight: bold;">${achievement.name}</div>
+                <div style="font-size: 0.9rem; color: var(--text-muted);">${achievement.description}</div>
+                ${achievement.unlocked ?
+                        '<div style="font-size: 0.8rem; color: var(--success); margin-top: 0.25rem;"><i class="fas fa-check-circle"></i> Conquistada</div>' :
+                        '<div style="font-size: 0.8rem; color: var(--warning); margin-top: 0.25rem;"><i class="fas fa-lock"></i> Em progresso</div>'
+                    }
+              </div>
+            </div>
+          </div>
+        `).join('');
+            }
+
+            loadSettings() {
+                document.getElementById('emailNotifications').checked = userData.settings.emailNotifications;
+                document.getElementById('darkMode').checked = userData.settings.darkMode;
+            }
+
+            saveSettings() {
+                userData.settings.emailNotifications = document.getElementById('emailNotifications').checked;
+                userData.settings.darkMode = document.getElementById('darkMode').checked;
+
+                this.saveToLocalStorage();
+
+                // Aplicar modo escuro
+                if (userData.settings.darkMode) {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+
+                this.showToast('Configurações salvas!', 'success');
+                this.closeModal('settingsModal');
+            }
+
+            addPoints(points) {
+                userData.points += points;
+                this.saveToLocalStorage();
+                this.updateUI();
+
+                // Animação de pontos
+                this.showPointsAnimation(points);
+            }
+
+            showPointsAnimation(points) {
+                const pointsEl = document.createElement('div');
+                pointsEl.className = 'points-animation';
+                pointsEl.textContent = `+${points}`;
+                pointsEl.style.cssText = `
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 2rem;
+          font-weight: bold;
+          color: var(--primary);
+          z-index: 5000;
+          pointer-events: none;
+          animation: floatUp 1s ease-out forwards;
+        `;
+
+                document.body.appendChild(pointsEl);
+
+                setTimeout(() => pointsEl.remove(), 1000);
+            }
+
+            updateNotificationBadges() {
+                const unread = userData.notifications.filter(n => !n.read).length;
+                const badge = document.getElementById('notificationCount');
+                if (badge) {
+                    badge.textContent = unread;
+                    badge.style.display = unread > 0 ? 'flex' : 'none';
+                }
+            }
+
+            // ===== PWA FUNCTIONALITY =====
+            initPWA() {
+                // Verificar se já está instalado
+                const isPWAInstalled = window.matchMedia('(display-mode: standalone)').matches ||
+                    window.navigator.standalone === true;
+
+                if (isPWAInstalled && !userData.settings.pwaInstalled) {
+                    userData.settings.pwaInstalled = true;
+                    this.saveToLocalStorage();
+                    this.updateUI();
+                }
+
+                // Configurar evento de instalação
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    window.deferredPrompt = e;
+                    console.log('PWA pronto para instalação');
+                });
+
+                window.addEventListener('appinstalled', () => {
+                    console.log('PWA instalado com sucesso');
+                    userData.settings.pwaInstalled = true;
+                    this.saveToLocalStorage();
+                    this.updateUI();
+                    this.showPwaToast('Aplicativo instalado! Agora você tem acesso rápido na tela inicial.');
+                    this.hidePwaBanner();
+                });
+
+                // Registrar Service Worker
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/sw.js').catch(err => {
+                        console.log('Service Worker não registrado:', err);
+                    });
+                }
+            }
+
+            showPwaBanner() {
+                if (userData.settings.pwaInstalled) {
+                    this.hidePwaBanner();
+                    return;
+                }
+
+                // Verificar se já foi dispensado recentemente
+                const dismissed = localStorage.getItem('pwa_banner_dismissed');
+                if (dismissed && (Date.now() - parseInt(dismissed)) < 24 * 60 * 60 * 1000) {
+                    this.showPwaFloatButton();
+                    return;
+                }
+
+                const banner = document.getElementById('pwaInstallBanner');
+                if (banner && window.deferredPrompt) {
+                    banner.style.display = 'flex';
+                } else {
+                    this.showPwaFloatButton();
+                }
+            }
+
+            hidePwaBanner() {
+                const banner = document.getElementById('pwaInstallBanner');
+                const floatBtn = document.getElementById('pwaFloatBtn');
+                if (banner) banner.style.display = 'none';
+                if (floatBtn) floatBtn.style.display = 'none';
+            }
+
+            showPwaFloatButton() {
+                if (!userData.settings.pwaInstalled && window.deferredPrompt) {
+                    const floatBtn = document.getElementById('pwaFloatBtn');
+                    floatBtn.style.display = 'flex';
+                    floatBtn.onclick = () => this.installPWA();
+                }
+            }
+
+            async installPWA() {
+                if (window.deferredPrompt) {
+                    window.deferredPrompt.prompt();
+                    const choiceResult = await window.deferredPrompt.userChoice;
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Usuário aceitou a instalação');
+                        localStorage.setItem('pwa_user_accepted', 'true');
+                    } else {
+                        console.log('Usuário recusou a instalação');
+                        this.dismissPwaBanner();
+                    }
+                    window.deferredPrompt = null;
+                }
+            }
+
+            dismissPwaBanner() {
+                localStorage.setItem('pwa_banner_dismissed', Date.now().toString());
+                this.hidePwaBanner();
+                this.showPwaFloatButton();
+
+                // Mostrar tutorial se for a primeira vez
+                if (!localStorage.getItem('pwa_tutorial_shown')) {
+                    setTimeout(() => {
+                        this.openModal('pwaTutorialModal');
+                        localStorage.setItem('pwa_tutorial_shown', 'true');
+                    }, 1000);
+                }
+            }
+
+            showPwaToast(message) {
+                const toast = document.getElementById('pwaToast');
+                if (!toast) return;
+
+                toast.querySelector('.pwa-toast-content p').textContent = message;
+                toast.style.display = 'flex';
+
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 5000);
+            }
+
+            showToast(message, type = 'info') {
+                // Usar toast PWA para todas as notificações
+                this.showPwaToast(message);
+            }
+
+            setupNetworkDetection() {
+                const updateOnlineStatus = () => {
+                    const isOnline = navigator.onLine;
+                    const indicator = document.getElementById('offlineIndicator');
+                    if (indicator) {
+                        indicator.style.display = isOnline ? 'none' : 'flex';
+                    }
+                };
+
+                window.addEventListener('online', updateOnlineStatus);
+                window.addEventListener('offline', updateOnlineStatus);
+                updateOnlineStatus();
+            }
+        }
+
+        // ============================================
+        // INICIALIZAÇÃO DA APLICAÇÃO
+        // ============================================
+        let hairCareApp;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            hairCareApp = new HairCareApp();
+        });
+
+        // ============================================
+        // SERVICE WORKER
+        // ============================================
+        if ('serviceWorker' in navigator) {
+            // Criar Service Worker inline
+            const swContent = `
+        const CACHE_NAME = 'haircare-premium-v1.0.0';
+        const urlsToCache = ['./'];
+
+        self.addEventListener('install', event => {
+          event.waitUntil(
+            caches.open(CACHE_NAME)
+              .then(cache => cache.addAll(urlsToCache))
+              .then(() => self.skipWaiting())
+          );
+        });
+
+        self.addEventListener('activate', event => {
+          event.waitUntil(
+            caches.keys().then(cacheNames => {
+              return Promise.all(
+                cacheNames.map(cacheName => {
+                  if (cacheName !== CACHE_NAME) {
+                    return caches.delete(cacheName);
+                  }
+                })
+              );
+            }).then(() => self.clients.claim())
+          );
+        });
+
+        self.addEventListener('fetch', event => {
+          event.respondWith(
+            caches.match(event.request)
+              .then(response => response || fetch(event.request))
+          );
+        });
+      `;
+
+            // Registrar Service Worker
+            window.addEventListener('load', () => {
+                const swBlob = new Blob([swContent], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(swBlob);
+
+                navigator.serviceWorker.register(swUrl)
+                    .then(registration => {
+                        console.log('Service Worker registrado com sucesso:', registration);
+
+                        // Verificar atualizações
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            if (newWorker && navigator.serviceWorker.controller) {
+                                document.getElementById('updateBanner').style.display = 'flex';
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.log('Service Worker não registrado:', err);
+                    });
+            });
+        }
+
+        // ============================================
+        // ANIMAÇÃO CSS PARA PONTOS
+        // ============================================
+        const style = document.createElement('style');
+        style.textContent = `
+      @keyframes floatUp {
+        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+        20% { opacity: 1; transform: translate(-50%, -70%) scale(1.2); }
+        80% { opacity: 1; transform: translate(-50%, -150%) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -200%) scale(0.5); }
+      }
+      
+      .points-animation {
+        animation: floatUp 1s ease-out forwards;
+      }
+    `;
+        document.head.appendChild(style);
+    </script>
 </body>
+
 </html>
