@@ -1,55 +1,601 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR Vision 3D - MakerAI Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --primary: #7c3aed; --bg: #030712; --text: #f1f5f9; --text-secondary: #94a3b8; --border: #334155; --radius: 16px; --radius-lg: 24px; --shadow: 0 20px 40px rgba(0,0,0,0.3); --gradient-primary: linear-gradient(135deg, #7c3aed, #9333ea); }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); }
-    .container { max-width:1400px; margin:0 auto; padding:0 2rem; }
-    .header { position:fixed; top:0; left:0; right:0; background:rgba(15,23,42,0.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:1rem 0; z-index:1000; }
-    .header-container { display:flex; justify-content:space-between; align-items:center; }
-    .logo { font-size:1.8rem; font-weight:800; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .btn { padding:0.8rem 1.8rem; border-radius:var(--radius); text-decoration:none; font-weight:600; transition:all 0.4s; display:inline-block; }
-    .btn.secondary { background:transparent; border:1px solid var(--border); color:var(--text); }
-    .btn.primary { background:var(--gradient-primary); color:white; }
-    .section { padding:8rem 0; text-align:center; }
-    h1 { font-size:3.5rem; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .subtitle { font-size:1.3rem; color:var(--text-secondary); max-width:800px; margin:0 auto 3rem; }
-    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:2rem; margin-top:3rem; }
-    .gallery img { width:100%; border-radius:var(--radius-lg); box-shadow:var(--shadow); }
-    footer { text-align:center; padding:3rem 0; color:var(--text-secondary); border-top:1px solid var(--border); }
-    @media (max-width:768px) { h1 { font-size:2.5rem; } .gallery { grid-template-columns:1fr; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MakerAI Studio - NASA AR Gallery</title>
+
+    <!-- Model Viewer v3.5 -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+    <!-- Fontes Google -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #a78bfa;
+            --bg: #030712;
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --card-border: rgba(99, 102, 241, 0.2);
+            --text: #f1f5f9;
+            --text-sec: #94a3b8;
+            --nasa-red: #E63946;
+            --nasa-blue: #457B9D;
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Header com efeito espacial */
+        header {
+            padding: 4rem 1rem 3rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(2, 0, 36, 0.9) 0%, rgba(3, 7, 18, 0.7) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="20" r="0.5" fill="white" opacity="0.8"/><circle cx="30" cy="40" r="0.3" fill="white" opacity="0.6"/><circle cx="70" cy="15" r="0.4" fill="white" opacity="0.7"/><circle cx="85" cy="65" r="0.3" fill="white" opacity="0.6"/><circle cx="40" cy="80" r="0.5" fill="white" opacity="0.8"/></svg>') repeat,
+                linear-gradient(180deg, rgba(124, 58, 237, 0.1) 0%, transparent 30%);
+            z-index: 0;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .title-gradient {
+            background: linear-gradient(135deg, var(--primary-light), #4f46e5, var(--nasa-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-sec);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Cards 3D */
+        .card {
+            background: linear-gradient(145deg, var(--card-bg), rgba(15, 23, 42, 0.9));
+            border-radius: 24px;
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(124, 58, 237, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 2px rgba(124, 58, 237, 0.2),
+                0 0 30px rgba(124, 58, 237, 0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--nasa-red));
+            z-index: 2;
+        }
+
+        /* Model Viewer Customizado */
+        model-viewer {
+            width: 100%;
+            height: 380px;
+            --progress-bar-color: var(--primary);
+            --progress-bar-height: 4px;
+            --poster-color: transparent;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            position: relative;
+        }
+
+        /* Loading State */
+        .model-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-sec);
+            z-index: 10;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(124, 58, 237, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Conteúdo do card */
+        .info {
+            padding: 1.8rem;
+            position: relative;
+        }
+
+        .info h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            margin: 0 0 0.8rem 0;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .info p {
+            color: var(--text-sec);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Badges */
+        .badge-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.mission {
+            background: linear-gradient(135deg, var(--nasa-blue), #1d4ed8);
+            color: white;
+        }
+
+        .badge.robotics {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+
+        .badge.observatory {
+            background: linear-gradient(135deg, #8b5cf6, var(--primary));
+            color: white;
+        }
+
+        /* Botão AR */
+        .ar-button {
+            background: linear-gradient(135deg, var(--primary), #5b21b6);
+            color: white;
+            border: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .ar-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .ar-button:hover::before {
+            left: 100%;
+        }
+
+        .ar-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+
+        .ar-button i {
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-sec);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 3rem;
+            background: rgba(3, 7, 18, 0.7);
+        }
+
+        .nasa-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: var(--nasa-red);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 2rem;
+            }
+
+            model-viewer {
+                height: 320px;
+            }
+
+            .card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            model-viewer {
+                height: 280px;
+            }
+
+            .info {
+                padding: 1.5rem;
+            }
+
+            .info h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+    </style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="container header-container">
-      <a href="../index.html" class="logo">MakerAI Studio</a>
-      <a href="../index.html" class="btn secondary">← Voltar</a>
-    </div>
-  </header>
 
-  <section class="section">
-    <div class="container">
-      <h1>AR Vision 3D</h1>
-      <p class="subtitle">Visualizador interativo de modelos 3D com suporte a realidade aumentada (AR).</p>
-      <div class="gallery">
-        <img src="https://i.ytimg.com/vi/1WgR-xUMHa0/maxresdefault.jpg" alt="Viewer AR Vision" loading="lazy">
-        <img src="https://devimages-cdn.apple.com/wwdc-services/images/119/4970/4970_wide_900x506_2x.jpg" alt="Modelo 3D em AR" loading="lazy">
-      </div>
-      <div class="features">
-        <h2>Tecnologias</h2>
-        <p>Three.js • WebXR • GLTF Models • React Three Fiber</p>
-        <p>Visualização AR em mobile, rotação 360°, hotspot interativo.</p>
-        <a href="../index.html#contato" class="btn primary" style="margin-top:2rem;">Criar experiência 3D</a>
-      </div>
-    </div>
-  </section>
+    <header>
+        <div style="position: relative; z-index: 1;">
+            <h1><span class="title-gradient">NASA MISSION CONTROL</span></h1>
+            <p class="subtitle">Explore artefatos espaciais autênticos em 3D e Realidade Aumentada. Clique em "VER EM
+                AR" para projetar no seu ambiente.</p>
+        </div>
+    </header>
 
-  <footer><p>© 2025 MakerAI Studio</p></footer>
+    <main class="container">
+
+        <!-- Card 1: Rover Perseverance (MODELO FUNCIONAL) -->
+        <div class="card">
+            <model-viewer src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb"
+                alt="NASA Mars Rover Perseverance" ar ar-modes="webxr scene-viewer quick-look" camera-controls
+                auto-rotate camera-orbit="45deg 55deg 2.5m" environment-image="neutral" shadow-intensity="1.2"
+                exposure="0.8" loading="eager"
+                poster="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&auto=format&fit=crop">
+
+                <div slot="poster" class="model-loading">
+                    <div class="spinner"></div>
+                    <p>Carregando Rover Perseverance...</p>
+                </div>
+
+                <button slot="ar-button" class="ar-button">
+                    <i class="fas fa-rocket"></i> VER EM REALIDADE AUMENTADA
+                </button>
+
+            </model-viewer>
+            <div class="info">
+                <div class="badge-container">
+                    <span class="badge mission">MISSÃO MARTE 2020</span>
+                    <span class="badge robotics">ROBÓTICA</span>
+                </div>
+                <h2>ROVER PERSEVERANCE</h2>
+                <p>Rover ativo em Marte desde 2021. Coleta amostras, tira fotos em alta definição e busca sinais de vida
+                    microbiana antiga no planeta vermelho.</p>
+                <p><strong>Tecnologia:</strong> 23 câmeras, gerador nuclear, braço robótico de 2m, drone Ingenuity.</p>
+            </div>
+        </div>
+
+        <!-- Card 2: Traje Espacial (MODELO FUNCIONAL) -->
+        <div class="card">
+            <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" alt="NASA Space Suit xEMU" ar
+                ar-modes="webxr scene-viewer quick-look" camera-controls auto-rotate camera-orbit="0deg 75deg 2m"
+                environment-image="neutral" shadow-intensity="1" exposure="0.9"
+                poster="https://images.unsplash.com/photo-1454789548928-9efd52dc4031?w-800&auto=format&fit=crop">
+
+                <div slot="poster" class="model-loading">
+                    <div class="spinner"></div>
+                    <p>Carregando Traje Espacial...</p>
+                </div>
+
+                <button slot="ar-button" class="ar-button">
+                    <i class="fas fa-user-astronaut"></i> VESTIR VIRTUALMENTE
+                </button>
+
+            </model-viewer>
+            <div class="info">
+                <div class="badge-container">
+                    <span class="badge mission">ARTEMIS PROGRAM</span>
+                    <span class="badge observatory">HUMAN RATED</span>
+                </div>
+                <h2>TRAJE xEMU (NASA)</h2>
+                <p>Novo traje espacial da geração Artemis, projetado para a Lua e Marte. Oferece maior mobilidade e
+                    proteção contra radiação.</p>
+                <p><strong>Características:</strong> Suporte vital por 8 horas, visor com HUD, sistema de resfriamento,
+                    joelheiras articuladas.</p>
+            </div>
+        </div>
+
+        <!-- Telescópio James Webb -->
+        <div class="card">
+            <model-viewer
+                src="https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Models/James%20Webb%20Space%20Telescope%20%28B%29/James%20Webb%20Space%20Telescope%20%28B%29.glb"
+                alt="NASA James Webb Space Telescope" ar ar-modes="webxr scene-viewer quick-look" camera-controls
+                auto-rotate camera-orbit="30deg 65deg 5m" environment-image="neutral" shadow-intensity="0.8"
+                exposure="1.1" poster="https://www.nasa.gov/wp-content/uploads/2023/11/webb-illustration-2023.jpeg">
+
+                <button slot="ar-button" class="ar-button">
+                    <i class="fas fa-satellite"></i> EXPLORAR EM AR
+                </button>
+            </model-viewer>
+            <div class="info">
+                <div class="badge-container">
+                    <span class="badge observatory">OBSERVATÓRIO</span>
+                    <span class="badge mission">DEEP SPACE</span>
+                </div>
+                <h2>TELESCÓPIO JAMES WEBB</h2>
+                <p>Sucessor do Hubble, opera no infravermelho. Localizado a 1.5 milhão de km da Terra, no ponto L2.</p>
+                <p><strong>Capacidades:</strong> Espelho de 6.5m, 100x mais sensível que o Hubble, imagens
+                    revolucionárias do universo primordial.</p>
+            </div>
+        </div>
+
+        <!-- Card 4: Módulo Lunar Apollo (MODELO FUNCIONAL) -->
+        <div class="card">
+            <model-viewer
+                src="https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@master/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf"
+                alt="Apollo Lunar Module" ar ar-modes="webxr scene-viewer quick-look" camera-controls
+                auto-rotate-delay="1000" camera-orbit="20deg 60deg 3m" environment-image="neutral" shadow-intensity="1"
+                exposure="0.85"
+                poster="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&auto=format&fit=crop">
+
+                <div slot="poster" class="model-loading">
+                    <div class="spinner"></div>
+                    <p>Carregando Módulo Lunar...</p>
+                </div>
+
+                <button slot="ar-button" class="ar-button">
+                    <i class="fas fa-moon"></i> VER NA MINHA SALA
+                </button>
+
+            </model-viewer>
+            <div class="info">
+                <div class="badge-container">
+                    <span class="badge mission">APOLLO 11</span>
+                    <span class="badge robotics">HISTÓRICO</span>
+                </div>
+                <h2>MÓDULO LUNAR EAGLE</h2>
+                <p>O "Eagle" pousou na Lua em 20 de julho de 1969. Neil Armstrong e Buzz Aldrin foram os primeiros
+                    humanos a pisar na superfície lunar.</p>
+                <p><strong>Dados:</strong> Altura: 7m, Peso: 15 toneladas, Tripulação: 2 astronautas, Missão: Apollo 11.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="nasa-logo">
+            <a href="../index.html" style="text-decoration: none; color: inherit;">MakerAI Studio</a>
+        </div>
+
+        <p>© 2025 - Ativos educacionais da NASA</p>
+
+        <div style="margin: 10px 0;">
+            <a href="https://wa.me/5511999999999" target="_blank"
+                style="color: #10b981; text-decoration: none; font-weight: 600; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fab fa-whatsapp"></i> SUPORTE DEVELOPER
+            </a>
+        </div>
+
+        <p style="font-size: 0.7rem; opacity: 0.6;">
+            Compatível com iOS, Android e WebXR
+        </p>
+    </footer>
+
+    <!-- Script para melhorar experiência -->
+    <script type="module">
+        // Mostrar loading enquanto carrega
+        document.querySelectorAll('model-viewer').forEach(viewer => {
+            // Criar elemento de loading
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'model-loading';
+            loadingDiv.innerHTML = `
+                <div class="spinner"></div>
+                <p>Carregando modelo 3D...</p>
+            `;
+
+            // Quando o modelo carregar, remover loading
+            viewer.addEventListener('load', () => {
+                console.log('✅ Modelo 3D carregado:', viewer.alt);
+                loadingDiv.style.display = 'none';
+            });
+
+            // Em caso de erro, mostrar mensagem
+            viewer.addEventListener('error', (e) => {
+                console.error('❌ Erro ao carregar modelo:', viewer.alt);
+                loadingDiv.innerHTML = `
+                    <div style="color: #ef4444; margin-bottom: 10px;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <p>Modelo não disponível</p>
+                    <button onclick="location.reload()" style="margin-top: 10px; padding: 5px 15px; background: var(--primary); border: none; color: white; border-radius: 5px; cursor: pointer;">
+                        Tentar novamente
+                    </button>
+                `;
+            });
+
+            // Adicionar loading ao modelo
+            viewer.shadowRoot.querySelector('.container').appendChild(loadingDiv);
+        });
+
+        // Verificar suporte AR
+        async function checkARSupport() {
+            if (!('xr' in navigator)) {
+                console.log('WebXR não suportado neste navegador');
+                document.querySelectorAll('.ar-button').forEach(btn => {
+                    btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> AR NÃO SUPORTADO';
+                    btn.style.opacity = '0.6';
+                    btn.style.cursor = 'not-allowed';
+                    btn.onclick = null;
+                });
+                return;
+            }
+
+            try {
+                const supported = await navigator.xr.isSessionSupported('immersive-ar');
+                if (!supported) {
+                    console.log('AR não suportado neste dispositivo');
+                }
+            } catch (error) {
+                console.log('Erro ao verificar suporte AR:', error);
+            }
+        }
+
+        // Chamar verificação após carregamento
+        window.addEventListener('load', checkARSupport);
+
+        // Adicionar confetes quando AR for ativado
+        document.querySelectorAll('.ar-button').forEach(button => {
+            button.addEventListener('click', () => {
+                console.log('🎉 AR ativado para:', button.closest('.card').querySelector('h2').textContent);
+            });
+        });
+    </script>
+
 </body>
+
 </html>
