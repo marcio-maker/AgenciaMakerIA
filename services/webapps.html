@@ -1311,56 +1311,67 @@
   </div>
 
   <!-- App Container -->
-  <div class="app" role="application" aria-label="App Conexão Pais e Filhos">
-    <!-- Header -->
-    <header>
-      <div class="brand" onclick="nav('home')">
-        <img src="https://tse3.mm.bing.net/th/id/OIP.2xBALJYhhVno3u98s_XItAHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
-          alt="Logo Universidade de Pais" class="logo" />
-        <div>
-          <h1>Universidade de Pais</h1>
-          <div class="muted">Conexão Pais e Filhos.</div>
-        </div>
+<div class="app" role="application" aria-label="App Conexão Pais e Filhos">
+  <!-- Header -->
+  <header>
+    <div class="brand" onclick="nav('home')">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.2xBALJYhhVno3u98s_XItAHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+        alt="Logo Universidade de Pais" class="logo" />
+      <div>
+        <h1>Universidade de Pais</h1>
+        <div class="muted">Conexão Pais e Filhos.</div>
       </div>
+    </div>
 
-      <div class="nav-actions">
-        <button class="icon" id="menu-button" onclick="toggleMenu()">
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="menu-dropdown" id="menu-dropdown">
-          <div class="tab" onclick="nav('about')">
-            <i class="fas fa-info-circle"></i> Sobre a Universidade
-          </div>
-          <div class="tab" onclick="nav('faq')">
-            <i class="fas fa-question-circle"></i> FAQs/Fale Conosco
-          </div>
-          <div class="tab" onclick="nav('benefits')">
-            <i class="fas fa-star"></i> Benefícios
-          </div>
-          <div class="tab" onclick="nav('sentiments')">
-            <i class="fas fa-brain"></i> Lista de Emoções
-          </div>
-          <div class="tab" onclick="nav('notes')">
-            <i class="fas fa-sticky-note"></i> Anotações
-          </div>
-          <div class="tab" onclick="nav('favorites')">
-            <i class="fas fa-heart"></i> Favoritos
-          </div>
-          <div class="tab" onclick="nav('share')">
-            <i class="fas fa-share-alt"></i> Compartilhar
-          </div>
-          <div class="tab" onclick="nav('profile')">
-            <i class="fas fa-user-cog"></i> Configurações do Perfil
-          </div>
-          <div class="tab" onclick="exportUserData()">
-            <i class="fas fa-download"></i> Exportar Dados
-          </div>
-          <div class="tab" onclick="clearAllData()" style="color: var(--danger);">
-            <i class="fas fa-trash"></i> Limpar Todos os Dados
-          </div>
+    <div class="nav-actions">
+      <button class="icon" id="menu-button" onclick="toggleMenu()" aria-label="Abrir menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="menu-dropdown" id="menu-dropdown">
+        <div class="tab" onclick="nav('about')">
+          <i class="fas fa-info-circle"></i> Sobre a Universidade
+        </div>
+        <div class="tab" onclick="nav('faq')">
+          <i class="fas fa-question-circle"></i> FAQs/Fale Conosco
+        </div>
+        <div class="tab" onclick="nav('benefits')">
+          <i class="fas fa-star"></i> Benefícios
+        </div>
+        <div class="tab" onclick="nav('sentiments')">
+          <i class="fas fa-brain"></i> Lista de Emoções
+        </div>
+        <div class="tab" onclick="nav('notes')">
+          <i class="fas fa-sticky-note"></i> Anotações
+        </div>
+        <div class="tab" onclick="nav('favorites')">
+          <i class="fas fa-heart"></i> Favoritos
+        </div>
+        <div class="tab" onclick="nav('share')">
+          <i class="fas fa-share-alt"></i> Compartilhar
+        </div>
+        <div class="tab" onclick="nav('profile')">
+          <i class="fas fa-user-cog"></i> Configurações do Perfil
+        </div>
+        <div class="tab" onclick="exportUserData()">
+          <i class="fas fa-download"></i> Exportar Dados
+        </div>
+        <div class="tab" onclick="clearAllData()" style="color: var(--danger);">
+          <i class="fas fa-trash"></i> Limpar Todos os Dados
+        </div>
+
+        <!-- Ícones lado a lado, mais para cima (menos margem inferior) -->
+        <div class="tab" style="display: flex; justify-content: center; align-items: center; gap: 40px; padding: 10px 0 14px 0; margin: 0;">
+          <a href="../index.html" class="text-decoration-none" title="Voltar ao Portfólio MakerAI Studio" style="font-size: 1.7rem; color: var(--text);">
+            <i class="fas fa-home"></i>
+          </a>
+          <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" class="text-decoration-none text-success" title="Falar no WhatsApp" style="font-size: 1.9rem;">
+            <i class="fab fa-whatsapp"></i>
+          </a>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
     <!-- Main Content -->
     <main class="main-content" id="main-content">
