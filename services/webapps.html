@@ -95,6 +95,7 @@
         transform: translateY(100%);
         opacity: 0;
       }
+
       to {
         transform: translateY(0);
         opacity: 1;
@@ -163,11 +164,25 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 12px 16px;
+      padding: 8px 16px;
       width: 100%;
       color: var(--text);
       max-width: 420px;
       margin: 0 auto;
+    }
+
+    /* Localize ou adicione estes estilos específicos para o header */
+    header h1 {
+      font-size: 1.1rem;
+      /* Tamanho original costuma ser 2rem; 1.1rem é bem menor */
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    header .muted {
+      font-size: 0.75rem;
+      /* Diminui a legenda "Conexão Pais e Filhos" */
+      margin-top: -2px;
     }
 
     .brand {
@@ -178,8 +193,8 @@
     }
 
     .brand .logo {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       object-fit: cover;
     }
@@ -1179,6 +1194,7 @@
         opacity: 0;
         transform: translateY(-10px) scaleY(0.9);
       }
+
       to {
         opacity: 1;
         transform: translateY(0) scaleY(1);
@@ -1190,6 +1206,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -2644,11 +2661,11 @@
       isBannerClosed() {
         const closedTime = localStorage.getItem(`${APP_CONFIG.STORAGE_PREFIX}bannerClosed`);
         if (!closedTime) return false;
-        
+
         const closedDate = new Date(closedTime);
         const now = new Date();
         const diffHours = (now - closedDate) / (1000 * 60 * 60);
-        
+
         // Mostrar novamente após 24 horas
         return diffHours < 24;
       }
@@ -2699,6 +2716,9 @@
     function toast(message, type = 'info', duration = 4000) {
       const container = document.getElementById('toast-container');
       if (!container) return;
+
+      // CORREÇÃO: Limpa toasts anteriores para não duplicar
+      container.innerHTML = '';
 
       const toast = document.createElement('div');
       toast.className = `toast ${type}`;
@@ -3179,9 +3199,9 @@
                   <p>${aula.description}</p>
                   <div class="module-meta" style="display:flex;justify-content:space-between;margin-top:8px;">
                     <span class="muted"><i class="fas fa-clock"></i> ${aula.duration}</span>
-                    ${appState.state.completedAulas[`M${moduleId}-A${idx}`] ? 
-                      '<span style="color:var(--success);"><i class="fas fa-check-circle"></i> Concluída</span>' : 
-                      '<span class="muted">Não iniciada</span>'}
+                    ${appState.state.completedAulas[`M${moduleId}-A${idx}`] ?
+            '<span style="color:var(--success);"><i class="fas fa-check-circle"></i> Concluída</span>' :
+            '<span class="muted">Não iniciada</span>'}
                   </div>
                 </div>
                 <div class="module-status">▶️</div>
@@ -3272,9 +3292,9 @@
         <div class="card">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
             <h2 style="margin:0;">${aula.title}</h2>
-            ${isCompleted ? 
-              '<span style="background:var(--success);color:white;padding:4px 12px;border-radius:12px;font-size:0.8em;">✓ Concluída</span>' : 
-              ''}
+            ${isCompleted ?
+          '<span style="background:var(--success);color:white;padding:4px 12px;border-radius:12px;font-size:0.8em;">✓ Concluída</span>' :
+          ''}
           </div>
           <p class="muted" style="margin-bottom:20px;">${aula.description}</p>
           
@@ -3342,7 +3362,7 @@
       }
 
       appState.saveState();
-      
+
       const explanation = document.getElementById('quiz-explanation');
       if (explanation) {
         explanation.style.display = 'block';
@@ -3351,14 +3371,14 @@
 
     function nextQuizStep(moduleId, aulaId) {
       const quizData = QUIZZES.find(q => q.id === COURSE_MODULES[moduleId].aulas[aulaId].quizId);
-      
+
       if (appState.state.currentQuizStep >= quizData.steps.length) {
         // Última pergunta - ir para resultados
         appState.state.currentQuizStep = quizData.steps.length + 1;
       } else {
         appState.state.currentQuizStep++;
       }
-      
+
       appState.saveState();
       renderAula(moduleId, aulaId);
     }
@@ -3381,7 +3401,7 @@
     function toggleBookmark(moduleId, aulaId) {
       const aulaKey = `${moduleId}-${aulaId}`;
       const index = appState.state.bookmarkedAulas.indexOf(aulaKey);
-      
+
       if (index === -1) {
         appState.state.bookmarkedAulas.push(aulaKey);
         toast('❤️ Aula adicionada aos favoritos', 'success');
@@ -3389,12 +3409,12 @@
         appState.state.bookmarkedAulas.splice(index, 1);
         toast('💔 Aula removida dos favoritos', 'info');
       }
-      
+
       appState.saveState();
-      
+
       // Atualizar visualização da aula
       renderAula(moduleId, aulaId);
-      
+
       // Atualizar tela de favoritos se estiver visível
       if (document.getElementById('screen-favorites').style.display === 'block') {
         renderFavorites();
@@ -3438,7 +3458,7 @@
       // Atualizar estatísticas
       document.getElementById('stats-completed-profile').textContent = progress.completedCount;
       document.getElementById('stats-percentage-profile').textContent = progress.percentage + '%';
-      document.getElementById('stats-favorites-profile').textContent = 
+      document.getElementById('stats-favorites-profile').textContent =
         appState.state.bookmarkedAulas?.length || 0;
 
       // Aplicar modo escuro
@@ -3453,7 +3473,7 @@
       // Configurar filtros de benefícios
       const filterTabs = document.querySelectorAll('.filter-tab');
       filterTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
+        tab.addEventListener('click', function () {
           filterTabs.forEach(t => t.classList.remove('active'));
           this.classList.add('active');
         });
@@ -3462,7 +3482,7 @@
       // Configurar cards de benefícios
       const benefitCards = document.querySelectorAll('.benefit-card');
       benefitCards.forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function () {
           const title = this.querySelector('h3').textContent;
           toast(`Benefício: ${title}`, 'info');
         });
@@ -3473,7 +3493,7 @@
       // Configurar filtros de emoções
       const filterButtons = document.querySelectorAll('.filter-btn');
       filterButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
           filterButtons.forEach(b => b.classList.remove('active'));
           this.classList.add('active');
         });
@@ -3482,7 +3502,7 @@
       // Configurar cards de emoções
       const emotionCards = document.querySelectorAll('.sentiment-card');
       emotionCards.forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function () {
           const emotion = this.querySelector('strong').textContent;
           const description = this.querySelector('.emotion-desc').textContent;
           toast(`${emotion}: ${description}`, 'info');
@@ -3577,7 +3597,7 @@
     // ===== FUNÇÕES DE FILTRO =====
     function filterBenefits(category) {
       const cards = document.querySelectorAll('.benefit-card');
-      
+
       cards.forEach(card => {
         if (category === 'all' || card.dataset.category === category) {
           card.style.display = 'flex';
@@ -3589,7 +3609,7 @@
 
     function filterEmotions(category) {
       const cards = document.querySelectorAll('.sentiment-card');
-      
+
       cards.forEach(card => {
         if (category === 'all' || card.dataset.category === category) {
           card.style.display = 'flex';
@@ -3611,23 +3631,23 @@
     function saveInitialAccount() {
       const name = document.getElementById('signup-name')?.value.trim();
       const email = document.getElementById('signup-email')?.value.trim();
-      
+
       if (!name || !email) {
         toast('Preencha todos os campos', 'error');
         return;
       }
-      
+
       if (!email.includes('@')) {
         toast('Email inválido', 'error');
         return;
       }
-      
+
       if (appState) {
         appState.state.account.name = name;
         appState.state.account.email = email;
         appState.state.currentScreen = 'home';
         appState.saveState();
-        
+
         toast(`🎉 Bem-vindo(a), ${name}!`, 'success');
         nav('home');
       }
@@ -3636,25 +3656,25 @@
     function exportUserData() {
       try {
         if (!appState) return;
-        
+
         const data = {
           app: APP_CONFIG,
           exportDate: new Date().toISOString(),
           state: appState.state,
           profilePhoto: localStorage.getItem(`${APP_CONFIG.STORAGE_PREFIX}profilePhoto`)
         };
-        
-        const blob = new Blob([JSON.stringify(data, null, 2)], 
+
+        const blob = new Blob([JSON.stringify(data, null, 2)],
           { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `universidade-pais-backup-${new Date().toISOString().slice(0,10)}.json`;
+        a.download = `universidade-pais-backup-${new Date().toISOString().slice(0, 10)}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        
+
         toast('💾 Dados exportados com sucesso!', 'success');
       } catch (error) {
         console.error('Erro ao exportar:', error);
@@ -3670,7 +3690,7 @@
             localStorage.removeItem(key);
           }
         });
-        
+
         toast('🗑️ Todos os dados foram apagados', 'warning');
         setTimeout(() => location.reload(), 2000);
       }
@@ -3687,7 +3707,7 @@
       const banner = document.getElementById('pwa-install-banner');
       if (banner) {
         banner.classList.add('hidden');
-        localStorage.setItem(`${APP_CONFIG.STORAGE_PREFIX}bannerClosed`, 
+        localStorage.setItem(`${APP_CONFIG.STORAGE_PREFIX}bannerClosed`,
           new Date().toISOString());
       }
     }
@@ -3736,10 +3756,10 @@
               );
             });
           `;
-          
+
           const swBlob = new Blob([swCode], { type: 'application/javascript' });
           const swURL = URL.createObjectURL(swBlob);
-          
+
           navigator.serviceWorker.register(swURL)
             .then(registration => {
               console.log('✅ Service Worker registrado:', registration.scope);
@@ -3752,48 +3772,48 @@
     }
 
     // ===== INICIALIZAÇÃO =====
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Inicializar gestores
       appState = new AppStateManager();
       pwaManager = new PWAInstallManager();
-      
+
       // Registrar Service Worker
       registerServiceWorker();
-      
+
       // Configurar event listeners
       document.addEventListener('click', (e) => {
         const menu = document.getElementById('menu-dropdown');
         const menuBtn = document.getElementById('menu-button');
-        
-        if (menu && menuBtn && 
-            !menu.contains(e.target) && 
-            !menuBtn.contains(e.target)) {
+
+        if (menu && menuBtn &&
+          !menu.contains(e.target) &&
+          !menuBtn.contains(e.target)) {
           toggleMenu(false);
         }
       });
-      
+
       // Atalhos de teclado
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') toggleMenu(false);
       });
-      
+
       // Carregar foto de perfil salva
       const savedPhoto = localStorage.getItem(`${APP_CONFIG.STORAGE_PREFIX}profilePhoto`);
       if (savedPhoto) {
         const photoElement = document.getElementById('profile-photo');
         if (photoElement) photoElement.src = savedPhoto;
       }
-      
+
       // Carregar notas salvas
       if (appState.state.notes) {
         renderNotes();
       }
-      
+
       // Navegar para tela inicial
       setTimeout(() => {
         nav(appState.state.currentScreen);
       }, 100);
-      
+
       console.log(`🎓 ${APP_CONFIG.NAME} v${APP_CONFIG.VERSION} inicializado!`);
     });
 
@@ -3837,4 +3857,5 @@
     window.copyInviteCode = copyInviteCode;
   </script>
 </body>
+
 </html>
