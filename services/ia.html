@@ -595,6 +595,130 @@
             padding-right: 2.5rem;
         }
 
+        /* Configurações Gerais da Header Única */
+        .main-header {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 0.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-left h1 {
+            font-size: 1.1rem;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Botão Hamburguer */
+        .menu-toggle {
+            display: none;
+            /* Escondido por padrão no Desktop */
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: #8a6d3b;
+            cursor: pointer;
+        }
+
+        /* Estilo dos Botões de Navegação */
+        .nav-menu {
+            display: flex;
+            gap: 5px;
+        }
+
+        .tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            padding: 0.6rem 0.8rem;
+            cursor: pointer;
+            color: #666;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            background: #f9f5f0;
+            color: #8a6d3b;
+            font-weight: 600;
+        }
+
+        .tab-badge {
+            background: #8a6d3b;
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        /* --- RESPONSIVIDADE (MOBILE) --- */
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            /* Mostra o hamburguer */
+
+            .nav-menu {
+                display: none;
+                /* Esconde o menu por padrão */
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 1rem;
+                border-bottom: 2px solid #8a6d3b;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Classe que o JS vai adicionar para abrir o menu */
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .tab-btn {
+                width: 100%;
+                padding: 1rem;
+                border-bottom: 1px solid #f5f5f5;
+            }
+        }
+
         /* ===== DASHBOARD GRID ===== */
         .dashboard-grid {
             display: grid;
@@ -1552,24 +1676,16 @@
     </div>
 
     <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="header-left">
-                    <div class="logo">💇</div>
-                    <div class="header-titles">
-                        <h1>HairCare Premium <span class="badge-premium">PRO</span></h1>
-                        <p>Assistente de cuidados capilares</p>
-                    </div>
+    <header class="main-header">
+        <div class="container nav-container">
+            <div class="header-left">
+                <div class="logo">💇</div>
+                <div class="header-titles">
+                    <h1>HairCare <span class="badge-premium">PRO</span></h1>
                 </div>
             </div>
-        </div>
-    </header>
 
-    <!-- Navegação -->
-    <nav>
-        <div class="container nav-container">
-            <div class="nav-tabs">
+            <nav class="nav-menu" id="navMenu">
                 <button class="tab-btn active" data-tab="home">
                     <i class="fas fa-home"></i> <span class="tab-text">Início</span>
                 </button>
@@ -1580,27 +1696,32 @@
                     <i class="fas fa-history"></i> <span class="tab-text">Histórico</span>
                 </button>
                 <button class="tab-btn" data-tab="cronograma">
-                    <i class="fas fa-calendar-alt"></i> <span class="tab-text">Cronograma</span>
+                    <i class="fas fa-calendar-alt"></i> <span class="tab-text">Agenda</span>
                 </button>
                 <button class="tab-btn" data-tab="consultoria">
                     <i class="fas fa-robot"></i> <span class="tab-text">IA</span>
                 </button>
                 <button class="tab-btn" data-tab="vip">
                     <i class="fas fa-crown"></i> <span class="tab-text">VIP</span>
-                    <span class="tab-badge" id="vipBadgeCount">3</span>
+                    <span class="tab-badge">3</span>
                 </button>
-            </div>
-            <div class="user-profile">
-                <div class="user-avatar" id="userAvatar" title="Configurações">
-                    <span id="avatarInitials">M</span>
+            </nav>
+
+            <div class="header-right">
+                <div class="user-profile">
+                    <button class="notification-btn" id="openNotificationsModal">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="user-avatar" id="userAvatar">M</div>
                 </div>
-                <button class="notification-btn" id="openNotificationsModal">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge" id="notificationCount">3</span>
+
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Conteúdo Principal -->
     <main class="container">
@@ -3044,6 +3165,52 @@ Domingo: Finalização com óleo de argan</textarea>
     `;
         document.head.appendChild(style);
     </script>
+
+    <script>
+    // Seleciona os elementos necessários
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    // Função para abrir/fechar o menu ao clicar no hambúrguer
+    menuToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        
+        // Troca o ícone de barras (bars) pelo de fechar (times/xmark)
+        const icon = this.querySelector('i');
+        if (navMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times'); // ou 'fa-xmark' dependendo da versão do FontAwesome
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Fecha o menu automaticamente ao clicar em qualquer link/botão de aba (útil para mobile)
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (window.innerWidth <= 992) { // apenas se estiver em modo mobile
+                navMenu.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    // Fecha o menu se o usuário clicar fora dele
+    document.addEventListener('click', function(event) {
+        const isClickInsideMenu = navMenu.contains(event.target);
+        const isClickOnToggle = menuToggle.contains(event.target);
+
+        if (!isClickInsideMenu && !isClickOnToggle && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        }
+    });
+</script>
+
 </body>
 
 </html>
