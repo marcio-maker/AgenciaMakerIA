@@ -1,380 +1,3011 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clínica Médica +300% | MakerAI Studio</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>ClinicAI - Gestão Inteligente de Clínicas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ESTILOS SAÚDE - TEMA VERDE/SAÚDE */
-        .health-hero {
-            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            padding: 8rem 0 6rem;
-            color: white;
-            text-align: center;
+        /* RESET E BASE MOBILE FIRST - PALETA MÉDICA */
+        :root {
+            /* Cores principais - Profissionalismo médico */
+            --primary: #2c8c99;           /* Azul esverdeado - Confiança */
+            --primary-light: #4db6ac;     /* Turquesa - Calma */
+            --primary-dark: #1a5f7a;      /* Azul marinho - Profissionalismo */
+            --secondary: #38b2ac;         /* Verde água - Saúde */
+            --accent: #4299e1;            /* Azul claro - Confiabilidade */
+            
+            /* Cores funcionais */
+            --danger: #e53e3e;            /* Vermelho suave - Alerta */
+            --warning: #ed8936;           /* Laranja - Atenção */
+            --success: #48bb78;           /* Verde - Sucesso */
+            --info: #4299e1;              /* Azul - Informação */
+            
+            /* Cores de superfície - MODO CLARO (padrão) */
+            --surface: #ffffff;           /* Branco puro */
+            --surface-soft: #f7fafc;      /* Branco suave */
+            --surface-muted: #edf2f7;     /* Cinza muito claro */
+            --surface-dark: #e2e8f0;      /* Cinza claro */
+            
+            /* Cores de texto - MODO CLARO (padrão) */
+            --text: #2d3748;              /* Cinza escuro - Legibilidade */
+            --text-muted: #4a5568;        /* Cinza médio */
+            --text-light: #718096;        /* Cinza claro */
+            --text-white: #ffffff;        /* Branco */
+            
+            /* Cores específicas para saúde */
+            --health-blue: #3182ce;       /* Azul hospitalar */
+            --health-green: #38a169;      /* Verde medicinal */
+            --health-teal: #319795;       /* Verde azulado */
+            --health-purple: #805ad5;     /* Roxo (farmacêutico) */
+            
+            /* Utilitários */
+            --radius: 10px;               /* Bordas suaves */
+            --radius-lg: 16px;            /* Bordas mais arredondadas */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            
+            /* Espaçamentos */
+            --container-padding: 1rem;
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            
+            /* Tipografia */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            
+            /* Transições */
+            --transition-fast: 150ms ease;
+            --transition: 250ms ease;
+            --transition-slow: 350ms ease;
+        }
+
+        /* Modo Escuro */
+        body.dark-mode {
+            --surface: #1a202c;
+            --surface-soft: #2d3748;
+            --surface-muted: #4a5568;
+            --surface-dark: #718096;
+            --text: #f7fafc;
+            --text-muted: #e2e8f0;
+            --text-light: #cbd5e0;
+            background: #171923;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 14px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--surface-soft);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color var(--transition), color var(--transition);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        /* Botão de alternar tema */
+        .theme-toggle {
+            background: var(--surface-soft);
+            border: 2px solid var(--surface-dark);
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            color: var(--text);
             position: relative;
             overflow: hidden;
+            margin-left: var(--space-sm);
+            flex-shrink: 0;
         }
-        
-        .health-hero::before {
-            content: '';
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: rotate(15deg);
+        }
+
+        .theme-toggle i {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&auto=format&fit=crop') center/cover;
-            opacity: 0.1;
+            transition: all var(--transition);
         }
-        
-        .health-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
+
+        .theme-toggle .fa-sun {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .theme-toggle .fa-moon {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Quando o tema escuro está ativo */
+        body.dark-mode .theme-toggle .fa-sun {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        body.dark-mode .theme-toggle .fa-moon {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        /* TYPOGRAPHY MOBILE */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text);
+        }
+
+        h1 {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--space-lg);
+        }
+
+        h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--space-md);
+        }
+
+        h3 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-sm);
+        }
+
+        p {
+            font-size: var(--font-size-md);
+            margin-bottom: var(--space-md);
+            color: var(--text-muted);
+        }
+
+        /* HEADER MOBILE FIRST */
+        header {
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            height: 64px;
+            border-bottom: 1px solid var(--surface-muted);
+            transition: background-color var(--transition), border-color var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+            padding: 0 var(--space-md);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-decoration: none;
+            color: var(--primary-dark);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
             font-weight: 700;
-            margin: 1rem 0;
-            border: 2px solid white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            display: none;
+            font-size: var(--font-size-xs);
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .desktop-nav {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            transition: all var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--surface-muted);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            width: 100%;
+            background: var(--surface);
+            box-shadow: var(--shadow-lg);
+            padding: var(--space-md);
+            display: none;
+            flex-direction: column;
+            gap: var(--space-xs);
+            z-index: 999;
+            max-height: calc(100vh - 64px);
+            overflow-y: auto;
+            border-top: 1px solid var(--surface-muted);
+            transition: background-color var(--transition);
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: var(--space-md);
+            border-radius: var(--radius);
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: var(--font-size-md);
+        }
+
+        .nav-link:hover {
+            background: var(--surface-muted);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
             font-size: 1.1rem;
         }
-        
-        .health-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-        
-        .health-stat {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: var(--radius-lg);
+
+        /* HERO SECTION MOBILE */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: var(--text-white);
+            padding: 5rem 0 3rem;
             text-align: center;
-            border: 2px solid #10b981;
+            margin-top: 64px;
+            min-height: calc(100vh - 64px);
+            display: flex;
+            align-items: center;
             position: relative;
             overflow: hidden;
         }
-        
-        .health-stat::before {
+
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
         }
-        
+
+        .hero .container {
+            padding: 0 var(--space-lg);
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 0.25rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .subtitle {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+            margin: 0 auto var(--space-2xl);
+            line-height: 1.6;
+            max-width: 600px;
+            font-weight: 400;
+        }
+
+        /* BUTTONS MOBILE */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            background: var(--surface);
+            color: var(--primary);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: var(--font-size-md);
+            width: 100%;
+            max-width: 300px;
+            margin: var(--space-xs) auto;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            font-size: var(--font-size-lg);
+            padding: var(--space-lg) var(--space-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-sm {
+            padding: var(--space-sm) var(--space-md);
+            font-size: var(--font-size-sm);
+            max-width: none;
+            width: auto;
+            border-radius: var(--radius);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--surface-dark);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* STATS SECTION MOBILE */
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+            margin: var(--space-2xl) 0;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+            border: 1px solid var(--surface-muted);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
         .stat-number {
             font-size: 3rem;
-            font-weight: 800;
-            color: #10b981;
+            font-weight: 700;
+            color: var(--primary);
+            margin: var(--space-sm) 0;
             line-height: 1;
-            margin: 1rem 0;
+            font-family: 'Inter', sans-serif;
         }
-        
-        .scheduling-flow {
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            padding: 3rem;
-            margin: 4rem 0;
-            border: 1px solid var(--border);
+
+        .stat-card h3 {
+            color: var(--text);
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-card p {
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+            margin: 0;
+        }
+
+        /* SECTION STYLES */
+        .section {
+            margin: var(--space-2xl) 0;
+            padding: var(--space-xl) 0;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--text);
+            margin-bottom: var(--space-xl);
             position: relative;
+            padding-bottom: var(--space-md);
         }
-        
-        .flow-timeline {
-            position: relative;
-            padding-left: 3rem;
-            margin: 2rem 0;
-        }
-        
-        .flow-timeline::before {
+
+        .section-title::after {
             content: '';
             position: absolute;
-            left: 1.5rem;
-            top: 0;
             bottom: 0;
-            width: 2px;
-            background: #10b981;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 2px;
         }
-        
-        .timeline-step {
+
+        /* CARDS MOBILE */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--surface-muted);
+            transition: all var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--surface-muted);
+        }
+
+        .card-title {
+            color: var(--text);
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+        }
+
+        /* AGENDA MOBILE */
+        .agenda-container {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--surface-muted);
+            overflow: hidden;
+        }
+
+        .agenda-header {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .date-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-md);
+        }
+
+        .date-navigation button {
+            background: var(--surface-soft);
+            border: 1px solid var(--surface-dark);
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            color: var(--text);
+            flex-shrink: 0;
+        }
+
+        .date-navigation button:hover {
+            background: var(--surface-muted);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .current-date {
+            font-weight: 600;
+            font-size: var(--font-size-lg);
+            text-align: center;
+            flex-grow: 1;
+            color: var(--text);
+        }
+
+        .time-slots {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: var(--space-sm);
+        }
+
+        .time-slots::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .time-slots::-webkit-scrollbar-track {
+            background: var(--surface-muted);
+            border-radius: 2px;
+        }
+
+        .time-slots::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 2px;
+        }
+
+        .time-slot {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            background: var(--surface-soft);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--success);
+            transition: all var(--transition);
+            border: 1px solid var(--surface-muted);
+        }
+
+        .time-slot:hover {
+            transform: translateX(2px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-light);
+        }
+
+        .time-slot.high-risk {
+            border-left-color: var(--danger);
+        }
+
+        .time-slot.medium-risk {
+            border-left-color: var(--warning);
+        }
+
+        .slot-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .slot-time {
+            font-weight: 600;
+            font-size: var(--font-size-lg);
+            color: var(--text);
+        }
+
+        .slot-patient {
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+        }
+
+        .slot-actions {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .slot-risk {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: 20px;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .risk-low {
+            background: rgba(72, 187, 120, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(72, 187, 120, 0.2);
+        }
+
+        .risk-medium {
+            background: rgba(237, 137, 54, 0.1);
+            color: var(--warning);
+            border: 1px solid rgba(237, 137, 54, 0.2);
+        }
+
+        .risk-high {
+            background: rgba(229, 62, 62, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(229, 62, 62, 0.2);
+        }
+
+        .action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            transition: all var(--transition);
+            font-weight: 500;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
+        }
+
+        .action-btn.btn-sm {
+            padding: var(--space-xs) var(--space-sm);
+        }
+
+        /* TABLES MOBILE */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: var(--space-md) 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--surface-muted);
+        }
+
+        .patients-table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+        .patients-table th {
+            background: var(--surface-soft);
+            padding: var(--space-md);
+            text-align: left;
+            font-weight: 600;
+            color: var(--text);
+            font-size: var(--font-size-sm);
+            white-space: nowrap;
+            border-bottom: 2px solid var(--surface-muted);
+        }
+
+        .patients-table td {
+            padding: var(--space-md);
+            border-top: 1px solid var(--surface-muted);
+            vertical-align: top;
+            font-size: var(--font-size-sm);
+        }
+
+        .patients-table tr:hover {
+            background: var(--surface-soft);
+        }
+
+        /* CHARTS MOBILE */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+
+        .chart-container {
+            background: var(--surface);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            height: 300px;
+            border: 1px solid var(--surface-muted);
+        }
+
+        .chart-container h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-md);
+            text-align: center;
+            color: var(--text);
+        }
+
+        /* TABS MOBILE */
+        .tabs {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--surface-soft);
+            border: 1px solid var(--surface-muted);
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all var(--transition);
+            white-space: nowrap;
+            font-size: var(--font-size-sm);
+            flex-shrink: 0;
+            color: var(--text);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--shadow);
+        }
+
+        /* MODALS MOBILE */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: flex-start;
+            justify-content: center;
+            padding: var(--space-md);
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalFadeIn 0.3s;
+            margin-top: var(--space-xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--surface-muted);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--surface-muted);
+        }
+
+        .modal-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            transition: all var(--transition);
+        }
+
+        .close-btn:hover {
+            background: var(--surface-muted);
+            color: var(--text);
+        }
+
+        /* FORMS MOBILE */
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
+            color: var(--text);
+            font-size: var(--font-size-sm);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: var(--space-md);
+            border: 2px solid var(--surface-muted);
+            border-radius: var(--radius);
+            font-size: var(--font-size-md);
+            transition: all var(--transition);
+            background: var(--surface);
+            color: var(--text);
+            font-family: var(--font-family);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44, 140, 153, 0.1);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%232d3748' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-md) center;
+            background-size: 16px;
+            padding-right: var(--space-2xl);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* APP SECTION MOBILE */
+        .app-section {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            padding: var(--space-xl) var(--space-lg);
+            border-radius: var(--radius-lg);
+            color: white;
             position: relative;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
+            overflow: hidden;
         }
-        
-        .timeline-step:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .timeline-step::before {
+
+        .app-section::before {
             content: '';
             position: absolute;
-            left: -3.3rem;
             top: 0;
-            width: 24px;
-            height: 24px;
-            background: #10b981;
-            border-radius: 50%;
-            border: 4px solid var(--surface);
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
         }
-        
-        .ai-prediction {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%);
-            padding: 3rem;
-            border-radius: var(--radius-lg);
-            margin: 4rem 0;
-            border-left: 5px solid #10b981;
-        }
-        
-        .prediction-meter {
-            width: 100%;
-            height: 20px;
-            background: var(--surface-light);
-            border-radius: 10px;
-            margin: 2rem 0;
-            overflow: hidden;
+
+        .app-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xl);
             position: relative;
+            z-index: 1;
         }
-        
-        .prediction-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #34d399);
-            border-radius: 10px;
-            transition: width 2s ease;
-            width: 0%;
+
+        .app-features {
+            list-style: none;
         }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+
+        .app-features li {
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            font-size: var(--font-size-md);
+            line-height: 1.5;
         }
-        
-        .feature-card {
+
+        .app-features i {
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+            color: var(--primary-light);
+        }
+
+        .app-preview {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mobile-preview {
             background: var(--surface);
-            padding: 2rem;
+            width: 280px;
+            height: 500px;
+            border-radius: 30px;
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            position: relative;
+            border: 1px solid var(--surface-muted);
+        }
+
+        .mobile-notch {
+            background: var(--surface-soft);
+            height: 20px;
+            width: 120px;
+            margin: 0 auto var(--space-md);
+            border-radius: 10px;
+        }
+
+        .appointment-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            color: white;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .appointment-card h4 {
+            margin-bottom: var(--space-sm);
+            font-size: var(--font-size-lg);
+        }
+
+        .app-button {
+            width: 100%;
+            padding: var(--space-md);
+            border: none;
             border-radius: var(--radius);
-            border: 1px solid var(--border);
-            transition: transform 0.3s ease;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-size: var(--font-size-md);
         }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: #10b981;
+
+        .app-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #10b981;
+
+        .app-button:active {
+            transform: translateY(0);
+        }
+
+        .app-button-primary {
+            background: var(--success);
+            color: white;
+        }
+
+        .app-button-secondary {
+            background: var(--surface-soft);
+            color: var(--text);
+            border: 1px solid var(--surface-muted);
+        }
+
+        .app-button-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* FOOTER MOBILE */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: var(--space-2xl) 0 var(--space-xl);
+            margin-top: var(--space-2xl);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-xl);
+        }
+
+        .footer-section h3 {
+            margin-bottom: var(--space-md);
+            font-size: var(--font-size-lg);
+            color: white;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--space-sm);
+            font-size: var(--font-size-sm);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: var(--font-size-sm);
+        }
+
+        /* UTILITY CLASSES */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 { margin-bottom: var(--space-xs); }
+        .mb-2 { margin-bottom: var(--space-sm); }
+        .mb-3 { margin-bottom: var(--space-md); }
+        .mb-4 { margin-bottom: var(--space-lg); }
+        .mb-5 { margin-bottom: var(--space-xl); }
+
+        .mt-1 { margin-top: var(--space-xs); }
+        .mt-2 { margin-top: var(--space-sm); }
+        .mt-3 { margin-top: var(--space-md); }
+        .mt-4 { margin-top: var(--space-lg); }
+        .mt-5 { margin-top: var(--space-xl); }
+
+        .px-1 { padding-left: var(--space-xs); padding-right: var(--space-xs); }
+        .px-2 { padding-left: var(--space-sm); padding-right: var(--space-sm); }
+        .px-3 { padding-left: var(--space-md); padding-right: var(--space-md); }
+        .px-4 { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+
+        /* LOADING STATES */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, var(--surface-soft) 25%, var(--surface-muted) 50%, var(--surface-soft) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: var(--radius);
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* MEDIA QUERIES - TABLET */
+        @media (min-width: 640px) {
+            html {
+                font-size: 15px;
+            }
+
+            .container {
+                --container-padding: var(--space-lg);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-lg);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-lg);
+            }
+
+            .charts-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-lg);
+            }
+
+            .hero h1 {
+                font-size: var(--font-size-4xl);
+            }
+
+            .subtitle {
+                font-size: var(--font-size-xl);
+            }
+
+            .btn {
+                width: auto;
+                margin: 0 var(--space-sm);
+            }
+
+            .hero-buttons {
+                display: flex;
+                justify-content: center;
+                gap: var(--space-md);
+            }
+
+            .agenda-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .app-content {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .app-content > div {
+                flex: 1;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .logo-subtitle {
+                display: block;
+            }
+        }
+
+        /* MEDIA QUERIES - DESKTOP */
+        @media (min-width: 1024px) {
+            html {
+                font-size: 16px;
+            }
+
+            .container {
+                --container-padding: var(--space-xl);
+            }
+
+            .mobile-menu-btn {
+                display: none;
+            }
+
+            .desktop-nav {
+                display: flex;
+                gap: var(--space-sm);
+            }
+
+            .desktop-nav a {
+                text-decoration: none;
+                color: var(--text);
+                font-weight: 500;
+                padding: var(--space-sm) var(--space-md);
+                border-radius: var(--radius);
+                transition: all var(--transition);
+                font-size: var(--font-size-sm);
+                display: flex;
+                align-items: center;
+                gap: var(--space-xs);
+            }
+
+            .desktop-nav a:hover {
+                background: var(--surface-muted);
+                color: var(--primary);
+            }
+
+            .desktop-nav a.active {
+                background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+                color: white;
+                box-shadow: var(--shadow);
+            }
+
+            .stats {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .charts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.4rem;
+                max-width: 800px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .modal-content {
+                margin-top: 0;
+            }
+
+            .time-slot {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .slot-actions {
+                flex-wrap: nowrap;
+            }
+        }
+
+        /* MEDIA QUERIES - LARGE DESKTOP */
+        @media (min-width: 1280px) {
+            .container {
+                --container-padding: var(--space-2xl);
+            }
+
+            .hero {
+                padding: 8rem 0 6rem;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            header,
+            footer,
+            .btn,
+            .mobile-menu-btn,
+            .action-btn,
+            .theme-toggle {
+                display: none !important;
+            }
+
+            .hero {
+                margin-top: 0;
+                padding: 2rem 0;
+                background: white !important;
+                color: black !important;
+                min-height: auto;
+            }
+
+            .highlight {
+                background: #f0f0f0 !important;
+                color: black !important;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .card,
+            .agenda-container,
+            .chart-container {
+                break-inside: avoid;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Loading -->
-    <div id="loadingScreen">
-        <div class="loading-logo-modern" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); -webkit-background-clip: text; background-clip: text;">
-            Saúde -85%
-        </div>
-        <div class="loading-orbit"></div>
-    </div>
-
     <!-- Header -->
-    <header class="header">
+    <header>
         <div class="container">
-            <div class="brand">
-                <a href="../index.html" class="logo">MakerAI Studio</a>
-                <span class="badge">Saúde Digital</span>
+            <div class="nav-container">
+                <a href="#hero" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <div>
+                        <div class="logo-text">ClinicAI</div>
+                        <div class="logo-subtitle">Sistema de Gestão Médica</div>
+                    </div>
+                </a>
+                
+                <nav class="desktop-nav">
+                    <a href="#hero" class="nav-link active" data-section="hero">
+                        <i class="fas fa-home"></i> <span class="nav-text">Home</span>
+                    </a>
+                    <a href="#dashboard" class="nav-link" data-section="dashboard">
+                        <i class="fas fa-chart-line"></i> <span class="nav-text">Dashboard</span>
+                    </a>
+                    <a href="#agenda" class="nav-link" data-section="agenda">
+                        <i class="fas fa-calendar-alt"></i> <span class="nav-text">Agenda</span>
+                    </a>
+                    <a href="#pacientes" class="nav-link" data-section="pacientes">
+                        <i class="fas fa-users"></i> <span class="nav-text">Pacientes</span>
+                    </a>
+                    <a href="#analytics" class="nav-link" data-section="analytics">
+                        <i class="fas fa-chart-bar"></i> <span class="nav-text">Analytics</span>
+                    </a>
+                    <a href="#app" class="nav-link" data-section="app">
+                        <i class="fas fa-mobile-alt"></i> <span class="nav-text">App</span>
+                    </a>
+                </nav>
+                
+                <!-- Botão de alternar tema -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
+            
+            <nav class="mobile-nav" id="mobileNav">
+                <a href="#hero" class="nav-link active" data-section="hero">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="#dashboard" class="nav-link" data-section="dashboard">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#agenda" class="nav-link" data-section="agenda">
+                    <i class="fas fa-calendar-alt"></i> Agenda
+                </a>
+                <a href="#pacientes" class="nav-link" data-section="pacientes">
+                    <i class="fas fa-users"></i> Pacientes
+                </a>
+                <a href="#analytics" class="nav-link" data-section="analytics">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </a>
+                <a href="#app" class="nav-link" data-section="app">
+                    <i class="fas fa-mobile-alt"></i> App
+                </a>
+            </nav>
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="health-hero">
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
         <div class="container">
-            <h1 style="color: white;">Clínica Médica com <span style="text-shadow: 0 0 30px rgba(255,255,255,0.7);">-85%</span> de Faltas</h1>
-            <div class="health-badge">Agendamento Inteligente +300% Eficiência</div>
-            <p class="subtitle" style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto;">
-                Sistema de agendamento com IA que prevê faltas e otimiza a agenda em tempo real
-            </p>
+            <h1>Reduza até <span class="highlight">60%</span> as Faltas na Sua Clínica</h1>
+            <p class="subtitle">Sistema inteligente com IA que prevê ausências, otimiza agendas e aumenta sua receita de forma profissional e segura.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="showModal('demoModal')">
+                    <i class="fas fa-play-circle"></i> Ver Demonstração
+                </button>
+                <button class="btn btn-secondary" onclick="scrollToSection('dashboard')">
+                    <i class="fas fa-chart-line"></i> Ver Dashboard
+                </button>
+            </div>
         </div>
     </section>
 
-    <!-- Conteúdo -->
-    <main class="page-content container">
-        <!-- Estatísticas -->
-        <section style="margin: 4rem 0;">
-            <h2 style="text-align: center; margin-bottom: 3rem;">Impacto na Gestão de Saúde</h2>
-            <div class="health-stats">
-                <div class="health-stat">
-                    <div class="feature-icon">📉</div>
-                    <div class="stat-number">-85%</div>
-                    <h4>Redução de Faltas</h4>
-                    <p>Com previsão de ausências</p>
+    <div class="container">
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-number">-60%</div>
+                <h3>Redução de Faltas</h3>
+                <p>Com predição de IA em tempo real</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">+120%</div>
+                <h3>Ocupação</h3>
+                <p>Mais consultas por dia</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">92%</div>
+                <h3>Precisão IA</h3>
+                <p>Na previsão de risco</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">+35%</div>
+                <h3>Receita</h3>
+                <p>Média em 6 meses</p>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section class="section" id="dashboard">
+            <h2 class="section-title">Dashboard Inteligente</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('hoje')">Hoje</button>
+                <button class="tab-btn" onclick="switchTab('semana')">Esta Semana</button>
+                <button class="tab-btn" onclick="switchTab('mes')">Este Mês</button>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Consultas Hoje</h3>
+                        <span class="stat-number" id="todayAppointmentsCount">12</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="mb-2"><span class="risk-high">●</span> <span id="highRiskCount">2</span> Alto Risco</p>
+                        <p class="mb-2"><span class="risk-medium">●</span> <span id="mediumRiskCount">3</span> Médio Risco</p>
+                        <p><span class="risk-low">●</span> <span id="lowRiskCount">7</span> Baixo Risco</p>
+                    </div>
                 </div>
-                <div class="health-stat">
-                    <div class="feature-icon">⚡</div>
-                    <div class="stat-number">+300%</div>
-                    <h4>Eficiência</h4>
-                    <p>Agenda otimizada</p>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Taxa de Comparecimento</h3>
+                        <span class="stat-number">88%</span>
+                    </div>
+                    <div class="card-chart">
+                        <canvas id="attendanceChart"></canvas>
+                    </div>
                 </div>
-                <div class="health-stat">
-                    <div class="feature-icon">😊</div>
-                    <div class="stat-number">95%</div>
-                    <h4>Satisfação</h4>
-                    <p>Pacientes satisfeitos</p>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Receita Diária</h3>
+                        <span class="stat-number">R$ 4,250</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="mb-2">Meta: R$ 5,000</p>
+                        <div style="background: var(--surface-muted); height: 10px; border-radius: 5px; margin: var(--space-md) 0;">
+                            <div style="background: linear-gradient(90deg, var(--success) 0%, var(--health-green) 100%); width: 85%; height: 100%; border-radius: 5px;"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="health-stat">
-                    <div class="feature-icon">💰</div>
-                    <div class="stat-number">12x</div>
-                    <h4>ROI</h4>
-                    <p>Em 6 meses</p>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Próximas Consultas</h3>
+                        <button class="btn btn-sm" onclick="showModal('addAppointmentModal')">
+                            <i class="fas fa-plus"></i> Nova
+                        </button>
+                    </div>
+                    <div id="upcomingAppointments">
+                        <!-- Preenchido por JavaScript -->
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Fluxo de Agendamento -->
-        <section class="scheduling-flow">
-            <h2 style="text-align: center; margin-bottom: 3rem; color: #10b981;">Fluxo de Agendamento Inteligente</h2>
-            <div class="flow-timeline">
-                <div class="timeline-step">
-                    <h4>1. Agendamento Online</h4>
-                    <p>Paciente agenda via app ou site, escolhendo especialidade e horário preferencial</p>
+        <!-- Agenda Section -->
+        <section class="section" id="agenda">
+            <h2 class="section-title">Agenda Inteligente</h2>
+            
+            <div class="agenda-container">
+                <div class="agenda-header">
+                    <div class="date-navigation">
+                        <button onclick="changeDate(-1)" aria-label="Dia anterior">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="current-date" id="currentDate"></div>
+                        <button onclick="changeDate(1)" aria-label="Próximo dia">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-sm" onclick="showModal('addAppointmentModal')">
+                        <i class="fas fa-plus"></i> Nova Consulta
+                    </button>
                 </div>
-                <div class="timeline-step">
-                    <h4>2. Análise Preditiva IA</h4>
-                    <p>Sistema analisa histórico e prevê probabilidade de ausência com 92% de precisão</p>
-                </div>
-                <div class="timeline-step">
-                    <h4>3. Confirmação Automática</h4>
-                    <p>Lembretes inteligentes via WhatsApp, SMS e email 24h antes</p>
-                </div>
-                <div class="timeline-step">
-                    <h4>4. Reagendamento Automático</h4>
-                    <p>Em caso de cancelamento, sistema realoca outros pacientes automaticamente</p>
+
+                <div class="time-slots" id="timeSlots">
+                    <!-- Preenchido por JavaScript -->
                 </div>
             </div>
         </section>
 
-        <!-- Predição IA -->
-        <section class="ai-prediction">
-            <h3>Predição de Faltas por IA</h3>
-            <p>Nosso sistema analisa múltiplos fatores para prever ausências:</p>
+        <!-- Pacientes Section -->
+        <section class="section" id="pacientes">
+            <h2 class="section-title">Gestão de Pacientes</h2>
             
-            <div style="margin: 2rem 0;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span>Histórico do Paciente</span>
-                    <span>92%</span>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Lista de Pacientes</h3>
+                    <button class="btn btn-sm" onclick="showModal('addPatientModal')">
+                        <i class="fas fa-user-plus"></i> Novo Paciente
+                    </button>
                 </div>
-                <div class="prediction-meter">
-                    <div class="prediction-fill" style="width: 92%"></div>
-                </div>
-            </div>
-            
-            <div style="margin: 2rem 0;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span>Fator Tempo/Trânsito</span>
-                    <span>85%</span>
-                </div>
-                <div class="prediction-meter">
-                    <div class="prediction-fill" style="width: 85%"></div>
-                </div>
-            </div>
-            
-            <div style="margin: 2rem 0;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span>Análise Meteorológica</span>
-                    <span>78%</span>
-                </div>
-                <div class="prediction-meter">
-                    <div class="prediction-fill" style="width: 78%"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Recursos -->
-        <section style="margin: 4rem 0;">
-            <h2 style="text-align: center; margin-bottom: 3rem;">Recursos do Sistema</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h4>IA Preditiva</h4>
-                    <p>Prevê faltas com base em múltiplos fatores analisados em tempo real</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h4>App Paciente</h4>
-                    <p>Agendamento, lembrete, prontuário digital e telemedicina</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍⚕️</div>
-                    <h4>Dashboard Médico</h4>
-                    <p>Visão completa da agenda, pacientes e histórico</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h4>Gestão Financeira</h4>
-                    <p>Controle de receitas, despesas e faturamento</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section style="text-align: center; margin: 4rem 0; padding: 3rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%); border-radius: var(--radius-lg);">
-            <h3>Pronto para transformar sua clínica?</h3>
-            <p style="margin: 1rem 0 2rem;">Reduza faltas, aumente eficiência e melhore a experiência dos pacientes</p>
-            <a href="../index.html#contato" class="btn primary large" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%); padding: 1.5rem 3rem;">
-                Agendar Demonstração →
-            </a>
-            <br>
-            <a href="../index.html#cases" class="back-button" style="margin-top: 2rem;">
-                ← Voltar para Cases
-            </a>
-        </section>
-    </main>
-
-    <script src="../script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hidden');
-            }, 1000);
-            
-            // Animar barras de predição
-            setTimeout(() => {
-                const bars = document.querySelectorAll('.prediction-fill');
-                bars.forEach(bar => {
-                    bar.style.width = bar.style.width;
-                });
-            }, 500);
-            
-            // Contar estatísticas
-            const stats = document.querySelectorAll('.stat-number');
-            stats.forEach(stat => {
-                const text = stat.textContent;
-                const value = parseInt(text.replace(/[^0-9]/g, ''));
-                const isNegative = text.includes('-');
-                let current = 0;
-                const increment = value / 30;
                 
-                const counter = setInterval(() => {
-                    current += increment;
-                    if (current >= value) {
-                        stat.textContent = text;
-                        clearInterval(counter);
-                    } else {
-                        const prefix = isNegative ? '-' : '+';
-                        const suffix = text.includes('%') ? '%' : 'x';
-                        stat.textContent = prefix + Math.floor(current) + suffix;
-                    }
-                }, 50);
+                <div class="table-responsive">
+                    <table class="patients-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Última Consulta</th>
+                                <th>Próxima Consulta</th>
+                                <th>Risco de Falta</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patientsTable">
+                            <!-- Preenchido por JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section class="section" id="analytics">
+            <h2 class="section-title">Analytics & Relatórios</h2>
+            
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3>Faltas vs Comparecimento</h3>
+                    <canvas id="attendanceAnalyticsChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Receita Mensal</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Distribuição por Especialidade</h3>
+                    <canvas id="specialtyChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Previsão de Faltas</h3>
+                    <canvas id="predictionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Section -->
+        <section class="section" id="app">
+            <h2 class="section-title">App do Paciente</h2>
+            
+            <div class="app-section">
+                <div class="app-content">
+                    <div>
+                        <h3>App Mobile Completo</h3>
+                        <ul class="app-features">
+                            <li><i class="fas fa-check-circle"></i> Agendamento online 24/7</li>
+                            <li><i class="fas fa-check-circle"></i> Lembretes automáticos</li>
+                            <li><i class="fas fa-check-circle"></i> Confirmação em 1 clique</li>
+                            <li><i class="fas fa-check-circle"></i> Teleconsulta integrada</li>
+                            <li><i class="fas fa-check-circle"></i> Acesso ao histórico</li>
+                        </ul>
+                        <button class="btn mt-4" style="background: white; color: var(--primary);">
+                            <i class="fas fa-mobile-alt"></i> Simular App
+                        </button>
+                    </div>
+                    <div class="app-preview">
+                        <div class="mobile-preview">
+                            <div class="mobile-notch"></div>
+                            <div class="appointment-card">
+                                <h4>Próxima Consulta</h4>
+                                <p class="mb-1">Dr. Silva</p>
+                                <p class="mb-1">Cardiologia</p>
+                                <p>Amanhã, 14:30</p>
+                            </div>
+                            <button class="app-button app-button-primary">
+                                Confirmar Presença
+                            </button>
+                            <button class="app-button app-button-secondary">
+                                Remarcar Consulta
+                            </button>
+                            <button class="app-button app-button-secondary">
+                                Ver Histórico
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section">
+            <div class="card text-center">
+                <h2 class="mb-3">Pronto para Transformar Sua Clínica?</h2>
+                <p class="mb-4">Teste gratuitamente por 14 dias. Sem compromisso, sem cartão de crédito.</p>
+                <button class="btn btn-primary" onclick="showModal('demoModal')">
+                    <i class="fas fa-calendar-check"></i> Agendar Demonstração
+                </button>
+                <p class="mt-4" style="color: var(--text-light);">
+                    <i class="fas fa-phone"></i> (11) 99999-9999 | 
+                    <i class="fas fa-envelope"></i> contato@clinicaiapp.com
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ClinicAI</h3>
+                    <p>Sistema inteligente de gestão clínica com IA preditiva para reduzir faltas e aumentar receita de forma profissional.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Recursos</h3>
+                    <p>Dashboard Inteligente</p>
+                    <p>Agenda com IA</p>
+                    <p>App do Paciente</p>
+                    <p>Analytics Avançado</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+                    <p><i class="fas fa-envelope"></i> contato@clinicaiapp.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> São Paulo, SP</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 ClinicAI. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="demoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Agendar Demonstração</h3>
+                <button class="close-btn" onclick="closeModal('demoModal')" aria-label="Fechar">&times;</button>
+            </div>
+            <form id="demoForm">
+                <div class="form-group">
+                    <label for="demoName">Nome Completo</label>
+                    <input type="text" id="demoName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="demoEmail">E-mail</label>
+                    <input type="email" id="demoEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="demoPhone">Telefone</label>
+                    <input type="tel" id="demoPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="demoClinic">Clínica</label>
+                    <input type="text" id="demoClinic" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="demoDate">Data Preferida</label>
+                    <input type="date" id="demoDate" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-calendar-check"></i> Agendar Demonstração
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="addPatientModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Novo Paciente</h3>
+                <button class="close-btn" onclick="closeModal('addPatientModal')" aria-label="Fechar">&times;</button>
+            </div>
+            <form id="patientForm">
+                <div class="form-group">
+                    <label for="patientName">Nome Completo</label>
+                    <input type="text" id="patientName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="patientBirth">Data de Nascimento</label>
+                    <input type="date" id="patientBirth" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="patientPhone">Telefone</label>
+                    <input type="tel" id="patientPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="patientEmail">E-mail</label>
+                    <input type="email" id="patientEmail" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="patientInsurance">Plano de Saúde</label>
+                    <input type="text" id="patientInsurance" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-save"></i> Salvar Paciente
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="addAppointmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Nova Consulta</h3>
+                <button class="close-btn" onclick="closeModal('addAppointmentModal')" aria-label="Fechar">&times;</button>
+            </div>
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label for="appointmentPatient">Paciente</label>
+                    <select class="form-control" id="appointmentPatient" required>
+                        <option value="">Selecione um paciente</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentDate">Data</label>
+                    <input type="date" class="form-control" id="appointmentDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentTime">Horário</label>
+                    <input type="time" class="form-control" id="appointmentTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentSpecialty">Especialidade</label>
+                    <select class="form-control" id="appointmentSpecialty" required>
+                        <option value="clínica_geral">Clínica Geral</option>
+                        <option value="cardiologia">Cardiologia</option>
+                        <option value="dermatologia">Dermatologia</option>
+                        <option value="pediatria">Pediatria</option>
+                        <option value="ortopedia">Ortopedia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentNotes">Observações</label>
+                    <textarea class="form-control" id="appointmentNotes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-calendar-plus"></i> Agendar Consulta
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Backend Simulation -->
+    <script>
+        // Gerenciamento de tema
+        function initTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Verificar tema salvo ou preferência do sistema
+            const savedTheme = localStorage.getItem('clinicai-theme');
+            const systemPrefersDark = prefersDarkScheme.matches;
+            
+            // Aplicar tema inicial
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.body.classList.add('dark-mode');
+            }
+            
+            // Alternar tema
+            themeToggle.addEventListener('click', () => {
+                const isDarkMode = document.body.classList.toggle('dark-mode');
+                
+                // Salvar preferência
+                localStorage.setItem('clinicai-theme', isDarkMode ? 'dark' : 'light');
+                
+                // Atualizar ícones
+                updateThemeIcon(isDarkMode);
             });
+            
+            // Ouvir mudanças no sistema
+            prefersDarkScheme.addEventListener('change', (e) => {
+                if (!localStorage.getItem('clinicai-theme')) {
+                    if (e.matches) {
+                        document.body.classList.add('dark-mode');
+                        updateThemeIcon(true);
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                        updateThemeIcon(false);
+                    }
+                }
+            });
+        }
+
+        function updateThemeIcon(isDarkMode) {
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (isDarkMode) {
+                themeToggle.setAttribute('aria-label', 'Alternar para modo claro');
+                themeToggle.title = 'Alternar para modo claro';
+            } else {
+                themeToggle.setAttribute('aria-label', 'Alternar para modo escuro');
+                themeToggle.title = 'Alternar para modo escuro';
+            }
+        }
+
+        // Banco de dados em memória com localStorage
+        let database = {
+            pacientes: JSON.parse(localStorage.getItem('pacientes')) || [
+                { 
+                    id: 1, 
+                    nome: "Maria Silva", 
+                    nascimento: "1985-05-15", 
+                    telefone: "(11) 98765-4321", 
+                    email: "maria@email.com", 
+                    plano: "Unimed", 
+                    risco: "baixo",
+                    historico: [],
+                    ultimaConsulta: "2024-03-15",
+                    proximaConsulta: "2024-03-22"
+                },
+                { 
+                    id: 2, 
+                    nome: "João Santos", 
+                    nascimento: "1978-11-22", 
+                    telefone: "(11) 97654-3210", 
+                    email: "joao@email.com", 
+                    plano: "Amil", 
+                    risco: "alto",
+                    historico: [],
+                    ultimaConsulta: "2024-03-10",
+                    proximaConsulta: "2024-03-25"
+                },
+                { 
+                    id: 3, 
+                    nome: "Ana Oliveira", 
+                    nascimento: "1992-03-08", 
+                    telefone: "(11) 96543-2109", 
+                    email: "ana@email.com", 
+                    plano: "Bradesco", 
+                    risco: "médio",
+                    historico: [],
+                    ultimaConsulta: "2024-03-12",
+                    proximaConsulta: "2024-03-28"
+                },
+                { 
+                    id: 4, 
+                    nome: "Carlos Pereira", 
+                    nascimento: "1980-07-30", 
+                    telefone: "(11) 95432-1098", 
+                    email: "carlos@email.com", 
+                    plano: "SulAmérica", 
+                    risco: "baixo",
+                    historico: [],
+                    ultimaConsulta: "2024-03-14",
+                    proximaConsulta: "2024-03-30"
+                }
+            ],
+            consultas: JSON.parse(localStorage.getItem('consultas')) || [
+                { 
+                    id: 1, 
+                    pacienteId: 1, 
+                    data: getToday(), 
+                    hora: "09:00", 
+                    especialidade: "Clínica Geral", 
+                    status: "agendado", 
+                    risco: "baixo",
+                    observacoes: "Consulta de rotina"
+                },
+                { 
+                    id: 2, 
+                    pacienteId: 2, 
+                    data: getToday(), 
+                    hora: "10:30", 
+                    especialidade: "Cardiologia", 
+                    status: "agendado", 
+                    risco: "alto",
+                    observacoes: "Acompanhamento"
+                },
+                { 
+                    id: 3, 
+                    pacienteId: 3, 
+                    data: getToday(), 
+                    hora: "14:00", 
+                    especialidade: "Dermatologia", 
+                    status: "agendado", 
+                    risco: "médio",
+                    observacoes: "Exame de rotina"
+                },
+                { 
+                    id: 4, 
+                    pacienteId: 4, 
+                    data: getToday(), 
+                    hora: "16:30", 
+                    especialidade: "Ortopedia", 
+                    status: "agendado", 
+                    risco: "baixo",
+                    observacoes: "Avaliação pós-cirúrgica"
+                }
+            ],
+            analytics: {
+                atendimentos: [85, 88, 92, 90, 88, 91, 95],
+                receita: [3200, 3500, 3800, 4200, 3900, 4500, 4800],
+                faltas: [15, 12, 8, 10, 12, 9, 5],
+                especialidades: [
+                    { nome: "Clínica Geral", valor: 35 },
+                    { nome: "Cardiologia", valor: 25 },
+                    { nome: "Dermatologia", valor: 15 },
+                    { nome: "Pediatria", valor: 15 },
+                    { nome: "Ortopedia", valor: 10 }
+                ]
+            }
+        };
+
+        // Data atual
+        let currentDate = new Date();
+        let charts = {}; // Para armazenar instâncias dos gráficos
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme(); // Inicializar tema
+            initNavigation();
+            initDashboard();
+            initAgenda();
+            initPacientes();
+            initAnalytics();
+            initModals();
+            updateDateDisplay();
+            loadPatientsSelect();
+            
+            // Configurar data mínima para formulários
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('appointmentDate').min = today;
+            document.getElementById('demoDate').min = today;
+            
+            // Inicializar gráficos responsivos
+            window.addEventListener('resize', handleResize);
+            
+            // Verificar se é a primeira visita
+            checkFirstVisit();
         });
+
+        // Funções de navegação
+        function initNavigation() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            // Menu mobile
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                mobileMenuBtn.setAttribute('aria-expanded', mobileNav.classList.contains('active'));
+                mobileMenuBtn.innerHTML = mobileNav.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            // Fechar menu ao clicar em um link
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Navegação suave
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    scrollToSection(targetId);
+                    
+                    // Atualizar links ativos
+                    document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Observador de interseção para highlights de seção
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        document.querySelectorAll('nav a').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            // Observar todas as seções
+            document.querySelectorAll('section[id]').forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const offsetTop = section.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+                
+                // Fechar menu mobile se aberto
+                const mobileNav = document.getElementById('mobileNav');
+                if (mobileNav.classList.contains('active')) {
+                    mobileNav.classList.remove('active');
+                    document.getElementById('mobileMenuBtn').innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+        }
+
+        // Dashboard
+        function initDashboard() {
+            updateUpcomingAppointments();
+            updateDashboardStats();
+            initAttendanceChart();
+        }
+
+        function switchTab(tab) {
+            // Atualizar botões de tab
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Atualizar conteúdo baseado na tab
+            updateDashboardByTab(tab);
+        }
+
+        function updateDashboardByTab(tab) {
+            let appointments = [];
+            let stats = { total: 0, high: 0, medium: 0, low: 0 };
+            
+            const today = new Date();
+            
+            switch(tab) {
+                case 'hoje':
+                    appointments = database.consultas.filter(c => c.data === formatDate(today));
+                    break;
+                case 'semana':
+                    const weekStart = new Date(today);
+                    weekStart.setDate(today.getDate() - today.getDay());
+                    const weekEnd = new Date(weekStart);
+                    weekEnd.setDate(weekStart.getDate() + 6);
+                    
+                    appointments = database.consultas.filter(c => {
+                        const appDate = new Date(c.data);
+                        return appDate >= weekStart && appDate <= weekEnd;
+                    });
+                    break;
+                case 'mes':
+                    const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+                    const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+                    
+                    appointments = database.consultas.filter(c => {
+                        const appDate = new Date(c.data);
+                        return appDate >= monthStart && appDate <= monthEnd;
+                    });
+                    break;
+            }
+            
+            // Calcular estatísticas
+            appointments.forEach(app => {
+                if (app.risco === 'alto') stats.high++;
+                else if (app.risco === 'médio') stats.medium++;
+                else stats.low++;
+            });
+            stats.total = appointments.length;
+            
+            // Atualizar UI
+            document.getElementById('todayAppointmentsCount').textContent = stats.total;
+            document.getElementById('highRiskCount').textContent = stats.high;
+            document.getElementById('mediumRiskCount').textContent = stats.medium;
+            document.getElementById('lowRiskCount').textContent = stats.low;
+            
+            // Atualizar próximas consultas
+            updateUpcomingAppointments(appointments.slice(0, 3));
+        }
+
+        function updateDashboardStats() {
+            const today = formatDate(new Date());
+            const todayAppointments = database.consultas.filter(c => c.data === today);
+            
+            let stats = { total: 0, high: 0, medium: 0, low: 0 };
+            
+            todayAppointments.forEach(app => {
+                if (app.risco === 'alto') stats.high++;
+                else if (app.risco === 'médio') stats.medium++;
+                else stats.low++;
+            });
+            stats.total = todayAppointments.length;
+            
+            document.getElementById('todayAppointmentsCount').textContent = stats.total;
+            document.getElementById('highRiskCount').textContent = stats.high;
+            document.getElementById('mediumRiskCount').textContent = stats.medium;
+            document.getElementById('lowRiskCount').textContent = stats.low;
+        }
+
+        function updateUpcomingAppointments(appointments = null) {
+            const container = document.getElementById('upcomingAppointments');
+            
+            if (!appointments) {
+                const today = formatDate(new Date());
+                appointments = database.consultas
+                    .filter(c => c.data === today)
+                    .sort((a, b) => a.hora.localeCompare(b.hora))
+                    .slice(0, 3);
+            }
+            
+            if (appointments.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: var(--space-md);">Nenhuma consulta agendada</p>';
+                return;
+            }
+            
+            let html = '';
+            appointments.forEach(appointment => {
+                const paciente = database.pacientes.find(p => p.id === appointment.pacienteId);
+                const riskClass = appointment.risco === 'alto' ? 'risk-high' : 
+                                appointment.risco === 'médio' ? 'risk-medium' : 'risk-low';
+                
+                html += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--space-sm) 0; border-bottom: 1px solid var(--surface-muted);">
+                        <div style="flex: 1; min-width: 0;">
+                            <div style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${appointment.hora}</div>
+                            <div style="font-size: var(--font-size-sm); color: var(--text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${paciente.nome.split(' ')[0]}</div>
+                        </div>
+                        <span class="${riskClass}" style="padding: var(--space-xs) var(--space-sm); flex-shrink: 0; font-size: var(--font-size-xs);">${appointment.risco.toUpperCase()}</span>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Agenda
+        function initAgenda() {
+            updateAgenda();
+        }
+
+        function changeDate(days) {
+            currentDate.setDate(currentDate.getDate() + days);
+            updateDateDisplay();
+            updateAgenda();
+        }
+
+        function updateDateDisplay() {
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById('currentDate').textContent = 
+                currentDate.toLocaleDateString('pt-BR', options);
+        }
+
+        function updateAgenda() {
+            const timeSlots = document.getElementById('timeSlots');
+            const dateStr = formatDate(currentDate);
+            
+            // Horários padrão do dia
+            const timeSlotsData = [
+                { time: "08:00", patientId: null, specialty: null },
+                { time: "09:00", patientId: 1, specialty: "Clínica Geral", risco: "baixo" },
+                { time: "10:30", patientId: 2, specialty: "Cardiologia", risco: "alto" },
+                { time: "12:00", patientId: null, specialty: null },
+                { time: "14:00", patientId: 3, specialty: "Dermatologia", risco: "médio" },
+                { time: "15:30", patientId: null, specialty: null },
+                { time: "16:30", patientId: 4, specialty: "Ortopedia", risco: "baixo" },
+                { time: "18:00", patientId: null, specialty: null }
+            ];
+            
+            // Filtrar consultas do dia selecionado
+            const dayAppointments = database.consultas.filter(c => c.data === dateStr);
+            
+            // Mapear consultas existentes para os horários
+            dayAppointments.forEach(app => {
+                const slotIndex = timeSlotsData.findIndex(s => s.time === app.hora);
+                if (slotIndex !== -1) {
+                    timeSlotsData[slotIndex] = {
+                        time: app.hora,
+                        patientId: app.pacienteId,
+                        specialty: app.especialidade,
+                        risco: app.risco,
+                        appointmentId: app.id
+                    };
+                }
+            });
+            
+            let html = '';
+            timeSlotsData.forEach(slot => {
+                if (slot.patientId) {
+                    const paciente = database.pacientes.find(p => p.id === slot.patientId);
+                    const riskClass = slot.risco === 'alto' ? 'high-risk' : 
+                                    slot.risco === 'médio' ? 'medium-risk' : '';
+                    
+                    html += `
+                        <div class="time-slot ${riskClass}">
+                            <div class="slot-info">
+                                <div class="slot-time">${slot.time}</div>
+                                <div class="slot-patient">${paciente.nome} • ${slot.specialty}</div>
+                            </div>
+                            <div class="slot-actions">
+                                <span class="slot-risk ${slot.risco === 'alto' ? 'risk-high' : slot.risco === 'médio' ? 'risk-medium' : 'risk-low'}">
+                                    Risco ${slot.risco}
+                                </span>
+                                <button onclick="sendReminder(${slot.patientId})" class="action-btn">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="btn-text">Lembrete</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="time-slot" style="justify-content: center; background: var(--surface-soft);">
+                            <div class="slot-info">
+                                <div class="slot-time">${slot.time}</div>
+                                <div class="slot-patient">Horário Disponível</div>
+                            </div>
+                            <button onclick="quickSchedule('${slot.time}')" class="action-btn" style="background: var(--success);">
+                                <i class="fas fa-plus"></i>
+                                <span class="btn-text">Agendar</span>
+                            </button>
+                        </div>
+                    `;
+                }
+            });
+            
+            timeSlots.innerHTML = html;
+        }
+
+        // Pacientes
+        function initPacientes() {
+            updatePatientsTable();
+        }
+
+        function updatePatientsTable() {
+            const table = document.getElementById('patientsTable');
+            
+            if (database.pacientes.length === 0) {
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: var(--space-xl); color: var(--text-light);">
+                            Nenhum paciente cadastrado. Clique em "Novo Paciente" para começar.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            let html = '';
+            database.pacientes.forEach(paciente => {
+                const risco = paciente.risco || "baixo";
+                const riskClass = risco === 'alto' ? 'risk-high' : 
+                                risco === 'médio' ? 'risk-medium' : 'risk-low';
+                
+                html += `
+                    <tr>
+                        <td>
+                            <div style="font-weight: 600;">${paciente.nome}</div>
+                            <div style="font-size: var(--font-size-xs); color: var(--text-light);">${paciente.email || 'Sem e-mail'}</div>
+                        </td>
+                        <td>${paciente.telefone}</td>
+                        <td>${formatDateToBR(paciente.ultimaConsulta)}</td>
+                        <td>${formatDateToBR(paciente.proximaConsulta)}</td>
+                        <td>
+                            <span class="${riskClass}">${risco.toUpperCase()}</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; gap: var(--space-xs);">
+                                <button onclick="editPatient(${paciente.id})" class="action-btn btn-sm" style="padding: var(--space-xs) var(--space-sm); background: var(--primary);">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="deletePatient(${paciente.id})" class="action-btn btn-sm" style="padding: var(--space-xs) var(--space-sm); background: var(--danger);">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button onclick="viewPatient(${paciente.id})" class="action-btn btn-sm" style="padding: var(--space-xs) var(--space-sm); background: var(--success);">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            table.innerHTML = html;
+        }
+
+        // Analytics
+        function initAnalytics() {
+            initAttendanceChart();
+            initAttendanceAnalyticsChart();
+            initRevenueChart();
+            initSpecialtyChart();
+            initPredictionChart();
+        }
+
+        function initAttendanceChart() {
+            const ctx = document.getElementById('attendanceChart').getContext('2d');
+            
+            if (charts.attendance) {
+                charts.attendance.destroy();
+            }
+            
+            charts.attendance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Comparecimento', 'Faltas'],
+                    datasets: [{
+                        data: [88, 12],
+                        backgroundColor: [getComputedStyle(document.documentElement).getPropertyValue('--success').trim(), 
+                                        getComputedStyle(document.documentElement).getPropertyValue('--danger').trim()],
+                        borderWidth: 0,
+                        borderColor: 'transparent'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    size: window.innerWidth < 640 ? 10 : 12
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+
+        function initAttendanceAnalyticsChart() {
+            const ctx = document.getElementById('attendanceAnalyticsChart').getContext('2d');
+            
+            if (charts.attendanceAnalytics) {
+                charts.attendanceAnalytics.destroy();
+            }
+            
+            charts.attendanceAnalytics = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                    datasets: [
+                        {
+                            label: 'Comparecimento',
+                            data: database.analytics.atendimentos,
+                            borderColor: getComputedStyle(document.documentElement).getPropertyValue('--success').trim(),
+                            backgroundColor: 'rgba(72, 187, 120, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Faltas',
+                            data: database.analytics.faltas,
+                            borderColor: getComputedStyle(document.documentElement).getPropertyValue('--danger').trim(),
+                            backgroundColor: 'rgba(229, 62, 62, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: window.innerWidth < 640 ? 10 : 12
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                font: {
+                                    size: window.innerWidth < 640 ? 9 : 11
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: window.innerWidth < 640 ? 9 : 11
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initRevenueChart() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            if (charts.revenue) {
+                charts.revenue.destroy();
+            }
+            
+            charts.revenue = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'Receita (R$)',
+                        data: database.analytics.receita,
+                        backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--primary').trim(),
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-dark').trim(),
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return 'R$ ' + value.toLocaleString();
+                                },
+                                font: {
+                                    size: window.innerWidth < 640 ? 9 : 11
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: window.innerWidth < 640 ? 9 : 11
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initSpecialtyChart() {
+            const ctx = document.getElementById('specialtyChart').getContext('2d');
+            
+            if (charts.specialty) {
+                charts.specialty.destroy();
+            }
+            
+            const colors = [
+                getComputedStyle(document.documentElement).getPropertyValue('--primary').trim(),
+                getComputedStyle(document.documentElement).getPropertyValue('--secondary').trim(),
+                getComputedStyle(document.documentElement).getPropertyValue('--warning').trim(),
+                getComputedStyle(document.documentElement).getPropertyValue('--success').trim(),
+                getComputedStyle(document.documentElement).getPropertyValue('--health-purple').trim()
+            ];
+            
+            charts.specialty = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: database.analytics.especialidades.map(e => e.nome),
+                    datasets: [{
+                        data: database.analytics.especialidades.map(e => e.valor),
+                        backgroundColor: colors,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                usePointStyle: true,
+                                font: {
+                                    size: window.innerWidth < 640 ? 10 : 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initPredictionChart() {
+            const ctx = document.getElementById('predictionChart').getContext('2d');
+            
+            if (charts.prediction) {
+                charts.prediction.destroy();
+            }
+            
+            charts.prediction = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Histórico', 'Dia da Semana', 'Horário', 'Plano', 'Idade', 'Distância'],
+                    datasets: [
+                        {
+                            label: 'Paciente de Alto Risco',
+                            data: [85, 70, 65, 90, 60, 75],
+                            backgroundColor: 'rgba(229, 62, 62, 0.2)',
+                            borderColor: getComputedStyle(document.documentElement).getPropertyValue('--danger').trim(),
+                            borderWidth: 2,
+                            pointBackgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--danger').trim()
+                        },
+                        {
+                            label: 'Paciente de Baixo Risco',
+                            data: [20, 30, 25, 15, 40, 20],
+                            backgroundColor: 'rgba(72, 187, 120, 0.2)',
+                            borderColor: getComputedStyle(document.documentElement).getPropertyValue('--success').trim(),
+                            borderWidth: 2,
+                            pointBackgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--success').trim()
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                display: false
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: window.innerWidth < 640 ? 9 : 11
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: window.innerWidth < 640 ? 10 : 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Modals
+        function initModals() {
+            // Demo Form
+            document.getElementById('demoForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simular envio
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    showNotification('Demonstração agendada com sucesso! Entraremos em contato em breve.', 'success');
+                    closeModal('demoModal');
+                    this.reset();
+                    
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            });
+
+            // Patient Form
+            document.getElementById('patientForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const newPatient = {
+                    id: database.pacientes.length > 0 ? Math.max(...database.pacientes.map(p => p.id)) + 1 : 1,
+                    nome: document.getElementById('patientName').value,
+                    nascimento: document.getElementById('patientBirth').value,
+                    telefone: document.getElementById('patientPhone').value,
+                    email: document.getElementById('patientEmail').value,
+                    plano: document.getElementById('patientInsurance').value,
+                    risco: calcularRiscoPaciente(),
+                    historico: [],
+                    ultimaConsulta: null,
+                    proximaConsulta: null
+                };
+                
+                database.pacientes.push(newPatient);
+                localStorage.setItem('pacientes', JSON.stringify(database.pacientes));
+                
+                updatePatientsTable();
+                loadPatientsSelect();
+                
+                showNotification('Paciente cadastrado com sucesso!', 'success');
+                closeModal('addPatientModal');
+                this.reset();
+            });
+
+            // Appointment Form
+            document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const pacienteId = parseInt(document.getElementById('appointmentPatient').value);
+                const paciente = database.pacientes.find(p => p.id === pacienteId);
+                
+                const newAppointment = {
+                    id: database.consultas.length > 0 ? Math.max(...database.consultas.map(c => c.id)) + 1 : 1,
+                    pacienteId: pacienteId,
+                    data: document.getElementById('appointmentDate').value,
+                    hora: document.getElementById('appointmentTime').value,
+                    especialidade: document.getElementById('appointmentSpecialty').value,
+                    status: 'agendado',
+                    risco: calcularRiscoConsulta(paciente),
+                    observacoes: document.getElementById('appointmentNotes').value
+                };
+                
+                // Atualizar próxima consulta do paciente
+                paciente.proximaConsulta = newAppointment.data;
+                
+                database.consultas.push(newAppointment);
+                localStorage.setItem('consultas', JSON.stringify(database.consultas));
+                localStorage.setItem('pacientes', JSON.stringify(database.pacientes));
+                
+                updateDashboardStats();
+                updateUpcomingAppointments();
+                updateAgenda();
+                updatePatientsTable();
+                
+                showNotification('Consulta agendada com sucesso!', 'success');
+                closeModal('addAppointmentModal');
+                this.reset();
+            });
+        }
+
+        function loadPatientsSelect() {
+            const select = document.getElementById('appointmentPatient');
+            select.innerHTML = '<option value="">Selecione um paciente</option>';
+            
+            database.pacientes.forEach(paciente => {
+                const option = document.createElement('option');
+                option.value = paciente.id;
+                option.textContent = `${paciente.nome} (${paciente.telefone})`;
+                select.appendChild(option);
+            });
+        }
+
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Focar no primeiro campo do formulário
+            setTimeout(() => {
+                const firstInput = document.querySelector(`#${modalId} .form-control`);
+                if (firstInput) firstInput.focus();
+            }, 100);
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Funções auxiliares
+        function getToday() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        function formatDateToBR(dateString) {
+            if (!dateString) return 'N/A';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        function calcularRiscoPaciente() {
+            const rand = Math.random();
+            if (rand > 0.7) return 'alto';
+            if (rand > 0.4) return 'médio';
+            return 'baixo';
+        }
+
+        function calcularRiscoConsulta(paciente) {
+            // Simulação simples de cálculo de risco
+            let riscoBase = paciente.risco === 'alto' ? 0.7 : paciente.risco === 'médio' ? 0.4 : 0.1;
+            
+            // Adicionar alguma variação aleatória
+            const variacao = (Math.random() - 0.5) * 0.3;
+            riscoBase = Math.max(0, Math.min(1, riscoBase + variacao));
+            
+            if (riscoBase > 0.6) return 'alto';
+            if (riscoBase > 0.3) return 'médio';
+            return 'baixo';
+        }
+
+        function sendReminder(patientId) {
+            const paciente = database.pacientes.find(p => p.id === patientId);
+            showNotification(`Lembrete enviado para ${paciente.nome}`, 'info');
+            
+            // Simular envio de SMS/WhatsApp
+            console.log(`Enviando lembrete para: ${paciente.telefone}`);
+        }
+
+        function editPatient(patientId) {
+            const paciente = database.pacientes.find(p => p.id === patientId);
+            
+            // Preencher modal de edição (simplificado)
+            document.getElementById('patientName').value = paciente.nome;
+            document.getElementById('patientBirth').value = paciente.nascimento;
+            document.getElementById('patientPhone').value = paciente.telefone;
+            document.getElementById('patientEmail').value = paciente.email;
+            document.getElementById('patientInsurance').value = paciente.plano;
+            
+            showModal('addPatientModal');
+            
+            // Alterar comportamento do formulário para edição
+            const form = document.getElementById('patientForm');
+            const originalSubmit = form.onsubmit;
+            
+            form.onsubmit = function(e) {
+                e.preventDefault();
+                
+                // Atualizar paciente
+                paciente.nome = document.getElementById('patientName').value;
+                paciente.nascimento = document.getElementById('patientBirth').value;
+                paciente.telefone = document.getElementById('patientPhone').value;
+                paciente.email = document.getElementById('patientEmail').value;
+                paciente.plano = document.getElementById('patientInsurance').value;
+                
+                localStorage.setItem('pacientes', JSON.stringify(database.pacientes));
+                
+                updatePatientsTable();
+                loadPatientsSelect();
+                
+                showNotification('Paciente atualizado com sucesso!', 'success');
+                closeModal('addPatientModal');
+                form.reset();
+                
+                // Restaurar comportamento original
+                form.onsubmit = originalSubmit;
+            };
+        }
+
+        function viewPatient(patientId) {
+            const paciente = database.pacientes.find(p => p.id === patientId);
+            alert(`Visualizando paciente:\n\nNome: ${paciente.nome}\nTelefone: ${paciente.telefone}\nE-mail: ${paciente.email}\nPlano: ${paciente.plano}\nRisco: ${paciente.risco}`);
+        }
+
+        function deletePatient(patientId) {
+            if (confirm('Tem certeza que deseja excluir este paciente?')) {
+                database.pacientes = database.pacientes.filter(p => p.id !== patientId);
+                localStorage.setItem('pacientes', JSON.stringify(database.pacientes));
+                
+                updatePatientsTable();
+                loadPatientsSelect();
+                
+                showNotification('Paciente excluído com sucesso!', 'success');
+            }
+        }
+
+        function quickSchedule(time) {
+            // Preencher modal de agendamento com horário pré-selecionado
+            document.getElementById('appointmentTime').value = time;
+            document.getElementById('appointmentDate').value = formatDate(currentDate);
+            
+            showModal('addAppointmentModal');
+        }
+
+        function showNotification(message, type = 'info') {
+            // Criar elemento de notificação
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Estilos da notificação
+            const bgColor = type === 'success' ? 'var(--success)' : 
+                           type === 'error' ? 'var(--danger)' : 
+                           type === 'warning' ? 'var(--warning)' : 'var(--info)';
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: ${bgColor};
+                color: white;
+                padding: var(--space-md) var(--space-lg);
+                border-radius: var(--radius);
+                box-shadow: var(--shadow-lg);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: var(--space-md);
+                z-index: 3000;
+                max-width: 400px;
+                animation: slideIn 0.3s ease-out;
+                font-size: var(--font-size-sm);
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remover automaticamente após 5 segundos
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }
+            }, 5000);
+            
+            // Adicionar keyframes de animação
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        function checkFirstVisit() {
+            const firstVisit = localStorage.getItem('clinicai_first_visit');
+            if (!firstVisit) {
+                // Primeira visita - mostrar tour rápido
+                setTimeout(() => {
+                    showNotification('Bem-vindo ao ClinicAI! Explore nosso sistema de gestão médica.', 'info');
+                    localStorage.setItem('clinicai_first_visit', 'true');
+                }, 2000);
+            }
+        }
+
+        // Redimensionamento responsivo
+        function handleResize() {
+            // Re-inicializar gráficos com novos tamanhos
+            Object.values(charts).forEach(chart => {
+                if (chart) chart.resize();
+            });
+        }
+
+        // Fechar modais ao clicar fora
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Fechar modais com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+
+        // Atualizar dados simulados periodicamente
+        setInterval(() => {
+            // Simular atualização de dados em tempo real
+            const now = new Date();
+            if (now.getMinutes() % 5 === 0) { // A cada 5 minutos
+                // Atualizar alguns dados aleatoriamente
+                database.analytics.atendimentos[6] = Math.min(100, Math.max(0, 
+                    database.analytics.atendimentos[6] + (Math.random() > 0.5 ? 1 : -1)));
+                
+                // Atualizar gráficos
+                if (charts.attendanceAnalytics) {
+                    charts.attendanceAnalytics.data.datasets[0].data = database.analytics.atendimentos;
+                    charts.attendanceAnalytics.update('none');
+                }
+            }
+        }, 60000); // Verificar a cada minuto
     </script>
 </body>
 </html>
