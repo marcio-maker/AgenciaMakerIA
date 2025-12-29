@@ -1,55 +1,2113 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DataPulse Analytics - MakerAI Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --primary: #7c3aed; --bg: #030712; --text: #f1f5f9; --text-secondary: #94a3b8; --border: #334155; --radius: 16px; --radius-lg: 24px; --shadow: 0 20px 40px rgba(0,0,0,0.3); --gradient-primary: linear-gradient(135deg, #7c3aed, #9333ea); }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); }
-    .container { max-width:1400px; margin:0 auto; padding:0 2rem; }
-    .header { position:fixed; top:0; left:0; right:0; background:rgba(15,23,42,0.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:1rem 0; z-index:1000; }
-    .header-container { display:flex; justify-content:space-between; align-items:center; }
-    .logo { font-size:1.8rem; font-weight:800; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .btn { padding:0.8rem 1.8rem; border-radius:var(--radius); text-decoration:none; font-weight:600; transition:all 0.4s; display:inline-block; }
-    .btn.secondary { background:transparent; border:1px solid var(--border); color:var(--text); }
-    .btn.primary { background:var(--gradient-primary); color:white; }
-    .section { padding:8rem 0; text-align:center; }
-    h1 { font-size:3.5rem; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .subtitle { font-size:1.3rem; color:var(--text-secondary); max-width:800px; margin:0 auto 3rem; }
-    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:2rem; margin-top:3rem; }
-    .gallery img { width:100%; border-radius:var(--radius-lg); box-shadow:var(--shadow); }
-    footer { text-align:center; padding:3rem 0; color:var(--text-secondary); border-top:1px solid var(--border); }
-    @media (max-width:768px) { h1 { font-size:2.5rem; } .gallery { grid-template-columns:1fr; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProDash SaaS - Dashboards e Sistemas Profissionais</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        body.dark {
+            background: #121212;
+            color: #e0e0e0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #ff9e00;
+            --info: #7209b7;
+            --radius: 12px;
+            --shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark {
+            --shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ============ NOVO HERO COM DASHBOARD 3D ============ */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        #three-canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 5%;
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-content .btn {
+            pointer-events: all;
+        }
+
+        #hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(90deg, #4cc9f0, #4361ee, #7209b7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2.5rem 0;
+            pointer-events: none;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            min-width: 180px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+            pointer-events: all;
+        }
+
+        .dashboard-legend {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            max-width: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: all;
+            z-index: 11;
+        }
+
+        .legend-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.4rem;
+            }
+
+            #hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-stats {
+                gap: 1rem;
+            }
+
+            .stat-item {
+                min-width: 140px;
+                padding: 1.2rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .dashboard-legend {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 2rem;
+                max-width: 100%;
+            }
+        }
+
+        /* ============ FIM NOVO HERO ============ */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 0.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        body.dark header {
+            background: rgba(18, 18, 18, 0.95);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-desktop {
+            display: none;
+            gap: 2rem;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .nav-desktop a:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--primary);
+            transition: 0.3s;
+        }
+
+        .hamburger:hover {
+            transform: rotate(90deg);
+        }
+
+        .nav-mobile {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            flex-direction: column;
+            border-radius: 0 0 var(--radius) var(--radius);
+            overflow: hidden;
+        }
+
+        body.dark .nav-mobile {
+            background: #1e1e1e;
+        }
+
+        .nav-mobile.active {
+            display: flex;
+            animation: slideDown 0.3s ease;
+        }
+
+        .nav-mobile a {
+            padding: 1rem 5%;
+            border-bottom: 1px solid #eee;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .nav-mobile a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        body.dark .nav-mobile a {
+            border-color: #333;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #darkToggle {
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: 0.3s;
+        }
+
+        #darkToggle:hover {
+            transform: scale(1.2);
+        }
+
+        .btn {
+            padding: 0.5rem 1.2rem;
+            /* Original era 0.9rem 2rem */
+            font-size: 0.9rem;
+            /* Original era 1.1rem */
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        section {
+            padding: 6rem 5%;
+        }
+
+        h2 {
+            font-size: 2.4rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        body.dark .card {
+            background: #1e1e1e;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin: 2.5rem 0;
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.2);
+        }
+
+        body.dark .kpi-card {
+            background: #1e1e1e;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 1.8rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .chart-container canvas {
+            border-radius: 10px;
+        }
+
+        body.dark .chart-container {
+            background: #1e1e1e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+        }
+
+        body.dark table {
+            background: #1e1e1e;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        body.dark tr:nth-child(even) {
+            background: #252525;
+        }
+
+        #salesTable tr:hover {
+            background: var(--primary) !important;
+            color: white;
+        }
+
+        .assistant-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 3rem auto;
+            max-width: 900px;
+        }
+
+        body.dark .assistant-box {
+            background: #1e1e1e;
+        }
+
+        #iaResponse {
+            min-height: 150px;
+            background: #f5f7fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            white-space: pre-wrap;
+            border-left: 4px solid var(--primary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        body.dark #iaResponse {
+            background: #2d2d2d;
+            color: #e0e0e0;
+        }
+
+        .api-key-box {
+            background: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--primary);
+            font-size: 0.98rem;
+        }
+
+        body.dark .api-key-box {
+            background: #1e293b;
+            color: #bbd0ff;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        input,
+        textarea {
+            padding: 1.1rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: modalShow 0.4s ease;
+        }
+
+        body.dark .modal-content {
+            background: #1e1e1e;
+        }
+
+        .close {
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            transition: 0.3s;
+        }
+
+        .close:hover {
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+
+        footer {
+            background: #0a0a0a;
+            color: #aaa;
+            text-align: center;
+            padding: 3rem 5%;
+            font-size: 0.95rem;
+        }
+
+        body.dark footer {
+            background: #000;
+        }
+
+        /* ============ DASHBOARD STYLES ============ */
+        .dashboard-root {
+            --primary: #4361ee;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #333;
+            --success: #2ecc71;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .dashboard-root.dark {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .dashboard-root * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-root {
+            background: var(--bg);
+            color: var(--text);
+            transition: 0.3s;
+            overflow-x: hidden;
+            height: 100%;
+        }
+
+        /* Layout */
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .dashboard-aside {
+            width: 260px;
+            background: var(--card);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1rem;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        .dashboard-main {
+            flex: 1;
+            margin-left: 260px;
+            padding: 2rem;
+            max-width: calc(100vw - 260px);
+            background: var(--bg);
+        }
+
+        .dashboard-nav-link {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.5rem;
+            transition: 0.2s;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .dashboard-nav-link:hover,
+        .dashboard-nav-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Cards & Components */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .dashboard-progress-bar {
+            background: #eee;
+            height: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        #progressFill {
+            background: var(--success);
+            height: 100%;
+            width: 0%;
+            transition: 1s ease-in-out;
+        }
+
+        .dashboard-input,
+        .dashboard-select {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: var(--bg);
+            color: var(--text);
+            margin-top: 5px;
+            outline: none;
+        }
+
+        .dashboard-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .dashboard-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .dashboard-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .dashboard-btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .dashboard-section {
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .dashboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: var(--card);
+        }
+
+        .dashboard-table th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 2px solid var(--primary);
+            background: var(--card);
+        }
+
+        .dashboard-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            background: var(--card);
+        }
+
+        .dashboard-form-group {
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-aside {
+                width: 70px;
+            }
+
+            .dashboard-aside span,
+            .dashboard-aside h2 {
+                display: none;
+            }
+
+            .dashboard-main {
+                margin-left: 70px;
+                max-width: calc(100vw - 70px);
+            }
+        }
+
+        /* ============ DASHBOARD EMBED CONTAINER ============ */
+        #dashboard-full {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            z-index: 2000;
+            display: none;
+            overflow: auto;
+        }
+
+        #dashboard-full.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--card);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2001;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-header h2 {
+            margin: 0;
+            color: var(--primary);
+            font-size: 1.5rem;
+            text-align: left;
+        }
+
+        .dashboard-container {
+            margin-top: 80px;
+            padding: 0;
+            height: calc(100% - 80px);
+            overflow-y: auto;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalShow {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #hero h1 {
+                font-size: 4rem;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .charts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            header {
+                padding: 0.7rem 8%;
+            }
+
+            .hamburger {
+                display: none;
+            }
+
+            .nav-desktop {
+                display: flex;
+            }
+
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            #hero h1 {
+                font-size: 4.2rem;
+            }
+
+            section {
+                padding: 7rem 8%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="container header-container">
-      <a href="index.html" class="logo">MakerAI Studio</a>
-      <a href="../index.html" class="btn secondary">← Voltar</a>
-    </div>
-  </header>
+    <header>
+        <div class="logo">ProDash <span style="color:#4cc9f0;">SaaS</span></div>
+        <nav class="nav-desktop">
+            <a href="#hero">Início</a>
+            <a href="#recursos">Recursos</a>
+            <a href="#sistema">Arquitetura</a>
+            <a href="#simulador">Demo Interativa</a>
+            <a href="#exemplos-dashboard">Dashboards na Prática</a>
+            <a href="#contato">Contato</a>
+            <button class="btn btn-success" onclick="openModal('orcamentoModal')">Orçamento</button>
+        </nav>
+        <div class="user-area">
+            <span id="userGreeting">Visitante</span>
+            <i class="fas fa-moon" id="darkToggle"></i>
+            <button class="btn btn-primary" onclick="openModal('loginModal')">Login Demo</button>
+            <button class="btn btn-success" onclick="openFullDashboard()" style="background: #2ecc71;">
+                <i class="fas fa-th-large"></i> Dashboard Completo
+            </button>
+            <i class="fas fa-bars hamburger" id="hamburger"></i>
+        </div>
+        <nav class="nav-mobile" id="navMobile">
+            <a href="#hero" onclick="toggleMenu()">Início</a>
+            <a href="#recursos" onclick="toggleMenu()">Recursos</a>
+            <a href="#sistema" onclick="toggleMenu()">Arquitetura</a>
+            <a href="#simulador" onclick="toggleMenu()">Demo Interativa</a>
+            <a href="#exemplos-dashboard" onclick="toggleMenu()">Dashboards na Prática</a>
+            <a href="#contato" onclick="toggleMenu()">Contato</a>
+            <a href="#" onclick="openModal('orcamentoModal'); toggleMenu()">Orçamento</a>
+            <a href="#" onclick="openFullDashboard(); toggleMenu()">
+                <i class="fas fa-th-large"></i> Dashboard Completo
+            </a>
+        </nav>
+    </header>
 
-  <section class="section">
-    <div class="container">
-      <h1>DataPulse Analytics</h1>
-      <p class="subtitle">Dashboard de análise em tempo real com gráficos avançados e alertas inteligentes.</p>
-      <div class="gallery">
-        <img src="https://thingsboard.io/blog/wp-content/uploads/2024/11/img-3.webp" alt="Dashboard DataPulse" loading="lazy">
-        <img src="https://thumbs.dreamstime.com/b/analytics-dashboard-dark-theme-data-visualization-ui-ux-vector-template-business-analysis-charts-graphs-diagrams-412439223.jpg" alt="Gráficos avançados" loading="lazy">
-      </div>
-      <div class="features">
-        <h2>Tecnologias</h2>
-        <p>React • Chart.js • Socket.io • PostgreSQL • Redis</p>
-        <p>Atualização em tempo real, drill-down, exportação PDF.</p>
-        <a href="../index.html#contato" class="btn primary" style="margin-top:2rem;">Desenvolver meu dashboard</a>
-      </div>
-    </div>
-  </section>
+    <!-- ============ HERO SECTION COM PIZZA DE DASHBOARD 3D ============ -->
+    <section id="hero">
+        <div id="three-canvas-container"></div>
 
-  <footer><p>© 2025 MakerAI Studio</p></footer>
+        <div class="hero-content">
+            <h1>Dashboard Analytics em Tempo Real</h1>
+            <p>Visualização 3D de métricas empresariais com interação completa</p>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="heroReceita">+32%</span>
+                    <span class="stat-label">Crescimento Mensal</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="heroClientes">2.5K</span>
+                    <span class="stat-label">Clientes Ativos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="heroUptime">99.9%</span>
+                    <span class="stat-label">Uptime Sistema</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="heroPerformance">4.8★</span>
+                    <span class="stat-label">Satisfação</span>
+                </div>
+            </div>
+
+            <div class="hero-cta">
+                <button class="btn btn-success" style="font-size:1.3rem;padding:1.2rem 3rem;"
+                    onclick="openFullDashboard()">
+                    <i class="fas fa-th-large"></i> Dashboard Completo
+                </button>
+                <button class="btn btn-primary" style="font-size:1.1rem;padding:1rem 2.5rem;"
+                    onclick="document.getElementById('simulador').scrollIntoView({behavior:'smooth'})">
+                    <i class="fas fa-chart-line"></i> Ver Métricas Detalhadas
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-legend">
+            <div class="legend-title">Legenda do Dashboard 3D</div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4361ee;"></div>
+                <span>Vendas Diretas (42%)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4cc9f0;"></div>
+                <span>Assinaturas (28%)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #7209b7;"></div>
+                <span>Consultoria (15%)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #f72585;"></div>
+                <span>Produtos (10%)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ff9e00;"></div>
+                <span>Serviços (5%)</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="recursos">
+        <h2>Recursos Profissionais</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Multi-Tenant Isolado</h3>
+                <p>Cada empresa com dados totalmente separados e seguros</p>
+            </div>
+            <div class="card">
+                <h3>APIs Modernas</h3>
+                <p>REST + GraphQL com documentação automática (Swagger)</p>
+            </div>
+            <div class="card">
+                <h3>Tempo Real</h3>
+                <p>Atualizações instantâneas via WebSockets e Server-Sent Events</p>
+            </div>
+            <div class="card">
+                <h3>IA Integrada</h3>
+                <p>Assistente empresarial com Groq, OpenAI ou modelos locais</p>
+            </div>
+            <div class="card">
+                <h3>Exportação Completa</h3>
+                <p>PDF, Excel, CSV e relatórios agendados por e-mail</p>
+            </div>
+            <div class="card">
+                <h3>Segurança Enterprise</h3>
+                <p>OAuth2, JWT, criptografia em trânsito e em repouso</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="sistema" style="background:#f0f4f8;">
+        <h2>Arquitetura do Sistema</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Backend</h3>
+                <p>Node.js ou FastAPI (Python)<br>Docker + Kubernetes<br>Auto-scaling na AWS/Azure/GCP</p>
+            </div>
+            <div class="card">
+                <h3>Banco de Dados</h3>
+                <p>PostgreSQL com Row Level Security<br>Isolamento total por tenant<br>Backups automáticos diários</p>
+            </div>
+            <div class="card">
+                <h3>Infraestrutura</h3>
+                <p>CDN global (Cloudflare)<br>Cache Redis<br>Monitoramento 24/7 com Grafana</p>
+            </div>
+            <div class="card">
+                <h3>Segurança</h3>
+                <p>HTTPS obrigatório + WAF<br>Rate limiting avançado<br>Logs e auditoria completa</p>
+            </div>
+            <div class="card">
+                <h3>Integrações</h3>
+                <p>Stripe, Mercado Pago, Pix<br>E-mail transacional (Resend/SendGrid)<br>Webhooks personalizados</p>
+            </div>
+            <div class="card">
+                <h3>Suporte</h3>
+                <p>SLA 99.9% de uptime<br>Atualizações mensais gratuitas<br>Equipe dedicada via Slack/WhatsApp</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="simulador">
+        <h2>Demo Interativa – Teste Agora Como Seria Seu Painel de Controle</h2>
+        <p style="text-align:center;max-width:800px;margin:0 auto 2rem;font-size:1.1rem;">
+            Faça login com <strong>admin / demo123</strong> para ver dados reais da Acme Corp (multi-tenant).
+            Experimente os gráficos interativos, filtro, exportação e assistente IA empresarial.
+        </p>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-value" id="kpiReceita">R$ 0</div>
+                <p>Receita Anual</p>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value" id="kpiClientes">0</div>
+                <p>Clientes Ativos</p>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value" id="kpiCrescimento">0%</div>
+                <p>Crescimento</p>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value" id="kpiChurn">0%</div>
+                <p>Churn Rate</p>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container"><canvas id="lineChart"></canvas></div>
+            <div class="chart-container"><canvas id="barChart"></canvas></div>
+            <div class="chart-container"><canvas id="polarChart"></canvas></div>
+            <div class="chart-container"><canvas id="doughnutChart"></canvas></div>
+        </div>
+
+        <h3 style="text-align:center;margin:3rem 0 1.5rem;">Últimas Vendas</h3>
+        <input type="text" id="tableFilter" placeholder="Filtrar por cliente ou produto..."
+            style="padding:1.1rem;width:100%;max-width:500px;margin:0 auto 1.5rem;display:block;border-radius:10px;border:1px solid #ccc;">
+        <table id="salesTable">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Cliente</th>
+                    <th>Produto</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div style="text-align:center;margin:2rem 0;">
+            <button class="btn btn-success" onclick="exportCSV()">Exportar para CSV</button>
+        </div>
+
+        <div class="assistant-box">
+            <h3>Assistente IA Empresarial</h3>
+            <div class="api-key-box">
+                <strong>Quer respostas mais inteligentes e naturais?</strong><br>
+                Cole uma chave gratuita da <a href="https://console.groq.com/keys" target="_blank"
+                    style="color:var(--primary);font-weight:bold;text-decoration:underline;">Groq (recomendado - ultra
+                    rápido)</a> ou OpenAI.<br>
+                <input type="password" id="apiKeyInput" placeholder="Sua chave API (opcional)"
+                    style="width:100%;margin:1rem 0;padding:1rem;border-radius:8px;border:1px solid #999;">
+                <button class="btn btn-primary" onclick="saveApiKey()" style="width:100%;">Salvar Chave</button>
+                <small style="display:block;margin-top:0.8rem;opacity:0.8;">A chave fica salva apenas no seu navegador
+                    (localStorage).</small>
+            </div>
+            <textarea id="iaInput"
+                placeholder="Ex: Qual a previsão de receita para 2026? Como reduzir churn? Estratégia de crescimento?"
+                rows="4"></textarea>
+            <button class="btn btn-primary" onclick="askIA()"
+                style="width:100%;margin-top:1rem;padding:1rem;font-size:1.1rem;">Enviar Pergunta</button>
+            <div id="iaResponse">Resposta aparecerá aqui...</div>
+        </div>
+    </section>
+
+    <section id="exemplos-dashboard" style="background:#f0f4f8;">
+        <h2>Como Ficaria Seu Dashboard Completo na Prática</h2>
+        <p style="text-align:center;max-width:900px;margin:0 auto 4rem;opacity:0.9;font-size:1.1rem;">
+            A demo acima é um resumo interativo. Na entrega real, seu sistema terá um painel administrativo completo:
+            sidebar de navegação, múltiplas páginas, modo dark/light, gráficos avançados e tudo personalizado com sua
+            marca.
+        </p>
+
+        <div class="grid">
+            <div class="card"><img src="https://www.bootstrapdash.com/blog/wp-content/uploads/2025/01/staradmin.jpg"
+                    alt="Dashboard SaaS premium com sidebar e gráficos" loading="lazy"></div>
+            <div class="card"><img
+                    src="https://s3-alpha.figma.com/hub/file/2238315261354170167/cee69862-77e7-4a7c-b848-955bc78782a3-cover.png"
+                    alt="Dark admin dashboard profissional" loading="lazy"></div>
+            <div class="card"><img src="https://www.bootstrapdash.com/blog/wp-content/uploads/2025/01/breeze.jpg"
+                    alt="Dashboard clean e moderno 2025" loading="lazy"></div>
+            <div class="card"><img
+                    src="https://cdn.sanity.io/images/hkc8ojqt/production/9acbde48b49cdec2c85ad41567a673ee70f25aa6-1920x1008.jpg"
+                    alt="Analytics dashboard enterprise" loading="lazy"></div>
+            <div class="card"><img
+                    src="https://flatlogic.com/blog/wp-content/uploads/2019/08/Screen-Shot-2019-08-23-at-4.18.44-PM-1024x590.png"
+                    alt="Dark themed admin template" loading="lazy"></div>
+            <div class="card"><img src="https://www.bootstrapdash.com/blog/wp-content/uploads/2025/01/staradmin2.jpg"
+                    alt="Star Admin 2 - Interface SaaS completa" loading="lazy"></div>
+            <div class="card"><img src="https://www.bootstrapdash.com/blog/wp-content/uploads/2025/01/purple-2.jpg"
+                    alt="Purple admin dashboard premium" loading="lazy"></div>
+            <div class="card"><img src="https://www.bootstrapdash.com/blog/wp-content/uploads/2025/01/pollux-1.jpg"
+                    alt="Pollux admin com múltiplos widgets" loading="lazy"></div>
+            <div class="card"><img
+                    src="https://assets.justinmind.com/wp-content/uploads/2020/02/dashboard-design-example-fireart-studio.png"
+                    alt="Exemplo real de dashboard analytics" loading="lazy"></div>
+            <div class="card"><img src="https://qrvey.com/wp-content/uploads/2023/11/dashboard-darktheme-1024x788.png"
+                    alt="White label analytics dark mode" loading="lazy"></div>
+        </div>
+
+        <div style="text-align:center;margin:5rem 0 2rem;">
+            <p style="font-size:1.3rem;margin-bottom:2rem;font-weight:600;">
+                Tudo isso com seu logo, cores da marca, funcionalidades exclusivas e deploy na nuvem em até 30 dias.
+            </p>
+            <button class="btn btn-success" style="font-size:1.3rem;padding:1.2rem 3.5rem;"
+                onclick="openModal('orcamentoModal')">
+                Quero Meu Sistema Personalizado – Orçamento Gratuito
+            </button>
+            <button class="btn btn-primary" style="font-size:1.3rem;padding:1.2rem 3.5rem;margin-top:1.5rem;"
+                onclick="openFullDashboard()">
+                <i class="fas fa-th-large"></i> Experimentar Dashboard Completo Agora
+            </button>
+        </div>
+    </section>
+
+    <section id="contato" style="background:#f0f4f8;">
+        <h2>Pronto para Ter Seu Próprio Sistema SaaS?</h2>
+        <p style="text-align:center;max-width:700px;margin:0 auto 3rem;opacity:0.9;">
+            Preenchimento leva menos de 2 minutos. Receba um orçamento personalizado e proposta técnica em até 24h.
+        </p>
+        <form>
+            <input type="text" placeholder="Nome completo" required>
+            <input type="email" placeholder="E-mail corporativo" required>
+            <input type="tel" placeholder="Telefone/WhatsApp (com DDD)">
+            <textarea placeholder="Descreva seu projeto: ramo, usuários, funcionalidades desejadas..." rows="7"
+                required></textarea>
+            <button type="submit" class="btn btn-success"
+                style="width:100%;max-width:400px;margin:0 auto;display:block;padding:1.2rem;font-size:1.2rem;">
+                Solicitar Orçamento Gratuito
+            </button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 ProDash SaaS – Sistemas e Dashboards Profissionais. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- ============ DASHBOARD COMPLETO (EMBED) ============ -->
+    <div id="dashboard-full" class="dashboard-root">
+        <div class="dashboard-header">
+            <h2>Dashboard ProDash Enterprise</h2>
+            <div>
+                <button class="dashboard-btn dashboard-btn-outline" onclick="exportCSVFull()"><i
+                        class="fas fa-download"></i> Exportar CSV</button>
+                <button class="dashboard-btn dashboard-btn-primary" onclick="closeFullDashboard()"
+                    style="margin-left: 1rem;">
+                    <i class="fas fa-times"></i> Voltar ao Site
+                </button>
+            </div>
+        </div>
+        <div class="dashboard-container" id="dashboardContainer">
+            <!-- Conteúdo do Dashboard será injetado aqui -->
+        </div>
+    </div>
+
+    <!-- Modais -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login Demo</h2>
+            <p>Use: <strong>admin</strong> / <strong>demo123</strong></p>
+            <input type="text" id="loginUser" placeholder="Usuário" value="admin">
+            <input type="password" id="loginPass" placeholder="Senha" value="demo123">
+            <button class="btn btn-primary" onclick="doLogin()" style="width:100%;margin-top:1rem;">Entrar</button>
+        </div>
+    </div>
+
+    <div class="modal" id="orcamentoModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('orcamentoModal')">&times;</span>
+            <h2>Solicitar Orçamento Gratuito</h2>
+            <form>
+                <input type="text" placeholder="Nome completo" required>
+                <input type="email" placeholder="E-mail corporativo" required>
+                <input type="tel" placeholder="Telefone/WhatsApp">
+                <textarea placeholder="Descreva seu projeto" rows="6" required></textarea>
+                <button type="submit" class="btn btn-success" style="width:100%;margin-top:1rem;">Enviar
+                    Solicitação</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============ THREE.JS IMPORTMAP ============ -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <!-- ============ THREE.JS PIZZA DE DASHBOARD 3D ============ -->
+    <script type="module">
+        import * as THREE from 'three';
+
+        const container = document.getElementById('three-canvas-container');
+        if (container) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({
+                antialias: true,
+                alpha: true,
+                powerPreference: "high-performance"
+            });
+
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // ===== GRÁFICO DE PIZZA 3D =====
+            const pizzaGroup = new THREE.Group();
+            scene.add(pizzaGroup);
+
+            // ===== DADOS DA PIZZA (MÉTRICAS REAIS) =====
+            const metrics = [
+                { name: "Vendas Diretas", value: 42, color: 0x4361ee, height: 3.5 },
+                { name: "Assinaturas", value: 28, color: 0x4cc9f0, height: 3.0 },
+                { name: "Consultoria", value: 15, color: 0x7209b7, height: 2.5 },
+                { name: "Produtos", value: 10, color: 0xf72585, height: 2.0 },
+                { name: "Serviços", value: 5, color: 0xff9e00, height: 1.5 }
+            ];
+
+            const slices = [];
+            let startAngle = 0;
+
+            // ===== CRIAR FATIAS DA PIZZA =====
+            metrics.forEach((metric, i) => {
+                const angle = (metric.value / 100) * Math.PI * 2;
+
+                // Geometria da fatia (setor de cilindro)
+                const geometry = new THREE.CylinderGeometry(
+                    5, // raio topo
+                    5, // raio base
+                    metric.height, // altura (valor da métrica)
+                    32, // segmentos radiais
+                    1, // segmentos height
+                    false, // open ended
+                    startAngle, // ângulo inicial
+                    angle * 0.95 // ângulo (95% para espaço entre fatias)
+                );
+
+                // Material com efeito metálico
+                const material = new THREE.MeshPhysicalMaterial({
+                    color: metric.color,
+                    metalness: 0.9,
+                    roughness: 0.1,
+                    clearcoat: 1.0,
+                    clearcoatRoughness: 0.1,
+                    emissive: metric.color,
+                    emissiveIntensity: 0.2
+                });
+
+                const slice = new THREE.Mesh(geometry, material);
+
+                // Armazenar dados da fatia
+                slice.userData = {
+                    name: metric.name,
+                    value: metric.value,
+                    originalHeight: metric.height,
+                    pulse: 0,
+                    hover: false
+                };
+
+                // Posicionar fatia (centro do gráfico)
+                const midAngle = startAngle + (angle * 0.95) / 2;
+                slice.position.x = Math.cos(midAngle) * 0.5;
+                slice.position.z = Math.sin(midAngle) * 0.5;
+
+                pizzaGroup.add(slice);
+                slices.push(slice);
+
+                startAngle += angle;
+            });
+
+            // ===== BASE DO GRÁFICO =====
+            const baseGeometry = new THREE.CylinderGeometry(5.2, 5.2, 0.2, 32);
+            const baseMaterial = new THREE.MeshStandardMaterial({
+                color: 0x1a1a2e,
+                metalness: 0.7,
+                roughness: 0.3
+            });
+            const base = new THREE.Mesh(baseGeometry, baseMaterial);
+            base.position.y = -0.1;
+            pizzaGroup.add(base);
+
+            // ===== EIXO CENTRAL =====
+            const axisGeometry = new THREE.CylinderGeometry(0.3, 0.3, 4, 16);
+            const axisMaterial = new THREE.MeshStandardMaterial({
+                color: 0x4cc9f0,
+                metalness: 0.8,
+                roughness: 0.2
+            });
+            const axis = new THREE.Mesh(axisGeometry, axisMaterial);
+            pizzaGroup.add(axis);
+
+            // ===== ILUMINAÇÃO =====
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(10, 10, 5);
+            scene.add(directionalLight);
+
+            const pointLight = new THREE.PointLight(0x4cc9f0, 2, 100);
+            pointLight.position.set(0, 10, 0);
+            scene.add(pointLight);
+
+            // ===== CONFIGURAÇÃO DA CÂMERA =====
+            camera.position.set(0, 8, 15);
+            camera.lookAt(0, 0, 0);
+
+            // ===== INTERAÇÃO COM MOUSE =====
+            let mouseX = 0, mouseY = 0;
+            let targetRotationX = 0, targetRotationY = 0;
+            let currentRotationX = 0, currentRotationY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+
+                targetRotationY = mouseX * Math.PI / 4; // Rotação mais rápida
+                targetRotationX = mouseY * Math.PI / 8;
+            });
+
+            // ===== RAYCASTER PARA HOVER =====
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            let hoveredSlice = null;
+
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObjects(slices);
+
+                if (intersects.length > 0) {
+                    const intersected = intersects[0].object;
+                    if (hoveredSlice !== intersected) {
+                        if (hoveredSlice) {
+                            hoveredSlice.userData.hover = false;
+                            hoveredSlice.material.emissiveIntensity = 0.2;
+                            hoveredSlice.scale.y = 1;
+                        }
+
+                        hoveredSlice = intersected;
+                        hoveredSlice.userData.hover = true;
+                        hoveredSlice.material.emissiveIntensity = 0.8;
+
+                        // Atualizar estatísticas no Hero
+                        updateHeroStats(hoveredSlice.userData.name, hoveredSlice.userData.value);
+                    }
+                } else if (hoveredSlice) {
+                    hoveredSlice.userData.hover = false;
+                    hoveredSlice.material.emissiveIntensity = 0.2;
+                    hoveredSlice.scale.y = 1;
+                    hoveredSlice = null;
+                    resetHeroStats();
+                }
+            });
+
+            // ===== ANIMAÇÃO =====
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                const elapsedTime = clock.getElapsedTime();
+                const deltaTime = clock.getDelta();
+
+                // Rotação suave do gráfico
+                currentRotationX += (targetRotationX - currentRotationX) * 0.05;
+                currentRotationY += (targetRotationY - currentRotationY) * 0.05;
+                pizzaGroup.rotation.x = currentRotationX;
+                pizzaGroup.rotation.y = currentRotationY + elapsedTime * 0.05; // Rotação automática lenta
+
+                // Animar fatias da pizza
+                slices.forEach((slice, i) => {
+                    const data = slice.userData;
+
+                    // Efeito de pulsação
+                    data.pulse = Math.sin(elapsedTime * 2 + i) * 0.5 + 0.5;
+
+                    // Efeito de hover (elevação)
+                    if (data.hover) {
+                        slice.scale.y = 1.3; // Aumenta altura
+                        slice.position.y = 0.5; // Eleva
+                    } else {
+                        slice.scale.y = 1;
+                        slice.position.y = 0;
+                    }
+
+                    // Oscilação leve quando não hover
+                    if (!data.hover) {
+                        slice.position.y = Math.sin(elapsedTime * 1.5 + i) * 0.1;
+                    }
+
+                    // Brilho baseado na pulsação
+                    slice.material.emissiveIntensity = 0.2 + data.pulse * (data.hover ? 0.6 : 0.1);
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // ===== FUNÇÕES DE ATUALIZAÇÃO DO HERO =====
+            function updateHeroStats(metricName, metricValue) {
+                const heroReceita = document.getElementById('heroReceita');
+                const heroClientes = document.getElementById('heroClientes');
+                const heroUptime = document.getElementById('heroUptime');
+                const heroPerformance = document.getElementById('heroPerformance');
+
+                // Atualizar baseado na métrica selecionada
+                switch (metricName) {
+                    case "Vendas Diretas":
+                        heroReceita.textContent = `${metricValue}%`;
+                        heroReceita.style.color = '#4361ee';
+                        break;
+                    case "Assinaturas":
+                        heroClientes.textContent = `${metricValue * 100}`;
+                        heroClientes.style.color = '#4cc9f0';
+                        break;
+                    case "Consultoria":
+                        heroUptime.textContent = `${metricValue}%`;
+                        heroUptime.style.color = '#7209b7';
+                        break;
+                    case "Produtos":
+                        heroPerformance.textContent = `${(metricValue / 2).toFixed(1)}★`;
+                        heroPerformance.style.color = '#f72585';
+                        break;
+                    case "Serviços":
+                        // Alternar entre métricas
+                        const metrics = ['5%', 'R$ 12K', '98%'];
+                        const currentIndex = Math.floor(performance.now() / 1000) % metrics.length;
+                        heroPerformance.textContent = metrics[currentIndex];
+                        heroPerformance.style.color = '#ff9e00';
+                        break;
+                }
+            }
+
+            function resetHeroStats() {
+                const heroReceita = document.getElementById('heroReceita');
+                const heroClientes = document.getElementById('heroClientes');
+                const heroUptime = document.getElementById('heroUptime');
+                const heroPerformance = document.getElementById('heroPerformance');
+
+                // Resetar para valores padrão
+                heroReceita.textContent = '+32%';
+                heroReceita.style.color = '';
+                heroClientes.textContent = '2.5K';
+                heroClientes.style.color = '';
+                heroUptime.textContent = '99.9%';
+                heroUptime.style.color = '';
+                heroPerformance.textContent = '4.8★';
+                heroPerformance.style.color = '';
+            }
+
+            // ===== RESIZE HANDLER =====
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+
+            // ===== CLICK HANDLER =====
+            container.addEventListener('click', (e) => {
+                if (hoveredSlice) {
+                    // Feedback visual ao clicar
+                    const originalEmissive = hoveredSlice.material.emissiveIntensity;
+                    hoveredSlice.material.emissiveIntensity = 1.5;
+
+                    setTimeout(() => {
+                        if (hoveredSlice) {
+                            hoveredSlice.material.emissiveIntensity = originalEmissive;
+                        }
+                    }, 200);
+
+                    // Scroll para a seção de simulador
+                    document.getElementById('simulador').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        }
+    </script>
+
+    <!-- ============ SCRIPTS PRINCIPAIS ============ -->
+    <script>
+        // ============ DASHBOARD COMPLETO ============
+        function openFullDashboard() {
+            document.getElementById('dashboard-full').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            renderFullDashboard();
+        }
+
+        function closeFullDashboard() {
+            document.getElementById('dashboard-full').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function renderFullDashboard() {
+            const container = document.getElementById('dashboardContainer');
+
+            // HTML do dashboard completo
+            container.innerHTML = `
+                <div class="dashboard-wrapper">
+                    <aside class="dashboard-aside">
+                        <h2 style="margin-bottom: 2rem; color: var(--primary); text-align: center;">ProDash</h2>
+                        <div class="dashboard-nav-link active" onclick="dashboardShowPage('dash')"><i class="fas fa-th-large"></i> <span>Dashboard</span></div>
+                        <div class="dashboard-nav-link" onclick="dashboardShowPage('vendas')"><i class="fas fa-cash-register"></i> <span>Vendas</span></div>
+                        <div class="dashboard-nav-link" onclick="dashboardShowPage('config')"><i class="fas fa-sliders-h"></i> <span>Ajustes</span></div>
+                        
+                        <div style="margin-top: auto; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1rem;">
+                            <div class="dashboard-nav-link" id="themeToggleDashboard"><i class="fas fa-adjust"></i> <span>Trocar Tema</span></div>
+                        </div>
+                    </aside>
+
+                    <main class="dashboard-main">
+                        <section id="dash" class="dashboard-section active">
+                            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                                <h1>Bem-vindo, <span id="welcomeName">Admin</span></h1>
+                                <button class="dashboard-btn dashboard-btn-outline" onclick="exportCSVFull()"><i class="fas fa-download"></i> Exportar CSV</button>
+                            </header>
+
+                            <div class="dashboard-grid">
+                                <div class="dashboard-card">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <h3>Faturamento Mensal</h3>
+                                        <i class="fas fa-dollar-sign" style="color: var(--success)"></i>
+                                    </div>
+                                    <p id="totalVendas" style="font-size: 2.2rem; font-weight: 800; margin: 10px 0;">R$ 0</p>
+                                    <p style="font-size: 0.8rem; opacity: 0.7;">Meta: R$ 50.000</p>
+                                    <div class="dashboard-progress-bar"><div id="progressFill"></div></div>
+                                </div>
+                                <div class="dashboard-card">
+                                    <h3>Pedidos Hoje</h3>
+                                    <p id="totalPedidos" style="font-size: 2.2rem; font-weight: 800; margin: 10px 0;">0</p>
+                                    <p style="color: var(--success); font-size: 0.9rem;"><i class="fas fa-arrow-up"></i> +12% que ontem</p>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-card">
+                                <h3>Análise de Tendência</h3>
+                                <canvas id="mainChart" height="120"></canvas>
+                            </div>
+                        </section>
+
+                        <section id="vendas" class="dashboard-section">
+                            <h1>Gerenciamento de Vendas</h1>
+                            <div class="dashboard-card" style="margin: 1.5rem 0;">
+                                <h3>Novo Lançamento</h3>
+                                <form id="vendaForm" class="dashboard-grid" style="grid-template-columns: 2fr 1fr 1fr; align-items: end; margin-top: 1rem;">
+                                    <div class="dashboard-form-group"><label>Cliente</label><input type="text" id="clienteNome" class="dashboard-input" required></div>
+                                    <div class="dashboard-form-group"><label>Valor (R$)</label><input type="number" id="vendaValor" class="dashboard-input" required></div>
+                                    <button type="submit" class="dashboard-btn dashboard-btn-primary" style="height: 45px;">Adicionar</button>
+                                </form>
+                            </div>
+
+                            <div class="dashboard-card">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <h3>Histórico de Transações</h3>
+                                    <input type="text" id="searchSales" class="dashboard-input" placeholder="Buscar cliente..." style="width: 250px; margin: 0;">
+                                </div>
+                                <div style="overflow-x: auto;">
+                                    <table class="dashboard-table">
+                                        <thead><tr><th>Data</th><th>Cliente</th><th>Valor</th><th>Status</th></tr></thead>
+                                        <tbody id="listaVendas"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="config" class="dashboard-section">
+                            <h1>Configurações</h1>
+                            <div class="dashboard-card" style="margin-top: 1.5rem; max-width: 500px;">
+                                <div class="dashboard-form-group">
+                                    <label>Nome da Unidade/Empresa</label>
+                                    <input type="text" id="cfgNome" class="dashboard-input">
+                                </div>
+                                <div class="dashboard-form-group">
+                                    <label>Meta de Faturamento (R$)</label>
+                                    <input type="number" id="cfgMeta" class="dashboard-input" value="50000">
+                                </div>
+                                <button class="dashboard-btn dashboard-btn-primary" onclick="saveConfig()">Aplicar Alterações</button>
+                            </div>
+                        </section>
+                    </main>
+                </div>
+            `;
+
+            // Inicializar dashboard
+            initDashboard();
+        }
+
+        // ============ LÓGICA DO DASHBOARD ============
+        let db = JSON.parse(localStorage.getItem('prodash_v3')) || {
+            config: { nome: "Empresa Demo", meta: 50000 },
+            vendas: [
+                { id: 1, cliente: "Tech Solutions", valor: 8500, data: "2023-10-10" },
+                { id: 2, cliente: "Padaria Central", valor: 1200, data: "2023-10-11" },
+                { id: 3, cliente: "Oficina do João", valor: 4300, data: "2023-10-12" }
+            ]
+        };
+
+        let chart;
+
+        function initDashboard() {
+            // Inicializar funcionalidades do dashboard
+            updateUI();
+            renderChart();
+
+            // Adicionar eventos
+            const themeToggle = document.getElementById('themeToggleDashboard');
+            if (themeToggle) {
+                themeToggle.onclick = () => {
+                    document.getElementById('dashboard-full').classList.toggle('dark');
+                };
+            }
+
+            // Formulário de venda
+            const vendaForm = document.getElementById('vendaForm');
+            if (vendaForm) {
+                vendaForm.onsubmit = (e) => {
+                    e.preventDefault();
+                    const novaVenda = {
+                        id: Date.now(),
+                        cliente: document.getElementById('clienteNome').value,
+                        valor: document.getElementById('vendaValor').value,
+                        data: new Date().toLocaleDateString('pt-BR')
+                    };
+                    db.vendas.push(novaVenda);
+                    updateUI();
+                    e.target.reset();
+                };
+            }
+
+            // Busca
+            const searchInput = document.getElementById('searchSales');
+            if (searchInput) {
+                searchInput.oninput = (e) => {
+                    const termo = e.target.value.toLowerCase();
+                    const filtrados = db.vendas.filter(v => v.cliente.toLowerCase().includes(termo));
+                    renderTable(filtrados);
+                };
+            }
+
+            // Configurações
+            const cfgNome = document.getElementById('cfgNome');
+            if (cfgNome) cfgNome.value = db.config.nome;
+        }
+
+        function dashboardShowPage(id) {
+            document.querySelectorAll('#dashboardContainer .dashboard-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('#dashboardContainer .dashboard-nav-link').forEach(l => l.classList.remove('active'));
+            const element = document.getElementById(id);
+            if (element) element.classList.add('active');
+            if (id === 'dash') { renderChart(); updateUI(); }
+        }
+
+        function updateUI() {
+            const total = db.vendas.reduce((acc, v) => acc + parseFloat(v.valor), 0);
+            const meta = db.config.meta;
+            const perc = Math.min((total / meta) * 100, 100);
+
+            const totalVendasEl = document.getElementById('totalVendas');
+            const totalPedidosEl = document.getElementById('totalPedidos');
+            const welcomeNameEl = document.getElementById('welcomeName');
+            const progressFillEl = document.getElementById('progressFill');
+
+            if (totalVendasEl) totalVendasEl.innerText = `R$ ${total.toLocaleString('pt-BR')}`;
+            if (totalPedidosEl) totalPedidosEl.innerText = db.vendas.length;
+            if (welcomeNameEl) welcomeNameEl.innerText = db.config.nome;
+            if (progressFillEl) progressFillEl.style.width = perc + '%';
+
+            renderTable(db.vendas);
+            localStorage.setItem('prodash_v3', JSON.stringify(db));
+        }
+
+        function renderTable(dados) {
+            const lista = document.getElementById('listaVendas');
+            if (!lista) return;
+
+            lista.innerHTML = dados.map(v => `
+                <tr>
+                    <td>${v.data}</td>
+                    <td>${v.cliente}</td>
+                    <td><strong>R$ ${parseFloat(v.valor).toLocaleString('pt-BR')}</strong></td>
+                    <td><span style="background:rgba(46,204,113,0.2); color:#2ecc71; padding:4px 8px; border-radius:4px; font-size:0.8rem">Confirmado</span></td>
+                </tr>
+            `).reverse().join('');
+        }
+
+        function exportCSVFull() {
+            let csv = "Data;Cliente;Valor\n";
+            db.vendas.forEach(v => csv += `${v.data};${v.cliente};${v.valor}\n`);
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'relatorio-vendas.csv');
+            a.click();
+        }
+
+        function saveConfig() {
+            const cfgNome = document.getElementById('cfgNome');
+            const cfgMeta = document.getElementById('cfgMeta');
+
+            if (cfgNome && cfgMeta) {
+                db.config.nome = cfgNome.value;
+                db.config.meta = cfgMeta.value;
+                updateUI();
+                alert("Sucesso! As alterações foram aplicadas ao Dashboard.");
+            }
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('mainChart');
+            if (!ctx) return;
+
+            const canvasCtx = ctx.getContext('2d');
+            if (chart) chart.destroy();
+            chart = new Chart(canvasCtx, {
+                type: 'bar',
+                data: {
+                    labels: db.vendas.slice(-7).map(v => v.cliente),
+                    datasets: [{
+                        label: 'Valor da Venda',
+                        data: db.vendas.slice(-7).map(v => v.valor),
+                        backgroundColor: '#4361ee',
+                        borderRadius: 5
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { display: false } } }
+            });
+        }
+
+        // ============ LÓGICA DA PÁGINA PRINCIPAL ============
+        const empresas = {
+            visitante: {
+                nome: "Visitante",
+                receita: [42000, 48000, 55000, 52000, 60000, 65000, 72000, 70000, 78000, 83000, 90000, 95000],
+                clientes: 48, crescimento: 9.2, churn: 9,
+                fontesReceita: [40, 35, 15, 10]
+            },
+            admin: {
+                nome: "Acme Corp",
+                receita: [68000, 75000, 82000, 79000, 88000, 95000, 105000, 108000, 118000, 125000, 135000, 148000],
+                clientes: 92, crescimento: 12.8, churn: 5.3,
+                fontesReceita: [50, 30, 12, 8]
+            }
+        };
+
+        let currentUser = "visitante";
+        let chartInstances = {};
+        const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+        const vendas = [
+            { data: "2025-12-27", cliente: "Empresa Alpha", produto: "Licença Enterprise", valor: 24500 },
+            { data: "2025-12-26", cliente: "TechStart", produto: "Assinatura Anual + Analytics", valor: 18900 },
+            { data: "2025-12-24", cliente: "Global Corp", produto: "Módulo IA + Dashboard", valor: 32800 },
+            { data: "2025-12-22", cliente: "VIP Solutions", produto: "Custom Full Stack", valor: 42000 },
+            { data: "2025-12-20", cliente: "NovaTech", produto: "Pacote Completo", valor: 29800 }
+        ];
+
+        function updateDashboard() {
+            const data = empresas[currentUser];
+            const userGreeting = document.getElementById('userGreeting');
+            if (userGreeting) userGreeting.innerText = `Olá, ${data.nome}`;
+
+            const total = data.receita.reduce((a, b) => a + b, 0);
+
+            const kpiReceita = document.getElementById('kpiReceita');
+            const kpiClientes = document.getElementById('kpiClientes');
+            const kpiCrescimento = document.getElementById('kpiCrescimento');
+            const kpiChurn = document.getElementById('kpiChurn');
+
+            if (kpiReceita) kpiReceita.innerText = `R$ ${total.toLocaleString('pt-BR')}`;
+            if (kpiClientes) kpiClientes.innerText = data.clientes;
+            if (kpiCrescimento) kpiCrescimento.innerText = `${data.crescimento.toFixed(1)}%`;
+            if (kpiChurn) kpiChurn.innerText = `${data.churn.toFixed(1)}%`;
+
+            Object.values(chartInstances).forEach(chart => chart?.destroy());
+            chartInstances = {};
+
+            const lineChart = document.getElementById('lineChart');
+            if (lineChart) {
+                chartInstances.line = new Chart(lineChart, {
+                    type: 'line',
+                    data: { labels: meses, datasets: [{ label: 'Receita Mensal', data: data.receita, borderColor: '#4361ee', backgroundColor: 'rgba(67,97,238,0.15)', fill: true, tension: 0.4 }] },
+                    options: { responsive: true, plugins: { title: { display: true, text: 'Evolução da Receita 2025' } } }
+                });
+            }
+
+            const barChart = document.getElementById('barChart');
+            if (barChart) {
+                chartInstances.bar = new Chart(barChart, {
+                    type: 'bar',
+                    data: { labels: meses, datasets: [{ label: 'Receita Real', data: data.receita, backgroundColor: '#4361ee' }, { label: 'Meta', data: data.receita.map(v => v * 1.15), backgroundColor: '#4cc9f0' }] },
+                    options: { responsive: true, plugins: { title: { display: true, text: 'Real vs Meta' } } }
+                });
+            }
+
+            const polarChart = document.getElementById('polarChart');
+            if (polarChart) {
+                chartInstances.polar = new Chart(polarChart, {
+                    type: 'polarArea',
+                    data: { labels: ['Vendas Novas', 'Renovações', 'Upsell', 'Expansão'], datasets: [{ data: data.fontesReceita, backgroundColor: ['#4361ee', '#4cc9f0', '#7209b7', '#f72585'] }] },
+                    options: { responsive: true, plugins: { title: { display: true, text: 'Fontes de Receita' } } }
+                });
+            }
+
+            const churnClientes = Math.round(data.clientes * data.churn / 100);
+            const doughnutChart = document.getElementById('doughnutChart');
+            if (doughnutChart) {
+                chartInstances.doughnut = new Chart(doughnutChart, {
+                    type: 'doughnut',
+                    data: { labels: ['Ativos', 'Novos', 'Churn', 'Inativos'], datasets: [{ data: [data.clientes - churnClientes, 22, churnClientes, 10], backgroundColor: ['#4cc9f0', '#4361ee', '#f72585', '#7209b7'] }] },
+                    options: { responsive: true, plugins: { title: { display: true, text: 'Status de Clientes' } } }
+                });
+            }
+
+            const tbody = document.querySelector('#salesTable tbody');
+            if (tbody) {
+                tbody.innerHTML = '';
+                vendas.forEach(v => {
+                    tbody.innerHTML += `<tr><td>${v.data}</td><td>${v.cliente}</td><td>${v.produto}</td><td>R$ ${v.valor.toLocaleString('pt-BR')}</td></tr>`;
+                });
+            }
+        }
+
+        const tableFilter = document.getElementById('tableFilter');
+        if (tableFilter) {
+            tableFilter.addEventListener('input', function () {
+                const filter = this.value.toLowerCase();
+                document.querySelectorAll('#salesTable tbody tr').forEach(row => {
+                    row.style.display = row.textContent.toLowerCase().includes(filter) ? '' : 'none';
+                });
+            });
+        }
+
+        function exportCSV() {
+            let csv = 'Data,Cliente,Produto,Valor\n';
+            vendas.forEach(v => csv += `${v.data},${v.cliente},${v.produto},${v.valor}\n`);
+            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'vendas_acme_corp_2025.csv';
+            link.click();
+        }
+
+        function saveApiKey() {
+            const keyInput = document.getElementById('apiKeyInput');
+            if (!keyInput) return;
+
+            const key = keyInput.value.trim();
+            if (key) {
+                localStorage.setItem('prodash_apikey', key);
+                alert('Chave salva! Agora o assistente usa IA real.');
+                keyInput.placeholder = 'Chave salva ✓';
+                keyInput.value = '';
+            }
+        }
+
+        async function askIA() {
+            const pergunta = document.getElementById('iaInput')?.value.trim();
+            if (!pergunta) return;
+            const responseDiv = document.getElementById('iaResponse');
+            if (!responseDiv) return;
+
+            responseDiv.innerHTML = '<em style="color:#666;">Processando...</em>';
+
+            const apiKey = localStorage.getItem('prodash_apikey');
+            if (apiKey) {
+                let success = false;
+                try {
+                    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ model: "llama3-70b-8192", messages: [{ role: "user", content: pergunta }], temperature: 0.7 })
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        responseDiv.innerHTML = `<strong style="color:var(--primary);">IA:</strong> ${data.choices[0].message.content.replace(/\n/g, '<br>')}`;
+                        success = true;
+                    }
+                } catch (e) { }
+
+                if (!success) {
+                    try {
+                        const res = await fetch('https://api.openai.com/v1/chat/completions', {
+                            method: 'POST',
+                            headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ model: "gpt-3.5-turbo", messages: [{ role: "user", content: pergunta }] })
+                        });
+                        if (res.ok) {
+                            const data = await res.json();
+                            responseDiv.innerHTML = `<strong style="color:var(--primary);">IA:</strong> ${data.choices[0].message.content.replace(/\n/g, '<br>')}`;
+                            success = true;
+                        }
+                    } catch (e) { }
+                }
+
+                if (!success) responseDiv.innerHTML = `<strong style="color:#f72585;">Erro na chave.</strong><br><br>${simularRespostaLocal(pergunta)}`;
+            } else {
+                responseDiv.innerHTML = `<strong style="color:var(--primary);">IA (simulada):</strong><br>${simularRespostaLocal(pergunta)}`;
+            }
+            document.getElementById('iaInput').value = '';
+        }
+
+        function simularRespostaLocal(pergunta) {
+            const p = pergunta.toLowerCase();
+            const data = empresas[currentUser];
+            const total = data.receita.reduce((a, b) => a + b, 0);
+            if (p.includes('receita')) return `Receita total 2025: <strong>R$ ${total.toLocaleString('pt-BR')}</strong>.`;
+            if (p.includes('previs') || p.includes('2026')) return `Projeção 2026: <strong>R$ ${(total * 1.28).toLocaleString('pt-BR')}</strong> (+28%).`;
+            if (p.includes('churn')) return `Churn: ${data.churn}%. Sugestão: onboarding personalizado pode reduzir em 40%.`;
+            if (p.includes('cliente')) return `${data.clientes} clientes ativos. Programa de upsell pode +25% receita.`;
+            return "Pergunte sobre receita, previsão, churn, clientes ou estratégia.";
+        }
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('active');
+        }
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('active');
+        }
+
+        window.addEventListener('click', e => {
+            if (e.target.classList.contains('modal'))
+                e.target.classList.remove('active');
+        });
+
+        function doLogin() {
+            const user = document.getElementById('loginUser')?.value.trim();
+            const pass = document.getElementById('loginPass')?.value;
+            if (user === 'admin' && pass === 'demo123') {
+                currentUser = 'admin';
+                updateDashboard();
+                closeModal('loginModal');
+                alert('Login sucesso! Dados da Acme Corp ativados.');
+            } else {
+                alert('Credenciais inválidas. Use: admin / demo123');
+            }
+        }
+
+        const darkToggle = document.getElementById('darkToggle');
+        if (darkToggle) {
+            darkToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark');
+                const icon = darkToggle;
+                icon.classList.toggle('fa-moon');
+                icon.classList.toggle('fa-sun');
+            });
+        }
+
+        function toggleMenu() {
+            const nav = document.getElementById('navMobile');
+            if (nav) nav.classList.toggle('active');
+        }
+
+        const hamburger = document.getElementById('hamburger');
+        if (hamburger) {
+            hamburger.addEventListener('click', toggleMenu);
+        }
+
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                alert('Enviado com sucesso! Entraremos em contato em até 24h.');
+                form.reset();
+                if (form.closest('.modal')) form.closest('.modal').classList.remove('active');
+            });
+        });
+
+        window.onload = () => {
+            if (localStorage.getItem('prodash_apikey')) {
+                const apiKeyInput = document.getElementById('apiKeyInput');
+                if (apiKeyInput) apiKeyInput.placeholder = 'Chave salva ✓';
+            }
+            updateDashboard();
+        };
+    </script>
 </body>
+
 </html>
