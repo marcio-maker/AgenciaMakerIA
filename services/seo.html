@@ -1,55 +1,1996 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RankAI Optimizer - MakerAI Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --primary: #7c3aed; --bg: #030712; --text: #f1f5f9; --text-secondary: #94a3b8; --border: #334155; --radius: 16px; --radius-lg: 24px; --shadow: 0 20px 40px rgba(0,0,0,0.3); --gradient-primary: linear-gradient(135deg, #7c3aed, #9333ea); }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); }
-    .container { max-width:1400px; margin:0 auto; padding:0 2rem; }
-    .header { position:fixed; top:0; left:0; right:0; background:rgba(15,23,42,0.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:1rem 0; z-index:1000; }
-    .header-container { display:flex; justify-content:space-between; align-items:center; }
-    .logo { font-size:1.8rem; font-weight:800; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .btn { padding:0.8rem 1.8rem; border-radius:var(--radius); text-decoration:none; font-weight:600; transition:all 0.4s; display:inline-block; }
-    .btn.secondary { background:transparent; border:1px solid var(--border); color:var(--text); }
-    .btn.primary { background:var(--gradient-primary); color:white; }
-    .section { padding:8rem 0; text-align:center; }
-    h1 { font-size:3.5rem; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .subtitle { font-size:1.3rem; color:var(--text-secondary); max-width:800px; margin:0 auto 3rem; }
-    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:2rem; margin-top:3rem; }
-    .gallery img { width:100%; border-radius:var(--radius-lg); box-shadow:var(--shadow); }
-    footer { text-align:center; padding:3rem 0; color:var(--text-secondary); border-top:1px solid var(--border); }
-    @media (max-width:768px) { h1 { font-size:2.5rem; } .gallery { grid-template-columns:1fr; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RankAI Pro | Plataforma de Inteligência SEO</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlJhbmtBSSBQcm8iLAogICJzaG9ydF9uYW1lIjogIlJhbmtBSSIsCiAgImRlc2NyaXB0aW9uIjogIlBsYXRhZm9ybWEgZGUgYW7DoWxpc2UgU0VPIGF2YW7DpWFkYSBjb20gSUEiLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwZjE3MmEiLAogICJ0aGVtZV9jb2xvciI6ICIjNjY3ZWVhIiwKICAib3JpZW50YXRpb24iOiAiYW55IiwKICAiaWNvbnMiOiBbCiAgICB7InNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vNTEyLzQ3MTIvNDcxMjEwOS5wbmciLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn0sCiAgICB7InNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vMjU2LzQ3MTIvNDcxMjEwOS5wbmciLCJzaXplcyI6IjI1NngyNTYiLCJ0eXBlIjoiaW1hZ2UvcG5nIn0sCiAgICB7InNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vMTkyLzQ3MTIvNDcxMjEwOS5wbmciLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn0sCiAgICB7InNyYyI6Imh0dHBzOi8vY2RuLWljb25zLXBuZy5mbGF0aWNvbi5jb20vMTI4LzQ3MTIvNDcxMjEwOS5wbmciLCJzaXplcyI6IjEyOHgxMjgiLCJ0eXBlIjoiaW1hZ2UvcG5nIn0KICBdCn0=">
+    
+    <!-- Bibliotecas externas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-primary: 0 20px 40px rgba(0, 0, 0, 0.3);
+            --shadow-secondary: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Animações */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-pulse { animation: pulse 2s ease-in-out infinite; }
+        
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Glassmorphism Premium */
+        .glass {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            box-shadow: var(--shadow-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-sm {
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+        }
+        
+        /* Gradientes */
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-border {
+            position: relative;
+            border-radius: 24px;
+            padding: 2px;
+            background: var(--primary-gradient);
+        }
+        
+        .gradient-border>div {
+            background: var(--bg-primary);
+            border-radius: 22px;
+            padding: 24px;
+        }
+        
+        /* Progress Rings */
+        .progress-ring { transform: rotate(-90deg); }
+        .progress-ring-circle {
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: 50% 50%;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-premium { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .badge-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; }
+        .badge-warning { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; }
+        .badge-danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; }
+        
+        /* Inputs Premium */
+        .input-premium {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px 20px;
+            color: var(--text-primary);
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .input-premium:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: rgba(15, 23, 42, 0.9);
+        }
+        
+        .input-premium::placeholder { color: var(--text-muted); }
+        
+        /* Botões */
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary:active { transform: translateY(0); }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::before { left: 100%; }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-primary);
+        }
+        
+        /* Tabs */
+        .tab-active {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+        
+        .tab-inactive {
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-inactive:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+        
+        /* Status Indicators */
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .status-online {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        
+        .status-offline {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .status-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        /* Tooltips */
+        .tooltip { position: relative; }
+        
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 1000;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-secondary);
+        }
+        
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+        }
+        
+        /* Console */
+        .console {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .console-line {
+            margin-bottom: 8px;
+            padding-left: 10px;
+            border-left: 3px solid transparent;
+        }
+        
+        .console-line.info { border-left-color: #3b82f6; color: #60a5fa; }
+        .console-line.success { border-left-color: #10b981; color: #34d399; }
+        .console-line.warning { border-left-color: #f59e0b; color: #fbbf24; }
+        .console-line.error { border-left-color: #ef4444; color: #f87171; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glass { border-radius: 20px; }
+            .btn-primary, .btn-secondary { padding: 14px 24px; }
+        }
+        
+        /* Utility Classes */
+        .text-gradient {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .bg-gradient { background: var(--primary-gradient); }
+        .shadow-glow { box-shadow: 0 0 30px rgba(102, 126, 234, 0.2); }
+        
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        /* SEO Score Circle */
+        .score-circle {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        
+        .score-circle svg { transform: rotate(-90deg); }
+        
+        .score-circle .circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 10;
+        }
+        
+        .score-circle .circle-progress {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+            stroke-dasharray: 565;
+            stroke-dashoffset: 565;
+            transition: stroke-dashoffset 1.5s ease;
+        }
+        
+        .score-circle .circle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        /* Provider Buttons */
+        .provider-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .provider-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+        
+        .provider-btn.active {
+            background: var(--primary-gradient);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Keyword Tags */
+        .keyword-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            font-size: 12px;
+            color: #93c5fd;
+            transition: all 0.2s ease;
+        }
+        
+        .keyword-tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-1px);
+        }
+        
+        /* Metric Cards */
+        .metric-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link.active {
+            background: rgba(102, 126, 234, 0.2);
+            color: white;
+        }
+        
+        .nav-link:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-hidden {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .section-visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 0;
+            margin-bottom: 40px;
+            border-radius: 24px;
+        }
+        
+        /* History Items */
+        .history-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .history-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Progress Steps */
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+        }
+        
+        .progress-step .step-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .progress-step.active .step-icon {
+            background: var(--primary-gradient);
+            color: white;
+        }
+        
+        .progress-step.completed .step-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+        
+        /* Heatmap */
+        .heatmap-cell {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin: 2px;
+            transition: all 0.2s ease;
+        }
+        
+        .heatmap-cell:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Banner de Instalação PWA */
+        #installBanner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10000;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        #installBanner.show {
+            transform: translateY(0);
+        }
+        
+        #installBanner button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        #installBanner .close {
+            background: transparent;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        @media (max-width: 640px) {
+            #installBanner {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+        }
+        
+        /* Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #1e293b;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #667eea;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
 </head>
-<body>
-  <header class="header">
-    <div class="container header-container">
-      <a href="../index.html" class="logo">MakerAI Studio</a>
-      <a href="../index.html" class="btn secondary">← Voltar</a>
+<body class="relative">
+    <!-- Banner de Instalação PWA -->
+    <div id="installBanner">
+        <i data-lucide="download" class="w-6 h-6"></i>
+        <span>Instale o RankAI Pro como aplicativo no seu dispositivo!</span>
+        <button id="installBtn">Instalar Agora</button>
+        <button class="close" id="closeBanner">✕</button>
     </div>
-  </header>
 
-  <section class="section">
-    <div class="container">
-      <h1>RankAI Optimizer</h1>
-      <p class="subtitle">Ferramenta de SEO impulsionada por IA para análise e otimização automática de conteúdo.</p>
-      <div class="gallery">
-        <img src="https://nogood.io/wp-content/uploads/2024/09/Image-1.png" alt="Dashboard RankAI" loading="lazy">
-        <img src="https://mikekhorev.com/wp-content/uploads/2025/06/ai-seo.png" alt="Análise SEO com IA" loading="lazy">
-      </div>
-      <div class="features">
-        <h2>Tecnologias</h2>
-        <p>Next.js • OpenAI API • SerpAPI • MongoDB • Tailwind</p>
-        <p>Sugestões de conteúdo IA, rastreamento de ranking, auditoria técnica.</p>
-        <a href="../index.html#contato" class="btn primary" style="margin-top:2rem;">Otimizar meu site com IA</a>
-      </div>
+    <!-- Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+        <div class="absolute top-3/4 left-1/3 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl animate-float" style="animation-delay: -5s;"></div>
     </div>
-  </section>
 
-  <footer><p>© 2025 MakerAI Studio</p></footer>
+    <!-- Main Navigation -->
+    <nav class="glass-sm fixed top-0 left-0 right-0 z-50 mx-6 mt-4 rounded-2xl">
+        <div class="flex items-center justify-between p-4">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="showHome()">
+                <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-gradient">RankAI Pro</h1>
+                    <p class="text-xs text-slate-400">Plataforma Empresarial SEO</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex items-center gap-2">
+                    <a href="#home" onclick="showHome()" class="nav-link text-slate-300 hover:text-white transition-colors font-medium" id="nav-home">Home</a>
+                    <a href="#dashboard" onclick="showDashboard()" class="nav-link text-slate-300 hover:text-white transition-colors font-medium" id="nav-dashboard">Dashboard</a>
+                    <a href="#analises" onclick="showAnalises()" class="nav-link text-slate-300 hover:text-white transition-colors font-medium" id="nav-analises">Análises</a>
+                    <a href="#relatorios" onclick="showRelatorios()" class="nav-link text-slate-300 hover:text-white transition-colors font-medium" id="nav-relatorios">Relatórios</a>
+                    <a href="#precos" onclick="showPrecos()" class="nav-link text-slate-300 hover:text-white transition-colors font-medium" id="nav-precos">Preços</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800/50">
+                        <span class="status-indicator status-online"></span>
+                        <span class="text-xs font-medium text-green-400" id="connectionStatus">Conectado</span>
+                    </div>
+                    <button class="btn-secondary text-sm" onclick="openSettings()">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                        Conta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="contentContainer" class="pt-24 pb-12 px-4 md:px-6 max-w-7xl mx-auto">
+        <!-- Hero Section (Default View) -->
+        <section id="heroSection">
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 mb-6">
+                    <i data-lucide="star" class="w-4 h-4 text-yellow-400"></i>
+                    <span class="text-sm font-medium text-white">Versão 2.0 • SEO com IA • PWA</span>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    <span class="text-white">Análise SEO</span>
+                    <span class="text-gradient"> Avançada</span>
+                    <br>
+                    <span class="text-white">Potencializada por</span>
+                    <span class="text-gradient"> Múltiplas IAs</span>
+                </h1>
+
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-10">
+                    Obtenha insights completos de SEO, otimização de palavras-chave e sugestões de melhorias de conteúdo dos modelos de IA mais avançados do mundo.
+                    <span class="block mt-2 text-sm text-green-400">Trabalha totalmente offline • Instalável como app • Privacidade total</span>
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-800/50">
+                        <i data-lucide="zap" class="w-5 h-5 text-yellow-500"></i>
+                        <span class="text-sm font-medium">Análise em Tempo Real</span>
+                    </div>
+                    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-800/50">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-green-500"></i>
+                        <span class="text-sm font-medium">Segurança Empresarial</span>
+                    </div>
+                    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-800/50">
+                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-blue-500"></i>
+                        <span class="text-sm font-medium">Relatórios Detalhados</span>
+                    </div>
+                    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-800/50">
+                        <i data-lucide="download" class="w-5 h-5 text-purple-500"></i>
+                        <span class="text-sm font-medium">App Instalável (PWA)</span>
+                    </div>
+                </div>
+
+                <button onclick="startAnalysis()" class="btn-primary text-lg px-8 py-4">
+                    <i data-lucide="play" class="w-5 h-5"></i>
+                    Iniciar Console de Análise
+                </button>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-8">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6">
+                        <i data-lucide="brain" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Integração com Múltiplas IAs</h3>
+                    <p class="text-slate-400 mb-6">Escolha entre OpenAI GPT-4, Google Gemini ou xAI Grok para a análise mais abrangente.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                            Processamento em tempo real
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                            Análise contextual
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                            Insights específicos por indústria
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass p-8">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-6">
+                        <i data-lucide="bar-chart-3" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Analítica Avançada</h3>
+                    <p class="text-slate-400 mb-6">Mergulhe fundo no desempenho do seu conteúdo com métricas abrangentes e visualizações.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                            Análise de densidade de palavras-chave
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                            Pontuação de legibilidade
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                            Benchmarking de concorrentes
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass p-8">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mb-6">
+                        <i data-lucide="shield" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Seguro e Privado + PWA</h3>
+                    <p class="text-slate-400 mb-6">Seus dados ficam no seu dispositivo. Instale como app nativo, use totalmente offline, privacidade completa.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                            Instalável como app PWA
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                            Armazenamento local de dados
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-green-500"></i>
+                            Funciona offline após instalação
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section (Hidden by Default) -->
+        <section id="dashboardSection" class="hidden">
+            <!-- Dashboard content will be loaded here -->
+        </section>
+
+        <!-- Análises Section (Hidden by Default) -->
+        <section id="analisesSection" class="hidden">
+            <!-- Análises content will be loaded here -->
+        </section>
+
+        <!-- Relatórios Section (Hidden by Default) -->
+        <section id="relatoriosSection" class="hidden">
+            <!-- Relatórios content will be loaded here -->
+        </section>
+
+        <!-- Preços Section (Hidden by Default) -->
+        <section id="precosSection" class="hidden">
+            <!-- Preços content will be loaded here -->
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-sm mt-20">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+                            <i data-lucide="sparkles" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <div class="text-xl font-bold text-gradient">RankAI Pro</div>
+                            <div class="text-xs text-slate-400">Plataforma SEO com IA</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        Ferramentas profissionais de análise SEO potencializadas pelos modelos de IA mais avançados do mundo.
+                        <br><span class="text-green-400 mt-2 block">✓ Instalável como app PWA</span>
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Produto</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Recursos</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Preços</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">API</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Documentação</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Empresa</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Sobre</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Carreiras</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Conectar</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-slate-700 transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5 text-slate-300"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-slate-700 transition-colors">
+                            <i data-lucide="github" class="w-5 h-5 text-slate-300"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-slate-700 transition-colors">
+                            <i data-lucide="linkedin" class="w-5 h-5 text-slate-300"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-slate-700 transition-colors">
+                            <i data-lucide="discord" class="w-5 h-5 text-slate-300"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-8 pt-8 text-center">
+                <p class="text-sm text-slate-500">
+                    © 2024 RankAI Pro. Todos os direitos reservados.
+                    <span class="mx-2">•</span>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors">Política de Privacidade</a>
+                    <span class="mx-2">•</span>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors">Termos de Serviço</a>
+                    <span class="mx-2">•</span>
+                    <span class="text-purple-400">App PWA Instalável</span>
+                </p>
+                <p class="text-xs text-slate-600 mt-2">
+                    Esta ferramenta usa APIs de IA e requer suas próprias chaves de API. Os dados são processados localmente.
+                    Instale como app para uso offline completo.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center">
+        <div class="glass p-8 rounded-2xl text-center max-w-md">
+            <div class="w-16 h-16 mx-auto mb-6 rounded-full border-4 border-purple-500 border-t-transparent animate-spin"></div>
+            <h3 class="text-xl font-bold text-white mb-2" id="loadingTitle">Analisando Conteúdo</h3>
+            <p class="text-slate-300 mb-4" id="loadingMessage">Conectando ao serviço de IA...</p>
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                <div id="loadingProgress" class="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <button onclick="cancelLoading()" class="mt-4 text-sm text-slate-400 hover:text-white">Cancelar Análise</button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed top-4 right-4 glass p-4 rounded-xl shadow-lg transform translate-x-full transition-transform z-50 max-w-sm">
+        <div class="flex items-start gap-3">
+            <div id="toastIcon" class="w-5 h-5"></div>
+            <div class="flex-1">
+                <div id="toastTitle" class="font-semibold text-white"></div>
+                <div id="toastMessage" class="text-sm text-slate-300 mt-1"></div>
+            </div>
+            <button onclick="hideToast()" class="text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="glass p-8 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-bold text-white">Configurações</h3>
+                <button onclick="closeSettings()" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-6">
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-3">Configurações de Análise</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-slate-300">Análise Detalhada</span>
+                            <label class="switch">
+                                <input type="checkbox" id="detailedAnalysis" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-slate-300">Salvar Automaticamente</span>
+                            <label class="switch">
+                                <input type="checkbox" id="autoSave" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-3">Configurações de Exportação</h4>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm text-slate-300 mb-2">Formato do Relatório</label>
+                            <select id="reportFormat" class="input-premium w-full">
+                                <option value="pdf">Documento PDF</option>
+                                <option value="html">Relatório HTML</option>
+                                <option value="json">Dados JSON</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-3">Gerenciamento de Dados</h4>
+                    <div class="space-y-3">
+                        <button onclick="exportAllData()" class="w-full btn-secondary text-sm">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            Exportar Todos os Dados
+                        </button>
+                        <button onclick="clearAllData()" class="w-full btn-secondary text-sm text-red-400 hover:text-red-300">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            Limpar Todos os Dados
+                        </button>
+                    </div>
+                </div>
+                
+                <button onclick="saveSettings()" class="w-full btn-primary">
+                    Salvar Configurações
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============ VARIÁVEIS GLOBAIS ============
+        let deferredPrompt;
+        const appState = {
+            currentPage: 'home',
+            currentProvider: 'openai',
+            apiKey: '',
+            isConnected: false,
+            isAnalyzing: false,
+            analysisHistory: [],
+            settings: {
+                detailedAnalysis: true,
+                autoSave: true,
+                reportFormat: 'pdf'
+            },
+            sessionStats: {
+                analyses: 0,
+                avgScore: 0,
+                timeSaved: 0,
+                improvement: 0
+            }
+        };
+
+        // ============ INICIALIZAÇÃO ============
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar ícones
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            
+            // Inicializar aplicação
+            initApp();
+            
+            // Configurar PWA
+            setupPWA();
+            
+            // Configurar eventos
+            setupEventListeners();
+            
+            // Configurar atalhos de teclado
+            setupKeyboardShortcuts();
+            
+            // Verificar conexão
+            checkConnection();
+        });
+
+        function initApp() {
+            // Carregar estado salvo
+            loadSavedState();
+            
+            // Atualizar navegação
+            updateNavigation();
+            
+            // Mostrar mensagem de boas-vindas
+            setTimeout(() => {
+                showToast('Bem-vindo ao RankAI Pro!', 'Comece sua análise SEO agora.', 'info');
+            }, 1000);
+        }
+
+        function loadSavedState() {
+            try {
+                // Carregar configurações
+                const savedSettings = localStorage.getItem('rankai_settings');
+                if (savedSettings) {
+                    appState.settings = JSON.parse(savedSettings);
+                }
+                
+                // Carregar histórico
+                const savedHistory = localStorage.getItem('rankai_history');
+                if (savedHistory) {
+                    appState.analysisHistory = JSON.parse(savedHistory);
+                }
+                
+                // Carregar estatísticas
+                const savedStats = localStorage.getItem('rankai_stats');
+                if (savedStats) {
+                    appState.sessionStats = JSON.parse(savedStats);
+                }
+                
+                // Carregar chave API
+                const savedApiKey = localStorage.getItem('rankai_api_key');
+                if (savedApiKey) {
+                    appState.apiKey = savedApiKey;
+                }
+                
+                // Carregar conteúdo de rascunho
+                const savedDraft = localStorage.getItem('rankai_draft');
+                if (savedDraft) {
+                    console.log('Rascunho carregado');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar estado salvo:', error);
+            }
+        }
+
+        // ============ NAVEGAÇÃO ============
+        function showHome() {
+            hideAllSections();
+            document.getElementById('heroSection').classList.remove('hidden');
+            appState.currentPage = 'home';
+            updateNavigation();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showDashboard() {
+            hideAllSections();
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            appState.currentPage = 'dashboard';
+            updateNavigation();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            loadDashboardContent();
+            showToast('Dashboard aberto!', 'Comece sua análise SEO agora.', 'success');
+        }
+
+        function showAnalises() {
+            hideAllSections();
+            document.getElementById('analisesSection').classList.remove('hidden');
+            appState.currentPage = 'analises';
+            updateNavigation();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            loadAnalisesContent();
+            showToast('Análises SEO', 'Explore as ferramentas de análise.', 'info');
+        }
+
+        function showRelatorios() {
+            hideAllSections();
+            document.getElementById('relatoriosSection').classList.remove('hidden');
+            appState.currentPage = 'relatorios';
+            updateNavigation();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            loadRelatoriosContent();
+            showToast('Relatórios', 'Gere relatórios profissionais.', 'info');
+        }
+
+        function showPrecos() {
+            hideAllSections();
+            document.getElementById('precosSection').classList.remove('hidden');
+            appState.currentPage = 'precos';
+            updateNavigation();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            loadPrecosContent();
+            showToast('Planos e Preços', 'Escolha o plano ideal.', 'info');
+        }
+
+        function hideAllSections() {
+            const sections = ['heroSection', 'dashboardSection', 'analisesSection', 'relatoriosSection', 'precosSection'];
+            sections.forEach(section => {
+                const el = document.getElementById(section);
+                if (el) el.classList.add('hidden');
+            });
+        }
+
+        function updateNavigation() {
+            const links = ['home', 'dashboard', 'analises', 'relatorios', 'precos'];
+            links.forEach(link => {
+                const el = document.getElementById(`nav-${link}`);
+                if (el) {
+                    if (link === appState.currentPage) {
+                        el.classList.add('active');
+                        el.classList.remove('text-slate-300');
+                    } else {
+                        el.classList.remove('active');
+                        el.classList.add('text-slate-300');
+                    }
+                }
+            });
+        }
+
+        // ============ CARREGAMENTO DE CONTEÚDO ============
+        function loadDashboardContent() {
+            const dashboardSection = document.getElementById('dashboardSection');
+            dashboardSection.innerHTML = `
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-white mb-2">Dashboard de Análise SEO</h2>
+                    <p class="text-slate-400">Insights abrangentes e ferramentas de otimização</p>
+                </div>
+                
+                <div class="glass p-6 mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white">Configuração de IA</h3>
+                            <p class="text-sm text-slate-400">Conecte seu serviço de IA preferido (opcional)</p>
+                        </div>
+                        <span class="badge badge-premium">
+                            <i data-lucide="shield" class="w-3 h-3"></i>
+                            Conexão Segura
+                        </span>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="selectProvider('openai')" class="provider-btn ${appState.currentProvider === 'openai' ? 'active' : ''}">
+                                <i data-lucide="brain" class="w-5 h-5"></i>
+                                <span class="text-sm font-medium">OpenAI</span>
+                            </button>
+                            <button onclick="selectProvider('gemini')" class="provider-btn ${appState.currentProvider === 'gemini' ? 'active' : ''}">
+                                <i data-lucide="database" class="w-5 h-5"></i>
+                                <span class="text-sm font-medium">Gemini</span>
+                            </button>
+                            <button onclick="selectProvider('grok')" class="provider-btn ${appState.currentProvider === 'grok' ? 'active' : ''}">
+                                <i data-lucide="zap" class="w-5 h-5"></i>
+                                <span class="text-sm font-medium">Grok</span>
+                            </button>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Chave da API (opcional)</label>
+                            <div class="flex gap-3">
+                                <input type="password" id="apiKeyInput" placeholder="Digite sua chave API" class="input-premium flex-1" value="${appState.apiKey}">
+                                <button onclick="saveApiKey()" class="btn-secondary whitespace-nowrap">
+                                    <i data-lucide="key" class="w-4 h-4"></i>
+                                    Salvar
+                                </button>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2">Sua chave é armazenada localmente no navegador</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="glass p-6">
+                        <h3 class="text-lg font-semibold text-white mb-6">Análise de Conteúdo</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-2">URL (Opcional)</label>
+                                <input type="text" id="analysisUrl" placeholder="https://exemplo.com" class="input-premium w-full">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-2">Conteúdo para Análise</label>
+                                <textarea id="analysisContent" rows="8" placeholder="Cole seu conteúdo aqui..." class="input-premium w-full"></textarea>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm text-slate-400">
+                                    <span id="charCount">0</span> caracteres • <span id="wordCount">0</span> palavras
+                                </div>
+                                <button onclick="analyzeContent()" class="btn-primary">
+                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                    Analisar com IA
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass p-6">
+                        <h3 class="text-lg font-semibold text-white mb-6">Resultados</h3>
+                        <div id="resultsContainer" class="h-64 overflow-y-auto">
+                            <div class="text-center py-8">
+                                <i data-lucide="search" class="w-12 h-12 text-slate-400 mx-auto mb-4"></i>
+                                <p class="text-slate-400">Execute uma análise para ver os resultados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex justify-center">
+                    <button onclick="generatePDFReport()" class="btn-primary">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        Gerar Relatório Completo
+                    </button>
+                </div>
+            `;
+            
+            // Atualizar ícones
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            
+            // Configurar contadores de texto
+            const contentInput = document.getElementById('analysisContent');
+            if (contentInput) {
+                contentInput.addEventListener('input', updateTextCounters);
+                
+                // Carregar rascunho salvo
+                const draft = localStorage.getItem('rankai_draft');
+                if (draft) {
+                    contentInput.value = draft;
+                    updateTextCounters();
+                }
+            }
+            
+            updateTextCounters();
+        }
+
+        function loadAnalisesContent() {
+            const analisesSection = document.getElementById('analisesSection');
+            analisesSection.innerHTML = `
+                <div class="page-header">
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Análises SEO Avançadas</h1>
+                        <p class="text-xl text-slate-200">Ferramentas profissionais para análise completa de conteúdo</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="glass p-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-4">
+                            <i data-lucide="file-text" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Análise de Conteúdo</h3>
+                        <p class="text-slate-400 mb-4">Analise a qualidade, relevância e otimização SEO do seu conteúdo textual.</p>
+                        <button onclick="showDashboard()" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                            Começar Análise →
+                        </button>
+                    </div>
+                    
+                    <div class="glass p-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">
+                            <i data-lucide="link" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Análise de Backlinks</h3>
+                        <p class="text-slate-400 mb-4">Verifique a qualidade e quantidade dos links apontando para seu site.</p>
+                        <button onclick="analyzeBacklinks()" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                            Analisar Backlinks →
+                        </button>
+                    </div>
+                    
+                    <div class="glass p-6">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mb-4">
+                            <i data-lucide="users" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Análise de Concorrentes</h3>
+                        <p class="text-slate-400 mb-4">Compare seu desempenho SEO com os principais concorrentes do mercado.</p>
+                        <button onclick="analyzeCompetitors()" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                            Comparar Concorrentes →
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        function loadRelatoriosContent() {
+            const relatoriosSection = document.getElementById('relatoriosSection');
+            relatoriosSection.innerHTML = `
+                <div class="page-header">
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Relatórios SEO Profissionais</h1>
+                        <p class="text-xl text-slate-200">Gere relatórios detalhados para apresentação e análise</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <div class="glass p-8">
+                        <h2 class="text-2xl font-bold text-white mb-6">Modelos de Relatório</h2>
+                        <div class="space-y-4">
+                            <button onclick="generateReport('executivo')" class="w-full flex items-center justify-between p-4 rounded-xl bg-slate-800/50 hover:bg-slate-700/50 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="briefcase" class="w-5 h-5 text-blue-500"></i>
+                                    <div>
+                                        <div class="font-medium text-white">Relatório Executivo</div>
+                                        <div class="text-sm text-slate-400">Para gestores e tomadores de decisão</div>
+                                    </div>
+                                </div>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            </button>
+                            
+                            <button onclick="generateReport('tecnico')" class="w-full flex items-center justify-between p-4 rounded-xl bg-slate-800/50 hover:bg-slate-700/50 transition-colors">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="code" class="w-5 h-5 text-green-500"></i>
+                                    <div>
+                                        <div class="font-medium text-white">Relatório Técnico</div>
+                                        <div class="text-sm text-slate-400">Detalhes técnicos para desenvolvedores</div>
+                                    </div>
+                                </div>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="glass p-8">
+                        <h2 class="text-2xl font-bold text-white mb-6">Exportação</h2>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20">
+                                <h3 class="font-semibold text-white mb-2">Formatos Suportados</h3>
+                                <div class="grid grid-cols-2 gap-2 mt-3">
+                                    <button onclick="generatePDFReport()" class="btn-secondary py-2">PDF</button>
+                                    <button onclick="exportToHTML()" class="btn-secondary py-2">HTML</button>
+                                    <button onclick="exportToJSON()" class="btn-secondary py-2">JSON</button>
+                                    <button onclick="exportToExcel()" class="btn-secondary py-2">Excel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        function loadPrecosContent() {
+            const precosSection = document.getElementById('precosSection');
+            precosSection.innerHTML = `
+                <div class="page-header">
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Planos e Preços</h1>
+                        <p class="text-xl text-slate-200">Escolha o plano ideal para suas necessidades SEO</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="glass p-8 relative">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Básico</h3>
+                            <div class="text-4xl font-bold text-white mb-4">R$ 79<span class="text-lg text-slate-400">/mês</span></div>
+                            <p class="text-slate-400">Perfeito para freelancers e pequenos negócios</p>
+                        </div>
+                        
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span class="text-slate-300">Até 50 análises/mês</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span class="text-slate-300">Relatórios básicos</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span class="text-slate-300">Suporte por email</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="selectPlan('basico')" class="w-full btn-secondary">Escolher Plano</button>
+                    </div>
+                    
+                    <div class="glass p-8 relative border-2 border-purple-500 transform scale-105">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            <span class="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-4 py-1 rounded-full">MAIS POPULAR</span>
+                        </div>
+                        
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Profissional</h3>
+                            <div class="text-4xl font-bold text-white mb-4">R$ 199<span class="text-lg text-slate-400">/mês</span></div>
+                            <p class="text-slate-400">Ideal para agências e equipes de marketing</p>
+                        </div>
+                        
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span class="text-slate-300">Análises ilimitadas</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span class="text-slate-300">Relatórios avançados</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span class="text-slate-300">Análise de concorrentes</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="selectPlan('profissional')" class="w-full btn-primary">Escolher Plano</button>
+                    </div>
+                    
+                    <div class="glass p-8 relative">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Empresarial</h3>
+                            <div class="text-4xl font-bold text-white mb-4">R$ 499<span class="text-lg text-slate-400">/mês</span></div>
+                            <p class="text-slate-400">Para grandes empresas e corporações</p>
+                        </div>
+                        
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span class="text-slate-300">Tudo do plano Pro</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span class="text-slate-300">Usuários ilimitados</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-green-500"></i>
+                                <span class="text-slate-300">Treinamento dedicado</span>
+                            </li>
+                        </ul>
+                        
+                        <button onclick="selectPlan('empresarial')" class="w-full btn-secondary">Fale Conosco</button>
+                    </div>
+                </div>
+            `;
+            
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        // ============ FUNÇÕES DE ANÁLISE ============
+        function startAnalysis() {
+            showDashboard();
+        }
+
+        function analyzeContent() {
+            if (appState.isAnalyzing) {
+                showToast('Aguarde', 'Já há uma análise em andamento.', 'warning');
+                return;
+            }
+
+            const content = document.getElementById('analysisContent')?.value || '';
+            const url = document.getElementById('analysisUrl')?.value || '';
+            
+            if (!content.trim() && !url.trim()) {
+                showToast('Erro', 'Digite conteúdo ou URL para analisar.', 'error');
+                return;
+            }
+
+            appState.isAnalyzing = true;
+            showLoading('Analisando conteúdo com IA...');
+
+            // Simular análise
+            const progressSteps = [
+                'Inicializando análise...',
+                'Processando texto...',
+                'Extraindo palavras-chave...',
+                'Analisando SEO...',
+                'Gerando recomendações...'
+            ];
+            
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 20;
+                document.getElementById('loadingProgress').style.width = `${progress}%`;
+                document.getElementById('loadingMessage').textContent = progressSteps[progress / 20 - 1] || 'Finalizando...';
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    setTimeout(() => {
+                        finishAnalysis(content, url);
+                    }, 500);
+                }
+            }, 800);
+        }
+
+        function finishAnalysis(content, url) {
+            hideLoading();
+            appState.isAnalyzing = false;
+            
+            // Gerar resultados simulados
+            const score = Math.floor(Math.random() * 40) + 60;
+            const results = {
+                score,
+                strengths: [
+                    'Boa estrutura de conteúdo',
+                    'Uso adequado de palavras-chave',
+                    'Conteúdo relevante e informativo'
+                ],
+                weaknesses: [
+                    'Falta otimização para mobile',
+                    'Meta description pode ser melhorada',
+                    'Velocidade de carregamento lenta'
+                ],
+                suggestions: [
+                    'Adicione mais imagens com texto alternativo',
+                    'Use mais subtítulos (H2, H3)',
+                    'Inclua links internos para conteúdo relacionado'
+                ]
+            };
+            
+            // Atualizar estatísticas
+            appState.sessionStats.analyses++;
+            appState.sessionStats.avgScore = ((appState.sessionStats.avgScore * (appState.sessionStats.analyses - 1)) + score) / appState.sessionStats.analyses;
+            appState.sessionStats.timeSaved += 0.5;
+            
+            // Adicionar ao histórico
+            appState.analysisHistory.unshift({
+                score,
+                content: content.substring(0, 100) + '...',
+                url: url || 'Conteúdo manual',
+                date: new Date().toISOString()
+            });
+            
+            if (appState.analysisHistory.length > 10) {
+                appState.analysisHistory.pop();
+            }
+            
+            // Salvar estado
+            saveAppState();
+            
+            // Mostrar resultados
+            displayResults(results);
+            showToast('Análise completa!', `Pontuação SEO: ${score}/100`, 'success');
+        }
+
+        function displayResults(results) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            if (!resultsContainer) return;
+            
+            resultsContainer.innerHTML = `
+                <div class="space-y-4">
+                    <div class="p-4 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm text-blue-300 mb-1">Pontuação SEO</div>
+                                <div class="text-3xl font-bold text-white">${results.score}/100</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-slate-400">Status</div>
+                                <div class="text-lg font-semibold ${results.score >= 80 ? 'text-green-400' : results.score >= 60 ? 'text-yellow-400' : 'text-red-400'}">
+                                    ${results.score >= 80 ? 'Excelente' : results.score >= 60 ? 'Bom' : 'Precisa melhorar'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-3">Pontos Fortes</h4>
+                        <div class="space-y-2">
+                            ${results.strengths.map(strength => `
+                                <div class="flex items-start gap-3 p-3 rounded-lg bg-green-500/10 border border-green-500/20">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-500 mt-0.5"></i>
+                                    <span class="text-sm text-slate-300">${strength}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-3">Áreas para Melhoria</h4>
+                        <div class="space-y-2">
+                            ${results.weaknesses.map(weakness => `
+                                <div class="flex items-start gap-3 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
+                                    <i data-lucide="alert-circle" class="w-4 h-4 text-yellow-500 mt-0.5"></i>
+                                    <span class="text-sm text-slate-300">${weakness}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-3">Recomendações</h4>
+                        <div class="space-y-2">
+                            ${results.suggestions.map(suggestion => `
+                                <div class="flex items-start gap-3 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                                    <i data-lucide="lightbulb" class="w-4 h-4 text-blue-500 mt-0.5"></i>
+                                    <span class="text-sm text-slate-300">${suggestion}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        // ============ FUNÇÕES PWA ============
+        function setupPWA() {
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                showInstallBanner();
+            });
+            
+            // Configurar botões de instalação
+            const installBtn = document.getElementById('installBtn');
+            const closeBtn = document.getElementById('closeBanner');
+            
+            if (installBtn) {
+                installBtn.addEventListener('click', async () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        const { outcome } = await deferredPrompt.userChoice;
+                        if (outcome === 'accepted') {
+                            hideInstallBanner();
+                            showToast('App instalado!', 'RankAI Pro foi instalado como aplicativo.', 'success');
+                        }
+                        deferredPrompt = null;
+                    }
+                });
+            }
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', hideInstallBanner);
+            }
+        }
+
+        function showInstallBanner() {
+            const banner = document.getElementById('installBanner');
+            if (banner) {
+                banner.classList.add('show');
+            }
+        }
+
+        function hideInstallBanner() {
+            const banner = document.getElementById('installBanner');
+            if (banner) {
+                banner.classList.remove('show');
+            }
+        }
+
+        // ============ FUNÇÕES DE CONFIGURAÇÃO ============
+        function openSettings() {
+            const modal = document.getElementById('settingsModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Preencher valores atuais
+            document.getElementById('detailedAnalysis').checked = appState.settings.detailedAnalysis;
+            document.getElementById('autoSave').checked = appState.settings.autoSave;
+            document.getElementById('reportFormat').value = appState.settings.reportFormat;
+        }
+
+        function closeSettings() {
+            const modal = document.getElementById('settingsModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function saveSettings() {
+            appState.settings.detailedAnalysis = document.getElementById('detailedAnalysis').checked;
+            appState.settings.autoSave = document.getElementById('autoSave').checked;
+            appState.settings.reportFormat = document.getElementById('reportFormat').value;
+            
+            localStorage.setItem('rankai_settings', JSON.stringify(appState.settings));
+            closeSettings();
+            showToast('Configurações salvas!', 'Suas preferências foram atualizadas.', 'success');
+        }
+
+        // ============ FUNÇÕES UTILITÁRIAS ============
+        function updateTextCounters() {
+            const contentInput = document.getElementById('analysisContent');
+            const charCount = document.getElementById('charCount');
+            const wordCount = document.getElementById('wordCount');
+            
+            if (contentInput && charCount && wordCount) {
+                const text = contentInput.value;
+                const chars = text.length;
+                const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+                
+                charCount.textContent = chars;
+                wordCount.textContent = words;
+                
+                // Auto-salvar se habilitado
+                if (appState.settings.autoSave && text.length > 50) {
+                    localStorage.setItem('rankai_draft', text);
+                }
+            }
+        }
+
+        function showLoading(message) {
+            const overlay = document.getElementById('loadingOverlay');
+            const messageEl = document.getElementById('loadingMessage');
+            if (messageEl) messageEl.textContent = message;
+            if (overlay) {
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+            }
+        }
+
+        function hideLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            }
+        }
+
+        function cancelLoading() {
+            hideLoading();
+            appState.isAnalyzing = false;
+            showToast('Cancelado', 'Análise interrompida.', 'warning');
+        }
+
+        function showToast(title, message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            if (!toast || !toastTitle || !toastMessage || !toastIcon) return;
+            
+            // Definir ícone baseado no tipo
+            let icon = 'info';
+            let iconColor = 'text-blue-500';
+            
+            switch(type) {
+                case 'success':
+                    icon = 'check-circle';
+                    iconColor = 'text-green-500';
+                    break;
+                case 'error':
+                    icon = 'alert-circle';
+                    iconColor = 'text-red-500';
+                    break;
+                case 'warning':
+                    icon = 'alert-triangle';
+                    iconColor = 'text-yellow-500';
+                    break;
+            }
+            
+            toastIcon.innerHTML = `<i data-lucide="${icon}" class="w-5 h-5 ${iconColor}"></i>`;
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            
+            // Mostrar toast
+            toast.classList.remove('translate-x-full');
+            
+            // Atualizar ícones
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            
+            // Auto-esconder após 5 segundos
+            setTimeout(() => {
+                hideToast();
+            }, 5000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            if (toast) {
+                toast.classList.add('translate-x-full');
+            }
+        }
+
+        function checkConnection() {
+            const statusEl = document.getElementById('connectionStatus');
+            if (statusEl) {
+                if (appState.apiKey) {
+                    statusEl.textContent = 'Conectado';
+                    statusEl.className = 'text-xs font-medium text-green-400';
+                    appState.isConnected = true;
+                } else {
+                    statusEl.textContent = 'Modo Offline';
+                    statusEl.className = 'text-xs font-medium text-slate-400';
+                    appState.isConnected = false;
+                }
+            }
+        }
+
+        function selectProvider(provider) {
+            appState.currentProvider = provider;
+            const providerNames = {
+                openai: 'OpenAI',
+                gemini: 'Google Gemini',
+                grok: 'xAI Grok'
+            };
+            showToast('Provedor alterado', `Usando ${providerNames[provider] || provider}`, 'success');
+        }
+
+        function saveApiKey() {
+            const apiKeyInput = document.getElementById('apiKeyInput');
+            if (!apiKeyInput) return;
+            
+            const key = apiKeyInput.value.trim();
+            
+            if (!key) {
+                showToast('Erro', 'Digite uma chave API válida.', 'error');
+                return;
+            }
+            
+            appState.apiKey = key;
+            localStorage.setItem('rankai_api_key', key);
+            checkConnection();
+            showToast('Chave salva!', 'API Key armazenada com segurança.', 'success');
+        }
+
+        function saveAppState() {
+            localStorage.setItem('rankai_settings', JSON.stringify(appState.settings));
+            localStorage.setItem('rankai_history', JSON.stringify(appState.analysisHistory));
+            localStorage.setItem('rankai_stats', JSON.stringify(appState.sessionStats));
+        }
+
+        function setupEventListeners() {
+            // Configurar evento de entrada para auto-salvar
+            const contentInput = document.getElementById('analysisContent');
+            if (contentInput) {
+                contentInput.addEventListener('input', updateTextCounters);
+            }
+        }
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                // Ctrl + Enter para iniciar análise
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    analyzeContent();
+                }
+                
+                // Esc para fechar modais
+                if (e.key === 'Escape') {
+                    hideToast();
+                    closeSettings();
+                }
+                
+                // Ctrl + D para dashboard
+                if (e.ctrlKey && e.key === 'd') {
+                    e.preventDefault();
+                    showDashboard();
+                }
+                
+                // Ctrl + H para home
+                if (e.ctrlKey && e.key === 'h') {
+                    e.preventDefault();
+                    showHome();
+                }
+            });
+        }
+
+        // ============ FUNÇÕES DE DEMONSTRAÇÃO ============
+        function generateReport(type) {
+            showLoading(`Gerando relatório ${type}...`);
+            setTimeout(() => {
+                hideLoading();
+                showToast('Relatório gerado!', 'Relatório disponível para download.', 'success');
+            }, 2000);
+        }
+
+        function selectPlan(plan) {
+            showToast('Plano selecionado', `Plano ${plan} escolhido com sucesso!`, 'success');
+        }
+
+        function generatePDFReport() {
+            showLoading('Gerando relatório PDF...');
+            setTimeout(() => {
+                hideLoading();
+                showToast('Relatório PDF gerado!', 'Baixando arquivo...', 'success');
+            }, 1500);
+        }
+
+        function exportToHTML() {
+            showToast('Exportando HTML', 'O relatório HTML será gerado.', 'info');
+        }
+
+        function exportToJSON() {
+            showToast('Exportando JSON', 'Os dados serão exportados em JSON.', 'info');
+        }
+
+        function exportToExcel() {
+            showToast('Exportando Excel', 'A planilha será gerada em formato Excel.', 'info');
+        }
+
+        function analyzeBacklinks() {
+            showLoading('Analisando backlinks...');
+            setTimeout(() => {
+                hideLoading();
+                showToast('Análise de backlinks completa!', 'Perfil de links analisado.', 'success');
+            }, 2000);
+        }
+
+        function analyzeCompetitors() {
+            showLoading('Analisando concorrentes...');
+            setTimeout(() => {
+                hideLoading();
+                showToast('Análise de concorrentes completa!', 'Dados comparativos gerados.', 'success');
+            }, 2000);
+        }
+
+        function exportAllData() {
+            const exportData = {
+                settings: appState.settings,
+                history: appState.analysisHistory,
+                stats: appState.sessionStats,
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+            const link = document.createElement('a');
+            link.href = dataUri;
+            link.download = `rankai-backup-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            showToast('Dados exportados', 'Todos os dados foram exportados.', 'success');
+        }
+
+        function clearAllData() {
+            if (confirm('Tem certeza que deseja limpar todos os dados? Esta ação não pode ser desfeita.')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+    </script>
 </body>
 </html>
