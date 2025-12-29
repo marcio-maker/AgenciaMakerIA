@@ -638,7 +638,7 @@ document.addEventListener('DOMContentLoaded', function () {
       log('Service cards ou overlay não encontrados');
       return;
     }
-    
+
     const serviceDetails = {
       'web-apps': {
         title: 'Web Apps e PWAs',
@@ -1305,131 +1305,49 @@ function initPWAInstall() {
   const translations = window.MakerAITranslations?.translations || {};
   const getLang = () => window.MakerAITranslations?.getCurrentLang() || 'pt';
 
-  // Função para atualizar todos os textos do banner com tradução
-  function updateBannerText() {
+  // Textos traduzidos
+  function getTranslations() {
     const lang = getLang();
-    const t = translations[lang]?.pwa || translations['pt']?.pwa || {};
+    return {
+      title: translations[lang]?.pwa?.title || 'MakerAI no seu dispositivo',
+      banner: translations[lang]?.pwa?.banner || 
+        `Instale o MakerAI Studio e tenha acesso offline completo.<br>
+         <em>Já instalado por +127 profissionais</em>`,
+      installButton: translations[lang]?.pwa?.install_button || 'Instalar app',
+      whatsappButton: translations[lang]?.pwa?.whatsapp_button || 'Contato no WhatsApp',
+      later: translations[lang]?.common?.later || 'Talvez mais tarde',
+      privacy: translations[lang]?.pwa?.privacy || 'Instalação segura • Sem coleta de dados',
+      manualInstall: translations[lang]?.pwa?.manual_install || 'Instalar manualmente'
+    };
+  }
 
+  // Atualizar textos do banner
+  function updateBannerText() {
+    const t = getTranslations();
     const titleEl = banner.querySelector('.pwa-info strong');
     const descEl = banner.querySelector('.pwa-info p');
 
-    if (titleEl) titleEl.textContent = t.title || 'MakerAI no teu telemóvel';
-    if (descEl) {
-      descEl.innerHTML = t.banner ||
-        `Instale o MakerAI Studio e receba <strong>grátis</strong> o Guia de Prompts IA!<br>
-         <em>Já instalado por +127 profissionais</em>`;
-    }
-    btnInstall.textContent = t.install_button || 'Instalar + Receber Guia Grátis';
+    if (titleEl) titleEl.textContent = t.title;
+    if (descEl) descEl.innerHTML = t.banner;
+    btnInstall.textContent = t.installButton;
   }
 
-  // Exibe o banner
+  // Exibir banner
   banner.style.display = 'block';
   updateBannerText();
 
-  // Escuta mudança de idioma (evento já disparado pelo seu sistema de tradução)
+  // Escutar mudanças de idioma
   window.addEventListener('languageChanged', updateBannerText);
 
-  // Captura o evento de instalação PWA
+  // Capturar evento de instalação PWA
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     console.log('PWA pronto para instalação');
   });
 
-  // Clique no botão Instalar → abre modal de lead
+  // Botão do banner - abre modal
   btnInstall.addEventListener('click', openLeadModal);
-
-  function openLeadModal() {
-    // Remove modal antigo se existir
-    const existing = document.getElementById('pwaLeadModal');
-    if (existing) existing.remove();
-
-    const lang = getLang();
-    const t = translations[lang]?.pwa || {};
-    const common = translations[lang]?.common || {};
-
-    const modal = document.createElement('div');
-    modal.id = 'pwaLeadModal';
-    modal.className = 'assistant-overlay active';
-    modal.setAttribute('role', 'dialog');
-    modal.setAttribute('aria-modal', 'true');
-    modal.setAttribute('aria-labelledby', 'pwa-lead-title');
-
-    modal.innerHTML = `
-    <div class="assistant-container-wrapper" style="
-      max-width: 460px;
-      padding: 2rem;
-      text-align: center;
-      background: var(--surface);
-      color: var(--text);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    ">
-      <h3 id="pwa-lead-title" style="margin-bottom: 1rem; font-size: 1.8rem;">🎁 Bônus Exclusivo</h3>
-      <p style="margin-bottom: 2rem; line-height: 1.7; opacity: 0.9; font-size: 1.05rem;">
-        ${t.modal_text ||
-      `Instale agora e receba <strong>instantaneamente</strong>:<br><br>
-           ✅ Guia Completo de 150+ Prompts IA<br>
-           ✅ Dicas Semanais exclusivas no WhatsApp<br><br>
-           <em>Já usado por +127 profissionais</em>`}
-      </p>
-
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-        <button type="button" id="pwaDirectInstallBtn" class="btn primary large" style="min-width: 220px;">
-          ${t.direct_install_button || 'Instalar + Receber no WhatsApp'}
-        </button>
-        <button type="button" id="pwaLeadCancel" class="btn secondary">
-          ${common.later || 'Depois'}
-        </button>
-      </div>
-
-      <p style="font-size: 0.8rem; margin-top: 1.5rem; opacity: 0.7;">
-        ${t.privacy || 'Você será direcionado ao WhatsApp. Seus dados não são coletados aqui.'}
-      </p>
-    </div>
-  `;
-
-    document.body.appendChild(modal);
-
-    // Fechar modal
-    const closeModal = () => modal.remove();
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal || e.target.id === 'pwaLeadCancel') closeModal();
-    });
-    modal.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // Botão principal: abre WhatsApp + tenta instalar PWA
-    document.getElementById('pwaDirectInstallBtn').addEventListener('click', () => {
-      closeModal();
-
-      // Mensagem pré-pronta para o WhatsApp
-      const message = encodeURIComponent(
-        `🚀 *Quero o Guia de 150+ Prompts IA + Dicas Semanais!*\n\n` +
-        `Vi no site MakerAI Studio e instalei o app.\n` +
-        `Me envia o bônus exclusivo? 😊`
-      );
-
-      // Abre WhatsApp
-      window.open(`https://wa.me/5511914809693?text=${message}`, '_blank');
-
-      showNotification('Redirecionando para o WhatsApp...', 'success');
-
-      // Tenta instalar o PWA (se o prompt estiver disponível)
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            showNotification('App instalado com sucesso! 🎉', 'success');
-            banner.style.display = 'none'; // Esconde o banner após instalação
-          }
-          deferredPrompt = null;
-        });
-      }
-    });
-  }
 
   // Fechar banner
   btnClose.addEventListener('click', () => {
@@ -1440,4 +1358,203 @@ function initPWAInstall() {
       banner.style.display = 'none';
     }, 400);
   });
+
+  // Função para mostrar instruções de instalação manual
+  function showManualInstructions() {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+    const isDesktop = !isIOS && !isAndroid;
+    
+    let instructions = '';
+    
+    if (isIOS) {
+      instructions = '📱 <strong>iPhone/iPad:</strong><br>1. Toque em "Compartilhar" (📤)<br>2. Role para baixo<br>3. Toque em "Adicionar à Tela de Início"<br>4. Toque em "Adicionar"';
+    } else if (isAndroid) {
+      instructions = '📱 <strong>Android:</strong><br>1. Toque nos 3 pontos (⋮)<br>2. Selecione "Instalar app"<br>3. Ou "Adicionar à tela inicial"<br>4. Confirme a instalação';
+    } else {
+      instructions = '💻 <strong>Desktop:</strong><br>1. Procure o ícone de instalação (📥)<br>2. Na barra de endereços do navegador<br>3. Ou no menu (⋮) → "Instalar MakerAI Studio"';
+    }
+    
+    // Criar modal de instruções
+    const instructionsModal = document.createElement('div');
+    instructionsModal.id = 'installInstructionsModal';
+    instructionsModal.className = 'assistant-overlay active';
+    instructionsModal.setAttribute('role', 'dialog');
+    instructionsModal.setAttribute('aria-modal', 'true');
+    
+    instructionsModal.innerHTML = `
+      <div class="assistant-container-wrapper" style="
+        max-width: 420px;
+        padding: 1.5rem;
+        text-align: left;
+        background: var(--surface);
+        color: var(--text);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      ">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="margin: 0; font-size: 1.3rem; color: var(--primary);">
+            📲 Como instalar
+          </h3>
+          <button onclick="document.getElementById('installInstructionsModal').remove()" 
+                  style="background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer;">×</button>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem; line-height: 1.6;">
+          ${instructions}
+        </div>
+        
+        <div style="background: var(--surface-secondary); padding: 1rem; border-radius: var(--radius); margin-bottom: 1.5rem;">
+          <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">
+            <strong>Benefícios da instalação:</strong><br>
+            • Acesso offline completo<br>
+            • Notificações de novos conteúdos<br>
+            • Performance otimizada<br>
+            • Experiência de app nativo
+          </p>
+        </div>
+        
+        <div style="text-align: center;">
+          <button onclick="document.getElementById('installInstructionsModal').remove()" 
+                  class="btn primary" style="width: 100%;">
+            Entendi, obrigado!
+          </button>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(instructionsModal);
+    
+    // Fechar ao clicar fora
+    instructionsModal.addEventListener('click', (e) => {
+      if (e.target === instructionsModal) {
+        instructionsModal.remove();
+      }
+    });
+  }
+
+  // Abrir modal de instalação
+  function openLeadModal() {
+    // Remover modal anterior se existir
+    const existing = document.getElementById('pwaLeadModal');
+    if (existing) existing.remove();
+
+    const t = getTranslations();
+
+    const modal = document.createElement('div');
+    modal.id = 'pwaLeadModal';
+    modal.className = 'assistant-overlay active';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'pwa-lead-title');
+
+    modal.innerHTML = `
+      <div class="assistant-container-wrapper" style="
+        max-width: 420px;
+        padding: 1.5rem;
+        text-align: center;
+        background: var(--surface);
+        color: var(--text);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      ">
+        <h3 id="pwa-lead-title" style="margin-bottom: 1rem; font-size: 1.3rem; color: var(--primary);">
+          📲 Instalar MakerAI
+        </h3>
+        
+        <p style="margin-bottom: 1.5rem; line-height: 1.6; opacity: 0.9; font-size: 1rem;">
+          Tenha acesso offline completo e notificações de novos conteúdos.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">
+          <button type="button" id="modalInstallBtn" class="btn primary" style="width: 100%;">
+            ${t.manualInstall}
+          </button>
+          <button type="button" id="modalWhatsAppBtn" class="btn secondary" style="width: 100%;">
+            ${t.whatsappButton}
+          </button>
+        </div>
+
+        <button type="button" id="modalCancelBtn" class="btn text-btn" style="
+          color: var(--text-secondary); 
+          font-size: 0.9rem; 
+          padding: 0.5rem;
+        ">
+          ${t.later}
+        </button>
+
+        <p style="font-size: 0.8rem; margin-top: 1.5rem; opacity: 0.7; line-height: 1.4;">
+          ${t.privacy}
+        </p>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    setupModalEvents(modal);
+  }
+
+  // Configurar eventos do modal
+  function setupModalEvents(modal) {
+    // Fechar modal
+    const closeModal = () => {
+      modal.style.opacity = '0';
+      modal.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        if (modal.parentNode) modal.remove();
+      }, 200);
+    };
+
+    // Botão WhatsApp
+    document.getElementById('modalWhatsAppBtn')?.addEventListener('click', () => {
+      const message = encodeURIComponent(
+        `Olá MakerAI Studio,\n` +
+        `Gostaria de conversar sobre um projeto.\n` +
+        `Podemos agendar uma call?`
+      );
+      window.open(`https://wa.me/5511914809693?text=${message}`, '_blank');
+      closeModal();
+      showNotification('Abrindo WhatsApp...', 'success', 2000);
+    });
+
+    // Botão Instalar Manualmente - CORRIGIDO
+    document.getElementById('modalInstallBtn')?.addEventListener('click', () => {
+      // Fecha o modal atual
+      closeModal();
+      
+      // Mostra instruções de instalação manual
+      setTimeout(() => {
+        showManualInstructions();
+      }, 200);
+      
+      // Se tiver prompt automático, tenta primeiro
+      if (deferredPrompt) {
+        setTimeout(() => {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              showNotification('✓ App instalado automaticamente!', 'success', 3000);
+              banner.style.display = 'none';
+            }
+            deferredPrompt = null;
+          });
+        }, 500);
+      }
+    });
+
+    // Fechar ao clicar fora, no botão cancelar ou com Escape
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target.id === 'modalCancelBtn') closeModal();
+    });
+
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Focar no primeiro botão para acessibilidade
+    setTimeout(() => {
+      document.getElementById('modalInstallBtn')?.focus();
+    }, 100);
+  }
 }
